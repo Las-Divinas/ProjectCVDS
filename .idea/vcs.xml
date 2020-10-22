@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="VcsDirectoryMappings">
+    <mapping directory="$PROJECT_DIR$/Universidad" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/Universidad/Ciclos" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/Universidad/Ciclos/Lab4/LigthwayContainer_DependencyInjection_Hangman" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/Universidad/Ciclos/Lab5" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/Universidad/POOB" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/Universidad/ProyectoPoob" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/Universidad/RECO" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/Universidad/exam/OrdensCal" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/Universidad/exam/ecitv" vcs="Git" />
+  </component>
+</project>
