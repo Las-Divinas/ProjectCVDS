@@ -1,5 +1,5 @@
 CREATE TABLE user(
-    'document' bigint primary key,
+    'document' varchar(50) primary key,
     'email' varchar(50) unique,
     'name' varchar(100) NOT NULL,
     'password' varchar(50) NOT NULL,
@@ -8,29 +8,33 @@ CREATE TABLE user(
 
 CREATE TABLE novelty(
     'id' serial primary key,
-    'user_id' bigint references user(document),
-    'novelty_type' varchar(50) NOT NULL,
     'description' varchar(200) NOT NULL,
-    'date' DATE NOT NULL
+    'date' DATE NOT NULL,
+    'user_id' varchar(50) NOT NULL,
+    'element_id' integer NOT NULL,
+    CONSTRAINT fk_user FOREIGN KEY (user_id) REFERENCES user(document),
+    CONSTRAINT fk_element FOREIGN KEY (element_id) REFERENCES element(id)
 );
 
 CREATE TABLE equipment(
     'id' serial primary key,
-    'novelty_id' integer references novelty(id),
+    'element' integer NOT NULL,
     'name' varchar(50) NOT NULL,
-    'description' varchar(200) NOT NULL
+    'description' varchar(200) NOT NULL,
+    'laboratory_id' integer NOT NULL,
+    CONSTRAINT fk_laboratory FOREIGN KEY (laboratory_id) REFERENCES laboratory(id)
 );
 
 CREATE TABLE laboratory(
     'id' serial primary key,
-    'equipment_id' integer references equipment(id),
-    'novelty_id' integer references novelty(id),
-    'name' varchar(50) NOT NULL
+    'name' varchar(50) NOT NULL,
+    'description' varchar(200) NOT NULL
 );
 
 CREATE TABLE element(
     'id' serial primary key,
-    'novelty_id' integer references novelty(id),
     'name' varchar(50) NOT NULL,
-    'description' varchar(200) NOT NULL
+    'description' varchar(200) NOT NULL,
+    'id_equipment' integer NOT NULL,
+    CONSTRAINT fk_equipment FOREIGN KEY (id_equipment) REFERENCES equipment(id)
 );
