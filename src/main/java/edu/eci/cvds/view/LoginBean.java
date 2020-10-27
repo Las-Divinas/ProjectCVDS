@@ -16,8 +16,11 @@ import edu.eci.cvds.security.Logger;
 @ManagedBean(name = "loginBean")
 @SessionScoped
 public class LoginBean extends BasePageBean{
-    /* @Inject
-    private ServiciosUsuario servicio; */
+
+    private static final long serialVersionUID = -5223360388656378877L;
+    /*
+     * @Inject private ServiciosUsuario servicio;
+     */
     @Inject
     private Logger logger;
     private String email;
