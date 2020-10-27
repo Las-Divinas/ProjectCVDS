@@ -1,3 +1,4 @@
+/* Create Tables */
 CREATE TABLE user(
     'document' varchar(50) primary key,
     'email' varchar(50) unique,
@@ -38,3 +39,9 @@ CREATE TABLE element(
     'id_equipment' integer NOT NULL,
     CONSTRAINT fk_equipment FOREIGN KEY (id_equipment) REFERENCES equipment(id)
 );
+
+/* Create Role */
+
+CREATE ROLE admin;
+
+CREATE ROLE user;
