@@ -32,9 +32,9 @@ public class LoginBean extends BasePageBean{
         boolean isLogger = logger.isLogged();
         if(!isLogger){
             logger.login(email, password, false);
-            /* redirect to home pa */
+            redirectHomeUser();
         } else{
-            /* sesion existente */
+            existingSession();
         }
     }
 
