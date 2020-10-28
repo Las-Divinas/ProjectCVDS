@@ -7,7 +7,7 @@
 <h:head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Login</title>
+    <title>Register</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" />
 </h:head>
 <h:body>
@@ -15,17 +15,29 @@
         <h:form class="form-horizontal">
             <h:panelGrid columns="1" cellpadding="5">
                 <div class="form-group">
+                    <h:outputLabel for="Name" value="Name: "/>
+                    <p:inputText class="form-control" id="name" value=""/>
+                </div>
+                <div class="form-group">
                     <h:outputLabel for="Email" value="Email: "/>
-                    <p:inputText class="form-control" id="email" required="false" type="String" value="#{loginBean.email}" />
+                    <p:inputText class="form-control" id="email" value=""/>
+                </div>
+                <div class="form-group">
+                    <h:outputLabel for="Document" value="Document: "/>
+                    <p:inputText class="form-control" id="document" value=""/>
                 </div>
                 <div class="form-group">
                     <h:outputLabel for="Password" value="Password: "/>
-                    <p:password class="form-control" id="password" required="false" type="String" value="#{loginBean.password}"/>
+                    <p:password class="form-control" id="password" value=""/>
+                </div>
+                <div class="form-group">
+                    <h:outputLabel for="Role" value="Role: "/>
+                    <p:inputText class="form-control" id="role" value=""/>
                 </div>
             </h:panelGrid>
             <br/>
-            <p:commandButton id="boton_login" class="btn btn-primary" value="Login" actionListener="#{loginBean.login}"/>
-        </h:form>
+            <p:commandButton class="btn btn-primary" value="Register"/>
+        </h:form> 
     </div>
 </h:body>
 </html>

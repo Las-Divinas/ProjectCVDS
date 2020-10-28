@@ -19,7 +19,7 @@ public class LoginBean extends BasePageBean{
 
     private static final long serialVersionUID = -5223360388656378877L;
     /*
-     * @Inject private ServiciosUsuario servicio;
+     * @Inject private UserService service;
      */
     @Inject
     private Logger logger;
@@ -43,13 +43,11 @@ public class LoginBean extends BasePageBean{
         if(logger.isAdmin()){
             HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
             session.setAttribute("email", email);
-            /* Implementar admin.xhtml */
             facesContext.getExternalContext().redirect("../admin/admin.xhtml");
         }
         if(logger.isUser()){
             HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
             session.setAttribute("email", email);
-            /* Implementar users.xhtml */
             facesContext.getExternalContext().redirect("../public/user.xhtml");
         }
     }
