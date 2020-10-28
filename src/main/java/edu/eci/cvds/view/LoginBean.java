@@ -58,6 +58,11 @@ public class LoginBean extends BasePageBean{
         facesContext.getExternalContext().redirect("");
     }
 
+    public void register() throws IOException{
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+        facesContext.getExternalContext().redirect("../Register.xhtml");
+    }
+
     public void logOut() throws IOException{
         FacesContext.getCurrentInstance().getExternalContext().redirect("../Login.xhtml");
         logger.logout();
