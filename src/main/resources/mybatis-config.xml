@@ -5,7 +5,11 @@
 <configuration>
     <properties resource="config.properties"/>
     <typeAliases>
-        <!-- Aca va lo que implementara Contre -->
+        <typeAlias type="edu.eci.cvds.samples.entities.Usuario" alias="Usuario"/>
+        <typeAlias type="edu.eci.cvds.samples.entities.Novelty" alias="Novelty"/>
+        <typeAlias type="edu.eci.cvds.samples.entities.Laboratory" alias="Laboratory"/>
+        <typeAlias type="edu.eci.cvds.samples.entities.Equipment" alias="Equipment"/>
+        <typeAlias type="edu.eci.cvds.samples.entities.Element" alias="Element"/>
     </typeAliases>
     <environments default="development">
         <environment id="development">
