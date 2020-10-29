@@ -6,7 +6,6 @@ public class  Element implements Serializable
 {
 
     private static final long serialVersionUID = 3057312705708674257L;
-    private int id;
     private String name;
     private String description;
     private int id_equipment;
@@ -16,21 +15,11 @@ public class  Element implements Serializable
 
     }
 
-    public Element(int id,String name,String description,int id_equipment)
+    public Element(String name,String description,int id_equipment)
     {
-        this.id = id;
         this.name = name;
         this.description = description;
         this.id_equipment = id_equipment;
-    }
-
-    public int getId()
-    {
-        return this.id;
-    }
-    public void setId(int id)
-    {
-        this.id = id;
     }
 
     public String getName()

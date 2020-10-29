@@ -1,7 +1,6 @@
 package edu.eci.cvds.samples.entities;
 
 import java.io.Serializable;
-import java.util.List;
 
 public class  Usuario implements Serializable
 {
@@ -11,21 +10,19 @@ public class  Usuario implements Serializable
     private String nombre;
     private String contraseña;
     private String rol;
-    private List<Novelty> novedades;
 
     public Usuario()
     {
 
     }
 
-    public Usuario(String documento,String correo,String nombre,String contraseña,String rol,List<Novelty> novedades)
+    public Usuario(String documento,String correo,String nombre,String contraseña,String rol)
     {
         this.documento = documento;
         this.correo = correo;
         this.nombre = nombre;
         this.contraseña = contraseña;
         this.rol = rol;
-        this.novedades = novedades;
     }
 
     public String getDocumento()
@@ -71,12 +68,5 @@ public class  Usuario implements Serializable
     public void setRol(String rol)
     {
         this.rol = rol;
-    }
-    public List<Novelty> getNovelties(){
-        return novedades;
-    }
-
-    public void setNovelties( List<Novelty> novedades){
-        this.novedades=novedades;
     }
 }

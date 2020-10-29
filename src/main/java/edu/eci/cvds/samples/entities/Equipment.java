@@ -7,7 +7,6 @@ public class  Equipment implements Serializable
 {
 
     private static final long serialVersionUID = -1857291145846510680L;
-    private int id;
     private int element;
     private String name;
     private String description ;
@@ -20,24 +19,14 @@ public class  Equipment implements Serializable
 
     }
 
-    public Equipment(int id,String description,int element,String name,int laboratory_id,List<Element> elementos,List<Novelty> novedades)
+    public Equipment(String description,int element,String name,int laboratory_id,List<Element> elementos,List<Novelty> novedades)
     {
-        this.id = id;
         this.description = description;
         this.element = element;
         this.name = name;
         this.laboratory_id = laboratory_id;
         this.elementos = elementos;
         this.novedades = novedades ;
-    }
-
-    public int getId()
-    {
-        return this.id;
-    }
-    public void setId(int id)
-    {
-        this.id = id;
     }
 
     public String getDescription()

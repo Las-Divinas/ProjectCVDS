@@ -6,7 +6,6 @@ import java.util.Date;
 public class  Novelty implements Serializable
 {
     private static final long serialVersionUID = -3203284066887482905L;
-    private int id;
     private String description;
     private Date date;
     private String user_id ;
@@ -17,22 +16,12 @@ public class  Novelty implements Serializable
 
     }
 
-    public Novelty(int id,String description,Date date,String user_id,int equipment_id)
+    public Novelty(String description,Date date,String user_id,int equipment_id)
     {
-        this.id = id;
         this.description = description;
         this.date = date;
         this.user_id = user_id;
         this.equipment_id = equipment_id;
-    }
-
-    public int getId()
-    {
-        return this.id;
-    }
-    public void setId(int id)
-    {
-        this.id = id;
     }
 
     public String getDescription()
