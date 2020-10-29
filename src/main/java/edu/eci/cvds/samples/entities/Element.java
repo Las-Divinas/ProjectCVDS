@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 public class  Element implements Serializable
 {
+
+    private static final long serialVersionUID = 3057312705708674257L;
     private int id;
     private String name;
     private String description;
@@ -22,7 +24,7 @@ public class  Element implements Serializable
         this.id_equipment = id_equipment;
     }
 
-    public String getId()
+    public int getId()
     {
         return this.id;
     }
@@ -49,7 +51,7 @@ public class  Element implements Serializable
         this.description = description;
     }
 
-    public String getId_equipment()
+    public int getId_equipment()
     {
         return this.id_equipment;
     }

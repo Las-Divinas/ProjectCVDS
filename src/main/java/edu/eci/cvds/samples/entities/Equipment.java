@@ -1,10 +1,12 @@
 package edu.eci.cvds.samples.entities;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.util.List;
 
 public class  Equipment implements Serializable
 {
+
+    private static final long serialVersionUID = -1857291145846510680L;
     private int id;
     private int element;
     private String name;
@@ -29,7 +31,7 @@ public class  Equipment implements Serializable
         this.novedades = novedades ;
     }
 
-    public String getId()
+    public int getId()
     {
         return this.id;
     }
@@ -47,7 +49,7 @@ public class  Equipment implements Serializable
         this.description = description;
     }
 
-    public String getElement()
+    public int getElement()
     {
         return this.element;
     }
@@ -65,7 +67,7 @@ public class  Equipment implements Serializable
         this.name = name;
     }
 
-    public String getLaboratory_id()
+    public int getLaboratory_id()
     {
         return this.laboratory_id;
     }
@@ -76,7 +78,7 @@ public class  Equipment implements Serializable
     
     public List<Element> getElementos()
     {
-        return this.laboratory_id;
+        return this.elementos;
     }
     public void setElementos(List<Element> elementos)
     {

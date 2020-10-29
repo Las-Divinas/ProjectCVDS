@@ -5,6 +5,7 @@ import java.util.Date;
 
 public class  Novelty implements Serializable
 {
+    private static final long serialVersionUID = -3203284066887482905L;
     private int id;
     private String description;
     private Date date;
@@ -25,7 +26,7 @@ public class  Novelty implements Serializable
         this.equipment_id = equipment_id;
     }
 
-    public String getId()
+    public int getId()
     {
         return this.id;
     }
@@ -43,7 +44,7 @@ public class  Novelty implements Serializable
         this.description = description;
     }
 
-    public String getDate()
+    public Date getDate()
     {
         return this.date;
     }
@@ -61,7 +62,7 @@ public class  Novelty implements Serializable
         this.user_id = user_id;
     }
 
-    public String getEquipment_id()
+    public int getEquipment_id()
     {
         return this.equipment_id;
     }

@@ -1,9 +1,11 @@
 package edu.eci.cvds.samples.entities;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class  Usuario implements Serializable
 {
+    private static final long serialVersionUID = -4765153708985909165L;
     private String documento;
     private String correo;
     private String nombre;
@@ -64,10 +66,17 @@ public class  Usuario implements Serializable
 
     public String getRol()
     {
-        return this.documento;
+        return this.rol;
     }
     public void setRol(String rol)
     {
         this.rol = rol;
+    }
+    public List<Novelty> getNovelties(){
+        return novedades;
+    }
+
+    public void setNovelties( List<Novelty> novedades){
+        this.novedades=novedades;
     }
 }
