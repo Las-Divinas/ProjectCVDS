@@ -29,8 +29,10 @@ public class LoginBean extends BasePageBean{
     private String message;
 
     public void login() throws IOException, ExceptionHistorialDeEquipos{
+        System.out.println("Hola entre");
         boolean isLogger = logger.isLogged();
         if(!isLogger){
+            System.out.println("Hola entre 2");
             logger.login(email, password, false);
             redirectHomeUser();
         } else{

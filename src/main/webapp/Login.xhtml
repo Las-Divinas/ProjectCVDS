@@ -23,11 +23,11 @@
                             <h:form class="justify-content-center">
                                 <div class="form-group">
                                     <h:outputLabel for="Email" value="Email: "/>
-                                    <p:inputText class="form-control" id="email" value="#{loginBean.email}" placeholder="test@test.com"/>
+                                    <p:inputText class="form-control" type="String" id="email" value="#{loginBean.email}" placeholder="test@test.com"/>
                                 </div>
                                 <div class="form-group">
                                     <h:outputLabel for="Password" value="Password: "/>
-                                    <p:password class="form-control" id="password" value="#{loginBean.password}" placeholder="Password"/>
+                                    <p:password class="form-control" type="String" id="password" value="#{loginBean.password}" placeholder="Password"/>
                                 </div>
                                 <div class="btn-group " role="group" aria-label="Basic example">
                                     <p:commandButton class="btn btn-primary" value="Register" actionListener="#{loginBean.register}"/>
