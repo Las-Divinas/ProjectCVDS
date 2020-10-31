@@ -41,8 +41,11 @@
                     <div class="form-group input-group">
                         <div class="input-group-prepend">
                             <span class="input-group-text"> <i class="fa fa-user"></i> </span>
-                         </div>
-                         <p:inputText class="form-control" id="role" value="#{registerBean.rol}" placeholder="Role"/>
+                        </div>
+                        <p:selectOneMenu id="roles" value="#{registerBean.rol}" class="custom-select"  required="true">
+                            <f:selectItem itemLabel="Select Role" noSelectionOption="true"/>
+                            <f:selectItems value="#{registerBean.roles}"/>
+                        </p:selectOneMenu>
                     </div>
                     <div class="form-group input-group">
                         <div class="input-group-prepend">

@@ -1,6 +1,7 @@
 package edu.eci.cvds.view;
 
 import java.io.IOException;
+import java.util.*;
 
 import javax.enterprise.context.SessionScoped;
 import javax.faces.bean.ManagedBean;
@@ -25,6 +26,8 @@ public class RegisterBean extends BasePageBean {
     private String nombre;
     private String contraseña;
     private String rol;
+    private String a[] = new String[] { "admin", "user" }; 
+    private List<String> roles = Arrays.asList(a);
 
     public void registerNewUser() throws ExceptionHistorialDeEquipos, IOException{
         try {
@@ -79,5 +82,13 @@ public class RegisterBean extends BasePageBean {
 
     public void setRol(String rol){
         this.rol=rol;
-    }  
+    } 
+
+    public List<String> getRoles(){
+        return roles;
+    }
+
+    public void setRoles(List<String> roles){
+        this.roles=roles;
+    }
 }
