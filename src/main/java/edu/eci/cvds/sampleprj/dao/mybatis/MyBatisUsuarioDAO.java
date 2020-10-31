@@ -16,7 +16,7 @@ public class MyBatisUsuarioDAO implements UsuarioDAO {
         try {
             usuarioMapper.registrarUsuario(usuario);
         } catch (Exception e) {
-            System.out.println(e.toString());
+            throw new PersistenceException("Error al registrar el nuevo usuario");
         }
     }
 }
