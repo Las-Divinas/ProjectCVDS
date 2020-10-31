@@ -24,35 +24,35 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text"> <i class="fa fa-user"></i> </span>
                          </div>
-                         <p:inputText class="form-control" id="name" value="" placeholder="Sandra Torres"/>
+                         <p:inputText class="form-control" id="name" value="#{registerBean.nombre}" placeholder="Sandra Torres"/>
                     </div>
                     <div class="form-group input-group">
                         <div class="input-group-prepend">
                             <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
                          </div>
-                         <p:inputText class="form-control" id="email" value="" placeholder="sandra@torres.co"/>
+                         <p:inputText class="form-control" id="email" value="#{registerBean.correo}" placeholder="sandra@torres.co"/>
                     </div>
                     <div class="form-group input-group">
                         <div class="input-group-prepend">
                             <span class="input-group-text"> <i class="fas fa-file"></i> </span>
                          </div>
-                         <p:inputText class="form-control" id="document" value="" placeholder="Document"/>
+                         <p:inputText class="form-control" id="document" value="#{registerBean.documento}" placeholder="Document"/>
                     </div>
                     <div class="form-group input-group">
                         <div class="input-group-prepend">
                             <span class="input-group-text"> <i class="fa fa-user"></i> </span>
                          </div>
-                         <p:inputText class="form-control" id="role" value="" placeholder="Role"/>
+                         <p:inputText class="form-control" id="role" value="#{registerBean.rol}" placeholder="Role"/>
                     </div>
                     <div class="form-group input-group">
                         <div class="input-group-prepend">
                             <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
                          </div>
-                         <p:password class="form-control" id="password" value="" placeholder="password"/>
+                         <p:password class="form-control" id="password" value="#{registerBean.contraseña}" placeholder="password"/>
                     </div>
                     <div class="form-group" role="group" aria-label="Basic example">
-                        <p:commandButton class="btn btn-primary btn-block" value="Register"/>
-                        <p:commandButton class="btn btn-primary btn-block" value="Cancel" actionListener=""/>
+                        <p:commandButton class="btn btn-primary btn-block" value="Register" actionListener="#{registerBean.registerNewUser}"/>
+                        <p:commandButton class="btn btn-primary btn-block" value="Cancel" actionListener="#{registerBean.redirectToLogin}"/>
                     </div>
                 </h:form>
             </article>

@@ -16,8 +16,8 @@ import edu.eci.cvds.samples.services.ServicioUsuario;
 @ManagedBean(name = "registerBean")
 @SessionScoped
 public class RegisterBean extends BasePageBean {
-    /* @Inject
-    private ServicioUsuario servicioUsuario; */
+    @Inject
+    private ServicioUsuario servicioUsuario;
 
     private static final long serialVersionUID = 1L;
     private String documento;
@@ -27,13 +27,13 @@ public class RegisterBean extends BasePageBean {
     private String rol;
 
     public void registerNewUser() throws ExceptionHistorialDeEquipos, IOException{
-        /* try {
+        try {
             servicioUsuario.registrarUsuario(new Usuario(documento, correo, nombre, contraseña, rol));
             FacesContext facesContext = FacesContext.getCurrentInstance();
             facesContext.getExternalContext().redirect("../Login.xhtml");
         } catch (ExceptionHistorialDeEquipos e) {
             throw new ExceptionHistorialDeEquipos("Error al registrar el equipo");
-        } */
+        }
     }
 
     public void redirectToLogin() throws IOException{
