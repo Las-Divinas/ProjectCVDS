@@ -23,6 +23,6 @@
         </environment>
     </environments>
     <mappers>
-        <!-- Aca va lo que implementaré con nikolas papasito -->
+        <mapper resource="mappers/UsuarioMapper.xml"></mapper>
     </mappers>
 </configuration>

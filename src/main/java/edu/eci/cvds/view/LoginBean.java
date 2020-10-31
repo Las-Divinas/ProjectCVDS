@@ -29,7 +29,7 @@ public class LoginBean extends BasePageBean{
     private String message;
 
     public void login() throws IOException, ExceptionHistorialDeEquipos{
-        System.out.println("Hola entre");
+        System.out.println("Hola entre en el login");
         boolean isLogger = logger.isLogged();
         if(!isLogger){
             System.out.println("Hola entre 2");
@@ -43,6 +43,7 @@ public class LoginBean extends BasePageBean{
     public void redirectHomeUser() throws IOException{
         FacesContext facesContext = FacesContext.getCurrentInstance();
         if(logger.isAdmin()){
+            System.out.println("Entre a admin");
             HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
             session.setAttribute("email", email);
             facesContext.getExternalContext().redirect("../admin/admin.xhtml");

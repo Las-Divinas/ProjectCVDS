@@ -1,12 +1,23 @@
 package edu.eci.cvds.view;
 
+import java.io.IOException;
+
 import javax.enterprise.context.SessionScoped;
 import javax.faces.bean.ManagedBean;
+import javax.faces.context.FacesContext;
+
+import com.google.inject.Inject;
+
+import edu.eci.cvds.samples.entities.Usuario;
+import edu.eci.cvds.samples.services.ExceptionHistorialDeEquipos;
+import edu.eci.cvds.samples.services.ServicioUsuario;
 
 @SuppressWarnings("deprecation")
 @ManagedBean(name = "registerBean")
 @SessionScoped
-public class RegisterBean extends BasePageBean{
+public class RegisterBean extends BasePageBean {
+    /* @Inject
+    private ServicioUsuario servicioUsuario; */
 
     private static final long serialVersionUID = 1L;
     private String documento;
@@ -15,8 +26,19 @@ public class RegisterBean extends BasePageBean{
     private String contraseña;
     private String rol;
 
-    public void registerNewUser(){
-        /* Here, we have to use the method that wa have to create in serviceimp and with this use mappers and DAO´s */
+    public void registerNewUser() throws ExceptionHistorialDeEquipos, IOException{
+        /* try {
+            servicioUsuario.registrarUsuario(new Usuario(documento, correo, nombre, contraseña, rol));
+            FacesContext facesContext = FacesContext.getCurrentInstance();
+            facesContext.getExternalContext().redirect("../Login.xhtml");
+        } catch (ExceptionHistorialDeEquipos e) {
+            throw new ExceptionHistorialDeEquipos("Error al registrar el equipo");
+        } */
+    }
+
+    public void redirectToLogin() throws IOException{
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+        facesContext.getExternalContext().redirect("../Login.xhtml");
     }
 
     public String getDocumento(){
@@ -27,7 +49,7 @@ public class RegisterBean extends BasePageBean{
         this.documento=documento;
     }
 
-    public String getCorre(){
+    public String getCorreo(){
         return correo;
     }
 
