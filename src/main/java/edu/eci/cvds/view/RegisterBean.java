@@ -9,6 +9,8 @@ import javax.faces.context.FacesContext;
 
 import com.google.inject.Inject;
 
+import org.apache.shiro.crypto.hash.Sha512Hash;
+
 import edu.eci.cvds.samples.entities.Usuario;
 import edu.eci.cvds.samples.services.ExceptionHistorialDeEquipos;
 import edu.eci.cvds.samples.services.ServicioUsuario;
@@ -31,7 +33,7 @@ public class RegisterBean extends BasePageBean {
 
     public void registerNewUser() throws ExceptionHistorialDeEquipos, IOException{
         try {
-            servicioUsuario.registrarUsuario(new Usuario(documento, correo, nombre, contraseña, rol));
+            servicioUsuario.registrarUsuario(new Usuario(documento, correo, nombre,new Sha512Hash(contraseña).toHex(),rol));
             FacesContext facesContext = FacesContext.getCurrentInstance();
             facesContext.getExternalContext().redirect("../Login.xhtml");
         } catch (ExceptionHistorialDeEquipos e) {
