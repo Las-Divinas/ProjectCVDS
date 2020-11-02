@@ -6,6 +6,7 @@ public class  Element implements Serializable
 {
 
     private static final long serialVersionUID = 3057312705708674257L;
+    private int id;
     private String name;
     private String description;
     private int id_equipment;
@@ -47,5 +48,11 @@ public class  Element implements Serializable
     public void setId_equipment(int id_equipment)
     {
         this.id_equipment = id_equipment;
+    }
+    public int getId(){
+        return id;
+    }
+    public void setId(int id){
+        this.id=id;
     }
 }

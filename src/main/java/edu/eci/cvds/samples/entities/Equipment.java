@@ -7,6 +7,7 @@ public class  Equipment implements Serializable
 {
 
     private static final long serialVersionUID = -1857291145846510680L;
+    private int id;
     private int element;
     private String name;
     private String description ;
@@ -81,5 +82,11 @@ public class  Equipment implements Serializable
     public void setNovedades(List<Novelty> novedades)
     {
         this.novedades = novedades;
+    }
+    public int getId(){
+        return id;
+    }
+    public void setId(int id){
+        this.id=id;
     }
 }
