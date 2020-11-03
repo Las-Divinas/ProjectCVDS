@@ -21,7 +21,7 @@ CREATE TABLE equipment(
     CONSTRAINT fk_laboratory FOREIGN KEY (laboratory_id) REFERENCES laboratory(id)
 );
 /* Ya quedo */
-CREATE TABLE laboratory(
+CREATE TABLE laboratorio(
     id serial primary key,
     name varchar(50) NOT NULL,
     description varchar(200) NOT NULL
