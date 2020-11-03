@@ -4,7 +4,9 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
+import edu.eci.cvds.sampleprj.dao.LaboratoryDAO;
 import edu.eci.cvds.sampleprj.dao.UsuarioDAO;
+import edu.eci.cvds.sampleprj.dao.mybatis.MyBatisLaboratorioDAO;
 import edu.eci.cvds.sampleprj.dao.mybatis.MyBatisUsuarioDAO;
 import edu.eci.cvds.samples.services.ServicioUsuario;
 import edu.eci.cvds.samples.services.impl.ServicioUsuarioImpl;
@@ -30,6 +32,7 @@ public class GuiceListener implements ServletContextListener {
                 setEnvironmentId("development");
                 setClassPathResource("mybatis-config.xml");
                 bind(UsuarioDAO.class).to(MyBatisUsuarioDAO.class);
+                bind(LaboratoryDAO.class).to(MyBatisLaboratorioDAO.class);
                 bind(BasePageBean.class).to(LoginBean.class);
                 bind(Logger.class).to(LoggerApacheShiro.class);
                 bind(ServicioUsuario.class).to(ServicioUsuarioImpl.class);

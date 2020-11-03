@@ -10,6 +10,6 @@
         <result property='description' column='description'/>
     </resultMap>
     <insert id="registrarLaboratorio" parameterType="map">
-        INSERT INTO laboratory VALUES(#{laboratory.name}, #{laboratory.description});
+        INSERT INTO laboratorio VALUES(#{laboratorio.id},#{laboratorio.name}, #{laboratorio.description});
     </insert>
 </mapper>

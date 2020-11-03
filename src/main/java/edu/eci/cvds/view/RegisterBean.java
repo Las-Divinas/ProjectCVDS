@@ -6,7 +6,9 @@ import java.util.*;
 
 import javax.enterprise.context.SessionScoped;
 import javax.faces.bean.ManagedBean;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpSession;
 
 import com.google.inject.Inject;
 
@@ -16,7 +18,6 @@ import edu.eci.cvds.samples.entities.Usuario;
 import edu.eci.cvds.samples.services.ExceptionHistorialDeEquipos;
 import edu.eci.cvds.samples.services.ServicioUsuario;
 
-@SuppressWarnings("deprecation")
 @ManagedBean(name = "registerBean")
 @SessionScoped
 public class RegisterBean extends BasePageBean {
@@ -43,6 +44,7 @@ public class RegisterBean extends BasePageBean {
     }
 
     public void redirectToLogin() throws IOException{
+        System.out.println("Redirect to login");
         FacesContext facesContext = FacesContext.getCurrentInstance();
         facesContext.getExternalContext().redirect("../Login.xhtml");
     }

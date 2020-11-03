@@ -4,14 +4,14 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="edu.eci.cvds.sampleprj.dao.mybatis.mappers.ElementoMapper">
-    <resultMap type='Elemento' id='ElementoResult'>
+    <resultMap type='Element' id='ElementoResult'>
         <id property='id' column='id'/>
         <result property='name' column='name'/>
         <result property='description' column='description'/>
-        <result property='contraseña' column='contraseño'/>
-        <association property="Equipo" javaType="Equipment" resultMap="edu.eci.cvds.sampleprj.dao.mybatis.mappers.EquipoMapper.EquipoResult" columnPrefix='equipo_'/>
+        <result property='contraseña' column='contraseña'/>
+        <association property="id_equipment" javaType="Equipment" resultMap="edu.eci.cvds.sampleprj.dao.mybatis.mappers.EquipoMapper.EquipoResult" columnPrefix='equipo_'/>
     </resultMap>
     <insert id="registrarElemento" parameterType="map">
-        INSERT INTO element VALUES(#{element.name}, #{element.description} , #{element.id_equipment});
+        INSERT INTO element VALUES(#{elemento.name}, #{elemento.description} , #{elemento.id_equipment});
     </insert>
 </mapper>

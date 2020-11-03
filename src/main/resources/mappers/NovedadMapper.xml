@@ -3,8 +3,8 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="edu.eci.cvds.sampleprj.dao.mybatis.mappers.UsuarioMapper">
-    <resultMap type='Usuario' id='UsuarioResult'>
+<mapper namespace="edu.eci.cvds.sampleprj.dao.mybatis.mappers.NovedadMapper">
+    <resultMap type='Novelty' id='NoveltyResult'>
         <id property='id' column='id'/>
         <result property='description' column='description'/>
         <result property='date' column='date'/>

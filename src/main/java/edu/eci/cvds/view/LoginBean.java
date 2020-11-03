@@ -12,7 +12,6 @@ import com.google.inject.Inject;
 import edu.eci.cvds.samples.services.ExceptionHistorialDeEquipos;
 import edu.eci.cvds.security.Logger;
 
-@SuppressWarnings("deprecation")
 @ManagedBean(name = "loginBean")
 @SessionScoped
 public class LoginBean extends BasePageBean{
