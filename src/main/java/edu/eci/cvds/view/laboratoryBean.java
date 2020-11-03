@@ -29,7 +29,7 @@ public class laboratoryBean extends BasePageBean{
             Laboratory laboratory = new Laboratory(id,name, description);
             servicioUsuario.registrarLaboratorio(laboratory);
         } catch (Exception e) {
-            System.out.println(e.getLocalizedMessage());
+            System.out.println(e.toString());
         }
     }
 

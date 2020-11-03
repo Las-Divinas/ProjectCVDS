@@ -13,6 +13,7 @@ import edu.eci.cvds.samples.services.ServicioUsuario;
 public class ServicioUsuarioImpl implements ServicioUsuario {
     @Inject
     private UsuarioDAO usuarioDAO;
+    @Inject
     private LaboratoryDAO laboratoryDAO;
 
     @Override
