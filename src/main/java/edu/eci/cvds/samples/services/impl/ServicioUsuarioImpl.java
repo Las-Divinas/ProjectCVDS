@@ -22,7 +22,6 @@ public class ServicioUsuarioImpl implements ServicioUsuario {
         } catch (PersistenceException e) {
             throw new ExceptionHistorialDeEquipos("Error al registrar el usuario");
         }
-
     }
 
     @Override

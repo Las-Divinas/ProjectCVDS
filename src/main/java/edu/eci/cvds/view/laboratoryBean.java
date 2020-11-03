@@ -14,20 +14,22 @@ import edu.eci.cvds.samples.services.ServicioUsuario;
 @ManagedBean(name = "laboratoryBean")
 @SessionScoped
 public class laboratoryBean extends BasePageBean{
+
+    private static final long serialVersionUID = 1L;
+
     @Inject
     private ServicioUsuario servicioUsuario;
     
     private String name;
     private String description;
-    private int id=1;
+    private int id;
 
     public void registrarLaboratorio() throws ExceptionHistorialDeEquipos, IOException{
         try {
             Laboratory laboratory = new Laboratory(id,name, description);
-            System.out.println(laboratory.getName()+"-------------------------------------");
             servicioUsuario.registrarLaboratorio(laboratory);
         } catch (Exception e) {
-            throw new ExceptionHistorialDeEquipos(e.toString());
+            System.out.println(e.getLocalizedMessage());
         }
     }
 
@@ -49,5 +51,9 @@ public class laboratoryBean extends BasePageBean{
 
     public int getId(){
         return id;
+    }
+
+    public void setId(int id){
+        this.id=id;
     }
 }
