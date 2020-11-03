@@ -8,10 +8,10 @@
         <id property='id' column='id'/>
         <result property='description' column='description'/>
         <result property='date' column='date'/>
-        <association property="Usuario" javaType="Usuario" resultMap="edu.eci.cvds.sampleprj.dao.mybatis.mappers.UsuarioMapper.UsuarioResult" columnPrefix='usuario_'/>
-        <association property="Equipo" javaType="Equipment" resultMap="edu.eci.cvds.sampleprj.dao.mybatis.mappers.EquipoMapper.EquipoResult" columnPrefix='equipo_'/>
+        <association property="user_id" javaType="Usuario" resultMap="edu.eci.cvds.sampleprj.dao.mybatis.mappers.UsuarioMapper.UsuarioResult" columnPrefix='usuario_'/>
+        <association property="equipment_id" javaType="Equipment" resultMap="edu.eci.cvds.sampleprj.dao.mybatis.mappers.EquipoMapper.EquipoResult" columnPrefix='equipo_'/>
     </resultMap>
     <insert id="registrarNovedad" parameterType="map">
-        INSERT INTO novelty VALUES(#{novedad.description}, #{novedad.date} , #{novedad.user_id}, #{novedad.equipment_id});
+        INSERT INTO novelty VALUES(#{novedad.id},#{novedad.description}, #{novedad.date} , #{novedad.user_id}, #{novedad.equipment_id});
     </insert>
 </mapper>
