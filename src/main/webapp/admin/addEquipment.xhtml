@@ -17,18 +17,22 @@
     <div class="container">
         <h:form class="justify-content-center">
             <div class="form-group">
+                <h:outputLabel for="id" value="id: "/>
+                <p:inputText class="form-control" type="Integer" id="id" value="#{equipmentBean.id}"/>
+            </div>
+            <div class="form-group">
                 <h:outputLabel for="Name" value="Name: "/>
-                <p:inputText class="form-control" type="String" id="name" value="" placeholder="Name"/>
+                <p:inputText class="form-control" type="String" id="name" value="#{equipmentBean.name}" placeholder="Name"/>
             </div>
             <div class="form-group">
                 <h:outputLabel for="Description" value="Description: "/>
-                <p:inputText class="form-control" type="String" id="description" value="" placeholder="Description"/>
+                <p:inputText class="form-control" type="String" id="description" value="#{equipmentBean.description}" placeholder="Description"/>
             </div>
             <div class="form-group">
-                <h:outputLabel for="Laboratory" value="Laboratory: "/>
-                <p:inputText class="form-control" type="String" id="laboratory" value="" placeholder="Laboratory"/>
+                <h:outputLabel for="Laboratory" value="Laboratory id : "/>
+                <p:inputText class="form-control" type="Integer" id="laboratory" value="#{equipmentBean.laboratory_id}" placeholder="13"/>
             </div>
-            <p:commandButton value="Add" class="btn btn-primary"/>
+            <p:commandButton value="Add" class="btn btn-primary" actionListener="#{equipmentBean.registrarEquipo}"/>
         </h:form>
     </div>
 </h:body>

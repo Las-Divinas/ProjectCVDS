@@ -12,6 +12,6 @@
         <association property="laboratory" javaType="Laboratory" resultMap="edu.eci.cvds.sampleprj.dao.mybatis.mappers.LaboratoryMapper.LaboratoryResult" columnPrefix='laboratorio_'/>
     </resultMap>
     <insert id="registrarEquipo" parameterType="map">
-        INSERT INTO equipment VALUES(#{equipo.name}, #{equipo.description},#{equipo.laboratory_id});
+        INSERT INTO equipment VALUES(#{equipo.id},#{equipo.name}, #{equipo.description},#{equipo.laboratory_id});
     </insert>
 </mapper>
