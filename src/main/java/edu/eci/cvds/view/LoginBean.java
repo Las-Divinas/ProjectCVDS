@@ -6,6 +6,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
+import javax.faces.event.ActionEvent;
 
 import com.google.inject.Inject;
 
@@ -65,9 +66,20 @@ public class LoginBean extends BasePageBean{
         facesContext.getExternalContext().redirect("../Register.xhtml");
     }
 
-    public void logOut() throws IOException{
-        FacesContext.getCurrentInstance().getExternalContext().redirect("../Login.xhtml");
+    public void logout() throws IOException{
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+        facesContext.getExternalContext().redirect("../Login.xhtml");
         logger.logout();
+    }
+
+    public void comeBack() throws IOException{
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+        if(logger.isAdmin()){
+            facesContext.getExternalContext().redirect("../admin/admin.xhtml");
+        }
+        if(logger.isUser()){
+            facesContext.getExternalContext().redirect("../public/user.xhtml");
+        }
     }
 
     public String getEmail(){
