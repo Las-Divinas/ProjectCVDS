@@ -14,6 +14,9 @@ import edu.eci.cvds.samples.services.ServicioUsuario;
 @ManagedBean(name = "elementBean")
 @SessionScoped
 public class ElementBean extends BasePageBean{
+
+    private static final long serialVersionUID = -6003014894429487789L;
+
     @Inject
     private ServicioUsuario servicioUsuario;
 

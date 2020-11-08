@@ -15,6 +15,9 @@ import edu.eci.cvds.samples.services.ServicioUsuario;
 @ManagedBean(name = "noveltyBean")
 @SessionScoped
 public class NoveltyBean extends BasePageBean{
+
+    private static final long serialVersionUID = 4054189115632351646L;
+
     @Inject
     private ServicioUsuario servicioUsuario;
 
