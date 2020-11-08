@@ -1,6 +1,8 @@
 package edu.eci.cvds.view;
 
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -22,13 +24,32 @@ public class ElementBean extends BasePageBean{
 
     private int id;
     private String name;
+    private String type;
     private String description;
     private int idEquipment;
+    private String a[] = new String[] {"Torre","Pantalla","Mouse","Teclado"};
+    private List<String> types = Arrays.asList(a);
 
     public void registrarElemento() throws ExceptionHistorialDeEquipos, IOException{
-        Element element = new Element(id, name, description, idEquipment);
+        Element element = new Element(id, name, description, idEquipment,type);
         servicioUsuario.registrarElemento(element);
     
+    }
+
+    public String getType(){
+        return type;
+    }
+
+    public void setType(String type){
+        this.type = type;
+    }
+
+    public List<String> getTypes(){
+        return types;
+    }
+
+    public void setTypes(List<String> types){
+        this.types=types;
     }
 
     public int getId(){

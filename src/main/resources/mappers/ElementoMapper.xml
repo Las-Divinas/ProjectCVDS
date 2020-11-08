@@ -11,6 +11,6 @@
         <association property="idEquipment" javaType="Equipment" resultMap="edu.eci.cvds.sampleprj.dao.mybatis.mappers.EquipoMapper.EquipoResult" columnPrefix='equipo_'/>
     </resultMap>
     <insert id="registrarElemento" parameterType="map">
-        INSERT INTO element VALUES(DEFAULT,#{elemento.name}, #{elemento.description} , #{elemento.id_equipment});
+        INSERT INTO element VALUES(DEFAULT,#{elemento.name}, #{elemento.description} , #{elemento.id_equipment}, #{elemento.type});
     </insert>
 </mapper>

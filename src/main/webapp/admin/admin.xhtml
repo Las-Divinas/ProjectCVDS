@@ -14,18 +14,22 @@
 </h:head>
 <h:body>
     <div class="container h-100">
-        <h:form>
-            <div class="float-sm-right">
-                <p:commandButton value="Salir" action="#{loginBean.logout}" class="btn btn-danger"/>
-            </div>
-        </h:form>
-        <br/>
         <div class="d-flex justify-content-center align-items-center">
-            <div class="d-flex flex-column">
+            <div class="d-flex flex-column ">
+                <h:form>
+                    <div class="float-sm-right">
+                        <p:commandButton value="Salir" action="#{loginBean.logout}" class="btn btn-danger"/>
+                    </div>
+                </h:form>
+                <br/>
                 <div class="jumbotron text-center">
                     <h1 class="text align-self-center p-2">Admin Page</h1>
                 </div>
-                <div class="btn-group" role="group" aria-label="Basic example">
+                <div class="btn-group justify-content-center" role="group" aria-label="Basic example">
+                    <a class="btn btn-primary" href="../public/consultEquipment.xhtml">Consultar Equipos</a>
+                </div>
+                <img src="../image/Escuela.jpg" class="mt-2 img-fluid" alt="Responsive image"/>
+                <div class="mt-2 btn-group justify-content-center" role="group" aria-label="Basic example">
                     <a class="btn btn-primary" href="../admin/addEquipment.xhtml">Añadir Equipo</a>
                     <a class="btn btn-primary" href="../admin/addElement.xhtml">Añadir Elemento</a>
                     <a class="btn btn-primary" href="../admin/addNovelty.xhtml">Añadir Novedad</a>

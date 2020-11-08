@@ -29,6 +29,13 @@
                         <p:inputText class="form-control" type="String" id="name" value="#{elementBean.name}" placeholder="Name"/>
                     </div>
                     <div class="form-group">
+                        <h:outputLabel for="Type" value="Type: "/>
+                        <p:selectOneMenu id="types" value="#{elementBean.type}" class="custom-select"  required="true">
+                            <f:selectItem itemLabel="Select Type" noSelectionOption="true"/>
+                            <f:selectItems value="#{elementBean.types}"/>
+                        </p:selectOneMenu>
+                    </div>
+                    <div class="form-group">
                         <h:outputLabel for="Description" value="Description: "/>
                         <p:inputText class="form-control" type="String" id="description" value="#{elementBean.description}" placeholder="Description"/>
                     </div>
