@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:p="http://primefaces.org/ui">
+<h:head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+    <link rel="stylesheet" href="../style/bootstrap.min.css"/>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald;family=Staatliches;display=swap" rel="stylesheet"/> 
+    <link rel = "icon" href ="https://observatics.edu.co/wp-content/uploads/sites/20/2019/06/Logo-Escuela-ingenier%C3%ADa.png"/> 
+</h:head>
+<h:body style="font-family: 'Oswald', sans-serif; background-color:rgba(218, 218, 221, 0.932);">
+    <div class="container">
+        <p:dataTable var="equipment" value="#{equipmentBean.equiposBusquedaBasica}">
+            <p:column headerText="Id">
+                <h:outputText value="#{equipment.id}"/>
+            </p:column>
+            <p:column headerText="Nombre">
+                <h:outputText value="#{equipment.name}"/>
+            </p:column>
+            <p:column headerText="Descripción">
+                <h:outputText value="#{equipment.description}"/>
+            </p:column>
+            <p:column headerText="Laboratorio">
+                <h:outputText value="#{equipment.laboratory_id}"/>
+            </p:column>
+        </p:dataTable>
+    </div>
+</h:body>
+</html>

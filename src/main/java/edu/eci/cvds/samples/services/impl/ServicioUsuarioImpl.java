@@ -15,6 +15,7 @@ import edu.eci.cvds.samples.entities.Novelty;
 import edu.eci.cvds.samples.entities.Usuario;
 import edu.eci.cvds.samples.services.ExceptionHistorialDeEquipos;
 import edu.eci.cvds.samples.services.ServicioUsuario;
+import java.util.List;
 
 public class ServicioUsuarioImpl implements ServicioUsuario {
     @Inject
@@ -74,6 +75,15 @@ public class ServicioUsuarioImpl implements ServicioUsuario {
             throw new ExceptionHistorialDeEquipos("Error al registrar la novedad");
         }
 
+    }
+
+    @Override
+    public List<Equipment> consultarEquipos() throws ExceptionHistorialDeEquipos{
+        try {
+            return equipoDAO.consultarEquipos();
+        } catch (Exception e) {
+            throw new ExceptionHistorialDeEquipos(e.toString());
+        }
     }
     
 }

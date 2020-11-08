@@ -9,9 +9,18 @@
         <result property='element' column='element'/>
         <result property='name' column='name'/>
         <result property='description' column='description'/>
-        <association property="laboratory" javaType="Laboratory" resultMap="edu.eci.cvds.sampleprj.dao.mybatis.mappers.LaboratoryMapper.LaboratoryResult" columnPrefix='laboratorio_'/>
+        <association property="laboratory_id" javaType="Laboratory" resultMap="edu.eci.cvds.sampleprj.dao.mybatis.mappers.LaboratoryMapper.LaboratoryResult" columnPrefix='laboratorio_'/>
     </resultMap>
+
+    <!-- Insert new equipment  -->
     <insert id="registrarEquipo" parameterType="map">
         INSERT INTO equipment VALUES(#{equipo.id},#{equipo.name}, #{equipo.description},#{equipo.laboratory_id});
     </insert>
+
+    <!-- Select the equipments -->
+    <select parameterType="map" id="consultarEquipos" resultMap="EquipoResult">
+        SELECT e.id, e.name , e.description, e.laboratory_id
+        FROM equipment as e
+    </select>
+
 </mapper>
