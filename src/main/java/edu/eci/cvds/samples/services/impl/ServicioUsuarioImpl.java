@@ -80,7 +80,16 @@ public class ServicioUsuarioImpl implements ServicioUsuario {
         try {
             return equipoDAO.consultarEquipos();
         } catch (Exception e) {
-            throw new ExceptionHistorialDeEquipos(e.toString());
+            throw new ExceptionHistorialDeEquipos("Error al consultar los equipos");
+        }
+    }
+
+    @Override
+    public int consultarUltimoId() throws ExceptionHistorialDeEquipos {
+        try {
+            return equipoDAO.consultarUltimoId();
+        } catch (Exception e) {
+            throw new ExceptionHistorialDeEquipos("Error al consultar el ultimo Id de los equipos");
         }
     }
 }

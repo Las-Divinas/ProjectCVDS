@@ -23,4 +23,9 @@
         FROM equipment as e
     </select>
 
+    <!-- Select the last id of element -->
+    <select parameterType="map" id="consultarUltimoId" resultType="int">
+        SELECT id FROM equipment ORDER BY id DESC LIMIT 1; 
+    </select>
+
 </mapper>

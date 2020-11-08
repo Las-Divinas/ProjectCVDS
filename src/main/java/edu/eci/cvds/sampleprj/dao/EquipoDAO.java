@@ -6,5 +6,6 @@ import java.util.List;
 public interface EquipoDAO {
     public void registrarEquipo(Equipment equipo) throws PersistenceException;
     public List<Equipment> consultarEquipos() throws PersistenceException;
+    public int consultarUltimoId() throws PersistenceException;
     
 }

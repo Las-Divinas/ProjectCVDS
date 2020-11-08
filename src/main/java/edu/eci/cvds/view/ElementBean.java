@@ -31,7 +31,8 @@ public class ElementBean extends BasePageBean{
     private List<String> types = Arrays.asList(a);
 
     public void registrarElemento() throws ExceptionHistorialDeEquipos, IOException{
-        Element element = new Element(id, name, description, idEquipment,type);
+        int id_equipo = servicioUsuario.consultarUltimoId();
+        Element element = new Element(id, name, description, id_equipo,type);
         servicioUsuario.registrarElemento(element);
     
     }

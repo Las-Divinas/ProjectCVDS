@@ -8,5 +8,6 @@ import java.util.List;
 public interface EquipoMapper {
     public void registrarEquipo(@Param("equipo") Equipment equipo);
     public List<Equipment> consultarEquipos();
+    public int consultarUltimoId();
     
 }

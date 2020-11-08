@@ -5,6 +5,7 @@ import java.io.IOException;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 
 import com.google.inject.Inject;
 
@@ -43,6 +44,8 @@ public class EquipmentBean extends BasePageBean{
     public void registrarEquipo() throws ExceptionHistorialDeEquipos, IOException{
         Equipment equipo = new Equipment(id, name, description, laboratory_id);
         servicioUsuario.registrarEquipment(equipo);
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+        facesContext.getExternalContext().redirect("../admin/addElement.xhtml");
     }
 
     public List<Equipment> consultarEquipos() throws ExceptionHistorialDeEquipos{
