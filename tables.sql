@@ -30,6 +30,7 @@ CREATE TABLE laboratorio(
 CREATE TABLE element(
     id serial primary key,
     name varchar(50) NOT NULL,
+    type varchar(50) NOT NULL,
     description varchar(200) NOT NULL,
     id_equipment integer NOT NULL,
     CONSTRAINT fk_equipment FOREIGN KEY (id_equipment) REFERENCES equipment(id)

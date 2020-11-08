@@ -54,7 +54,6 @@ public class ServicioUsuarioImpl implements ServicioUsuario {
         } catch (PersistenceException ex) {
             throw new ExceptionHistorialDeEquipos("Error al registrar el equipo");
         }
-
     }
 
     @Override
@@ -74,7 +73,6 @@ public class ServicioUsuarioImpl implements ServicioUsuario {
         } catch (Exception e) {
             throw new ExceptionHistorialDeEquipos("Error al registrar la novedad");
         }
-
     }
 
     @Override
@@ -85,5 +83,4 @@ public class ServicioUsuarioImpl implements ServicioUsuario {
             throw new ExceptionHistorialDeEquipos(e.toString());
         }
     }
-    
 }

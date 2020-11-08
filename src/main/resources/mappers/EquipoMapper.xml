@@ -14,7 +14,7 @@
 
     <!-- Insert new equipment  -->
     <insert id="registrarEquipo" parameterType="map">
-        INSERT INTO equipment VALUES(#{equipo.id},#{equipo.name}, #{equipo.description},#{equipo.laboratory_id});
+        INSERT INTO equipment VALUES(DEFAULT,#{equipo.name}, #{equipo.description},#{equipo.laboratory_id});
     </insert>
 
     <!-- Select the equipments -->
