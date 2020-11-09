@@ -71,7 +71,7 @@ public class ServicioUsuarioImpl implements ServicioUsuario {
         try {
             novedadDAO.registrarNovedad(n);
         } catch (Exception e) {
-            throw new ExceptionHistorialDeEquipos("Error al registrar la novedad");
+            throw new ExceptionHistorialDeEquipos(e.toString());
         }
     }
 
@@ -90,6 +90,24 @@ public class ServicioUsuarioImpl implements ServicioUsuario {
             return equipoDAO.consultarUltimoId();
         } catch (Exception e) {
             throw new ExceptionHistorialDeEquipos("Error al consultar el ultimo Id de los equipos");
+        }
+    }
+
+    @Override
+    public int consultarUltimoIdElement() throws ExceptionHistorialDeEquipos {
+        try {
+            return elementoDAO.consultarUltimoId();
+        } catch (Exception e) {
+            throw new ExceptionHistorialDeEquipos("Error al consultar el ultimo Id de los elementos");
+        }
+    }
+
+    @Override
+    public Usuario consultarIdUsuarioPorCorreo(String correo) throws ExceptionHistorialDeEquipos {
+        try {
+            return usuarioDAO.consultarIdPorCorreo(correo);
+        } catch (Exception e) {
+            throw new ExceptionHistorialDeEquipos(e.toString());
         }
     }
 }

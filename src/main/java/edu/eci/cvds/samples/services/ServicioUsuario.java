@@ -15,4 +15,6 @@ public interface ServicioUsuario {
     public abstract void registrarNovedad(Novelty n) throws ExceptionHistorialDeEquipos;
     public abstract List<Equipment> consultarEquipos() throws ExceptionHistorialDeEquipos;
     public abstract int consultarUltimoId() throws ExceptionHistorialDeEquipos;
+    public abstract int consultarUltimoIdElement() throws ExceptionHistorialDeEquipos;
+    public abstract Usuario consultarIdUsuarioPorCorreo(String correo) throws ExceptionHistorialDeEquipos;
 }

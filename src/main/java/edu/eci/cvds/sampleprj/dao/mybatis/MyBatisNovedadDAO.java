@@ -18,7 +18,7 @@ public class MyBatisNovedadDAO implements NovedadDAO {
         try {
             novedadMapper.registrarNovedad(novedad);
         } catch (Exception e) {
-            throw new PersistenceException("Error al registrar la nueva novedad");
+            throw new PersistenceException(e.toString());
         }
 
     }

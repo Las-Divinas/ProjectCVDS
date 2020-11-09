@@ -13,4 +13,7 @@
     <insert id="registrarElemento" parameterType="map">
         INSERT INTO element VALUES(DEFAULT,#{elemento.name}, #{elemento.description} , #{elemento.id_equipment}, #{elemento.type});
     </insert>
+    <select parameterType="map" id="consultarUltimoId" resultType="int">
+        SELECT id FROM element ORDER BY id DESC LIMIT 1; 
+    </select>
 </mapper>

@@ -14,4 +14,7 @@
     <insert id="registrarUsuario" parameterType="map">
         INSERT INTO usuario VALUES(#{usuario.documento}, #{usuario.correo} , #{usuario.nombre}, #{usuario.contraseña}, #{usuario.rol});
     </insert>
+    <select id="consultarIdPorCorreo" parameterType="map" resultMap="UsuarioResult">
+        select u.documento, u.correo, u.nombre, u.contraseña, u.rol from usuario u where u.correo = #{correo};
+    </select>
 </mapper>

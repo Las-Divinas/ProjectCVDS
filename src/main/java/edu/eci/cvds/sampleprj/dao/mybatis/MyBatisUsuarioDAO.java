@@ -19,4 +19,14 @@ public class MyBatisUsuarioDAO implements UsuarioDAO {
             throw new PersistenceException("Error al registrar el nuevo usuario");
         }
     }
+
+    @Override
+    public Usuario consultarIdPorCorreo(String correo) throws PersistenceException {
+        try {
+            return usuarioMapper.consultarIdPorCorreo(correo);
+        } catch (Exception e) {
+            throw new PersistenceException(e.toString());
+        }
+
+    }
 }

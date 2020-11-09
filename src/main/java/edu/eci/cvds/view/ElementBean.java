@@ -6,12 +6,18 @@ import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpSession;
 
 import com.google.inject.Inject;
 
+
 import edu.eci.cvds.samples.entities.Element;
+import edu.eci.cvds.samples.entities.Novelty;
+import edu.eci.cvds.samples.entities.Usuario;
 import edu.eci.cvds.samples.services.ExceptionHistorialDeEquipos;
 import edu.eci.cvds.samples.services.ServicioUsuario;
+import java.util.Date;
 
 @ManagedBean(name = "elementBean")
 @SessionScoped
@@ -21,7 +27,6 @@ public class ElementBean extends BasePageBean{
 
     @Inject
     private ServicioUsuario servicioUsuario;
-
     private int id;
     private String name;
     private String type;
@@ -34,6 +39,14 @@ public class ElementBean extends BasePageBean{
         int id_equipo = servicioUsuario.consultarUltimoId();
         Element element = new Element(id, name, description, id_equipo,type);
         servicioUsuario.registrarElemento(element);
+        Date date = new Date(System.currentTimeMillis());
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+        HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
+        String correoSession = (String) session.getAttribute("correo");
+        Usuario usuario = servicioUsuario.consultarIdUsuarioPorCorreo(correoSession);
+        int id_elemento = servicioUsuario.consultarUltimoIdElement();
+        Novelty novelty = new Novelty("Elemento agregado al equipo"+id_equipo, date, usuario.getDocumento() , id_elemento);
+        servicioUsuario.registrarNovedad(novelty);
     
     }
 

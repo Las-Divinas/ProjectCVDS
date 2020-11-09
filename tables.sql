@@ -7,9 +7,9 @@ CREATE TABLE novelty(
     description varchar(200) NOT NULL,
     date DATE NOT NULL,
     user_id varchar(50) NOT NULL,
-    equipment_id integer NOT NULL,
+    element_id integer NOT NULL,
     CONSTRAINT fk_user FOREIGN KEY (user_id) REFERENCES usuario(documento),
-    CONSTRAINT fk_noveltyequipment FOREIGN KEY (equipment_id) REFERENCES equipment(id)
+    CONSTRAINT fk_noveltyequipment FOREIGN KEY (element_id) REFERENCES element(id)
 );
 /* Ya quedo */
 CREATE TABLE equipment(

@@ -6,5 +6,6 @@ import edu.eci.cvds.samples.entities.Element;
 
 public interface ElementoMapper {
     public void registrarElemento(@Param("elemento") Element elemento);
+    public int consultarUltimoId();
     
 }

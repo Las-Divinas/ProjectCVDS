@@ -4,5 +4,6 @@ import edu.eci.cvds.samples.entities.Element;
 
 public interface ElementoDAO {
     public void registrarElemento(Element element) throws PersistenceException;
+    public int consultarUltimoId() throws PersistenceException;
     
 }
