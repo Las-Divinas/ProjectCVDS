@@ -32,9 +32,11 @@
                     <a class="btn btn-primary" href="../admin/addLaboratory.xhtml" style="font-family: Consolas;">Añadir Laboratorio</a>
                     <a class="btn btn-primary" href="../admin/Register.xhtml" style="font-family: Consolas;">Registrar Nuevo Usuario</a>
                 </div>
-                <div class="p-2 btn-group justify-content-lg-center" style="font-family: Consolas;">
-                    <p:commandButton value="Salir" action="#{loginBean.logout}" class="btn btn-danger"/>
-                </div>
+                <h:form>
+                    <div class="p-2 row justify-content-center h-100" style="font-family: Consolas;">
+                        <p:commandButton value="Salir" action="#{loginBean.logout}" class="btn btn-danger"/>
+                    </div>
+                </h:form>
             </div>
         </div>
     </div>
