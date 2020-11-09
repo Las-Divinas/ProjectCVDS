@@ -10,30 +10,30 @@
     <title>Admin</title>
     <link rel="stylesheet" href="../style/bootstrap.min.css"/>
     <link href="https://fonts.googleapis.com/css2?family=Oswald;family=Staatliches;display=swap" rel="stylesheet"/> 
-    <link rel = "icon" href ="https://observatics.edu.co/wp-content/uploads/sites/20/2019/06/Logo-Escuela-ingenier%C3%ADa.png"/> 
+    <link rel="icon" href ="https://observatics.edu.co/wp-content/uploads/sites/20/2019/06/Logo-Escuela-ingenier%C3%ADa.png"/>
+    <link rel="stylesheet" href="../style/style.css"/>
 </h:head>
 <h:body>
     <div class="container h-100">
         <div class="d-flex justify-content-center align-items-center">
             <div class="d-flex flex-column ">
-                <h:form>
-                    <div class="float-sm-right">
-                        <p:commandButton value="Salir" action="#{loginBean.logout}" class="btn btn-danger"/>
+                <div class="p-0 btn-group justify-content-lg-center">
+                    <img src="../image/logo.jpg" height="200" width="200"/>
+                    <div class="btn-group jumbotron justify-content-center" style="background-color: black; color: white; font-family: Consolas;">
+                        <h1 class="text align-self-center p-2">Admin Page</h1>
                     </div>
-                </h:form>
-                <br/>
-                <div class="jumbotron text-center">
-                    <h1 class="text align-self-center p-2">Admin Page</h1>
                 </div>
-                <div class="btn-group justify-content-center" role="group" aria-label="Basic example">
-                    <a class="btn btn-primary" href="../public/consultEquipment.xhtml">Consultar Equipos</a>
+                <div class="p-2 btn-group justify-content-center" role="group" aria-label="Basic example">
+                    <a class="btn btn-primary" href="../public/consultEquipment.xhtml" style="font-family: Consolas;">Consultar Equipos</a>
                 </div>
-                <img src="../image/Escuela.jpg" class="mt-2 img-fluid" alt="Responsive image"/>
-                <div class="mt-2 btn-group justify-content-center" role="group" aria-label="Basic example">
-                    <a class="btn btn-primary" href="../admin/addEquipment.xhtml">Añadir Equipo</a>
-                    <a class="btn btn-primary" href="../admin/addNovelty.xhtml">Añadir Novedad</a>
-                    <a class="btn btn-primary" href="../admin/addLaboratory.xhtml">Añadir Laboratorio</a>
-                    <a class="btn btn-primary" href="../admin/Register.xhtml">Registrar Nuevo Usuario</a>
+                <div class="p-2 btn-group justify-content-center" role="group" aria-label="Basic example">
+                    <a class="btn btn-primary" href="../admin/addEquipment.xhtml" style="font-family: Consolas;">Añadir Equipo</a>
+                    <a class="btn btn-primary" href="../admin/addNovelty.xhtml" style="font-family: Consolas;">Añadir Novedad</a>
+                    <a class="btn btn-primary" href="../admin/addLaboratory.xhtml" style="font-family: Consolas;">Añadir Laboratorio</a>
+                    <a class="btn btn-primary" href="../admin/Register.xhtml" style="font-family: Consolas;">Registrar Nuevo Usuario</a>
+                </div>
+                <div class="p-2 btn-group justify-content-lg-center" style="font-family: Consolas;">
+                    <p:commandButton value="Salir" action="#{loginBean.logout}" class="btn btn-danger"/>
                 </div>
             </div>
         </div>
