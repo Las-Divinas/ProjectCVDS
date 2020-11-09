@@ -25,11 +25,20 @@ public class NoveltyBean extends BasePageBean{
     private String description;
     private String idUser;
     private int idEquipment;
+    private String title;
 
     public void registrarNovedad() throws ExceptionHistorialDeEquipos, IOException{
         Date date = new Date(System.currentTimeMillis());
-        Novelty novelty = new Novelty(id, description, date , idUser, idEquipment);
+        Novelty novelty = new Novelty(id, description,title, date , idUser, idEquipment);
         servicioUsuario.registrarNovedad(novelty);
+    }
+
+    public String getTitle(){
+        return title;
+    }
+
+    public void setTitle(String title){
+        this.title = title;
     }
 
     public int getId(){

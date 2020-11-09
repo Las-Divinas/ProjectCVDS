@@ -45,7 +45,8 @@ public class ElementBean extends BasePageBean{
         String correoSession = (String) session.getAttribute("correo");
         Usuario usuario = servicioUsuario.consultarIdUsuarioPorCorreo(correoSession);
         int id_elemento = servicioUsuario.consultarUltimoIdElement();
-        Novelty novelty = new Novelty("Elemento agregado al equipo"+id_equipo, date, usuario.getDocumento() , id_elemento);
+        Novelty novelty = new Novelty("Elemento agregado al equipo"+id_equipo, "Se agrego le agrego a equipo"+"", date, usuario.getDocumento() , id_elemento);
+        System.out.println(novelty.getTitle()+"-----------------------------asasasasas");
         servicioUsuario.registrarNovedad(novelty);
     
     }

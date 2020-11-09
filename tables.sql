@@ -5,11 +5,13 @@ CREATE TABLE usuario(documento varchar(50) primary key, correo varchar(50) uniqu
 CREATE TABLE novelty(
     id serial primary key,
     description varchar(200) NOT NULL,
+    title varchar(30) NOT NULL,
     date DATE NOT NULL,
     user_id varchar(50) NOT NULL,
     element_id integer NOT NULL,
+    equipment_id integer,
     CONSTRAINT fk_user FOREIGN KEY (user_id) REFERENCES usuario(documento),
-    CONSTRAINT fk_noveltyequipment FOREIGN KEY (element_id) REFERENCES element(id)
+    CONSTRAINT fk_noveltyelement FOREIGN KEY (element_id) REFERENCES element(id)
 );
 /* Ya quedo */
 CREATE TABLE equipment(

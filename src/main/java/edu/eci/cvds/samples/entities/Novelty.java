@@ -10,29 +10,71 @@ public class  Novelty implements Serializable
     private Date date;
     private String user_id ;
     private int equipment_id;
+    private int element_id;
     private int id;
+    private String title;
 
     public Novelty()
     {
 
     }
 
-    public Novelty(int id,String description,Date date,String user_id,int equipment_id)
+    public Novelty(int id,String description,String title, Date date,String user_id,int equipment_id)
     {
         this.id=id;
         this.description = description;
         this.date = date;
         this.user_id = user_id;
         this.equipment_id = equipment_id;
+        this.title = title;
     }
 
-    public Novelty(String description,Date date,String user_id,int equipment_id)
+    public Novelty(int id,String description,String title,Date date,String user_id,int equipment_id,int element_id)
+    {
+        this.id=id;
+        this.description = description;
+        this.date = date;
+        this.user_id = user_id;
+        this.equipment_id = equipment_id;
+        this.element_id = element_id;
+        this.title = title;
+    }
+
+    public Novelty(String description,String title,Date date,String user_id,int equipment_id)
     {
         this.description = description;
         this.date = date;
         this.user_id = user_id;
         this.equipment_id = equipment_id;
+        this.title = title;
     }
+
+    public Novelty(String description,String title,Date date,String user_id,int equipment_id,int element_id)
+    {
+        this.description = description;
+        this.date = date;
+        this.user_id = user_id;
+        this.equipment_id = equipment_id;
+        this.element_id = element_id;
+        this.title = title;
+    }
+
+    public String getTitle(){
+        return title;
+    }
+
+    public void setTitle(String title){
+        this.title = title;
+    }
+
+    public int getElement_id(){
+        return element_id;
+    }
+
+    public void setElement_id(int element_id){
+        this.element_id = element_id;
+    }
+
 
     public String getDescription()
     {
