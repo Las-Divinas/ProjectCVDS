@@ -7,14 +7,13 @@
 <h:head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Login</title>
+    <title>Equipment</title>
     <link rel="stylesheet" href="../style/bootstrap.min.css"/>
     <link href="https://fonts.googleapis.com/css2?family=Oswald;family=Staatliches;display=swap" rel="stylesheet"/> 
     <link rel = "icon" href ="https://observatics.edu.co/wp-content/uploads/sites/20/2019/06/Logo-Escuela-ingenier%C3%ADa.png"/> 
 </h:head>
 <h:body style="font-family: 'Oswald', sans-serif; background-color:rgba(218, 218, 221, 0.932);">
     <div class="container h-100">
-
         <div class="d-flex justify-content-center align-items-center">
             <div class="d-flex flex-column">
                 <h:form>
@@ -25,7 +24,12 @@
                 <div class="jumbotron text-center">
                     <h1 class="text align-self-center p-2">Elementos</h1>
                 </div>
-                <p:dataTable var="equipment" value="#{equipmentBean.equiposBusquedaBasica}">
+                <p:dataTable var="equipment" value="#{equipmentBean.equiposBusquedaBasica}" rows="10"
+                        paginator="true"
+                        paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                        currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records"
+                        rowsPerPageTemplate="5,10,15" 
+                        styleClass="table-dark table-striped table-bordered">
                     <p:column headerText="Id">
                         <h:outputText value="#{equipment.id}"/>
                     </p:column>

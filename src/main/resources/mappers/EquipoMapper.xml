@@ -9,7 +9,7 @@
         <result property='element' column='element'/>
         <result property='name' column='name'/>
         <result property='description' column='description'/>
-        <association property="laboratory_id" javaType="Laboratory" resultMap="edu.eci.cvds.sampleprj.dao.mybatis.mappers.LaboratoryMapper.LaboratoryResult" columnPrefix='laboratorio_'/>
+        <result property="laboratory_id" column="laboratory_id"/>
     </resultMap>
 
     <!-- Insert new equipment  -->
