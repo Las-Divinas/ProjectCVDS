@@ -107,6 +107,15 @@ public class ServicioUsuarioImpl implements ServicioUsuario {
         try {
             return usuarioDAO.consultarIdPorCorreo(correo);
         } catch (Exception e) {
+            throw new ExceptionHistorialDeEquipos("Error al consultar usuario con correo "+correo);
+        }
+    }
+
+    @Override
+    public Element consultarElementoPorId(int id) throws ExceptionHistorialDeEquipos {
+        try {
+            return elementoDAO.consultarElementoPorId(id);
+        } catch (Exception e) {
             throw new ExceptionHistorialDeEquipos(e.toString());
         }
     }

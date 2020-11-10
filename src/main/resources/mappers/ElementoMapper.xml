@@ -8,12 +8,18 @@
         <id property='id' column='id'/>
         <result property='name' column='"name"'/>
         <result property='description' column='description'/>
-        <association property="idEquipment" javaType="Equipment" resultMap="edu.eci.cvds.sampleprj.dao.mybatis.mappers.EquipoMapper.EquipoResult" columnPrefix='equipo_'/>
+        <result property="id_equipment" column="id_equipment"/>
+        <result property='type' column='description'/>
     </resultMap>
     <insert id="registrarElemento" parameterType="map">
         INSERT INTO element VALUES(DEFAULT,#{elemento.name}, #{elemento.description} , #{elemento.id_equipment}, #{elemento.type});
     </insert>
     <select parameterType="map" id="consultarUltimoId" resultType="int">
         SELECT id FROM element ORDER BY id DESC LIMIT 1; 
+    </select>
+    <select parameterType="map" id="consultarElementoPorId" resultMap="ElementoResult">
+        SELECT e.name, e.description, e.id_equipment, e.tipo
+        FROM element as e
+        WHERE e.id = #{id};
     </select>
 </mapper>

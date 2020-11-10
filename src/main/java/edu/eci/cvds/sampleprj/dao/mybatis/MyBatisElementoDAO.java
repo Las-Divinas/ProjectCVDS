@@ -30,5 +30,14 @@ public class MyBatisElementoDAO implements ElementoDAO {
             throw new PersistenceException("Error al consultar el ultimo id de los elementos");
         }
     }
+
+    @Override
+    public Element consultarElementoPorId(int id) throws PersistenceException {
+        try {
+            return elementoMapper.consultarElementoPorId(id);
+        } catch (Exception e) {
+            throw new PersistenceException(e.toString());
+        }
+    }
     
 }

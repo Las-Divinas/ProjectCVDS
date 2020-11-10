@@ -5,10 +5,14 @@ import java.util.Date;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpSession;
 
 import com.google.inject.Inject;
 
+import edu.eci.cvds.samples.entities.Element;
 import edu.eci.cvds.samples.entities.Novelty;
+import edu.eci.cvds.samples.entities.Usuario;
 import edu.eci.cvds.samples.services.ExceptionHistorialDeEquipos;
 import edu.eci.cvds.samples.services.ServicioUsuario;
 
@@ -26,11 +30,37 @@ public class NoveltyBean extends BasePageBean{
     private String idUser;
     private int idEquipment;
     private String title;
+    private int idElement;
 
     public void registrarNovedad() throws ExceptionHistorialDeEquipos, IOException{
         Date date = new Date(System.currentTimeMillis());
-        Novelty novelty = new Novelty(id, description,title, date , idUser, idEquipment);
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+        HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
+        String correoSession = (String) session.getAttribute("correo");
+        Usuario usuario = servicioUsuario.consultarIdUsuarioPorCorreo(correoSession);
+        Novelty novelty = new Novelty(id, description,title, date , usuario.getDocumento(), idEquipment, idElement);
         servicioUsuario.registrarNovedad(novelty);
+    }
+
+    public void registrarNovedadElemento() throws ExceptionHistorialDeEquipos{
+        Date date = new Date(System.currentTimeMillis());
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+        HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
+        String correoSession = (String) session.getAttribute("correo");
+        Usuario usuario = servicioUsuario.consultarIdUsuarioPorCorreo(correoSession);
+        Element elemento = servicioUsuario.consultarElementoPorId(idElement);
+        System.out.println(elemento.getName()+"-------------"+elemento.getId_equipment());
+        Novelty novelty = new Novelty(description,title, date, usuario.getDocumento(), elemento.getId_equipment(), 0);
+        servicioUsuario.registrarNovedad(novelty);
+
+    }
+
+    public int getIdElement(){
+        return idElement;
+    }
+
+    public void setIdElement(int idElement){
+        this.idElement = idElement;
     }
 
     public String getTitle(){

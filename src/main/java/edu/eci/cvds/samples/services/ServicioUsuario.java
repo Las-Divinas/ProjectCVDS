@@ -17,4 +17,5 @@ public interface ServicioUsuario {
     public abstract int consultarUltimoId() throws ExceptionHistorialDeEquipos;
     public abstract int consultarUltimoIdElement() throws ExceptionHistorialDeEquipos;
     public abstract Usuario consultarIdUsuarioPorCorreo(String correo) throws ExceptionHistorialDeEquipos;
+    public abstract Element consultarElementoPorId(int id) throws ExceptionHistorialDeEquipos;
 }

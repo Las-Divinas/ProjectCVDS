@@ -26,6 +26,14 @@ public class  Element implements Serializable
         this.type = type;
     }
 
+    public Element(String name,String description,int id_equipment, String type)
+    {
+        this.name = name;
+        this.description = description;
+        this.id_equipment = id_equipment;
+        this.type = type;
+    }
+
     public Element(String name,String description,int id_equipment)
     {
         this.name = name;
@@ -53,7 +61,7 @@ public class  Element implements Serializable
 
     public int getId_equipment()
     {
-        return this.id_equipment;
+        return id_equipment;
     }
     public void setId_equipment(int id_equipment)
     {
