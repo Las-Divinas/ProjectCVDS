@@ -13,6 +13,7 @@ public class  Equipment implements Serializable
     private int laboratory_id;
     private List<Element> elementos;
     private List<Novelty> novedades;
+    private String estado;
 
     public Equipment()
     {
@@ -31,6 +32,13 @@ public class  Equipment implements Serializable
         this.description=description;
         this.laboratory_id=laboratory_id;
     }
+
+    public Equipment(String name, String description, int laboratory_id, String estado){
+        this.name=name;
+        this.description=description;
+        this.laboratory_id=laboratory_id;
+        this.estado = estado;
+    }
     
     public Equipment(String description,String name,int laboratory_id,List<Element> elementos,List<Novelty> novedades)
     {
@@ -39,6 +47,14 @@ public class  Equipment implements Serializable
         this.laboratory_id = laboratory_id;
         this.elementos = elementos;
         this.novedades = novedades ;
+    }
+
+    public String getEstado(){
+        return estado;
+    }
+
+    public void setEstado(String estado){
+        this.estado = estado;
     }
 
     public String getDescription()

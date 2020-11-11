@@ -42,7 +42,7 @@ public class EquipmentBean extends BasePageBean{
     }
 
     public void registrarEquipo() throws ExceptionHistorialDeEquipos, IOException{
-        Equipment equipo = new Equipment(id, name, description, laboratory_id);
+        Equipment equipo = new Equipment(name, description, laboratory_id,"ACTIVO");
         servicioUsuario.registrarEquipment(equipo);
         FacesContext facesContext = FacesContext.getCurrentInstance();
         facesContext.getExternalContext().redirect("../admin/addElement.xhtml");

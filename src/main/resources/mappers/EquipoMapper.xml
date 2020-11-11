@@ -9,17 +9,19 @@
         <result property='name' column='name'/>
         <result property='description' column='description'/>
         <result property="laboratory_id" column="laboratory_id"/>
+        <result property="estado" column="estado"/>
     </resultMap>
 
     <!-- Insert new equipment  -->
     <insert id="registrarEquipo" parameterType="map">
-        INSERT INTO equipment VALUES(DEFAULT,#{equipo.name}, #{equipo.description},#{equipo.laboratory_id});
+        INSERT INTO equipment VALUES(DEFAULT,#{equipo.name}, #{equipo.description},#{equipo.laboratory_id}, #{equipo.estado});
     </insert>
 
     <!-- Select the equipments -->
     <select parameterType="map" id="consultarEquipos" resultMap="EquipoResult">
-        SELECT e.id, e.name , e.description, e.laboratory_id
+        SELECT e.id, e.name , e.description, e.laboratory_id, e.estado
         FROM equipment as e
+        WHERE e.estado = 'ACTIVO';
     </select>
 
     <!-- Select the last id of element -->
