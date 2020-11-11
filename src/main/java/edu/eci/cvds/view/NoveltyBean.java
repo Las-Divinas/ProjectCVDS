@@ -31,6 +31,7 @@ public class NoveltyBean extends BasePageBean{
     private int idEquipment;
     private String title;
     private int idElement;
+    private String message;
 
     public void registrarNovedad() throws ExceptionHistorialDeEquipos, IOException{
         Date date = new Date(System.currentTimeMillis());
@@ -39,6 +40,7 @@ public class NoveltyBean extends BasePageBean{
         String correoSession = (String) session.getAttribute("correo");
         Usuario usuario = servicioUsuario.consultarIdUsuarioPorCorreo(correoSession);
         Novelty novelty = new Novelty(id, description,title, date , usuario.getDocumento(), idEquipment, idElement);
+        message = "Se agrego la nueva novedad al equipo "+idEquipment;
         servicioUsuario.registrarNovedad(novelty);
     }
 
@@ -51,6 +53,7 @@ public class NoveltyBean extends BasePageBean{
         Element elemento = servicioUsuario.consultarElementoPorId(idElement);
         System.out.println(elemento.getName()+"-------------"+elemento.getId_equipment());
         Novelty novelty = new Novelty(description,title, date, usuario.getDocumento(), elemento.getId_equipment(), 0);
+        message = "Se agrego la nueva novedad al elemento "+idElement+" del equipo "+idEquipment;
         servicioUsuario.registrarNovedad(novelty);
 
     }
@@ -100,6 +103,14 @@ public class NoveltyBean extends BasePageBean{
     }
     public void setIdEquipment(int idEquipment){
         this.idEquipment=idEquipment;
+    }
+
+    public String getMessage(){
+        return message;
+    }
+
+    public void setMessage(String message){
+        this.message = message;
     }
     
 }

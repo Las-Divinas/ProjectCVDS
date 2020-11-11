@@ -32,6 +32,7 @@ public class ElementBean extends BasePageBean{
     private String type;
     private String description;
     private int idEquipment;
+    private String message;
     private String a[] = new String[] {"Torre","Pantalla","Mouse","Teclado"};
     private List<String> types = Arrays.asList(a);
 
@@ -46,7 +47,7 @@ public class ElementBean extends BasePageBean{
         Usuario usuario = servicioUsuario.consultarIdUsuarioPorCorreo(correoSession);
         int id_elemento = servicioUsuario.consultarUltimoIdElement();
         Novelty novelty = new Novelty("Elemento agregado al equipo"+id_equipo, "Se agrego le agrego a equipo"+"", date, usuario.getDocumento() ,id_equipo,id_elemento);
-        System.out.println(novelty.getTitle()+"-----------------------------asasasasas");
+        message = "Se creo que correctamente el elemento del equipo"+id_equipo;
         servicioUsuario.registrarNovedad(novelty);
     
     }
@@ -97,5 +98,13 @@ public class ElementBean extends BasePageBean{
 
     public void setIdEquipment(int idEquipment){
         this.idEquipment=idEquipment;
+    }
+
+    public String getMessage(){
+        return message;
+    }
+
+    public void setMessage(String message){
+        this.message = message;
     }
 }

@@ -3,6 +3,7 @@ package edu.eci.cvds.view;
 import java.io.IOException;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
@@ -28,6 +29,7 @@ public class EquipmentBean extends BasePageBean{
     private String name;
     private String description;
     private int laboratory_id;
+    private String message;
     private List<Equipment> equiposBusquedaBasica;
 
     @PostConstruct
@@ -45,11 +47,21 @@ public class EquipmentBean extends BasePageBean{
         Equipment equipo = new Equipment(name, description, laboratory_id,"ACTIVO");
         servicioUsuario.registrarEquipment(equipo);
         FacesContext facesContext = FacesContext.getCurrentInstance();
+        message = "Se agrego con exito el equipo";
         facesContext.getExternalContext().redirect("../admin/addElement.xhtml");
     }
 
     public List<Equipment> consultarEquipos() throws ExceptionHistorialDeEquipos{
+        message = "Tuvimos un problema en agregar el equipo";
         return servicioUsuario.consultarEquipos();
+    }
+
+    public String getMessage(){
+        return message;
+    }
+
+    public void setMessage(String message){
+        this.message = message;
     }
 
     public int getId(){
@@ -90,5 +102,10 @@ public class EquipmentBean extends BasePageBean{
 
     public void setEquiposBusquedaBasica(List<Equipment> equiposBusquedaBasica){
         this.equiposBusquedaBasica=equiposBusquedaBasica;
+    }
+
+    public void dialogMessage() {
+        FacesContext context = FacesContext.getCurrentInstance();
+        context.addMessage(null, new FacesMessage("Exitoso", "Se añadio con exito el Equipo"));
     }
 }

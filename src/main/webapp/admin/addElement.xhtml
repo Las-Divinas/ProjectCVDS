@@ -39,7 +39,10 @@
                         <h:outputLabel for="Description" value="Description: "/>
                         <p:inputText class="form-control" type="String" id="description" value="#{elementBean.description}" placeholder="Description"/>
                     </div>
-                    <p:commandButton value="Add" class="btn btn-primary" actionListener="#{elementBean.registrarElemento}"/>
+                    <p:commandButton value="Add" class="btn btn-primary" actionListener="#{elementBean.registrarElemento}" onclick="PF('dlg2').show();"/>
+                    <p:dialog header="Modal Dialog" widgetVar="dlg2" modal="true" height="100">
+                        <h:outputText value="#{elementBean.message}" />
+                    </p:dialog> 
                 </h:form>
             </div>
         </div>
