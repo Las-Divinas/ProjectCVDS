@@ -12,4 +12,7 @@
     <insert id="registrarLaboratorio" parameterType="map">
         INSERT INTO laboratorio VALUES(DEFAULT,#{laboratorio.name}, #{laboratorio.description});
     </insert>
+    <select resultType="int" id="consultarUltimoId">
+        SELECT id FROM laboratorio ORDER BY id DESC LIMIT 1; 
+    </select>
 </mapper>

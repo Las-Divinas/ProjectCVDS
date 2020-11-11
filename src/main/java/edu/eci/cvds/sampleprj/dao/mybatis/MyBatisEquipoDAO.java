@@ -40,5 +40,24 @@ public class MyBatisEquipoDAO implements EquipoDAO {
             throw new PersistenceException("Error al consultar el ultimo Id de los equipos");
         }
     }
+
+    @Override
+    public Equipment consultarEquipoPorId(int id) throws PersistenceException {
+        try {
+            return equipoMapper.consultarEquipoPorId(id);
+        } catch (Exception e) {
+            throw new PersistenceException("Error al consultar el equipo con el Id "+id);
+        }
+    }
+
+    @Override
+    public void cambiarLaboratorio(int idLaboratory, int idEquipment) throws PersistenceException {
+        try {
+            equipoMapper.cambiarLaboratorio(idLaboratory, idEquipment);
+        } catch (Exception e) {
+            throw new PersistenceException(e.toString());
+        }
+
+    }
     
 }

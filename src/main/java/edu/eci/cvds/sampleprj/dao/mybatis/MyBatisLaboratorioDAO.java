@@ -17,12 +17,20 @@ public class MyBatisLaboratorioDAO implements LaboratoryDAO {
     @Override
     public void registrarLaboratorio(Laboratory lab) throws PersistenceException {
         try {
-            System.out.print(lab.getName()+"+-------------------------------");
             laboratorioMapper.registrarLaboratorio(lab);
         } catch (Exception e) {
-            throw new PersistenceException(e.toString());
+            throw new PersistenceException("Error al registrar el nuevo Laboratorio");
         }
 
+    }
+
+    @Override
+    public int consultarUltimoId() throws PersistenceException {
+        try {
+            return laboratorioMapper.consultarUltimoId();
+        } catch (Exception e) {
+            throw new PersistenceException("Error al consultar el ultimo Id de la tabla laboratorio");
+        }
     }
     
 }

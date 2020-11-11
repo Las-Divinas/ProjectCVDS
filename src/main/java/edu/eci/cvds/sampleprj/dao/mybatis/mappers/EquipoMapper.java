@@ -9,5 +9,9 @@ public interface EquipoMapper {
     public void registrarEquipo(@Param("equipo") Equipment equipo);
     public List<Equipment> consultarEquipos();
     public int consultarUltimoId();
+    public Equipment consultarEquipoPorId(@Param("id") int id);
+    public void cambiarLaboratorio(@Param("idLaboratory") int idLaboratory,
+                                             @Param("idEquipment") int idEquipment);
+
     
 }

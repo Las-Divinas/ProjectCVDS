@@ -116,7 +116,35 @@ public class ServicioUsuarioImpl implements ServicioUsuario {
         try {
             return elementoDAO.consultarElementoPorId(id);
         } catch (Exception e) {
+            throw new ExceptionHistorialDeEquipos("Error al consultar el elmento con el Id "+id);
+        }
+    }
+
+    @Override
+    public int consultarUltimoIdLaboratorio() throws ExceptionHistorialDeEquipos {
+        try {
+            return laboratoryDAO.consultarUltimoId();
+        } catch (Exception e) {
+            throw new ExceptionHistorialDeEquipos("Error al consultar el ultimo Id de la tabla laboratorio");
+        }
+    }
+
+    @Override
+    public Equipment consultarEquipoPorId(int id) throws ExceptionHistorialDeEquipos {
+        try {
+            return equipoDAO.consultarEquipoPorId(id);
+        } catch (Exception e) {
+            throw new ExceptionHistorialDeEquipos("Error al consultar el equipo con el Id "+id);
+        }
+    }
+
+    @Override
+    public void cambiarLaboratorioEquipo(int idLaboratory, int idEquipment) throws ExceptionHistorialDeEquipos {
+        try {
+            equipoDAO.cambiarLaboratorio(idLaboratory, idEquipment);
+        } catch (Exception e) {
             throw new ExceptionHistorialDeEquipos(e.toString());
         }
+
     }
 }
