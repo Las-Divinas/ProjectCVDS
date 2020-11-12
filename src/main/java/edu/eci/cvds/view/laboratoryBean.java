@@ -49,7 +49,8 @@ public class laboratoryBean extends BasePageBean{
 
     public void registrarLaboratorio() throws ExceptionHistorialDeEquipos, IOException{
         try {
-            Laboratory laboratory = new Laboratory(id,name, description);
+            Date date = new Date(System.currentTimeMillis());
+            Laboratory laboratory = new Laboratory(id,name, description,"ACTIVO",date,null);
             servicioUsuario.registrarLaboratorio(laboratory);
             FacesContext facesContext = FacesContext.getCurrentInstance();
             facesContext.getExternalContext().redirect("../admin/addEquipLab.xhtml");

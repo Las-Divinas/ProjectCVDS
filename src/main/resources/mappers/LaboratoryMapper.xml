@@ -8,16 +8,19 @@
         <id property='id' column='id'/>
         <result property='name' column='name'/>
         <result property='description' column='description'/>
+        <result property='estado' column='estado'/>
+        <result property='fecha_creacion' column='fecha_creacion'/>
+        <result property='fecha_cierre' column='fecha_cierre'/>
     </resultMap>
     <insert id="registrarLaboratorio" parameterType="map">
-        INSERT INTO laboratorio VALUES(DEFAULT,#{laboratorio.name}, #{laboratorio.description});
+        INSERT INTO laboratorio VALUES(DEFAULT,#{laboratorio.name}, #{laboratorio.description},#{laboratorio.estado},#{laboratorio.fecha_creacion},#{laboratorio.fecha_cierre});
     </insert>
     <select resultType="int" id="consultarUltimoId">
         SELECT id FROM laboratorio ORDER BY id DESC LIMIT 1; 
     </select>
     <!-- Select the Laboratoy -->
     <select parameterType="map" id="consultarLaboratorios" resultMap="LaboratoryResult">
-        SELECT e.id, e.name , e.description
+        SELECT e.id, e.name , e.description,e.estado,e.fecha_creacion,e.fecha_cierre
         FROM laboratorio as e;
     </select>
 </mapper>

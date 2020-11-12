@@ -1,6 +1,7 @@
 package edu.eci.cvds.samples.entities;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 public class  Laboratory implements Serializable {
@@ -10,6 +11,9 @@ public class  Laboratory implements Serializable {
     private String description;
     private List<Equipment> equipos;
     private int id;
+    private String estado;
+    private Date fecha_creacion;
+    private Date fecha_cierre;
 
     public Laboratory() {
 
@@ -19,6 +23,14 @@ public class  Laboratory implements Serializable {
         this.id=id;
         this.name=name;
         this.description=description;
+    }
+    public Laboratory(int id, String name, String description, String estado, Date fecha_creacion, Date fecha_cierre){
+        this.id=id;
+        this.name=name;
+        this.description=description;
+        this.estado=estado;
+        this.fecha_creacion=fecha_creacion;
+        this.fecha_cierre=fecha_cierre;
     }
 
     public Laboratory(String name, String description){
@@ -64,5 +76,29 @@ public class  Laboratory implements Serializable {
     }
     public void setId(int id){
         this.id=id;
+    }
+    public String getEstado()
+    {
+        return this.estado;
+    }
+    public void setEstado(String estado)
+    {
+        this.estado = estado;
+    }
+    public Date getFecha_creacion()
+    {
+        return this.fecha_creacion;
+    }
+    public void setFecha_creacion(Date fecha_creacion)
+    {
+        this.fecha_creacion = fecha_creacion;
+    }
+    public Date getFecha_cierre()
+    {
+        return this.fecha_cierre;
+    }
+    public void setFecha_cierre(Date fecha_cierre)
+    {
+        this.fecha_cierre = fecha_cierre;
     }
 }

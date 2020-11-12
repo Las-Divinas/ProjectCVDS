@@ -46,6 +46,15 @@
                         <p:column headerText="Descripción">
                             <h:outputText value="#{laboratory.description}"/>
                         </p:column>
+                        <p:column headerText="Estado">
+                            <h:outputText value="#{laboratory.estado}"/>
+                        </p:column>
+                        <p:column headerText="Fecha Creacion">
+                            <h:outputText value="#{laboratory.fecha_creacion}"/>
+                        </p:column>
+                        <p:column headerText="Fecha Cierre">
+                            <h:outputText value="#{laboratory.fecha_cierre}"/>
+                        </p:column>
                         <!--<p:column class="text-center" headerText="Administrar" exportable="false">
                             <p:commandButton class="btn btn-success btn-sm" value="Administrar"/>
                         </p:column>
