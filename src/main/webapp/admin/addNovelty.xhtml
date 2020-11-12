@@ -15,9 +15,11 @@
 </h:head>
 <h:body>
     <div class="container h-100">
-        <div class="float-sm-right">
-            <p:commandButton value="Atras" action="#{loginBean.comeBack}" class="btn btn-danger"/>
-        </div>
+        <h:form>
+            <div class="float-sm-right">
+                <p:commandButton value="Atras" action="#{loginBean.comeBack}" class="btn btn-danger"/>
+            </div>
+        </h:form>
         <div class="d-flex justify-content-center align-items-center">
             <div class="d-flex flex-column">
                 <div class="jumbotron text-center">
@@ -38,7 +40,7 @@
                                 <h:outputLabel for="Equipment" value="Equipment Id: "/>
                                 <p:inputText class="form-control" type="String" id="equipment_id" value="#{noveltyBean.idEquipment}" placeholder="1"/>
                             </div>
-                            <p:commandButton value="Add" class="btn btn-primary" actionListener="#{noveltyBean.registrarNovedad}" onclick="PF('dlg2').show();"/>
+                            <p:commandButton value="Add" class="btn btn-primary" actionListener="#{noveltyBean.registrarNovedad}"/>
                             <p:dialog header="Modal Dialog" widgetVar="dlg2" modal="true" height="100">
                                 <h:outputText value="#{noveltyBean.message}" />
                             </p:dialog> 

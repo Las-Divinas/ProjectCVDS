@@ -34,6 +34,7 @@ public class MyBatisLaboratorioDAO implements LaboratoryDAO {
             throw new PersistenceException("Error al consultar el ultimo Id de la tabla laboratorio");
         }
     }
+<<<<<<< HEAD
     @Override
     public List<Laboratory> consultarLaboratorios() throws PersistenceException{
         try {
@@ -43,4 +44,6 @@ public class MyBatisLaboratorioDAO implements LaboratoryDAO {
         }
     }
     
+=======
+>>>>>>> 648f665a95ce15937a5ef42b24466a5d3e99e0f0
 }
