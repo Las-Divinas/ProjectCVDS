@@ -147,4 +147,13 @@ public class ServicioUsuarioImpl implements ServicioUsuario {
         }
 
     }
+
+    @Override
+    public List<Laboratory> consultarLaboratorios() throws ExceptionHistorialDeEquipos {
+        try {
+            return laboratoryDAO.consultarLaboratorios();
+        } catch (Exception e) {
+            throw new ExceptionHistorialDeEquipos("Error al consultar los laboratorios");
+        }
+    }
 }

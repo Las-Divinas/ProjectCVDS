@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:p="http://primefaces.org/ui">
+<h:head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Laboratory</title>
+    <link rel="stylesheet" href="../style/bootstrap.min.css"/>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald;family=Staatliches;display=swap" rel="stylesheet"/> 
+    <link rel = "icon" href ="https://observatics.edu.co/wp-content/uploads/sites/20/2019/06/Logo-Escuela-ingenier%C3%ADa.png"/> 
+</h:head>
+<h:body style="font-family: 'Oswald', sans-serif; background-color:rgba(218, 218, 221, 0.932);">
+    <div class="container h-100">
+        <div class="d-flex justify-content-center align-items-center">
+            <div class="d-flex flex-column">
+                <h:form>
+                    <div class="float-sm-right">
+                        <p:commandButton value="Atras" action="#{loginBean.redirectHomeUser}" class="btn btn-danger"/>
+                    </div>
+                    <div class="jumbotron text-center">
+                        <h1 class="text align-self-center p-2">Laboratorios</h1>
+                    </div>
+                    <p:dataTable id="tbl" var="laboratory" value="#{laboratoryBean.laboratoriosBusquedaBasica}" rows="10"
+                            paginator="true"
+                            paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {Exporters}"
+                            currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records"
+                            rowsPerPageTemplate="5,10,15" 
+                            styleClass="table-dark table-striped table-bordered justify-content-center">
+                            <f:facet name="{Exporters}">
+                                <div style="float:right;margin-right: 2%;">
+                                    <h:commandLink>
+                                        <p:graphicImage url="../image/excel.png" width="22"/>
+                                        <p:dataExporter type="xls" target="tbl" fileName="laboratory" encoding="UTF-8"/>
+                                    </h:commandLink>
+                                </div>
+                            </f:facet>
+                        <p:column headerText="Id">
+                            <h:outputText value="#{laboratory.id}"/>
+                        </p:column>
+                        <p:column headerText="Nombre">
+                            <h:outputText value="#{laboratory.name}"/>
+                        </p:column>
+                        <p:column headerText="Descripción">
+                            <h:outputText value="#{laboratory.description}"/>
+                        </p:column>
+                        <!--<p:column class="text-center" headerText="Administrar" exportable="false">
+                            <p:commandButton class="btn btn-success btn-sm" value="Administrar"/>
+                        </p:column>
+                        <p:column class="text-center" headerText="Novedades" exportable="false">
+                            <p:commandButton class="btn btn-success btn-sm" value="Novedades"/>
+                        </p:column>-->
+                    </p:dataTable>
+                </h:form>
+            </div>
+        </div>
+    </div>
+</h:body>
+</html>

@@ -1,5 +1,7 @@
 package edu.eci.cvds.sampleprj.dao.mybatis;
 
+import java.util.List;
+
 import com.google.inject.Inject;
 
 import edu.eci.cvds.sampleprj.dao.LaboratoryDAO;
@@ -30,6 +32,14 @@ public class MyBatisLaboratorioDAO implements LaboratoryDAO {
             return laboratorioMapper.consultarUltimoId();
         } catch (Exception e) {
             throw new PersistenceException("Error al consultar el ultimo Id de la tabla laboratorio");
+        }
+    }
+    @Override
+    public List<Laboratory> consultarLaboratorios() throws PersistenceException{
+        try {
+            return laboratorioMapper.consultarLaboratorios();
+        } catch (Exception e) {
+            throw new PersistenceException("Error al consultar los laboratorios");
         }
     }
     

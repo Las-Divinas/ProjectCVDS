@@ -1,8 +1,11 @@
 package edu.eci.cvds.view;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
@@ -30,6 +33,19 @@ public class laboratoryBean extends BasePageBean{
     private String description;
     private int id;
     private int idEquipment;
+    private String message;
+    private List<Laboratory> laboratoriosBusquedaBasica;
+
+    @PostConstruct
+    public void init(){
+        super.init();
+        try{
+            laboratoriosBusquedaBasica = new ArrayList<>();
+            laboratoriosBusquedaBasica = servicioUsuario.consultarLaboratorios();
+        } catch (ExceptionHistorialDeEquipos e){
+            e.printStackTrace();
+        }
+    }
 
     public void registrarLaboratorio() throws ExceptionHistorialDeEquipos, IOException{
         try {
@@ -41,6 +57,11 @@ public class laboratoryBean extends BasePageBean{
         } catch (Exception e) {
             throw new ExceptionHistorialDeEquipos("Error al registrar el nuevo laboratorio");
         }
+    }
+
+    public List<Laboratory> consultarLaboratorios() throws ExceptionHistorialDeEquipos{
+        message = "Tuvimos un problema al consultar el Laboratorio";
+        return servicioUsuario.consultarLaboratorios();
     }
 
     public void updateLaboratoryEquipment() throws ExceptionHistorialDeEquipos{
@@ -94,5 +115,12 @@ public class laboratoryBean extends BasePageBean{
 
     public void setIdEquipment(int idEquipment){
         this.idEquipment = idEquipment;
+    }
+    public List<Laboratory> getLaboratoriosBusquedaBasica(){
+        return laboratoriosBusquedaBasica;
+    }
+
+    public void setLaboratoriosBusquedaBasica(List<Laboratory> laboratoriosBusquedaBasica){
+        this.laboratoriosBusquedaBasica=laboratoriosBusquedaBasica;
     }
 }

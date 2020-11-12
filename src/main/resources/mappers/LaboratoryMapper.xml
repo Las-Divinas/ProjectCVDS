@@ -6,7 +6,7 @@
 <mapper namespace="edu.eci.cvds.sampleprj.dao.mybatis.mappers.LaboratoryMapper">
     <resultMap type='Laboratory' id='LaboratoryResult'>
         <id property='id' column='id'/>
-        <result property='name' column='"name"'/>
+        <result property='name' column='name'/>
         <result property='description' column='description'/>
     </resultMap>
     <insert id="registrarLaboratorio" parameterType="map">
@@ -14,5 +14,10 @@
     </insert>
     <select resultType="int" id="consultarUltimoId">
         SELECT id FROM laboratorio ORDER BY id DESC LIMIT 1; 
+    </select>
+    <!-- Select the Laboratoy -->
+    <select parameterType="map" id="consultarLaboratorios" resultMap="LaboratoryResult">
+        SELECT e.id, e.name , e.description
+        FROM laboratorio as e;
     </select>
 </mapper>

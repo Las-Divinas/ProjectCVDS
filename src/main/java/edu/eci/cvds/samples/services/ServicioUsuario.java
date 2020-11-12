@@ -21,4 +21,5 @@ public interface ServicioUsuario {
     public abstract int consultarUltimoIdLaboratorio() throws ExceptionHistorialDeEquipos;
     public abstract Equipment consultarEquipoPorId(int id) throws ExceptionHistorialDeEquipos;
     public abstract void cambiarLaboratorioEquipo(int idLaboratory, int idEquipment) throws ExceptionHistorialDeEquipos;
+    public abstract List<Laboratory> consultarLaboratorios() throws ExceptionHistorialDeEquipos;
 }

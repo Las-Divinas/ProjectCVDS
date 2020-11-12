@@ -35,7 +35,7 @@ public class  Laboratory implements Serializable {
 
     public String getName()
     {
-        return this.name;
+        return name;
     }
     public void setName(String name)
     {
