@@ -32,5 +32,4 @@ public class MyBatisLaboratorioDAO implements LaboratoryDAO {
             throw new PersistenceException("Error al consultar el ultimo Id de la tabla laboratorio");
         }
     }
-    
 }
