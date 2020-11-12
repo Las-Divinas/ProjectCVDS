@@ -1,3 +1,4 @@
+<?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
         xmlns:h="http://java.sun.com/jsf/html"
@@ -36,7 +37,7 @@
                         <h:outputLabel for="Laboratory" value="Laboratory id : " style="color: white;"/>
                         <p:inputText class="form-control" type="Integer" id="laboratory" value="#{equipmentBean.laboratory_id}" placeholder="13"/>
                     </div>
-                    <p:commandButton value="Add" class="btn btn-primary" actionListener="#{equipmentBean.registrarEquipo}"/>
+                    <p:commandButton value="Add" class="btn btn-primary" actionListener="#{equipmentBean.registrarEquipo}" onclick="PF('dlg2').show();"/>
                     <p:dialog header="Modal Dialog" widgetVar="dlg2" modal="true" height="100">
                         <h:outputText value="#{equipmentBean.message}" />
                     </p:dialog> 
