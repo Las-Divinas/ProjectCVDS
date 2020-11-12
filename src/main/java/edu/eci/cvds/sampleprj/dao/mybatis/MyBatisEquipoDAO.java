@@ -59,5 +59,14 @@ public class MyBatisEquipoDAO implements EquipoDAO {
         }
 
     }
+
+    @Override
+    public int consultarNumeroEquipos(int laboratory_id) throws PersistenceException {
+        try {
+            return equipoMapper.consultarNumeroEquipos(laboratory_id);
+        } catch (Exception e) {
+            throw new PersistenceException(e.toString());
+        }
+    }
     
 }

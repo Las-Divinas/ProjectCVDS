@@ -60,6 +60,10 @@ public class laboratoryBean extends BasePageBean{
         }
     }
 
+    public int countEquipment(int idLaboratory) throws ExceptionHistorialDeEquipos
+    {
+        return servicioUsuario.consultarNumeroEquipos(idLaboratory);
+    }
     public List<Laboratory> consultarLaboratorios() throws ExceptionHistorialDeEquipos{
         message = "Tuvimos un problema al consultar el Laboratorio";
         return servicioUsuario.consultarLaboratorios();

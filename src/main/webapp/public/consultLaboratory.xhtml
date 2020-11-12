@@ -55,6 +55,9 @@
                         <p:column headerText="Fecha Cierre">
                             <h:outputText value="#{laboratory.fecha_cierre}"/>
                         </p:column>
+                        <p:column headerText="Numero Equipos">
+                            <h:outputText value="#{laboratoryBean.countEquipment(laboratory.id)}"/>
+                        </p:column>
                         <!--<p:column class="text-center" headerText="Administrar" exportable="false">
                             <p:commandButton class="btn btn-success btn-sm" value="Administrar"/>
                         </p:column>

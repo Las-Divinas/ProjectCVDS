@@ -38,5 +38,9 @@
         SET laboratory_id = #{idLaboratory}
         WHERE id = #{idEquipment}
     </update>
+    <!-- Count equipment with laboratory id -->
+    <select parameterType="map" id="consultarNumeroEquipos" resultType="int">
+        SELECT COUNT (*) FROM equipment WHERE laboratory_id = #{laboratory_id} ; 
+    </select>
 
 </mapper>

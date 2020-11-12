@@ -156,4 +156,13 @@ public class ServicioUsuarioImpl implements ServicioUsuario {
             throw new ExceptionHistorialDeEquipos("Error al consultar los laboratorios");
         }
     }
+
+    @Override
+    public int consultarNumeroEquipos(int laboratory_id) throws ExceptionHistorialDeEquipos {
+        try {
+            return equipoDAO.consultarNumeroEquipos(laboratory_id);
+        } catch (Exception e) {
+            throw new ExceptionHistorialDeEquipos("Error al consultar los laboratorios");
+        }
+    }
 }

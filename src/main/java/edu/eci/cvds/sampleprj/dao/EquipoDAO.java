@@ -9,5 +9,6 @@ public interface EquipoDAO {
     public int consultarUltimoId() throws PersistenceException;
     public Equipment consultarEquipoPorId(int id) throws PersistenceException;
     public void cambiarLaboratorio(int idLaboratory, int idEquipment) throws PersistenceException;
+    public int consultarNumeroEquipos(int laboratory_id) throws PersistenceException;
     
 }

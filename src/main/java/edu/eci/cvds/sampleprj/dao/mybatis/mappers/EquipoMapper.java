@@ -12,6 +12,7 @@ public interface EquipoMapper {
     public Equipment consultarEquipoPorId(@Param("id") int id);
     public void cambiarLaboratorio(@Param("idLaboratory") int idLaboratory,
                                              @Param("idEquipment") int idEquipment);
+    public int consultarNumeroEquipos(@Param("laboratory_id")int laboratory_id);
 
     
 }
