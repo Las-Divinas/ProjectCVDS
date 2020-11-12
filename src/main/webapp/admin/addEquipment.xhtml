@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="../style/bootstrap.min.css"/>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous"/>
     <link rel = "icon" href ="https://observatics.edu.co/wp-content/uploads/sites/20/2019/06/Logo-Escuela-ingenier%C3%ADa.png"/> 
-
+    <link rel="stylesheet" href="../style/style.css"/>
 </h:head>
 <h:body>
     <div class="container h-100">
@@ -25,15 +25,15 @@
                 </div>
                 <h:form class="justify-content-center">
                     <div class="form-group">
-                        <h:outputLabel for="Name" value="Name: "/>
+                        <h:outputLabel for="Name" value="Name: " style="color: white;"/>
                         <p:inputText class="form-control" type="String" id="name" value="#{equipmentBean.name}" placeholder="Name"/>
                     </div>
                     <div class="form-group">
-                        <h:outputLabel for="Description" value="Description: "/>
+                        <h:outputLabel for="Description" value="Description: " style="color: white;"/>
                         <p:inputText class="form-control" type="String" id="description" value="#{equipmentBean.description}" placeholder="Description"/>
                     </div>
                     <div class="form-group">
-                        <h:outputLabel for="Laboratory" value="Laboratory id : "/>
+                        <h:outputLabel for="Laboratory" value="Laboratory id : " style="color: white;"/>
                         <p:inputText class="form-control" type="Integer" id="laboratory" value="#{equipmentBean.laboratory_id}" placeholder="13"/>
                     </div>
                     <p:commandButton value="Add" class="btn btn-primary" actionListener="#{equipmentBean.registrarEquipo}"/>

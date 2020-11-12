@@ -165,4 +165,13 @@ public class ServicioUsuarioImpl implements ServicioUsuario {
             throw new ExceptionHistorialDeEquipos("Error al consultar los laboratorios");
         }
     }
+
+    @Override
+    public List<Element> consultarElementos() throws ExceptionHistorialDeEquipos {
+        try {
+            return elementoDAO.consultarElementos();
+        } catch (Exception e) {
+            throw new ExceptionHistorialDeEquipos("Error al consultar los elementos");
+        }
+    }
 }

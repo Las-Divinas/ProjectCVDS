@@ -2,8 +2,10 @@ package edu.eci.cvds.view;
 
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
@@ -35,10 +37,22 @@ public class ElementBean extends BasePageBean{
     private String message;
     private String a[] = new String[] {"Torre","Pantalla","Mouse","Teclado"};
     private List<String> types = Arrays.asList(a);
+    private List<Element> elementosBusquedaBasica;
+
+    @PostConstruct
+    public void init(){
+        super.init();
+        try{
+            elementosBusquedaBasica = new ArrayList<>();
+            elementosBusquedaBasica = servicioUsuario.consultarElementos();
+        } catch (ExceptionHistorialDeEquipos e){
+            e.printStackTrace();
+        }
+    }
 
     public void registrarElemento() throws ExceptionHistorialDeEquipos, IOException{
         int id_equipo = servicioUsuario.consultarUltimoId();
-        Element element = new Element(id, name, description, id_equipo,type);
+        Element element = new Element(id, name, description, id_equipo,type,"ACTIVO");
         servicioUsuario.registrarElemento(element);
         Date date = new Date(System.currentTimeMillis());
         FacesContext facesContext = FacesContext.getCurrentInstance();
@@ -50,6 +64,10 @@ public class ElementBean extends BasePageBean{
         message = "Se creo que correctamente el elemento del equipo"+id_equipo;
         servicioUsuario.registrarNovedad(novelty);
     
+    }
+
+    public List<Element> consultarElementos() throws ExceptionHistorialDeEquipos{
+        return servicioUsuario.consultarElementos();
     }
 
     public String getType(){
@@ -106,5 +124,13 @@ public class ElementBean extends BasePageBean{
 
     public void setMessage(String message){
         this.message = message;
+    }
+
+    public List<Element> getElementosBusquedaBasica(){
+        return elementosBusquedaBasica;
+    }
+
+    public void setElementosBusquedaBasica(List<Element> ElementosBusquedaBasica){
+        this.elementosBusquedaBasica = elementosBusquedaBasica;
     }
 }

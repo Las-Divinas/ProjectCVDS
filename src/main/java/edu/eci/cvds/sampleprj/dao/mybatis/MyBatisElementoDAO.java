@@ -1,7 +1,7 @@
 package edu.eci.cvds.sampleprj.dao.mybatis;
 
 import com.google.inject.Inject;
-
+import java.util.List;
 import edu.eci.cvds.sampleprj.dao.ElementoDAO;
 import edu.eci.cvds.sampleprj.dao.PersistenceException;
 import edu.eci.cvds.sampleprj.dao.mybatis.mappers.ElementoMapper;
@@ -40,4 +40,12 @@ public class MyBatisElementoDAO implements ElementoDAO {
         }
     }
     
+    @Override
+    public List<Element> consultarElementos() throws PersistenceException {
+        try {
+            return elementoMapper.consultarElementos();
+        } catch (Exception e) {
+            throw new PersistenceException(e.toString());
+        }
+    }
 }
