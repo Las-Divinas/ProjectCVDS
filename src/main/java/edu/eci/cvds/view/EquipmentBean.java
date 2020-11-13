@@ -31,6 +31,7 @@ public class EquipmentBean extends BasePageBean{
     private int laboratory_id;
     private String message;
     private List<Equipment> equiposBusquedaBasica;
+    private List<Equipment> equiposSeleccionados;
 
     @PostConstruct
     public void init(){
@@ -54,6 +55,24 @@ public class EquipmentBean extends BasePageBean{
     public List<Equipment> consultarEquipos() throws ExceptionHistorialDeEquipos{
         message = "Tuvimos un problema en agregar el equipo";
         return servicioUsuario.consultarEquipos();
+    }
+
+    public void eliminarEquipos() throws ExceptionHistorialDeEquipos{
+        message = "Entre a eliminar";
+        for(int i=0; i < equiposSeleccionados.size(); i++){
+            System.out.println("------------------------------Entre"+i+"---------------------------------------");
+            int idElemento = equiposSeleccionados.get(i).getId();
+            servicioUsuario.cambiarEstadoElementoId(idElemento,"NO_ACTIVO");
+        }
+        equiposBusquedaBasica = servicioUsuario.consultarEquipos();
+    }
+
+    public List<Equipment> getEquiposSeleccionados(){
+        return equiposSeleccionados;
+    }
+
+    public void setEquiposSeleccionados(List<Equipment> equiposSeleccionados){
+        this.equiposSeleccionados = equiposSeleccionados;
     }
 
     public String getMessage(){

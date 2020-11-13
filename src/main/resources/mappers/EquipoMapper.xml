@@ -42,5 +42,12 @@
     <select parameterType="map" id="consultarNumeroEquipos" resultType="int">
         SELECT COUNT (*) FROM equipment WHERE laboratory_id = #{laboratory_id} ; 
     </select>
-
+    <delete id="eliminarElementoPorId">
+        DELETE FROM equipment as e WHERE e.id= #{id};
+    </delete>
+    <update parameterType="map" id="cambiarEstadoElementoId">
+        UPDATE equipment 
+        SET estado = #{estado}
+        WHERE id = #{id};
+    </update>
 </mapper>

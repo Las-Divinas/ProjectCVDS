@@ -24,4 +24,6 @@ public interface ServicioUsuario {
     public abstract List<Laboratory> consultarLaboratorios() throws ExceptionHistorialDeEquipos;
     public int consultarNumeroEquipos(int laboratory_id) throws ExceptionHistorialDeEquipos;
     public abstract List<Element> consultarElementos() throws ExceptionHistorialDeEquipos;
+    public abstract void eliminarEquipoPorId(int id) throws ExceptionHistorialDeEquipos;
+    public abstract void cambiarEstadoElementoId(int id,String estado) throws ExceptionHistorialDeEquipos;
 }

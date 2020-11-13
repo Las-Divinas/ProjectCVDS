@@ -174,4 +174,24 @@ public class ServicioUsuarioImpl implements ServicioUsuario {
             throw new ExceptionHistorialDeEquipos("Error al consultar los elementos");
         }
     }
+
+    @Override
+    public void eliminarEquipoPorId(int id) throws ExceptionHistorialDeEquipos {
+        try {
+            equipoDAO.eliminarEquipoPorId(id);
+        } catch (Exception e) {
+            throw new ExceptionHistorialDeEquipos("Error al eliminar el equipo con id "+id);
+        }
+
+    }
+
+    @Override
+    public void cambiarEstadoElementoId(int id,String estado) throws ExceptionHistorialDeEquipos {
+        try {
+            equipoDAO.cambiarEstadoElementoId(id,estado);
+        } catch (Exception e) {
+            throw new ExceptionHistorialDeEquipos(e.toString());
+        }
+
+    }
 }

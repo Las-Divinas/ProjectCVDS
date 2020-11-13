@@ -55,7 +55,7 @@ public class MyBatisEquipoDAO implements EquipoDAO {
         try {
             equipoMapper.cambiarLaboratorio(idLaboratory, idEquipment);
         } catch (Exception e) {
-            throw new PersistenceException(e.toString());
+            throw new PersistenceException("Error al cambiar al laboratorio con id "+idLaboratory+" el equipo con id "+idEquipment);
         }
 
     }
@@ -65,8 +65,28 @@ public class MyBatisEquipoDAO implements EquipoDAO {
         try {
             return equipoMapper.consultarNumeroEquipos(laboratory_id);
         } catch (Exception e) {
+            throw new PersistenceException("Error al consultar el numero de equipos en el laboratorio con id "+laboratory_id);
+        }
+    }
+
+    @Override
+    public void eliminarEquipoPorId(int id) throws PersistenceException {
+        try {
+            equipoMapper.eliminarElementoPorId(id);
+        } catch (Exception e) {
+            throw new PersistenceException("Error al eliminar el equipo con id "+id);
+        }
+
+    }
+
+    @Override
+    public void cambiarEstadoElementoId(int id,String estado) throws PersistenceException {
+        try {
+            equipoMapper.cambiarEstadoElementoId(id,estado);
+        } catch (Exception e) {
             throw new PersistenceException(e.toString());
         }
+
     }
     
 }
