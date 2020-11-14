@@ -194,4 +194,13 @@ public class ServicioUsuarioImpl implements ServicioUsuario {
         }
 
     }
+
+    @Override
+    public List<Novelty> consultarNovedades() throws ExceptionHistorialDeEquipos {
+        try{
+            return  novedadDAO.consultarNovedades();
+        } catch (Exception e){
+            throw new ExceptionHistorialDeEquipos("Error al consultar los novedades");
+        }
+    }
 }

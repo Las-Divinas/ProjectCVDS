@@ -1,8 +1,11 @@
 package edu.eci.cvds.view;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
@@ -32,6 +35,18 @@ public class NoveltyBean extends BasePageBean{
     private String title;
     private int idElement;
     private String message;
+    private List<Novelty> novedadBusquedaBasica;
+
+    @PostConstruct
+    public void init(){
+        super.init();
+        try{
+            novedadBusquedaBasica = new ArrayList<>();
+            novedadBusquedaBasica = servicioUsuario.consultarNovedades();
+        } catch (ExceptionHistorialDeEquipos e){
+            e.printStackTrace();
+        }
+    }
 
     public void registrarNovedad() throws ExceptionHistorialDeEquipos, IOException{
         Date date = new Date(System.currentTimeMillis());
@@ -112,5 +127,12 @@ public class NoveltyBean extends BasePageBean{
     public void setMessage(String message){
         this.message = message;
     }
-    
+
+    public List<Novelty> getNovedadBusquedaBasica() {
+        return novedadBusquedaBasica;
+    }
+
+    public void setNovedadBusquedaBasica(List<Novelty> novedadBusquedaBasica) {
+        this.novedadBusquedaBasica = novedadBusquedaBasica;
+    }
 }
