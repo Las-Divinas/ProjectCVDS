@@ -58,4 +58,24 @@ public class MyBatisElementoDAO implements ElementoDAO {
         }
 
     }
+
+    @Override
+    public void eliminarElementosPorId(int id) throws PersistenceException {
+        try {
+            elementoMapper.eliminarElementosPorId(id);
+        } catch (Exception e) {
+            throw new PersistenceException("Error al eliminar el elemento con id "+id);
+        }
+
+    }
+
+    @Override
+    public void cambiarEstadoElementosId(int id,String estado) throws PersistenceException {
+        try {
+            elementoMapper.cambiarEstadoElementosId(id,estado);
+        } catch (Exception e) {
+            throw new PersistenceException(e.toString());
+        }
+
+    }
 }

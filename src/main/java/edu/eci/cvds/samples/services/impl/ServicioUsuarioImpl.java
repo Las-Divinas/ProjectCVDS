@@ -213,4 +213,24 @@ public class ServicioUsuarioImpl implements ServicioUsuario {
         }
 
     }
+
+    @Override
+    public void eliminarElementosPorId(int id) throws ExceptionHistorialDeEquipos {
+        try {
+            elementoDAO.eliminarElementosPorId(id);
+        } catch (Exception e) {
+            throw new ExceptionHistorialDeEquipos("Error al eliminar el elemento con id "+id);
+        }
+
+    }
+
+    @Override
+    public void cambiarEstadoElementosId(int id,String estado) throws ExceptionHistorialDeEquipos {
+        try {
+            elementoDAO.cambiarEstadoElementosId(id,estado);
+        } catch (Exception e) {
+            throw new ExceptionHistorialDeEquipos(e.toString());
+        }
+
+    }
 }

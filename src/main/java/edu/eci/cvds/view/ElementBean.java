@@ -38,6 +38,7 @@ public class ElementBean extends BasePageBean{
     private String a[] = new String[] {"Torre","Pantalla","Mouse","Teclado"};
     private List<String> types = Arrays.asList(a);
     private List<Element> elementosBusquedaBasica;
+    private List<Element> elementosSeleccionados;
 
     @PostConstruct
     public void init(){
@@ -86,6 +87,16 @@ public class ElementBean extends BasePageBean{
 
     public List<Element> consultarElementos() throws ExceptionHistorialDeEquipos{
         return servicioUsuario.consultarElementos();
+    }
+
+    public void eliminarElementos() throws ExceptionHistorialDeEquipos{
+        message = "Entre a eliminar";
+        for(int i=0; i < elementosSeleccionados.size(); i++){
+            System.out.println("------------------------------Entre"+i+"---------------------------------------");
+            int idElementos = elementosSeleccionados.get(i).getId();
+            servicioUsuario.cambiarEstadoElementosId(idElementos,"NO_ACTIVO");
+        }
+        elementosBusquedaBasica = servicioUsuario.consultarElementos();
     }
 
     public String getType(){
@@ -151,4 +162,13 @@ public class ElementBean extends BasePageBean{
     public void setElementosBusquedaBasica(List<Element> elementosBusquedaBasica){
         this.elementosBusquedaBasica = elementosBusquedaBasica;
     }
+
+    public List<Element> getElementosSeleccionados(){
+        return elementosSeleccionados;
+    }
+
+    public void setElementosSeleccionados(List<Element> elementosSeleccionados){
+        this.elementosSeleccionados = elementosSeleccionados;
+    }
+    
 }

@@ -8,4 +8,6 @@ public interface ElementoDAO {
     public Element consultarElementoPorId(int id) throws PersistenceException;      
     public List<Element> consultarElementos() throws PersistenceException;
     public void cambiarIdEquipo(int idEquipment, int idElement) throws PersistenceException;
+    public void eliminarElementosPorId(int id) throws PersistenceException;
+    public void cambiarEstadoElementosId(int id,String estado) throws PersistenceException;
 }

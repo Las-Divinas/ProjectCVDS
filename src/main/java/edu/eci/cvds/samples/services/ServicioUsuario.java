@@ -28,4 +28,6 @@ public interface ServicioUsuario {
     public abstract void eliminarEquipoPorId(int id) throws ExceptionHistorialDeEquipos;
     public abstract void cambiarEstadoElementoId(int id,String estado) throws ExceptionHistorialDeEquipos;
     public abstract void cambiarIdEquipoParaElemento(int idEquipment, int idElement) throws ExceptionHistorialDeEquipos;
+    public abstract void eliminarElementosPorId(int id) throws ExceptionHistorialDeEquipos;
+    public abstract void cambiarEstadoElementosId(int id,String estado) throws ExceptionHistorialDeEquipos;
 }

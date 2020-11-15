@@ -30,7 +30,8 @@
                             paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {Exporters}"
                             currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records"
                             rowsPerPageTemplate="5,10,15" 
-                            styleClass="table-dark table-striped table-bordered justify-content-center">
+                            styleClass="table-dark table-striped table-bordered justify-content-center"
+                            rowKey="#{element.id}" selection="#{elementBean.elementosSeleccionados}">
                             <f:facet name="{Exporters}">
                                 <div style="float:right;margin-right: 2%;">
                                     <h:commandLink>
@@ -39,22 +40,29 @@
                                     </h:commandLink>
                                 </div>
                             </f:facet>
-                        <p:column headerText="Id">
+                        <p:column selectionMode="multiple" style="width:40px;text-align:center"/>
+                        <p:column headerText="Id" filterBy="#{element.id}">
                             <h:outputText value="#{element.id}"/>
                         </p:column>
-                        <p:column headerText="Name">
+                        <p:column headerText="Name" filterBy="#{element.name}">
                             <h:outputText value="#{element.name}"/>
                         </p:column>
-                        <p:column headerText="Type">
+                        <p:column headerText="Type" filterBy="#{element.type}">
                             <h:outputText value="#{element.type}"/>
                         </p:column>
-                        <p:column headerText="Estado">
+                        <p:column headerText="Estado" filterBy="#{element.estado}">
                             <h:outputText value="#{element.estado}"/>
                         </p:column>
-                        <p:column headerText="Id_equipment">
+                        <p:column headerText="Id_equipment" filterBy="#{element.id_equipment}">
                             <h:outputText value="#{element.id_equipment}"/>
                         </p:column>
                     </p:dataTable>
+                    <div class="float-sm-lefth" style="margin: 20px;">
+                        <p:commandButton update="tbl" class="btn btn-primary" value="Eliminar" actionListener="#{elementBean.eliminarElementos}" onclick="PF('dlg2').show();"/>
+                    </div>
+                    <p:dialog header="Modal Dialog" widgetVar="dlg2" modal="true" height="100">
+                        <h:outputText value="#{elementBean.message}" />
+                    </p:dialog> 
                 </h:form>
             </div>
         </div>

@@ -10,4 +10,6 @@ public interface ElementoMapper {
     public Element consultarElementoPorId(@Param("id") int id);
     public List<Element> consultarElementos();
     public void cambiarIdEquipo(@Param("idEquipment") int idEquipment, @Param("idElement") int idElement);
+    public void eliminarElementosPorId(@Param("id") int id);
+    public void cambiarEstadoElementosId(@Param("id") int id,@Param("estado") String estado);
 }
