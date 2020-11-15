@@ -6,6 +6,7 @@ import edu.eci.cvds.samples.entities.Equipment;
 import edu.eci.cvds.samples.entities.Laboratory;
 import edu.eci.cvds.samples.entities.Novelty;
 import edu.eci.cvds.samples.entities.Usuario;
+import org.apache.ibatis.annotations.Param;
 
 public interface ServicioUsuario {
     public abstract void registrarUsuario(Usuario u) throws ExceptionHistorialDeEquipos;
@@ -30,4 +31,6 @@ public interface ServicioUsuario {
     public abstract void cambiarIdEquipoParaElemento(int idEquipment, int idElement) throws ExceptionHistorialDeEquipos;
     public abstract void eliminarElementosPorId(int id) throws ExceptionHistorialDeEquipos;
     public abstract void cambiarEstadoElementosId(int id,String estado) throws ExceptionHistorialDeEquipos;
+    public List<Novelty> consultarNovedadesPorIDEquipo(int equipoID) throws ExceptionHistorialDeEquipos;
+    public List<Novelty> consultarNovedadesPorIDElemento(int elementoID) throws ExceptionHistorialDeEquipos;
 }

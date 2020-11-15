@@ -19,7 +19,6 @@ import java.util.ArrayList;
 @ManagedBean(name = "equipmentBean")
 @SessionScoped
 public class EquipmentBean extends BasePageBean{
-
 	private static final long serialVersionUID = 6194542760432320641L;
 
 	@Inject

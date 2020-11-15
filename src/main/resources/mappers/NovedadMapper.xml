@@ -17,4 +17,12 @@
     <select parameterType="map" id="consultarNovedades" resultMap="NoveltyResult">
         SELECT n.id, n.equipment_id, n.element_id, n.date, n.description FROM novelty as n;
     </select>
+    <select parameterType="map" id="consultarNovedadesPorIDEquipo" resultMap="NoveltyResult">
+        SELECT n.id, n.equipment_id, n.element_id, n.date, n.description FROM novelty as n
+        WHERE n.element_id = #{equipmentID};
+    </select>
+    <select parameterType="map" id="consultarNovedadesPorIDElemento" resultMap="NoveltyResult">
+        SELECT n.id, n.equipment_id, n.element_id, n.date, n.description FROM novelty as n
+        WHERE n.element_id = #{elementID};
+    </select>
 </mapper>

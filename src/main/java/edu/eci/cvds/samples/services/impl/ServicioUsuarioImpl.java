@@ -233,4 +233,23 @@ public class ServicioUsuarioImpl implements ServicioUsuario {
         }
 
     }
+
+    @Override
+    public List<Novelty> consultarNovedadesPorIDEquipo(int equipoID) throws ExceptionHistorialDeEquipos {
+        try{
+            return novedadDAO.consultarNovedadesPorIDEquipo(equipoID);
+        }catch (Exception e){
+            throw new ExceptionHistorialDeEquipos(e.toString());
+        }
+    }
+
+    @Override
+    public List<Novelty> consultarNovedadesPorIDElemento(int elementoID) throws ExceptionHistorialDeEquipos {
+        try{
+            return novedadDAO.consultarNovedadesPorIDElemento(elementoID);
+        }catch (Exception e){
+            throw new ExceptionHistorialDeEquipos(e.toString());
+        }
+    }
+
 }

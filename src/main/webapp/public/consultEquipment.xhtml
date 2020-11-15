@@ -59,7 +59,7 @@
                             <p:commandButton class="btn btn-success btn-sm" value="Administrar"/>
                         </p:column>
                         <p:column class="text-center" headerText="Novedades" exportable="false">
-                            <p:commandButton class="btn btn-success btn-sm" value="Novedades"/>
+                            <p:commandButton class="btn btn-success btn-sm" value="Novedades" actionListener="#{noveltyBean.consultarNovedadEquipoID(equipment.id)}"/>
                         </p:column>
                     </p:dataTable>
                     <div class="float-sm-lefth" style="margin: 20px;">

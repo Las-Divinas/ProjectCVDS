@@ -33,4 +33,22 @@ public class MyBatisNovedadDAO implements NovedadDAO {
             throw new PersistenceException("Error al consultar novedades");
         }
     }
+
+    @Override
+    public List<Novelty> consultarNovedadesPorIDEquipo(int equipoID) throws PersistenceException {
+        try{
+            return novedadMapper.consultarNovedadesPorIDEquipo(equipoID);
+        } catch (Exception e){
+            throw new PersistenceException(e.toString());
+        }
+    }
+
+    @Override
+    public List<Novelty> consultarNovedadesPorIDElemento(int elementoID) throws PersistenceException {
+        try{
+            return novedadMapper.consultarNovedadesPorIDElemento(elementoID);
+        } catch (Exception e){
+            throw new PersistenceException(e.toString());
+        }
+    }
 }

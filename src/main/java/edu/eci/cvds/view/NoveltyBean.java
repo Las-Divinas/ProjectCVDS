@@ -70,7 +70,18 @@ public class NoveltyBean extends BasePageBean{
         Novelty novelty = new Novelty(description,title, date, usuario.getDocumento(), elemento.getId_equipment(), 0);
         message = "Se agrego la nueva novedad al elemento "+idElement+" del equipo "+idEquipment;
         servicioUsuario.registrarNovedad(novelty);
+    }
 
+    public void consultarNovedadEquipoID(int equipoID) throws  ExceptionHistorialDeEquipos,IOException{
+        this.novedadBusquedaBasica = servicioUsuario.consultarNovedadesPorIDEquipo(equipoID);
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+        facesContext.getExternalContext().redirect("../public/consultNovelty.xhtml");
+    }
+
+    public void consultarNovedadElementoID(int elementoID) throws ExceptionHistorialDeEquipos,IOException{
+        this.novedadBusquedaBasica = servicioUsuario.consultarNovedadesPorIDElemento(elementoID);
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+        facesContext.getExternalContext().redirect("../public/consultNovelty.xhtml");
     }
 
     public int getIdElement(){
@@ -116,6 +127,7 @@ public class NoveltyBean extends BasePageBean{
     public int getIdEquipment(){
         return idEquipment;
     }
+
     public void setIdEquipment(int idEquipment){
         this.idEquipment=idEquipment;
     }
