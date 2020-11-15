@@ -7,4 +7,5 @@ public interface ElementoDAO {
     public int consultarUltimoId() throws PersistenceException;
     public Element consultarElementoPorId(int id) throws PersistenceException;      
     public List<Element> consultarElementos() throws PersistenceException;
+    public void cambiarIdEquipo(int idEquipment, int idElement) throws PersistenceException;
 }

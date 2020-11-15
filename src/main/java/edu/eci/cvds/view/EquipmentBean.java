@@ -49,7 +49,7 @@ public class EquipmentBean extends BasePageBean{
         servicioUsuario.registrarEquipment(equipo);
         FacesContext facesContext = FacesContext.getCurrentInstance();
         message = "Se agrego con exito el equipo";
-        facesContext.getExternalContext().redirect("../admin/addElement.xhtml");
+        facesContext.getExternalContext().redirect("../admin/selectElement.xhtml");
     }
 
     public List<Equipment> consultarEquipos() throws ExceptionHistorialDeEquipos{

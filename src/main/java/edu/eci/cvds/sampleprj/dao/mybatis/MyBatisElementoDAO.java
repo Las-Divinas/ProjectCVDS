@@ -48,4 +48,14 @@ public class MyBatisElementoDAO implements ElementoDAO {
             throw new PersistenceException(e.toString());
         }
     }
+
+    @Override
+    public void cambiarIdEquipo(int idEquipment, int idElement) throws PersistenceException {
+        try {
+            elementoMapper.cambiarIdEquipo(idEquipment, idElement);
+        } catch (Exception e) {
+            throw new PersistenceException(e.toString());
+        }
+
+    }
 }

@@ -27,4 +27,5 @@ public interface ServicioUsuario {
     public abstract List<Novelty> consultarNovedades() throws ExceptionHistorialDeEquipos;
     public abstract void eliminarEquipoPorId(int id) throws ExceptionHistorialDeEquipos;
     public abstract void cambiarEstadoElementoId(int id,String estado) throws ExceptionHistorialDeEquipos;
+    public abstract void cambiarIdEquipoParaElemento(int idEquipment, int idElement) throws ExceptionHistorialDeEquipos;
 }

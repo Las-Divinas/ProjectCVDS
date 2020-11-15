@@ -51,8 +51,7 @@ public class ElementBean extends BasePageBean{
     }
 
     public void registrarElemento() throws ExceptionHistorialDeEquipos, IOException{
-        int id_equipo = servicioUsuario.consultarUltimoId();
-        Element element = new Element(id, name, description, id_equipo,type,"ACTIVO");
+        Element element = new Element(id, name, description, idEquipment,type,"ACTIVO");
         servicioUsuario.registrarElemento(element);
         Date date = new Date(System.currentTimeMillis());
         FacesContext facesContext = FacesContext.getCurrentInstance();
@@ -60,10 +59,29 @@ public class ElementBean extends BasePageBean{
         String correoSession = (String) session.getAttribute("correo");
         Usuario usuario = servicioUsuario.consultarIdUsuarioPorCorreo(correoSession);
         int id_elemento = servicioUsuario.consultarUltimoIdElement();
-        Novelty novelty = new Novelty("Elemento agregado al equipo"+id_equipo, "Se agrego le agrego a equipo"+"", date, usuario.getDocumento() ,id_equipo,id_elemento);
-        message = "Se creo que correctamente el elemento del equipo"+id_equipo;
+        Novelty novelty = new Novelty("Elemento agregado al equipo"+idEquipment, "Se agrego le agrego a equipo"+"", date, usuario.getDocumento() ,idEquipment,id_elemento);
+        message = "Se creo que correctamente el elemento del equipo"+idEquipment;
         servicioUsuario.registrarNovedad(novelty);
     
+    }
+
+    public void changeEquipmentElement() throws ExceptionHistorialDeEquipos, IOException{
+        int idEquipo = servicioUsuario.consultarUltimoId();
+        Element elemento = servicioUsuario.consultarElementoPorId(id);
+        if(!(elemento.getId_equipment()==idEquipo)){
+            servicioUsuario.cambiarIdEquipoParaElemento(idEquipo, id);
+            Date date = new Date(System.currentTimeMillis());
+            FacesContext facesContext = FacesContext.getCurrentInstance();
+            HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
+            String correoSession = (String) session.getAttribute("correo");
+            Usuario usuario = servicioUsuario.consultarIdUsuarioPorCorreo(correoSession);
+            Novelty novelty = new Novelty("Elemento agregado al equipo"+idEquipo, "Se agrego le agrego a equipo"+"", date, usuario.getDocumento() ,idEquipo,id);
+            servicioUsuario.registrarNovedad(novelty);
+            message = "Se ha asociado correctamente el elemento al equipo "+idEquipo;
+        }
+        else{
+            message = "El equipo ya esta asociado a ese equipo :)";
+        }
     }
 
     public List<Element> consultarElementos() throws ExceptionHistorialDeEquipos{
@@ -130,7 +148,7 @@ public class ElementBean extends BasePageBean{
         return elementosBusquedaBasica;
     }
 
-    public void setElementosBusquedaBasica(List<Element> ElementosBusquedaBasica){
+    public void setElementosBusquedaBasica(List<Element> elementosBusquedaBasica){
         this.elementosBusquedaBasica = elementosBusquedaBasica;
     }
 }

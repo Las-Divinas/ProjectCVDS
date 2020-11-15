@@ -203,4 +203,14 @@ public class ServicioUsuarioImpl implements ServicioUsuario {
             throw new ExceptionHistorialDeEquipos("Error al consultar los novedades");
         }
     }
+
+    @Override
+    public void cambiarIdEquipoParaElemento(int idEquipment, int idElement) throws ExceptionHistorialDeEquipos {
+        try {
+            elementoDAO.cambiarIdEquipo(idEquipment, idElement);
+        } catch (Exception e) {
+            throw new ExceptionHistorialDeEquipos(e.toString());
+        }
+
+    }
 }

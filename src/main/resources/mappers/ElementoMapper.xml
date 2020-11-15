@@ -27,4 +27,9 @@
         SELECT e.id, e.name, e.description, e.id_equipment, e.tipo, e.estado
         FROM element as e;
     </select>
+    <update parameterType="map" id="cambiarIdEquipo">
+        UPDATE element  
+        SET id_equipment = #{idEquipment}
+        WHERE id = #{idElement};
+    </update>
 </mapper>

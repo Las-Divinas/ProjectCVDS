@@ -9,4 +9,5 @@ public interface ElementoMapper {
     public int consultarUltimoId();
     public Element consultarElementoPorId(@Param("id") int id);
     public List<Element> consultarElementos();
+    public void cambiarIdEquipo(@Param("idEquipment") int idEquipment, @Param("idElement") int idElement);
 }
