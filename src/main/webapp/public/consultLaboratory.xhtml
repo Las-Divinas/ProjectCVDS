@@ -66,6 +66,24 @@
                             <p:commandButton class="btn btn-success btn-sm" value="Novedades"/>
                         </p:column>-->
                     </p:dataTable>
+                   <!--  <h1 style="color:antiquewhite">Estadisticas Elementos laboratorio</h1> -->
+                    <br/>
+                    <p:chart style="opacity: 0.8;-moz-opacity: 0.8;filter: alpha(opacity=10);-khtml-opacity: 0.8;width: 70%;margin-left: 15%;border-radius: 10px;background-color: mintcream;" type="pie" id="pie"
+                            responsive="true"
+                            model="#{laboratoryBean.generarEstadistica()}"
+
+                    />
+
+                    <br/>
+                    <!-- <h1 style="color:antiquewhite">Estadisticas estado laboratorios</h1> -->
+                    <br/>
+                    <p:chart style="opacity: 0.8;-moz-opacity: 0.8;filter: alpha(opacity=10);-khtml-opacity: 0.8;width: 70%;margin-left: 15%;border-radius: 10px;background-color: mintcream;" type="pie" id="pie2"
+                            responsive="true"
+                            model="#{laboratoryBean.generarEstadisticaEstado()}"
+
+                    />
+
+                    <br/>
                 </h:form>
             </div>
         </div>

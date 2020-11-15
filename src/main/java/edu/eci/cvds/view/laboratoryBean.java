@@ -19,6 +19,7 @@ import edu.eci.cvds.samples.entities.Novelty;
 import edu.eci.cvds.samples.entities.Usuario;
 import edu.eci.cvds.samples.services.ExceptionHistorialDeEquipos;
 import edu.eci.cvds.samples.services.ServicioUsuario;
+import org.primefaces.model.chart.PieChartModel;
 
 @ManagedBean(name = "laboratoryBean")
 @SessionScoped
@@ -135,5 +136,53 @@ public class laboratoryBean extends BasePageBean{
 
     public void setLaboratoriosBusquedaBasica(List<Laboratory> laboratoriosBusquedaBasica){
         this.laboratoriosBusquedaBasica=laboratoriosBusquedaBasica;
+    }
+
+
+    //-----------------Graficos --------------------------//
+    private PieChartModel model;
+    private PieChartModel modelEstado;
+
+    public PieChartModel generarEstadistica() throws ExceptionHistorialDeEquipos {
+        model = new PieChartModel();
+        for (Laboratory laboratory : laboratoriosBusquedaBasica) {
+            model.set(laboratory.getName(),servicioUsuario.consultarNumeroEquipos(laboratory.getId()));
+        }
+        model.setTitle("Cantidad de equipos por laboratorio");
+        model.setShowDataLabels(true);
+        model.setDataLabelFormatString("%dK");
+        model.setLegendPosition("e");
+        model.setShowDatatip(true);
+        model.setShowDataLabels(true);
+        model.setDataFormat("value");
+        model.setDataLabelFormatString("%d");
+        //model.setSeriesColors("006600,FFFF00,000099,990000");
+        return model;
+    }
+    public PieChartModel generarEstadisticaEstado() throws ExceptionHistorialDeEquipos {
+        model = new PieChartModel();
+        int activo=0;
+        int noActivo=0;
+        for (Laboratory laboratory : laboratoriosBusquedaBasica) {
+           if(laboratory.getEstado().equals("ACTIVO"))
+           {
+               activo++;
+           }else
+           {
+            noActivo++;
+           }
+        }
+        model.set("Activos",activo);
+        model.set("No Activos",noActivo);
+        model.setTitle("Estado Laboratorios");
+        model.setShowDataLabels(true);
+        model.setDataLabelFormatString("%dK");
+        model.setLegendPosition("e");
+        model.setShowDatatip(true);
+        model.setShowDataLabels(true);
+        model.setDataFormat("value");
+        model.setDataLabelFormatString("%d");
+        //model.setSeriesColors("006600,FFFF00,000099,990000");
+        return model;
     }
 }
