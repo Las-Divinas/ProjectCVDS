@@ -45,7 +45,7 @@
                         <h:outputLabel for="Equipo" value="Equipo: " style="color: white;"/>
                         <p:inputText class="form-control" type="integer" id="idEquipment" value="#{elementBean.idEquipment}" placeholder="Id EQuipo"/>
                     </div>
-                    <p:commandButton value="Add" class="btn btn-primary" actionListener="#{elementBean.registrarElemento}"/>
+                    <p:commandButton value="Add" class="btn btn-primary" actionListener="#{elementBean.registrarElemento}" onclick="PF('dlg2').show();"/>
                     <p:dialog header="Modal Dialog" widgetVar="dlg2" modal="true" height="100">
                         <h:outputText value="#{elementBean.message}" />
                     </p:dialog> 

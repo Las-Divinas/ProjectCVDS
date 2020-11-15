@@ -33,7 +33,7 @@ public class laboratoryBean extends BasePageBean{
     private String description;
     private int id;
     private int idEquipment;
-    private String message;
+    private String message = "Se creo el laboratorio con exito";
     private List<Laboratory> laboratoriosBusquedaBasica;
 
     @PostConstruct
@@ -88,6 +88,14 @@ public class laboratoryBean extends BasePageBean{
         } catch (Exception e) {
             throw new ExceptionHistorialDeEquipos(e.toString());
         }
+    }
+
+    public String getMessage(){
+        return message;
+    }
+
+    public void setMessage(String message){
+        this.message = message;
     }
 
     public String getName(){

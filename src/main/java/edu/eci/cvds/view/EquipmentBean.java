@@ -29,7 +29,7 @@ public class EquipmentBean extends BasePageBean{
     private String name;
     private String description;
     private int laboratory_id;
-    private String message;
+    private String message = "Se creo el equipo con exito";
     private List<Equipment> equiposBusquedaBasica;
     private List<Equipment> equiposSeleccionados;
 
@@ -45,10 +45,10 @@ public class EquipmentBean extends BasePageBean{
     }
 
     public void registrarEquipo() throws ExceptionHistorialDeEquipos, IOException{
+        message = "Se creo el elemento con exito";
         Equipment equipo = new Equipment(name, description, laboratory_id,"ACTIVO");
         servicioUsuario.registrarEquipment(equipo);
         FacesContext facesContext = FacesContext.getCurrentInstance();
-        message = "Se agrego con exito el equipo";
         facesContext.getExternalContext().redirect("../admin/selectElement.xhtml");
     }
 

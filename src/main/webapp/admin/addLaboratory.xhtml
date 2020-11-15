@@ -32,7 +32,10 @@
                         <h:outputLabel for="description" value="Description: " style="color: white;"/>
                         <p:inputText class="form-control" type="String" id="description" value="#{laboratoryBean.description}"/>
                     </div>
-                    <p:commandButton value="Add" class="btn btn-primary" actionListener="#{laboratoryBean.registrarLaboratorio}"/>
+                    <p:commandButton value="Add" class="btn btn-primary" actionListener="#{laboratoryBean.registrarLaboratorio}" onclick="PF('dlg2').show();"/>
+                    <p:dialog header="Modal Dialog" widgetVar="dlg2" modal="true" height="100">
+                        <h:outputText value="#{laboratoryBean.message}" />
+                    </p:dialog>
                 </h:form>
             </div>
         </div>

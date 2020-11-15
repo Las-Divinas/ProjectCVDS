@@ -34,7 +34,7 @@ public class ElementBean extends BasePageBean{
     private String type;
     private String description;
     private int idEquipment;
-    private String message;
+    private String message = "Se creo el elemento con exito";
     private String a[] = new String[] {"Torre","Pantalla","Mouse","Teclado"};
     private List<String> types = Arrays.asList(a);
     private List<Element> elementosBusquedaBasica;
