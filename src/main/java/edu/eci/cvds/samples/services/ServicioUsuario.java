@@ -6,7 +6,6 @@ import edu.eci.cvds.samples.entities.Equipment;
 import edu.eci.cvds.samples.entities.Laboratory;
 import edu.eci.cvds.samples.entities.Novelty;
 import edu.eci.cvds.samples.entities.Usuario;
-import org.apache.ibatis.annotations.Param;
 
 public interface ServicioUsuario {
     public abstract void registrarUsuario(Usuario u) throws ExceptionHistorialDeEquipos;

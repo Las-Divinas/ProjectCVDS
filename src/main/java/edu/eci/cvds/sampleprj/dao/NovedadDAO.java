@@ -1,8 +1,6 @@
 package edu.eci.cvds.sampleprj.dao;
 
 import edu.eci.cvds.samples.entities.Novelty;
-import edu.eci.cvds.samples.services.ExceptionHistorialDeEquipos;
-import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 

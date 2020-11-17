@@ -1,6 +1,5 @@
 package edu.eci.cvds.sampleprj.dao.mybatis.mappers;
 
-import edu.eci.cvds.samples.entities.Element;
 import org.apache.ibatis.annotations.Param;
 
 import edu.eci.cvds.samples.entities.Novelty;

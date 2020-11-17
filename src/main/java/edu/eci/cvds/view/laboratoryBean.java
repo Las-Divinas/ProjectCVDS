@@ -141,7 +141,6 @@ public class laboratoryBean extends BasePageBean{
 
     //-----------------Graficos --------------------------//
     private PieChartModel model;
-    private PieChartModel modelEstado;
 
     public PieChartModel generarEstadistica() throws ExceptionHistorialDeEquipos {
         model = new PieChartModel();
