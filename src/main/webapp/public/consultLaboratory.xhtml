@@ -38,22 +38,22 @@
                                     </h:commandLink>
                                 </div>
                             </f:facet>
-                        <p:column headerText="Id">
+                        <p:column headerText="Id" filterBy="#{laboratory.id}" sortBy="#{laboratory.id}">
                             <h:outputText value="#{laboratory.id}"/>
                         </p:column>
-                        <p:column headerText="Nombre">
+                        <p:column headerText="Nombre" filterBy="#{laboratory.name}" sortBy="#{laboratory.name}">
                             <h:outputText value="#{laboratory.name}"/>
                         </p:column>
-                        <p:column headerText="Descripción">
+                        <p:column headerText="Descripción" filterBy="#{laboratory.description}" sortBy="#{laboratory.description}">
                             <h:outputText value="#{laboratory.description}"/>
                         </p:column>
-                        <p:column headerText="Estado">
+                        <p:column headerText="Estado" filterBy="#{laboratory.estado}" sortBy="#{laboratory.estado}">
                             <h:outputText value="#{laboratory.estado}"/>
                         </p:column>
-                        <p:column headerText="Fecha Creacion">
+                        <p:column headerText="Fecha Creacion" filterBy="#{laboratory.fecha_creacion}" sortBy="#{laboratory.fecha_creacion}">
                             <h:outputText value="#{laboratory.fecha_creacion}"/>
                         </p:column>
-                        <p:column headerText="Fecha Cierre">
+                        <p:column headerText="Fecha Cierre" filterBy="#{laboratory.fecha_cierre}" sortBy="#{laboratory.fecha_cierre}">
                             <h:outputText value="#{laboratory.fecha_cierre}"/>
                         </p:column>
                         <p:column headerText="Numero Equipos">

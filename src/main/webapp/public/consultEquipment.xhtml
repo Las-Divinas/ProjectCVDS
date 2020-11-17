@@ -40,19 +40,19 @@
                             </div>
                         </f:facet>
                         <p:column selectionMode="multiple" style="width:40px;text-align:center"/>
-                        <p:column headerText="Id" filterBy="#{equipment.id}">
+                        <p:column headerText="Id" filterBy="#{equipment.id}" sortBy="#{equipment.id}">
                             <h:outputText value="#{equipment.id}"/>
                         </p:column>
-                        <p:column headerText="Nombre" filterBy="#{equipment.name}">
+                        <p:column headerText="Nombre" filterBy="#{equipment.name}" sortBy="#{equipment.name}">
                             <h:outputText value="#{equipment.name}"/>
                         </p:column>
-                        <p:column headerText="Descripción" filterBy="#{equipment.description}">
+                        <p:column headerText="Descripción" filterBy="#{equipment.description}" sortBy="#{equipment.description}">
                             <h:outputText value="#{equipment.description}"/>
                         </p:column>
-                        <p:column headerText="Laboratorio" filterBy="#{equipment.laboratory_id}">
+                        <p:column headerText="Laboratorio" filterBy="#{equipment.laboratory_id}" sortBy="#{equipment.laboratory_id}">
                             <h:outputText value="#{equipment.laboratory_id}"/>
                         </p:column>
-                        <p:column headerText="Estado" filterBy="#{equipment.estado}">
+                        <p:column headerText="Estado" filterBy="#{equipment.estado}" sortBy="#{equipment.estado}">
                             <h:outputText value="#{equipment.estado}"/>
                         </p:column>
                         <p:column class="text-center" headerText="Administrar" exportable="false">

@@ -41,19 +41,19 @@
                                 </div>
                             </f:facet>
                         <p:column selectionMode="multiple" style="width:40px;text-align:center"/>
-                        <p:column headerText="Id" filterBy="#{element.id}">
+                        <p:column headerText="Id" filterBy="#{element.id}" sortBy="#{element.id}">
                             <h:outputText value="#{element.id}"/>
                         </p:column>
-                        <p:column headerText="Name" filterBy="#{element.name}">
+                        <p:column headerText="Name" filterBy="#{element.name}" sortBy="#{element.name}">
                             <h:outputText value="#{element.name}"/>
                         </p:column>
-                        <p:column headerText="Type" filterBy="#{element.type}">
+                        <p:column headerText="Type" filterBy="#{element.type}" sortBy="#{element.type}">
                             <h:outputText value="#{element.type}"/>
                         </p:column>
-                        <p:column headerText="Estado" filterBy="#{element.estado}">
+                        <p:column headerText="Estado" filterBy="#{element.estado}" sortBy="#{element.estado}">
                             <h:outputText value="#{element.estado}"/>
                         </p:column>
-                        <p:column headerText="Id_equipment" filterBy="#{element.id_equipment}">
+                        <p:column headerText="Id_equipment" filterBy="#{element.id_equipment}" sortBy="#{element.id_equipment}">
                             <h:outputText value="#{element.id_equipment}"/>
                         </p:column>
                         <p:column class="text-center" headerText="Novedades" exportable="false">

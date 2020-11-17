@@ -37,16 +37,16 @@
                                 </h:commandLink>
                             </div>
                         </f:facet>
-                        <p:column headerText="Id">
+                        <p:column headerText="Id" filterBy="#{novelty.id}" sortBy="#{novelty.id}">
                             <h:outputText value="#{novelty.id}"/>
                         </p:column>
-                        <p:column headerText="Id Equipo">
+                        <p:column headerText="Id Equipo" filterBy="#{novelty.equipment_id}" sortBy="#{novelty.equipment_id}">
                             <h:outputText value="#{novelty.equipment_id}"/>
                         </p:column>
-                        <p:column headerText="Id Elemento">
+                        <p:column headerText="Id Elemento" filterBy="#{novelty.element_id}" sortBy="#{novelty.element_id}">
                             <h:outputText value="#{novelty.element_id}"/>
                         </p:column>
-                        <p:column headerText="Descripción">
+                        <p:column headerText="Descripción" filterBy="#{novelty.description}" sortBy="#{novelty.description}">
                             <h:outputText value="#{novelty.description}"/>
                         </p:column>
                     </p:dataTable>
