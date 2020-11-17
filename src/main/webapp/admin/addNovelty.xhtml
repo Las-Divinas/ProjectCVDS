@@ -38,7 +38,10 @@
                             </div>
                             <div class="form-group">
                                 <h:outputLabel for="Equipment" value="Equipment Id: " style="color: white;"/>
-                                <p:inputText class="form-control" type="String" id="equipment_id" value="#{noveltyBean.idEquipment}" placeholder="1"/>
+                                <p:selectOneMenu id="nombresEquipos" value="#{noveltyBean.nombreEquipo}" class="form-control"  required="true">
+                                    <f:selectItem itemLabel="Select Equipment" noSelectionOption="true"/>
+                                    <f:selectItems value="#{noveltyBean.nombresEquipos}"/>
+                                </p:selectOneMenu>
                             </div>
                             <p:commandButton value="Add" class="btn btn-primary" actionListener="#{noveltyBean.registrarNovedad}"/>
                             <p:dialog header="Modal Dialog" widgetVar="dlg2" modal="true" height="100">
@@ -58,7 +61,10 @@
                             </div>
                             <div class="form-group">
                                 <h:outputLabel for="Element" value="Element Id: " style="color: white;"/>
-                                <p:inputText class="form-control" type="integer" id="element_id" value="#{noveltyBean.idElement}" placeholder="1"/>
+                                <p:selectOneMenu id="nombresElementos" value="#{noveltyBean.nombreElemento}" class="form-control"  required="true">
+                                    <f:selectItem itemLabel="Select Element" noSelectionOption="true"/>
+                                    <f:selectItems value="#{noveltyBean.nombresElementos}"/>
+                                </p:selectOneMenu>
                             </div>
                             <p:commandButton value="Add" class="btn btn-primary" actionListener="#{noveltyBean.registrarNovedadElemento}"/>
                         </h:form>

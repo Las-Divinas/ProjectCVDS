@@ -15,6 +15,7 @@ import com.google.inject.Inject;
 
 
 import edu.eci.cvds.samples.entities.Element;
+import edu.eci.cvds.samples.entities.Equipment;
 import edu.eci.cvds.samples.entities.Novelty;
 import edu.eci.cvds.samples.entities.Usuario;
 import edu.eci.cvds.samples.services.ExceptionHistorialDeEquipos;
@@ -39,19 +40,36 @@ public class ElementBean extends BasePageBean{
     private List<String> types = Arrays.asList(a);
     private List<Element> elementosBusquedaBasica;
     private List<Element> elementosSeleccionados;
+    private List<String> nombresElementos;
+    private String nombreElemento;
+    private List<Equipment> equipos;
+    private List<String> nombresEquipos;
+    private String nombreEquipo;
+
 
     @PostConstruct
     public void init(){
         super.init();
         try{
-            elementosBusquedaBasica = new ArrayList<>();
+            elementosBusquedaBasica = new ArrayList<>(); 
+            equipos = new ArrayList<>();
+            nombresEquipos = new ArrayList<>();
+            nombresElementos = new ArrayList<>();
             elementosBusquedaBasica = servicioUsuario.consultarElementos();
+            for(Element elemento: elementosBusquedaBasica){
+                nombresElementos.add(elemento.getName());
+            }
+            equipos = servicioUsuario.consultarEquipos();
+            for(Equipment equipo: equipos){
+                nombresEquipos.add(equipo.getName());
+            }
         } catch (ExceptionHistorialDeEquipos e){
             e.printStackTrace();
         }
     }
 
     public void registrarElemento() throws ExceptionHistorialDeEquipos, IOException{
+        idEquipment = getIdByNameEquipment(nombreEquipo);
         Element element = new Element(id, name, description, idEquipment,type,"ACTIVO");
         servicioUsuario.registrarElemento(element);
         Date date = new Date(System.currentTimeMillis());
@@ -68,6 +86,7 @@ public class ElementBean extends BasePageBean{
 
     public void changeEquipmentElement() throws ExceptionHistorialDeEquipos, IOException{
         int idEquipo = servicioUsuario.consultarUltimoId();
+        id = getIdByNameElement(nombreElemento);
         Element elemento = servicioUsuario.consultarElementoPorId(id);
         if(!(elemento.getId_equipment()==idEquipo)){
             servicioUsuario.cambiarIdEquipoParaElemento(idEquipo, id);
@@ -85,6 +104,26 @@ public class ElementBean extends BasePageBean{
         }
     }
 
+    public int getIdByNameEquipment(String nombre){
+        int idEquipment = 0;
+        for(Equipment equipo: equipos){
+            if(equipo.getName().equals(nombre)){
+                idEquipment = equipo.getId();
+            }
+        }
+        return idEquipment;
+    }
+
+    public int getIdByNameElement(String nombre){
+        int idElement = 0;
+        for(Element elemento: elementosBusquedaBasica){
+            if(elemento.getName().equals(nombre)){
+                idElement = elemento.getId();
+            }
+        }
+        return idElement;
+    }
+
     public List<Element> consultarElementos() throws ExceptionHistorialDeEquipos{
         return servicioUsuario.consultarElementos();
     }
@@ -97,6 +136,38 @@ public class ElementBean extends BasePageBean{
             servicioUsuario.cambiarEstadoElementosId(idElementos,"NO_ACTIVO");
         }
         elementosBusquedaBasica = servicioUsuario.consultarElementos();
+    }
+
+    public List<String> getNombresElementos(){
+        return nombresElementos;
+    }
+
+    public void setNombresElementos(List<String> nombresElementos){
+        this.nombresElementos = nombresElementos;
+    }
+
+    public String getNombreElemento(){
+        return nombreElemento;
+    }
+
+    public void setNombreElemento(String nombreElemento){
+        this.nombreElemento = nombreElemento;
+    }
+
+    public List<String> getNombresEquipos(){
+        return nombresEquipos;
+    }
+
+    public void setNombresEquipos(List<String> nombresEquipos){
+        this.nombresEquipos = nombresEquipos;
+    }
+
+    public String getNombreEquipo(){
+        return nombreEquipo;
+    }
+
+    public void setNombreEquipo(String nombreEquipo){
+        this.nombreEquipo = nombreEquipo;
     }
 
     public String getType(){

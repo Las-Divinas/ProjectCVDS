@@ -43,7 +43,10 @@
                     </div>
                     <div class="form-group">
                         <h:outputLabel for="Equipo" value="Equipo: " style="color: white;"/>
-                        <p:inputText class="form-control" type="integer" id="idEquipment" value="#{elementBean.idEquipment}" placeholder="Id EQuipo"/>
+                        <p:selectOneMenu id="nombresEquipos" value="#{elementBean.nombreEquipo}" class="form-control"  required="true">
+                            <f:selectItem itemLabel="Select Equipment" noSelectionOption="true"/>
+                            <f:selectItems value="#{elementBean.nombresEquipos}"/>
+                        </p:selectOneMenu>
                     </div>
                     <p:commandButton value="Add" class="btn btn-primary" actionListener="#{elementBean.registrarElemento}" onclick="PF('dlg2').show();"/>
                     <p:dialog header="Modal Dialog" widgetVar="dlg2" modal="true" height="100">

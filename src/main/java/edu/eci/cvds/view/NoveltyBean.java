@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 import com.google.inject.Inject;
 
 import edu.eci.cvds.samples.entities.Element;
+import edu.eci.cvds.samples.entities.Equipment;
 import edu.eci.cvds.samples.entities.Novelty;
 import edu.eci.cvds.samples.entities.Usuario;
 import edu.eci.cvds.samples.services.ExceptionHistorialDeEquipos;
@@ -36,13 +37,31 @@ public class NoveltyBean extends BasePageBean{
     private int idElement;
     private String message;
     private List<Novelty> novedadBusquedaBasica;
+    private List<Equipment> equipos;
+    private List<String> nombresEquipos;
+    private String nombreEquipo;
+    private List<Element> elementos;
+    private List<String> nombresElementos;
+    private String nombreElemento;
 
     @PostConstruct
     public void init(){
         super.init();
         try{
             novedadBusquedaBasica = new ArrayList<>();
+            equipos = new ArrayList<>();
+            elementos = new ArrayList<>();
+            nombresElementos = new ArrayList<>();
+            nombresEquipos = new ArrayList<>();
             novedadBusquedaBasica = servicioUsuario.consultarNovedades();
+            elementos = servicioUsuario.consultarElementos();
+            equipos = servicioUsuario.consultarEquipos();
+            for(Element elemento: elementos){
+                nombresElementos.add(elemento.getName());
+            }
+            for(Equipment equipo: equipos){
+                nombresEquipos.add(equipo.getName());
+            }
         } catch (ExceptionHistorialDeEquipos e){
             e.printStackTrace();
         }
@@ -54,7 +73,8 @@ public class NoveltyBean extends BasePageBean{
         HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
         String correoSession = (String) session.getAttribute("correo");
         Usuario usuario = servicioUsuario.consultarIdUsuarioPorCorreo(correoSession);
-        Novelty novelty = new Novelty(id, description,title, date , usuario.getDocumento(), idEquipment, idElement);
+        idEquipment = getIdByNameEquipment(nombreEquipo);
+        Novelty novelty = new Novelty(id, description,title, date , usuario.getDocumento(), idEquipment, 0);
         message = "Se agrego la nueva novedad al equipo "+idEquipment;
         servicioUsuario.registrarNovedad(novelty);
     }
@@ -65,10 +85,11 @@ public class NoveltyBean extends BasePageBean{
         HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
         String correoSession = (String) session.getAttribute("correo");
         Usuario usuario = servicioUsuario.consultarIdUsuarioPorCorreo(correoSession);
+        idElement = getIdByNameElement(nombreElemento);
         Element elemento = servicioUsuario.consultarElementoPorId(idElement);
         System.out.println(elemento.getName()+"-------------"+elemento.getId_equipment());
-        Novelty novelty = new Novelty(description,title, date, usuario.getDocumento(), elemento.getId_equipment(), 0);
-        message = "Se agrego la nueva novedad al elemento "+idElement+" del equipo "+idEquipment;
+        Novelty novelty = new Novelty(description,title, date, usuario.getDocumento(), elemento.getId_equipment(), idElement);
+        message = "Se agrego la nueva novedad al elemento "+idElement+" del equipo "+elemento.getId_equipment();
         servicioUsuario.registrarNovedad(novelty);
     }
 
@@ -82,6 +103,58 @@ public class NoveltyBean extends BasePageBean{
         this.novedadBusquedaBasica = servicioUsuario.consultarNovedadesPorIDElemento(elementoID);
         FacesContext facesContext = FacesContext.getCurrentInstance();
         facesContext.getExternalContext().redirect("../public/consultNovelty.xhtml");
+    }
+
+    public int getIdByNameEquipment(String name){
+        int idEquipment = 0;
+        for(Equipment equipo: equipos){
+            if(equipo.getName().equals(name)){
+                idEquipment = equipo.getId();
+            }
+        }
+        return idEquipment;
+    }
+
+    public int getIdByNameElement(String name){
+        int idElement = 0;
+        for(Element elemento: elementos){
+            if(elemento.getName().equals(name)){
+                idElement = elemento.getId();
+            }
+        }
+        return idElement;
+    }
+    
+    public List<String> getNombresEquipos(){
+        return nombresEquipos;
+    }
+
+    public void setNombresEquipos(List<String> nombresEquipos){
+        this.nombresEquipos = nombresEquipos;
+    }
+
+    public List<String> getNombresElementos(){
+        return nombresElementos;
+    }
+
+    public void setNombresElementos(List<String> nombresElementos){
+        this.nombresElementos = nombresElementos;
+    }
+
+    public String getNombreEquipo(){
+        return nombreEquipo;
+    }
+
+    public void setNombreEquipo(String nombreEquipo){
+        this.nombreEquipo = nombreEquipo;
+    }
+
+    public String getNombreElemento(){
+        return nombreElemento;
+    }
+
+    public void setNombreElemento(String nombreElemento){
+        this.nombreElemento = nombreElemento;
     }
 
     public int getIdElement(){

@@ -11,6 +11,7 @@ import javax.faces.context.FacesContext;
 import com.google.inject.Inject;
 
 import edu.eci.cvds.samples.entities.Equipment;
+import edu.eci.cvds.samples.entities.Laboratory;
 import edu.eci.cvds.samples.services.ExceptionHistorialDeEquipos;
 import edu.eci.cvds.samples.services.ServicioUsuario;
 import java.util.List;
@@ -31,13 +32,22 @@ public class EquipmentBean extends BasePageBean{
     private String message = "Se creo el equipo con exito";
     private List<Equipment> equiposBusquedaBasica;
     private List<Equipment> equiposSeleccionados;
+    private List<String> nombresLaboratorios;
+    private String nombreLaboratorio;
+    private List<Laboratory> laboratorios;
 
     @PostConstruct
     public void init(){
         super.init();
         try{
             equiposBusquedaBasica = new ArrayList<>();
+            laboratorios = new ArrayList<>();
+            nombresLaboratorios = new ArrayList<>();
             equiposBusquedaBasica = servicioUsuario.consultarEquipos();
+            laboratorios = servicioUsuario.consultarLaboratorios();
+            for(int i=0; i<laboratorios.size(); i++){
+                nombresLaboratorios.add(laboratorios.get(i).getName());
+            }
         } catch (ExceptionHistorialDeEquipos e){
             e.printStackTrace();
         }
@@ -45,6 +55,7 @@ public class EquipmentBean extends BasePageBean{
 
     public void registrarEquipo() throws ExceptionHistorialDeEquipos, IOException{
         message = "Se creo el elemento con exito";
+        laboratory_id = getIdByNameLaboratory(nombreLaboratorio);
         Equipment equipo = new Equipment(name, description, laboratory_id,"ACTIVO");
         servicioUsuario.registrarEquipment(equipo);
         FacesContext facesContext = FacesContext.getCurrentInstance();
@@ -64,6 +75,31 @@ public class EquipmentBean extends BasePageBean{
             servicioUsuario.cambiarEstadoElementoId(idElemento,"NO_ACTIVO");
         }
         equiposBusquedaBasica = servicioUsuario.consultarEquipos();
+    }
+
+    public int getIdByNameLaboratory(String name){
+        int laboratoryId = 0;
+        for(Laboratory laboratory: laboratorios){
+            if(laboratory.getName().equals(name))
+                laboratoryId = laboratory.getId();
+        }
+        return laboratoryId;
+    }
+
+    public String getNombreLaboratorio(){
+        return nombreLaboratorio;
+    }
+
+    public void setNombreLaboratorio(String nombreLaboratorio){
+        this.nombreLaboratorio = nombreLaboratorio;
+    }
+
+    public List<String> getNombresLaboratorios(){
+        return nombresLaboratorios;
+    }
+
+    public void setNombresLaboratorios(List<String> nombresLaboratorios){
+        this.nombresLaboratorios = nombresLaboratorios;
     }
 
     public List<Equipment> getEquiposSeleccionados(){
