@@ -19,6 +19,9 @@ import edu.eci.cvds.samples.entities.Equipment;
 import edu.eci.cvds.samples.entities.Novelty;
 import edu.eci.cvds.samples.entities.Usuario;
 import edu.eci.cvds.samples.services.ExceptionHistorialDeEquipos;
+import edu.eci.cvds.samples.services.ServicioElement;
+import edu.eci.cvds.samples.services.ServicioEquipment;
+import edu.eci.cvds.samples.services.ServicioNovelty;
 import edu.eci.cvds.samples.services.ServicioUsuario;
 import java.util.Date;
 
@@ -30,6 +33,16 @@ public class ElementBean extends BasePageBean{
 
     @Inject
     private ServicioUsuario servicioUsuario;
+
+    @Inject
+    private ServicioElement servicioElement;
+
+    @Inject
+    private ServicioNovelty servicioNovelty;
+
+    @Inject
+    private ServicioEquipment servicioEquipment;
+
     private int id;
     private String name;
     private String type;
@@ -55,11 +68,11 @@ public class ElementBean extends BasePageBean{
             equipos = new ArrayList<>();
             nombresEquipos = new ArrayList<>();
             nombresElementos = new ArrayList<>();
-            elementosBusquedaBasica = servicioUsuario.consultarElementos();
+            elementosBusquedaBasica = servicioElement.consultarElementos();
             for(Element elemento: elementosBusquedaBasica){
                 nombresElementos.add(elemento.getName());
             }
-            equipos = servicioUsuario.consultarEquipos();
+            equipos = servicioEquipment.consultarEquipos();
             for(Equipment equipo: equipos){
                 nombresEquipos.add(equipo.getName());
             }
@@ -71,32 +84,32 @@ public class ElementBean extends BasePageBean{
     public void registrarElemento() throws ExceptionHistorialDeEquipos, IOException{
         idEquipment = getIdByNameEquipment(nombreEquipo);
         Element element = new Element(id, name, description, idEquipment,type,"ACTIVO");
-        servicioUsuario.registrarElemento(element);
+        servicioElement.registrarElemento(element);
         Date date = new Date(System.currentTimeMillis());
         FacesContext facesContext = FacesContext.getCurrentInstance();
         HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
         String correoSession = (String) session.getAttribute("correo");
         Usuario usuario = servicioUsuario.consultarIdUsuarioPorCorreo(correoSession);
-        int id_elemento = servicioUsuario.consultarUltimoIdElement();
+        int id_elemento = servicioElement.consultarUltimoIdElement();
         Novelty novelty = new Novelty("Elemento agregado al equipo"+idEquipment, "Se agrego le agrego a equipo"+"", date, usuario.getDocumento() ,idEquipment,id_elemento);
         message = "Se creo que correctamente el elemento del equipo"+idEquipment;
-        servicioUsuario.registrarNovedad(novelty);
+        servicioNovelty.registrarNovedad(novelty);
     
     }
 
     public void changeEquipmentElement() throws ExceptionHistorialDeEquipos, IOException{
-        int idEquipo = servicioUsuario.consultarUltimoId();
+        int idEquipo = servicioEquipment.consultarUltimoIdEquipment();
         id = getIdByNameElement(nombreElemento);
-        Element elemento = servicioUsuario.consultarElementoPorId(id);
+        Element elemento = servicioElement.consultarElementoPorId(id);
         if(!(elemento.getId_equipment()==idEquipo)){
-            servicioUsuario.cambiarIdEquipoParaElemento(idEquipo, id);
+            servicioElement.cambiarIdEquipoParaElemento(idEquipo, id);
             Date date = new Date(System.currentTimeMillis());
             FacesContext facesContext = FacesContext.getCurrentInstance();
             HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
             String correoSession = (String) session.getAttribute("correo");
             Usuario usuario = servicioUsuario.consultarIdUsuarioPorCorreo(correoSession);
             Novelty novelty = new Novelty("Elemento agregado al equipo"+idEquipo, "Se agrego le agrego a equipo"+"", date, usuario.getDocumento() ,idEquipo,id);
-            servicioUsuario.registrarNovedad(novelty);
+            servicioNovelty.registrarNovedad(novelty);
             message = "Se ha asociado correctamente el elemento al equipo "+idEquipo;
         }
         else{
@@ -125,7 +138,7 @@ public class ElementBean extends BasePageBean{
     }
 
     public List<Element> consultarElementos() throws ExceptionHistorialDeEquipos{
-        return servicioUsuario.consultarElementos();
+        return servicioElement.consultarElementos();
     }
 
     public void eliminarElementos() throws ExceptionHistorialDeEquipos{
@@ -133,9 +146,9 @@ public class ElementBean extends BasePageBean{
         for(int i=0; i < elementosSeleccionados.size(); i++){
             System.out.println("------------------------------Entre"+i+"---------------------------------------");
             int idElementos = elementosSeleccionados.get(i).getId();
-            servicioUsuario.cambiarEstadoElementosId(idElementos,"NO_ACTIVO");
+            servicioElement.cambiarEstadoElementosId(idElementos,"NO_ACTIVO");
         }
-        elementosBusquedaBasica = servicioUsuario.consultarElementos();
+        elementosBusquedaBasica = servicioElement.consultarElementos();
     }
 
     public List<String> getNombresElementos(){

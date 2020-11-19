@@ -18,6 +18,9 @@ import edu.eci.cvds.samples.entities.Laboratory;
 import edu.eci.cvds.samples.entities.Novelty;
 import edu.eci.cvds.samples.entities.Usuario;
 import edu.eci.cvds.samples.services.ExceptionHistorialDeEquipos;
+import edu.eci.cvds.samples.services.ServicioEquipment;
+import edu.eci.cvds.samples.services.ServicioLaboratory;
+import edu.eci.cvds.samples.services.ServicioNovelty;
 import edu.eci.cvds.samples.services.ServicioUsuario;
 import org.primefaces.model.chart.PieChartModel;
 
@@ -29,6 +32,15 @@ public class laboratoryBean extends BasePageBean{
 
     @Inject
     private ServicioUsuario servicioUsuario;
+
+    @Inject
+    private ServicioLaboratory servicioLaboratory;
+
+    @Inject
+    private ServicioNovelty servicioNovelty;
+
+    @Inject
+    private ServicioEquipment servicioEquipment;
     
     private String name;
     private String description;
@@ -42,7 +54,7 @@ public class laboratoryBean extends BasePageBean{
         super.init();
         try{
             laboratoriosBusquedaBasica = new ArrayList<>();
-            laboratoriosBusquedaBasica = servicioUsuario.consultarLaboratorios();
+            laboratoriosBusquedaBasica = servicioLaboratory.consultarLaboratorios();
         } catch (ExceptionHistorialDeEquipos e){
             e.printStackTrace();
         }
@@ -52,7 +64,7 @@ public class laboratoryBean extends BasePageBean{
         try {
             Date date = new Date(System.currentTimeMillis());
             Laboratory laboratory = new Laboratory(id,name, description,"ACTIVO",date,null);
-            servicioUsuario.registrarLaboratorio(laboratory);
+            servicioLaboratory.registrarLaboratorio(laboratory);
             FacesContext facesContext = FacesContext.getCurrentInstance();
             facesContext.getExternalContext().redirect("../admin/addEquipLab.xhtml");
 
@@ -63,27 +75,27 @@ public class laboratoryBean extends BasePageBean{
 
     public int countEquipment(int idLaboratory) throws ExceptionHistorialDeEquipos
     {
-        return servicioUsuario.consultarNumeroEquipos(idLaboratory);
+        return servicioEquipment.consultarNumeroEquipos(idLaboratory);
     }
     public List<Laboratory> consultarLaboratorios() throws ExceptionHistorialDeEquipos{
         message = "Tuvimos un problema al consultar el Laboratorio";
-        return servicioUsuario.consultarLaboratorios();
+        return servicioLaboratory.consultarLaboratorios();
     }
 
     public void updateLaboratoryEquipment() throws ExceptionHistorialDeEquipos{
         try {
-            int idLaboratorio = servicioUsuario.consultarUltimoIdLaboratorio();
-            Equipment equipo = servicioUsuario.consultarEquipoPorId(idEquipment);
+            int idLaboratorio = servicioLaboratory.consultarUltimoIdLaboratorio();
+            Equipment equipo = servicioEquipment.consultarEquipoPorId(idEquipment);
             int oldIdLaboratorio = equipo.getLaboratory_id();
             if(!(equipo.getLaboratory_id() == idLaboratorio)){
-                servicioUsuario.cambiarLaboratorioEquipo(idLaboratorio, idEquipment);               
+                servicioEquipment.cambiarLaboratorioEquipo(idLaboratorio, idEquipment);               
                 Date date = new Date(System.currentTimeMillis());
                 FacesContext facesContext = FacesContext.getCurrentInstance();
                 HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
                 String correoSession = (String) session.getAttribute("correo");
                 Usuario usuario = servicioUsuario.consultarIdUsuarioPorCorreo(correoSession);
                 Novelty novelty = new Novelty("Es equipo fue agregado al laboratorio "+idLaboratorio+"Ya no pertenece al laboratorio "+oldIdLaboratorio, "Agregado al laboratorio "+idLaboratorio, date, usuario.getDocumento(), idEquipment, 0);
-                servicioUsuario.registrarNovedad(novelty);
+                servicioNovelty.registrarNovedad(novelty);
             }
 
         } catch (Exception e) {
@@ -145,7 +157,7 @@ public class laboratoryBean extends BasePageBean{
     public PieChartModel generarEstadistica() throws ExceptionHistorialDeEquipos {
         model = new PieChartModel();
         for (Laboratory laboratory : laboratoriosBusquedaBasica) {
-            model.set(laboratory.getName(),servicioUsuario.consultarNumeroEquipos(laboratory.getId()));
+            model.set(laboratory.getName(),servicioEquipment.consultarNumeroEquipos(laboratory.getId()));
         }
         model.setTitle("Cantidad de equipos por laboratorio");
         model.setShowDataLabels(true);

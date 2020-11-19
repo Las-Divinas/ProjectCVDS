@@ -13,7 +13,8 @@ import com.google.inject.Inject;
 import edu.eci.cvds.samples.entities.Equipment;
 import edu.eci.cvds.samples.entities.Laboratory;
 import edu.eci.cvds.samples.services.ExceptionHistorialDeEquipos;
-import edu.eci.cvds.samples.services.ServicioUsuario;
+import edu.eci.cvds.samples.services.ServicioEquipment;
+import edu.eci.cvds.samples.services.ServicioLaboratory;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -22,8 +23,11 @@ import java.util.ArrayList;
 public class EquipmentBean extends BasePageBean{
 	private static final long serialVersionUID = 6194542760432320641L;
 
-	@Inject
-    private ServicioUsuario servicioUsuario;
+    @Inject 
+    private ServicioEquipment servicioEquipment;
+
+    @Inject
+    private ServicioLaboratory servicioLaboratory;
 
     private int id;
     private String name;
@@ -43,8 +47,8 @@ public class EquipmentBean extends BasePageBean{
             equiposBusquedaBasica = new ArrayList<>();
             laboratorios = new ArrayList<>();
             nombresLaboratorios = new ArrayList<>();
-            equiposBusquedaBasica = servicioUsuario.consultarEquipos();
-            laboratorios = servicioUsuario.consultarLaboratorios();
+            equiposBusquedaBasica = servicioEquipment.consultarEquipos();
+            laboratorios = servicioLaboratory.consultarLaboratorios();
             for(int i=0; i<laboratorios.size(); i++){
                 nombresLaboratorios.add(laboratorios.get(i).getName());
             }
@@ -57,14 +61,14 @@ public class EquipmentBean extends BasePageBean{
         message = "Se creo el elemento con exito";
         laboratory_id = getIdByNameLaboratory(nombreLaboratorio);
         Equipment equipo = new Equipment(name, description, laboratory_id,"ACTIVO");
-        servicioUsuario.registrarEquipment(equipo);
+        servicioEquipment.registrarEquipment(equipo);
         FacesContext facesContext = FacesContext.getCurrentInstance();
         facesContext.getExternalContext().redirect("../admin/selectElement.xhtml");
     }
 
     public List<Equipment> consultarEquipos() throws ExceptionHistorialDeEquipos{
         message = "Tuvimos un problema en agregar el equipo";
-        return servicioUsuario.consultarEquipos();
+        return servicioEquipment.consultarEquipos();
     }
 
     public void eliminarEquipos() throws ExceptionHistorialDeEquipos{
@@ -72,9 +76,9 @@ public class EquipmentBean extends BasePageBean{
         for(int i=0; i < equiposSeleccionados.size(); i++){
             System.out.println("------------------------------Entre"+i+"---------------------------------------");
             int idElemento = equiposSeleccionados.get(i).getId();
-            servicioUsuario.cambiarEstadoElementoId(idElemento,"NO_ACTIVO");
+            servicioEquipment.cambiarEstadoElementoId(idElemento,"NO_ACTIVO");
         }
-        equiposBusquedaBasica = servicioUsuario.consultarEquipos();
+        equiposBusquedaBasica = servicioEquipment.consultarEquipos();
     }
 
     public int getIdByNameLaboratory(String name){

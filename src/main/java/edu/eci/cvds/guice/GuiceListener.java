@@ -14,7 +14,15 @@ import edu.eci.cvds.sampleprj.dao.mybatis.MyBatisEquipoDAO;
 import edu.eci.cvds.sampleprj.dao.mybatis.MyBatisLaboratorioDAO;
 import edu.eci.cvds.sampleprj.dao.mybatis.MyBatisNovedadDAO;
 import edu.eci.cvds.sampleprj.dao.mybatis.MyBatisUsuarioDAO;
+import edu.eci.cvds.samples.services.ServicioElement;
+import edu.eci.cvds.samples.services.ServicioEquipment;
+import edu.eci.cvds.samples.services.ServicioLaboratory;
+import edu.eci.cvds.samples.services.ServicioNovelty;
 import edu.eci.cvds.samples.services.ServicioUsuario;
+import edu.eci.cvds.samples.services.impl.ServicioElementImpl;
+import edu.eci.cvds.samples.services.impl.ServicioEquipmentImpl;
+import edu.eci.cvds.samples.services.impl.ServicioLaboratoryImpl;
+import edu.eci.cvds.samples.services.impl.ServicioNoveltyImpl;
 import edu.eci.cvds.samples.services.impl.ServicioUsuarioImpl;
 import edu.eci.cvds.security.Logger;
 import edu.eci.cvds.security.LoggerApacheShiro;
@@ -45,6 +53,10 @@ public class GuiceListener implements ServletContextListener {
                 bind(BasePageBean.class).to(LoginBean.class);
                 bind(Logger.class).to(LoggerApacheShiro.class);
                 bind(ServicioUsuario.class).to(ServicioUsuarioImpl.class);
+                bind(ServicioLaboratory.class).to(ServicioLaboratoryImpl.class);
+                bind(ServicioNovelty.class).to(ServicioNoveltyImpl.class);
+                bind(ServicioElement.class).to(ServicioElementImpl.class);
+                bind(ServicioEquipment.class).to(ServicioEquipmentImpl.class);
             }
         });
 

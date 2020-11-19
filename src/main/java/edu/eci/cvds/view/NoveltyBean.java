@@ -18,6 +18,9 @@ import edu.eci.cvds.samples.entities.Equipment;
 import edu.eci.cvds.samples.entities.Novelty;
 import edu.eci.cvds.samples.entities.Usuario;
 import edu.eci.cvds.samples.services.ExceptionHistorialDeEquipos;
+import edu.eci.cvds.samples.services.ServicioElement;
+import edu.eci.cvds.samples.services.ServicioEquipment;
+import edu.eci.cvds.samples.services.ServicioNovelty;
 import edu.eci.cvds.samples.services.ServicioUsuario;
 
 @ManagedBean(name = "noveltyBean")
@@ -28,6 +31,15 @@ public class NoveltyBean extends BasePageBean{
 
     @Inject
     private ServicioUsuario servicioUsuario;
+
+    @Inject
+    private ServicioNovelty servicioNovelty;
+
+    @Inject
+    private ServicioEquipment servicioEquipment;
+
+    @Inject
+    private ServicioElement servicioElement;
 
     private int id;
     private String description;
@@ -53,9 +65,9 @@ public class NoveltyBean extends BasePageBean{
             elementos = new ArrayList<>();
             nombresElementos = new ArrayList<>();
             nombresEquipos = new ArrayList<>();
-            novedadBusquedaBasica = servicioUsuario.consultarNovedades();
-            elementos = servicioUsuario.consultarElementos();
-            equipos = servicioUsuario.consultarEquipos();
+            novedadBusquedaBasica = servicioNovelty.consultarNovedades();
+            elementos = servicioElement.consultarElementos();
+            equipos = servicioEquipment.consultarEquipos();
             for(Element elemento: elementos){
                 nombresElementos.add(elemento.getName());
             }
@@ -76,7 +88,7 @@ public class NoveltyBean extends BasePageBean{
         idEquipment = getIdByNameEquipment(nombreEquipo);
         Novelty novelty = new Novelty(id, description,title, date , usuario.getDocumento(), idEquipment, 0);
         message = "Se agrego la nueva novedad al equipo "+idEquipment;
-        servicioUsuario.registrarNovedad(novelty);
+        servicioNovelty.registrarNovedad(novelty);
     }
 
     public void registrarNovedadElemento() throws ExceptionHistorialDeEquipos{
@@ -86,21 +98,21 @@ public class NoveltyBean extends BasePageBean{
         String correoSession = (String) session.getAttribute("correo");
         Usuario usuario = servicioUsuario.consultarIdUsuarioPorCorreo(correoSession);
         idElement = getIdByNameElement(nombreElemento);
-        Element elemento = servicioUsuario.consultarElementoPorId(idElement);
+        Element elemento = servicioElement.consultarElementoPorId(idElement);
         System.out.println(elemento.getName()+"-------------"+elemento.getId_equipment());
         Novelty novelty = new Novelty(description,title, date, usuario.getDocumento(), elemento.getId_equipment(), idElement);
         message = "Se agrego la nueva novedad al elemento "+idElement+" del equipo "+elemento.getId_equipment();
-        servicioUsuario.registrarNovedad(novelty);
+        servicioNovelty.registrarNovedad(novelty);
     }
 
     public void consultarNovedadEquipoID(int equipoID) throws  ExceptionHistorialDeEquipos,IOException{
-        this.novedadBusquedaBasica = servicioUsuario.consultarNovedadesPorIDEquipo(equipoID);
+        this.novedadBusquedaBasica = servicioNovelty.consultarNovedadesPorIDEquipo(equipoID);
         FacesContext facesContext = FacesContext.getCurrentInstance();
         facesContext.getExternalContext().redirect("../public/consultNovelty.xhtml");
     }
 
     public void consultarNovedadElementoID(int elementoID) throws ExceptionHistorialDeEquipos,IOException{
-        this.novedadBusquedaBasica = servicioUsuario.consultarNovedadesPorIDElemento(elementoID);
+        this.novedadBusquedaBasica = servicioNovelty.consultarNovedadesPorIDElemento(elementoID);
         FacesContext facesContext = FacesContext.getCurrentInstance();
         facesContext.getExternalContext().redirect("../public/consultNovelty.xhtml");
     }
