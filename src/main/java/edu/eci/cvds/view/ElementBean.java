@@ -83,7 +83,7 @@ public class ElementBean extends BasePageBean{
 
     public void registrarElemento() throws ExceptionHistorialDeEquipos, IOException{
         idEquipment = getIdByNameEquipment(nombreEquipo);
-        asociarElementoAEQuipo(idEquipment, type);
+        desasociarElementoAEQuipo(idEquipment, type);
         Element element = new Element(id, name, description, idEquipment,type,"ACTIVO");
         servicioElement.registrarElemento(element);
         Date date = new Date(System.currentTimeMillis());
@@ -98,7 +98,7 @@ public class ElementBean extends BasePageBean{
     
     }
 
-    private void asociarElementoAEQuipo(int idEquipment, String tipo) throws ExceptionHistorialDeEquipos {
+    private void desasociarElementoAEQuipo(int idEquipment, String tipo) throws ExceptionHistorialDeEquipos {
         Element elemento = servicioElement.seleccionarElementoPorIdEquipo(idEquipment, tipo);
         if(!elemento.equals(null)){
             int lastIdEquipment = elemento.getId_equipment();
@@ -113,6 +113,21 @@ public class ElementBean extends BasePageBean{
             Novelty novelty = new Novelty("Elemento fue desassociado de "+lastIdEquipment,"desasociacion elemeto "+elemento.getId(), date, usuario.getDocumento(), lastIdEquipment, elemento.getId());
             servicioNovelty.registrarNovedad(novelty);
         }
+    }
+
+    public void asociarElemento() throws ExceptionHistorialDeEquipos{
+        int idEquipment = getIdByNameEquipment(nombreEquipo);
+        id = getIdByNameElement(nombreElemento);
+        System.out.println(id+"  Consultar el id del elemento++++++++++++++++++++++++++++++++++++++"+nombreElemento+"+++++"+nombreEquipo);
+        try {
+            Element element = servicioElement.consultarElementoPorId(id);
+            System.out.println(element.getEstado()+"++++"+element.getId());
+            desasociarElementoAEQuipo(idEquipment, element.getType());
+            servicioElement.cambiarIdEquipoParaElemento(idEquipment, id);
+        } catch (Exception e) {
+            throw new ExceptionHistorialDeEquipos(e.toString());
+        }
+        
     }
 
     public void changeEquipmentElement() throws ExceptionHistorialDeEquipos, IOException{
@@ -148,6 +163,7 @@ public class ElementBean extends BasePageBean{
     public int getIdByNameElement(String nombre){
         int idElement = 0;
         for(Element elemento: elementosBusquedaBasica){
+            System.out.println(elemento.getId()+"++++++++++"+elemento.getName()+"++++++"+nombre);
             if(elemento.getName().equals(nombre)){
                 idElement = elemento.getId();
             }

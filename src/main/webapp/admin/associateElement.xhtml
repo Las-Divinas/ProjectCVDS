@@ -27,17 +27,17 @@
                     <h:form>
                         <div class="form-group">
                             <h:outputLabel for="Equipment" value="Equipo" style="color: aliceblue;"/>
-                            <p:selectOneMenu id="EquipmentNames" value="elementBean.nombreEquipo" class="form-control">
+                            <p:selectOneMenu id="EquipmentNames" value="#{elementBean.nombreEquipo}" class="form-control">
                                 <f:selectItem itemLabel="Select Equipment" noSelectionOption="true"/>
-                                <f:selectItems value="#{elementBean.nombresElementos}"/>
+                                <f:selectItems value="#{elementBean.nombresEquipos}"/>
                             </p:selectOneMenu>
                             <h:outputLabel for="Element" value="Elemento" style="color: aliceblue;"/>
-                            <p:selectOneMenu id="ELementNames" value="elementBean.nombreElemento" class="form-control">
+                            <p:selectOneMenu id="ELementNames" value="#{elementBean.nombreElemento}" class="form-control">
                                 <f:selectItem itemLabel="Select Element" noSelectionOption="true"/>
                                 <f:selectItems value="#{elementBean.nombresElementos}"/>
                             </p:selectOneMenu>
                         </div>
-                        <p:commandButton value="Asociar" class="btn btn-primary"/>
+                        <p:commandButton value="Asociar" class="btn btn-primary" actionListener="#{elementBean.asociarElemento}"/>
                     </h:form>
                 </div>
             </div>

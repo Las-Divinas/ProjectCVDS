@@ -19,7 +19,7 @@
         SELECT id FROM element ORDER BY id DESC LIMIT 1; 
     </select>
     <select parameterType="map" id="consultarElementoPorId" resultMap="ElementoResult">
-        SELECT e.name, e.description, e.id_equipment, e.tipo, e.estado
+        SELECT e.id, e.name, e.description, e.id_equipment, e.tipo, e.estado
         FROM element as e
         WHERE e.id = #{id};
     </select>
