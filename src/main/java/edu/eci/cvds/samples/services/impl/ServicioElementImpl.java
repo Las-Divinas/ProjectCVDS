@@ -77,4 +77,13 @@ public class ServicioElementImpl implements ServicioElement {
             throw new ExceptionHistorialDeEquipos(e.toString());
         }
     }
+
+    @Override
+    public Element seleccionarElementoPorIdEquipo(int idEquipment, String tipo) throws ExceptionHistorialDeEquipos {
+        try {
+            return elementoDAO.selecionarElementoPorIdEquipo(idEquipment, tipo);
+        } catch (Exception e) {
+            throw new ExceptionHistorialDeEquipos(e.toString());
+        }
+    }
 }

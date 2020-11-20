@@ -12,4 +12,5 @@ public interface ElementoMapper {
     public void cambiarIdEquipo(@Param("idEquipment") int idEquipment, @Param("idElement") int idElement);
     public void eliminarElementosPorId(@Param("id") int id);
     public void cambiarEstadoElementosId(@Param("id") int id,@Param("estado") String estado);
+    public Element seleccionarElementoPorIdEquipo(@Param("idEquipment") int idEquipment, @Param("tipo") String tipo);
 }

@@ -74,8 +74,17 @@ public class MyBatisElementoDAO implements ElementoDAO {
         try {
             elementoMapper.cambiarEstadoElementosId(id,estado);
         } catch (Exception e) {
-            throw new PersistenceException(e.toString());
+            throw new PersistenceException("Error al cambiar el estado del elemento con Id "+id);
         }
 
+    }
+
+    @Override
+    public Element selecionarElementoPorIdEquipo(int idEquipment, String tipo) throws PersistenceException {
+        try {
+            return elementoMapper.seleccionarElementoPorIdEquipo(idEquipment, tipo);
+        } catch (Exception e) {
+            throw new PersistenceException(e.toString());
+        }
     }
 }

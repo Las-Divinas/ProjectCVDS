@@ -12,4 +12,5 @@ public interface ServicioElement {
     public abstract void cambiarIdEquipoParaElemento(int idEquipment, int idElement) throws ExceptionHistorialDeEquipos;
     public abstract void eliminarElementosPorId(int id) throws ExceptionHistorialDeEquipos;
     public abstract void cambiarEstadoElementosId(int id,String estado) throws ExceptionHistorialDeEquipos;
+    public abstract Element seleccionarElementoPorIdEquipo(int idEquipment, String tipo) throws ExceptionHistorialDeEquipos;
 }

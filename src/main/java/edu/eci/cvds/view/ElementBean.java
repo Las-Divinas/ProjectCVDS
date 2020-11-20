@@ -83,6 +83,7 @@ public class ElementBean extends BasePageBean{
 
     public void registrarElemento() throws ExceptionHistorialDeEquipos, IOException{
         idEquipment = getIdByNameEquipment(nombreEquipo);
+        asociarElementoAEQuipo(idEquipment, type);
         Element element = new Element(id, name, description, idEquipment,type,"ACTIVO");
         servicioElement.registrarElemento(element);
         Date date = new Date(System.currentTimeMillis());
@@ -95,6 +96,23 @@ public class ElementBean extends BasePageBean{
         message = "Se creo que correctamente el elemento del equipo"+idEquipment;
         servicioNovelty.registrarNovedad(novelty);
     
+    }
+
+    private void asociarElementoAEQuipo(int idEquipment, String tipo) throws ExceptionHistorialDeEquipos {
+        Element elemento = servicioElement.seleccionarElementoPorIdEquipo(idEquipment, tipo);
+        if(!elemento.equals(null)){
+            int lastIdEquipment = elemento.getId_equipment();
+            System.out.println("-----------------------Prueba--------------------"+elemento.getId()+"++++"+idEquipment+tipo);
+            servicioElement.cambiarIdEquipoParaElemento(1, elemento.getId());
+            System.out.println("-----------------------Prueba--------------------"+elemento.getId()+"++++"+idEquipment+tipo);
+            Date date = new Date(System.currentTimeMillis());
+            FacesContext facesContext = FacesContext.getCurrentInstance();
+            HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
+            String correoSession = (String) session.getAttribute("correo");
+            Usuario usuario = servicioUsuario.consultarIdUsuarioPorCorreo(correoSession);
+            Novelty novelty = new Novelty("Elemento fue desassociado de "+lastIdEquipment,"desasociacion elemeto "+elemento.getId(), date, usuario.getDocumento(), lastIdEquipment, elemento.getId());
+            servicioNovelty.registrarNovedad(novelty);
+        }
     }
 
     public void changeEquipmentElement() throws ExceptionHistorialDeEquipos, IOException{

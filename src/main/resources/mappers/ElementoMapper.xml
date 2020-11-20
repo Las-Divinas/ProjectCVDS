@@ -40,4 +40,9 @@
         SET estado = #{estado}
         WHERE id = #{id};
     </update>
+    <select id="seleccionarElementoPorIdEquipo" resultMap="ElementoResult">
+        SELECT e.id, e.name, e.description, e.id_equipment, e.tipo, e.estado
+        FROM element as e
+        WHERE e.id_equipment = #{idEquipment} AND e.tipo = #{tipo};
+    </select>
 </mapper>

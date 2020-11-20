@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:p="http://primefaces.org/ui">
+<h:head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Associate Element</title>
+    <link rel="stylesheet" href="../style/bootstrap.min.css"/>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald;family=Staatliches;display=swap" rel="stylesheet"/> 
+    <link rel="icon" href ="https://observatics.edu.co/wp-content/uploads/sites/20/2019/06/Logo-Escuela-ingenier%C3%ADa.png"/>
+    <link rel="stylesheet" href="../style/style.css"/>
+</h:head>
+<h:body>
+    <div class="container h-100">
+        <h:form>
+            <div class="float-sm-right">
+                <p:commandButton value="Atras" action="#{loginBean.redirectHomeUser}" class="btn btn-danger"/>
+            </div>
+        </h:form>
+        <div class="d-flex justify-content-center align-items-center">
+            <div class="d-flex flex-column">
+                <div class="jumbotron text-center">
+                    <h1 class="text align-self-center p-2">Asociar Elemento a un Equipo</h1>
+                    <h:form>
+                        <div class="form-group">
+                            <h:outputLabel for="Equipment" value="Equipo" style="color: aliceblue;"/>
+                            <p:selectOneMenu id="EquipmentNames" value="elementBean.nombreEquipo" class="form-control">
+                                <f:selectItem itemLabel="Select Equipment" noSelectionOption="true"/>
+                                <f:selectItems value="#{elementBean.nombresElementos}"/>
+                            </p:selectOneMenu>
+                            <h:outputLabel for="Element" value="Elemento" style="color: aliceblue;"/>
+                            <p:selectOneMenu id="ELementNames" value="elementBean.nombreElemento" class="form-control">
+                                <f:selectItem itemLabel="Select Element" noSelectionOption="true"/>
+                                <f:selectItems value="#{elementBean.nombresElementos}"/>
+                            </p:selectOneMenu>
+                        </div>
+                        <p:commandButton value="Asociar" class="btn btn-primary"/>
+                    </h:form>
+                </div>
+            </div>
+        </div>
+    </div>
+</h:body>
+</html>
