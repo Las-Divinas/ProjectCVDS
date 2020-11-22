@@ -41,6 +41,7 @@
                         <h:outputLabel for="Description" value="Description: " style="color: white;"/>
                         <p:inputText class="form-control" type="String" id="description" value="#{elementBean.description}" placeholder="Description"/>
                     </div>
+                    <!--Asignar Elemento a Equipo
                     <div class="form-group">
                         <h:outputLabel for="Equipo" value="Equipo: " style="color: white;"/>
                         <p:selectOneMenu id="nombresEquipos" value="#{elementBean.nombreEquipo}" class="form-control"  required="true">
@@ -48,6 +49,7 @@
                             <f:selectItems value="#{elementBean.nombresEquipos}"/>
                         </p:selectOneMenu>
                     </div>
+                    -->
                     <p:commandButton value="Add" class="btn btn-primary" actionListener="#{elementBean.registrarElemento}" onclick="PF('dlg2').show();"/>
                     <p:dialog header="Modal Dialog" widgetVar="dlg2" modal="true" height="100">
                         <h:outputText value="#{elementBean.message}" />

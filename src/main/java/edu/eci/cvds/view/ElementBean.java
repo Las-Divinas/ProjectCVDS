@@ -47,7 +47,7 @@ public class ElementBean extends BasePageBean{
     private String name;
     private String type;
     private String description;
-    private int idEquipment;
+    private Integer idEquipment;
     private String message = "Se creo el elemento con exito";
     private String a[] = new String[] {"Torre","Pantalla","Mouse","Teclado"};
     private List<String> types = Arrays.asList(a);
@@ -81,21 +81,29 @@ public class ElementBean extends BasePageBean{
         }
     }
 
-    public void registrarElemento() throws ExceptionHistorialDeEquipos, IOException{
-        idEquipment = getIdByNameEquipment(nombreEquipo);
-        desasociarElementoAEQuipo(idEquipment, type);
-        Element element = new Element(id, name, description, idEquipment,type,"ACTIVO");
-        servicioElement.registrarElemento(element);
-        Date date = new Date(System.currentTimeMillis());
-        FacesContext facesContext = FacesContext.getCurrentInstance();
-        HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
-        String correoSession = (String) session.getAttribute("correo");
-        Usuario usuario = servicioUsuario.consultarIdUsuarioPorCorreo(correoSession);
-        int id_elemento = servicioElement.consultarUltimoIdElement();
-        Novelty novelty = new Novelty("Elemento agregado al equipo"+idEquipment, "Se agrego le agrego a equipo"+"", date, usuario.getDocumento() ,idEquipment,id_elemento);
-        message = "Se creo que correctamente el elemento del equipo"+idEquipment;
-        servicioNovelty.registrarNovedad(novelty);
-    
+    public void registrarElemento() throws ExceptionHistorialDeEquipos {
+        try {
+            //-----Registro de Elemento-----
+            Element element = new Element(name,description,type,"INACTIVO");
+            servicioElement.registrarElemento(element);
+
+            //-----Registro de Novedad al crear nuevo Elemento-----
+            Date date = new Date(System.currentTimeMillis());
+            //* Obtener Usuario que esta realizando actividad
+            FacesContext facesContext = FacesContext.getCurrentInstance();
+            HttpSession httpSession = (HttpSession) facesContext.getExternalContext().getSession(true);
+            String sessionCorreo = (String) httpSession.getAttribute("correo");
+            Usuario usuario = servicioUsuario.consultarIdUsuarioPorCorreo(sessionCorreo);
+            //* Obtener ID del Elemento creado
+            Integer elementoID = servicioElement.consultarUltimoIdElement();
+            //* Generar Novedad
+            Novelty novelty = new Novelty("El elemento "+name+" ha sido creado", "Elemento Creado", date, usuario.getDocumento(),elementoID,"Element");
+            servicioNovelty.registrarNovedad(novelty);
+            //* Mensaje POPUP
+            message = "Elemento de Tipo "+type+" Creado Correctamente";
+        } catch (Exception e) {
+            throw new ExceptionHistorialDeEquipos("Error al registrar nuevo elemento");
+        }
     }
 
     private void desasociarElementoAEQuipo(int idEquipment, String tipo) throws ExceptionHistorialDeEquipos {
@@ -111,6 +119,7 @@ public class ElementBean extends BasePageBean{
             String correoSession = (String) session.getAttribute("correo");
             Usuario usuario = servicioUsuario.consultarIdUsuarioPorCorreo(correoSession);
             Novelty novelty = new Novelty("Elemento fue desassociado de "+lastIdEquipment,"desasociacion elemeto "+elemento.getId(), date, usuario.getDocumento(), lastIdEquipment, elemento.getId());
+
             servicioNovelty.registrarNovedad(novelty);
         }
     }
@@ -127,7 +136,6 @@ public class ElementBean extends BasePageBean{
         } catch (Exception e) {
             throw new ExceptionHistorialDeEquipos(e.toString());
         }
-        
     }
 
     public void changeEquipmentElement() throws ExceptionHistorialDeEquipos, IOException{

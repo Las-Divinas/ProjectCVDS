@@ -29,7 +29,6 @@ public class LoggerApacheShiro implements Logger {
     @Override
     public void logout() {
         SecurityUtils.getSubject().logout();
-
     }
 
     @Override

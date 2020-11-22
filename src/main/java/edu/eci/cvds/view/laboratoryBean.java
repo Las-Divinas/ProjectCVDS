@@ -60,13 +60,26 @@ public class laboratoryBean extends BasePageBean{
         }
     }
 
-    public void registrarLaboratorio() throws ExceptionHistorialDeEquipos, IOException{
+    public void registrarLaboratorio() throws ExceptionHistorialDeEquipos {
         try {
+            //-----Registro de Laboratorio-----
             Date date = new Date(System.currentTimeMillis());
-            Laboratory laboratory = new Laboratory(id,name, description,"ACTIVO",date,null);
+            Laboratory laboratory = new Laboratory(name, description,"ACTIVO",date,null);
             servicioLaboratory.registrarLaboratorio(laboratory);
+
+            //-----Registro de Novedad al crear nuevo Laboratorio
+            //* Obtener Usuario que esta realizando actividad
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.getExternalContext().redirect("../admin/addEquipLab.xhtml");
+            HttpSession httpSession = (HttpSession) facesContext.getExternalContext().getSession(true);
+            String sessionCorreo = (String) httpSession.getAttribute("correo");
+            Usuario usuario = servicioUsuario.consultarIdUsuarioPorCorreo(sessionCorreo);
+            //* Obtener ID del Elemento creado
+            Integer laboratorioID = servicioLaboratory.consultarUltimoIdLaboratorio();
+            //* Generar Novedad
+            Novelty novelty = new Novelty("El laboratorio "+name+" ha sido creado", "Laboratorio Creado", date, usuario.getDocumento(), laboratorioID, "Laboratory");
+            servicioNovelty.registrarNovedad(novelty);
+            //* Mensaje POPUP
+            message = "Laboratorio Creado Correctamente";
 
         } catch (Exception e) {
             throw new ExceptionHistorialDeEquipos("Error al registrar el nuevo laboratorio");

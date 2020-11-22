@@ -5,7 +5,7 @@ import java.util.List;
 import edu.eci.cvds.samples.entities.Element;
 
 public interface ServicioElement {
-    public abstract void registrarElemento(Element e) throws ExceptionHistorialDeEquipos;
+    public abstract void registrarElemento(Element e) throws Exception;
     public abstract int consultarUltimoIdElement() throws ExceptionHistorialDeEquipos;
     public abstract Element consultarElementoPorId(int id) throws ExceptionHistorialDeEquipos;
     public abstract List<Element> consultarElementos() throws ExceptionHistorialDeEquipos;

@@ -5,7 +5,7 @@ import java.util.List;
 import edu.eci.cvds.samples.entities.Element;
 
 public interface ElementoDAO {
-    public void registrarElemento(Element element) throws PersistenceException;
+    public void registrarElemento(Element element) throws Exception;
     public int consultarUltimoId() throws PersistenceException;
     public Element consultarElementoPorId(int id) throws PersistenceException;      
     public List<Element> consultarElementos() throws PersistenceException;

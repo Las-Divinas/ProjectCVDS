@@ -19,12 +19,21 @@ public class  Laboratory implements Serializable {
 
     }
 
-    public Laboratory(int id, String name, String description){
+    public Laboratory(String name, String description, String estado, Date fecha_creacion, Date fecha_cierre) {
+        this.name = name;
+        this.description = description;
+        this.estado = estado;
+        this.fecha_creacion = fecha_creacion;
+        this.fecha_cierre = fecha_cierre;
+    }
+
+    public Laboratory(int id, String name, String description) {
         this.id=id;
         this.name=name;
         this.description=description;
     }
-    public Laboratory(int id, String name, String description, String estado, Date fecha_creacion, Date fecha_cierre){
+
+    public Laboratory(int id, String name, String description, String estado, Date fecha_creacion, Date fecha_cierre) {
         this.id=id;
         this.name=name;
         this.description=description;
@@ -33,13 +42,12 @@ public class  Laboratory implements Serializable {
         this.fecha_cierre=fecha_cierre;
     }
 
-    public Laboratory(String name, String description){
+    public Laboratory(String name, String description) {
         this.name=name;
         this.description=description;
     }
 
-    public Laboratory(String name, String description, List<Equipment> equipos)
-    {
+    public Laboratory(String name, String description, List<Equipment> equipos) {
         this.name = name;
         this.description = description;
         this.equipos = equipos;

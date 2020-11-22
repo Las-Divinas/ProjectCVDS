@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.google.inject.Inject;
 
+import edu.eci.cvds.sampleprj.dao.ElementoDAO;
 import edu.eci.cvds.sampleprj.dao.NovedadDAO;
 import edu.eci.cvds.samples.entities.Novelty;
 import edu.eci.cvds.samples.services.ExceptionHistorialDeEquipos;
@@ -13,6 +14,9 @@ public class ServicioNoveltyImpl implements ServicioNovelty {
 
     @Inject
     private NovedadDAO novedadDAO;
+
+    @Inject
+    private ElementoDAO elementoDAO;
 
     @Override
     public void registrarNovedad(Novelty n) throws ExceptionHistorialDeEquipos {

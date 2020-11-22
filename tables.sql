@@ -8,10 +8,13 @@ CREATE TABLE novelty(
     title varchar(30) NOT NULL,
     date DATE NOT NULL,
     user_id varchar(50) NOT NULL,
-    element_id integer,
-    equipment_id integer NOT NULL,
+    laboratory_id INTEGER,
+    element_id INTEGER,
+    equipment_id INTEGER,
     CONSTRAINT fk_user FOREIGN KEY (user_id) REFERENCES usuario(documento),
-    CONSTRAINT fk_noveltyequipment FOREIGN KEY (equipment_id) REFERENCES equipment(id)
+    CONSTRAINT fk_noveltyloboratory FOREIGN KEY (laboratory_id) REFERENCES laboratorio(id),
+    CONSTRAINT fk_noveltyequipment FOREIGN KEY (equipment_id) REFERENCES equipment(id),
+    CONSTRAINT fk_noveltyelement FOREIGN KEY (element_id) REFERENCES element(id)
 );
 /* Ya quedo */
 CREATE TABLE equipment(
@@ -29,12 +32,13 @@ CREATE TABLE laboratorio(
     description varchar(200) NOT NULL
 );
 /* Ya quedo */
-CREATE TABLE element(
-    id serial primary key,
-    name varchar(50) NOT NULL,
-    type varchar(50) NOT NULL,
-    description varchar(200) NOT NULL,
-    id_equipment integer NOT NULL,
-    CONSTRAINT fk_equipment FOREIGN KEY (id_equipment) REFERENCES equipment(id)
+create table element(
+	id serial primary key,
+	id_equipment integer,
+	name varchar(50) not null,
+	type varchar(50) not null,
+	description varchar(200) not null,
+	estado varchar(50) not null,
+	constraint fk_equipment foreign key (id_equipment) references equipment(id)
 );
 

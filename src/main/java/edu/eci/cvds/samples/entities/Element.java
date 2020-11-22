@@ -10,20 +10,24 @@ public class  Element implements Serializable
     private String name;
     private String description;
     private String type;
-    private int id_equipment;
+    private Integer id_equipment;
     private String estado;
 
-    public Element()
-    {
-
+    public Element() {
     }
 
-    public Element(int id,String name,String description,int id_equipment, String type, String estado)
+    public Element(String name, String description, String type, String estado) {
+        this.name = name;
+        this.description = description;
+        this.type = type;
+        this.estado = estado;
+    }
+
+    public Element(int id,String name,String description, String type, String estado)
     {
         this.id=id;
         this.name = name;
         this.description = description;
-        this.id_equipment = id_equipment;
         this.type = type;
         this.estado = estado;
     }
@@ -61,11 +65,11 @@ public class  Element implements Serializable
         this.description = description;
     }
 
-    public int getId_equipment()
+    public Integer getId_equipment()
     {
         return id_equipment;
     }
-    public void setId_equipment(int id_equipment)
+    public void setId_equipment(Integer id_equipment)
     {
         this.id_equipment = id_equipment;
     }

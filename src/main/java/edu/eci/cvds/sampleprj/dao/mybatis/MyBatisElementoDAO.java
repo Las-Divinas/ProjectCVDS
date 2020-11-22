@@ -17,7 +17,7 @@ public class MyBatisElementoDAO implements ElementoDAO {
         try {
             elementoMapper.registrarElemento(element);
         } catch (Exception e) {
-            throw new PersistenceException("Error al ingresar el nuevo elemento");
+            throw new PersistenceException(e.getMessage());
         }
 
     }

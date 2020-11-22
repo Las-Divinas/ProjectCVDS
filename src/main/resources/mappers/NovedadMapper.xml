@@ -8,11 +8,12 @@
         <id property='id' column='id'/>
         <result property='description' column='description'/>
         <result property='date' column='date'/>
+        <result property="laboratory_id" column="laboratory_id"/>
         <result property="equipment_id" column="equipment_id"/>
         <result property="element_id" column="element_id"/>
     </resultMap>
     <insert id="registrarNovedad" parameterType="map">
-        INSERT INTO novelty VALUES(DEFAULT,#{novedad.description}, #{novedad.title}, #{novedad.date} , #{novedad.user_id}, #{novedad.element_id},#{novedad.equipment_id});
+        INSERT INTO novelty VALUES(DEFAULT,#{novedad.description}, #{novedad.title}, #{novedad.date} , #{novedad.user_id} ,#{novedad.element_id},#{novedad.equipment_id}, #{novedad.laboratory_id});
     </insert>
     <select parameterType="map" id="consultarNovedades" resultMap="NoveltyResult">
         SELECT n.id, n.equipment_id, n.element_id, n.date, n.description FROM novelty as n;

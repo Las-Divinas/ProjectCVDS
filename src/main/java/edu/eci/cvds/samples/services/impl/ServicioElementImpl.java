@@ -15,11 +15,11 @@ public class ServicioElementImpl implements ServicioElement {
     private ElementoDAO elementoDAO;
 
     @Override
-    public void registrarElemento(Element element) throws ExceptionHistorialDeEquipos {
+    public void registrarElemento(Element element) throws Exception {
         try {
             elementoDAO.registrarElemento(element);
         } catch (Exception e) {
-            throw new ExceptionHistorialDeEquipos("Error al registrar el elemento");
+            throw new ExceptionHistorialDeEquipos(e.getMessage());
         }
     }
 
