@@ -108,18 +108,19 @@ public class ElementBean extends BasePageBean{
 
     private void desasociarElementoAEQuipo(int idEquipment, String tipo) throws ExceptionHistorialDeEquipos {
         Element elemento = servicioElement.seleccionarElementoPorIdEquipo(idEquipment, tipo);
-        if(!elemento.equals(null)){
-            int lastIdEquipment = elemento.getId_equipment();
-            System.out.println("-----------------------Prueba--------------------"+elemento.getId()+"++++"+idEquipment+tipo);
-            servicioElement.cambiarIdEquipoParaElemento(1, elemento.getId());
-            System.out.println("-----------------------Prueba--------------------"+elemento.getId()+"++++"+idEquipment+tipo);
-            Date date = new Date(System.currentTimeMillis());
-            FacesContext facesContext = FacesContext.getCurrentInstance();
-            HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
-            String correoSession = (String) session.getAttribute("correo");
-            Usuario usuario = servicioUsuario.consultarIdUsuarioPorCorreo(correoSession);
-            Novelty novelty = new Novelty("Elemento fue desassociado de "+lastIdEquipment,"desasociacion elemeto "+elemento.getId(), date, usuario.getDocumento(), lastIdEquipment, elemento.getId());
-
+        Date date = new Date(System.currentTimeMillis());
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+        HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
+        String correoSession = (String) session.getAttribute("correo");
+        Usuario usuario = servicioUsuario.consultarIdUsuarioPorCorreo(correoSession);
+        if(elemento != null ){
+            servicioElement.cambiarIdEquipoParaElemento((Integer)null, elemento.getId());
+            servicioElement.cambiarEstadoElementosId(elemento.getId(), "INACTIVO");
+            Novelty novelty = new Novelty("Elemento fue desasociado","desasociacion elemeto "+elemento.getId(), date, usuario.getDocumento(), (Integer)null, elemento.getId());
+            servicioNovelty.registrarNovedad(novelty);
+        }
+        else{
+            Novelty novelty = new Novelty("Elemento Asociado","Asociado", date, usuario.getDocumento(), idEquipment, elemento.getId());
             servicioNovelty.registrarNovedad(novelty);
         }
     }
@@ -133,6 +134,7 @@ public class ElementBean extends BasePageBean{
             System.out.println(element.getEstado()+"++++"+element.getId());
             desasociarElementoAEQuipo(idEquipment, element.getType());
             servicioElement.cambiarIdEquipoParaElemento(idEquipment, id);
+            servicioElement.cambiarEstadoElementosId(id, "ACTIVO");
         } catch (Exception e) {
             throw new ExceptionHistorialDeEquipos(e.toString());
         }
@@ -140,21 +142,34 @@ public class ElementBean extends BasePageBean{
 
     public void changeEquipmentElement() throws ExceptionHistorialDeEquipos, IOException{
         int idEquipo = servicioEquipment.consultarUltimoIdEquipment();
+        System.out.println(idEquipo+" Id Equipo");
         id = getIdByNameElement(nombreElemento);
         Element elemento = servicioElement.consultarElementoPorId(id);
-        if(!(elemento.getId_equipment()==idEquipo)){
-            servicioElement.cambiarIdEquipoParaElemento(idEquipo, id);
-            Date date = new Date(System.currentTimeMillis());
-            FacesContext facesContext = FacesContext.getCurrentInstance();
-            HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
-            String correoSession = (String) session.getAttribute("correo");
-            Usuario usuario = servicioUsuario.consultarIdUsuarioPorCorreo(correoSession);
-            Novelty novelty = new Novelty("Elemento agregado al equipo"+idEquipo, "Se agrego le agrego a equipo"+"", date, usuario.getDocumento() ,idEquipo,id);
-            servicioNovelty.registrarNovedad(novelty);
-            message = "Se ha asociado correctamente el elemento al equipo "+idEquipo;
+        System.out.println(id+" Id Elemento");
+        System.out.println(elemento.getElement_name()+" Nombre elemento");
+        messageManagerElementAssociete(elemento, servicioEquipment.consultarEquipoPorId(idEquipo));
+        servicioElement.cambiarIdEquipoParaElemento(idEquipo, id);
+        servicioElement.cambiarEstadoElementosId(elemento.getId(), "ACTIVO");
+        Date date = new Date(System.currentTimeMillis());
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+        HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
+        String correoSession = (String) session.getAttribute("correo");
+        Usuario usuario = servicioUsuario.consultarIdUsuarioPorCorreo(correoSession);
+        Novelty novelty = new Novelty("Elemento agregado al equipo"+idEquipo, "Elemento Asociado a Equipo", date, usuario.getDocumento() ,idEquipo,id);
+        servicioNovelty.registrarNovedad(novelty);
+    }
+
+    private void messageManagerElementAssociete(Element elemento, Equipment equipo){
+        if(elemento.getId_equipment() == null){
+            message = "El equipo se asocio al equipo "+equipo.getEquipment_name();
         }
         else{
-            message = "El equipo ya esta asociado a ese equipo :)";
+            if(elemento.getId_equipment()==equipo.getId()){
+                message = "El elemento ya esta asociado al equipo "+equipo.getEquipment_name();
+            }
+            else{
+                message = "El equipo se asocio al equipo "+equipo.getEquipment_name();
+            }
         }
     }
 
