@@ -86,4 +86,13 @@ public class ServicioElementImpl implements ServicioElement {
             throw new ExceptionHistorialDeEquipos(e.toString());
         }
     }
+
+    @Override
+    public String consultarNombreElemento(Integer elementoID) throws ExceptionHistorialDeEquipos {
+        try {
+            return elementoDAO.consultarNombreElemento(elementoID);
+        } catch (Exception e) {
+            throw new ExceptionHistorialDeEquipos("Error al consultar nombre del elemento");
+        }
+    }
 }

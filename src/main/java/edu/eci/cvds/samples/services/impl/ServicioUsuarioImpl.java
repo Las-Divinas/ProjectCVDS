@@ -30,4 +30,12 @@ public class ServicioUsuarioImpl implements ServicioUsuario {
         }
     }
 
+    @Override
+    public String consultarNombreUsuario(String usuarioID) throws ExceptionHistorialDeEquipos {
+        try {
+            return usuarioDAO.consultarNombreUsuario(usuarioID);
+        } catch (Exception e) {
+            throw new ExceptionHistorialDeEquipos(e.toString());
+        }
+    }
 }

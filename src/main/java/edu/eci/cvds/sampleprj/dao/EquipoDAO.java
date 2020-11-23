@@ -12,4 +12,5 @@ public interface EquipoDAO {
     public int consultarNumeroEquipos(int laboratory_id) throws PersistenceException;
     public void eliminarEquipoPorId(int id) throws PersistenceException;
     public void cambiarEstadoElementoId(int id,String estado) throws PersistenceException;
+    String consultarNombreEquipo(Integer equipmentID) throws PersistenceException;
 }

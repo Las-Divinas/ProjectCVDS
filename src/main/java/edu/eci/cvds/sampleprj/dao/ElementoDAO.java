@@ -5,12 +5,13 @@ import java.util.List;
 import edu.eci.cvds.samples.entities.Element;
 
 public interface ElementoDAO {
-    public void registrarElemento(Element element) throws Exception;
-    public int consultarUltimoId() throws PersistenceException;
-    public Element consultarElementoPorId(int id) throws PersistenceException;      
-    public List<Element> consultarElementos() throws PersistenceException;
-    public void cambiarIdEquipo(int idEquipment, int idElement) throws PersistenceException;
-    public void eliminarElementosPorId(int id) throws PersistenceException;
-    public void cambiarEstadoElementosId(int id,String estado) throws PersistenceException;
-    public Element selecionarElementoPorIdEquipo(int idEquipment, String tipo) throws PersistenceException;
+    void registrarElemento(Element element) throws Exception;
+    int consultarUltimoId() throws PersistenceException;
+    Element consultarElementoPorId(int id) throws PersistenceException;
+    List<Element> consultarElementos() throws PersistenceException;
+    void cambiarIdEquipo(int idEquipment, int idElement) throws PersistenceException;
+    void eliminarElementosPorId(int id) throws PersistenceException;
+    void cambiarEstadoElementosId(int id, String estado) throws PersistenceException;
+    Element selecionarElementoPorIdEquipo(int idEquipment, String tipo) throws PersistenceException;
+    String consultarNombreElemento(Integer elementoID) throws PersistenceException;
 }

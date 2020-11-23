@@ -17,4 +17,8 @@
     <select id="consultarIdPorCorreo" parameterType="map" resultMap="UsuarioResult">
         select u.documento, u.correo, u.nombre, u.contraseña, u.rol from usuario u where u.correo = #{correo};
     </select>
+    <select id="consultarNombreUsuario" parameterType="map" resultType="String">
+        SELECT u.nombre FROM usuario u
+        WHERE u.documento = #{userID};
+    </select>
 </mapper>

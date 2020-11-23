@@ -42,7 +42,7 @@ public class laboratoryBean extends BasePageBean{
     @Inject
     private ServicioEquipment servicioEquipment;
     
-    private String name;
+    private String laboratory_name;
     private String description;
     private int id;
     private int idEquipment;
@@ -61,38 +61,38 @@ public class laboratoryBean extends BasePageBean{
     }
 
     public void registrarLaboratorio() throws ExceptionHistorialDeEquipos {
-        try {
-            //-----Registro de Laboratorio-----
-            Date date = new Date(System.currentTimeMillis());
-            Laboratory laboratory = new Laboratory(name, description,"ACTIVO",date,null);
-            servicioLaboratory.registrarLaboratorio(laboratory);
+        //-----Registro de Laboratorio-----
+        Date date = new Date(System.currentTimeMillis());
+        Laboratory laboratory = new Laboratory(laboratory_name, description,"ACTIVO",date,null);
+        servicioLaboratory.registrarLaboratorio(laboratory);
 
-            //-----Registro de Novedad al crear nuevo Laboratorio
-            //* Obtener Usuario que esta realizando actividad
-            FacesContext facesContext = FacesContext.getCurrentInstance();
-            HttpSession httpSession = (HttpSession) facesContext.getExternalContext().getSession(true);
-            String sessionCorreo = (String) httpSession.getAttribute("correo");
-            Usuario usuario = servicioUsuario.consultarIdUsuarioPorCorreo(sessionCorreo);
-            //* Obtener ID del Elemento creado
-            Integer laboratorioID = servicioLaboratory.consultarUltimoIdLaboratorio();
-            //* Generar Novedad
-            Novelty novelty = new Novelty("El laboratorio "+name+" ha sido creado", "Laboratorio Creado", date, usuario.getDocumento(), laboratorioID, "Laboratory");
-            servicioNovelty.registrarNovedad(novelty);
-            //* Mensaje POPUP
-            message = "Laboratorio Creado Correctamente";
-
-        } catch (Exception e) {
-            throw new ExceptionHistorialDeEquipos("Error al registrar el nuevo laboratorio");
-        }
+        //-----Registro de Novedad al crear nuevo Laboratorio
+        //* Obtener Usuario que esta realizando actividad
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+        HttpSession httpSession = (HttpSession) facesContext.getExternalContext().getSession(true);
+        String sessionCorreo = (String) httpSession.getAttribute("correo");
+        Usuario usuario = servicioUsuario.consultarIdUsuarioPorCorreo(sessionCorreo);
+        //* Obtener ID del Elemento creado
+        Integer laboratorioID = servicioLaboratory.consultarUltimoIdLaboratorio();
+        //* Generar Novedad
+        Novelty novelty = new Novelty("El laboratorio "+laboratory_name+" ha sido creado", "Laboratorio Creado", date, usuario.getDocumento(), laboratorioID, "Laboratory");
+        servicioNovelty.registrarNovedad(novelty);
+        //* Mensaje POPUP
+        message = "Laboratorio Creado Correctamente";
     }
 
-    public int countEquipment(int idLaboratory) throws ExceptionHistorialDeEquipos
-    {
+
+    public int countEquipment(int idLaboratory) throws ExceptionHistorialDeEquipos {
         return servicioEquipment.consultarNumeroEquipos(idLaboratory);
     }
+
     public List<Laboratory> consultarLaboratorios() throws ExceptionHistorialDeEquipos{
         message = "Tuvimos un problema al consultar el Laboratorio";
         return servicioLaboratory.consultarLaboratorios();
+    }
+
+    public String consultarNombreLaboratorio(Integer laboratorioID) throws ExceptionHistorialDeEquipos {
+        return servicioLaboratory.consultarNombreLaboratorio(laboratorioID);
     }
 
     public void updateLaboratoryEquipment() throws ExceptionHistorialDeEquipos{
@@ -124,12 +124,12 @@ public class laboratoryBean extends BasePageBean{
         this.message = message;
     }
 
-    public String getName(){
-        return name;
+    public String getLaboratory_name() {
+        return laboratory_name;
     }
 
-    public void setName(String name){
-        this.name=name;
+    public void setLaboratory_name(String laboratory_name) {
+        this.laboratory_name = laboratory_name;
     }
 
     public String getDescription(){
@@ -155,6 +155,7 @@ public class laboratoryBean extends BasePageBean{
     public void setIdEquipment(int idEquipment){
         this.idEquipment = idEquipment;
     }
+
     public List<Laboratory> getLaboratoriosBusquedaBasica(){
         return laboratoriosBusquedaBasica;
     }
@@ -164,13 +165,14 @@ public class laboratoryBean extends BasePageBean{
     }
 
 
+
     //-----------------Graficos --------------------------//
     private PieChartModel model;
 
     public PieChartModel generarEstadistica() throws ExceptionHistorialDeEquipos {
         model = new PieChartModel();
         for (Laboratory laboratory : laboratoriosBusquedaBasica) {
-            model.set(laboratory.getName(),servicioEquipment.consultarNumeroEquipos(laboratory.getId()));
+            model.set(laboratory.getLaboratory_name(),servicioEquipment.consultarNumeroEquipos(laboratory.getId()));
         }
         model.setTitle("Cantidad de equipos por laboratorio");
         model.setShowDataLabels(true);

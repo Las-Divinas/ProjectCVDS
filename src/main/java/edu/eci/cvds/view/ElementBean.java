@@ -44,7 +44,7 @@ public class ElementBean extends BasePageBean{
     private ServicioEquipment servicioEquipment;
 
     private int id;
-    private String name;
+    private String element_name;
     private String type;
     private String description;
     private Integer idEquipment;
@@ -70,11 +70,11 @@ public class ElementBean extends BasePageBean{
             nombresElementos = new ArrayList<>();
             elementosBusquedaBasica = servicioElement.consultarElementos();
             for(Element elemento: elementosBusquedaBasica){
-                nombresElementos.add(elemento.getName());
+                nombresElementos.add(elemento.getElement_name());
             }
             equipos = servicioEquipment.consultarEquipos();
             for(Equipment equipo: equipos){
-                nombresEquipos.add(equipo.getName());
+                nombresEquipos.add(equipo.getEquipment_name());
             }
         } catch (ExceptionHistorialDeEquipos e){
             e.printStackTrace();
@@ -84,7 +84,7 @@ public class ElementBean extends BasePageBean{
     public void registrarElemento() throws ExceptionHistorialDeEquipos {
         try {
             //-----Registro de Elemento-----
-            Element element = new Element(name,description,type,"INACTIVO");
+            Element element = new Element(element_name,description,type,"INACTIVO");
             servicioElement.registrarElemento(element);
 
             //-----Registro de Novedad al crear nuevo Elemento-----
@@ -97,7 +97,7 @@ public class ElementBean extends BasePageBean{
             //* Obtener ID del Elemento creado
             Integer elementoID = servicioElement.consultarUltimoIdElement();
             //* Generar Novedad
-            Novelty novelty = new Novelty("El elemento "+name+" ha sido creado", "Elemento Creado", date, usuario.getDocumento(),elementoID,"Element");
+            Novelty novelty = new Novelty("El elemento "+element_name+" ha sido creado", "Elemento Creado", date, usuario.getDocumento(),elementoID,"Element");
             servicioNovelty.registrarNovedad(novelty);
             //* Mensaje POPUP
             message = "Elemento de Tipo "+type+" Creado Correctamente";
@@ -161,7 +161,7 @@ public class ElementBean extends BasePageBean{
     public int getIdByNameEquipment(String nombre){
         int idEquipment = 0;
         for(Equipment equipo: equipos){
-            if(equipo.getName().equals(nombre)){
+            if(equipo.getEquipment_name().equals(nombre)){
                 idEquipment = equipo.getId();
             }
         }
@@ -171,8 +171,8 @@ public class ElementBean extends BasePageBean{
     public int getIdByNameElement(String nombre){
         int idElement = 0;
         for(Element elemento: elementosBusquedaBasica){
-            System.out.println(elemento.getId()+"++++++++++"+elemento.getName()+"++++++"+nombre);
-            if(elemento.getName().equals(nombre)){
+            System.out.println(elemento.getId()+"++++++++++"+elemento.getElement_name()+"++++++"+nombre);
+            if(elemento.getElement_name().equals(nombre)){
                 idElement = elemento.getId();
             }
         }
@@ -191,6 +191,10 @@ public class ElementBean extends BasePageBean{
             servicioElement.cambiarEstadoElementosId(idElementos,"NO_ACTIVO");
         }
         elementosBusquedaBasica = servicioElement.consultarElementos();
+    }
+
+    public String consultarNombreElemento(Integer elementoID) throws ExceptionHistorialDeEquipos {
+        return servicioElement.consultarNombreElemento(elementoID);
     }
 
     public List<String> getNombresElementos(){
@@ -249,12 +253,12 @@ public class ElementBean extends BasePageBean{
         this.id=id;
     }
 
-    public String getName(){
-        return name;
+    public String getElement_name() {
+        return element_name;
     }
-    
-    public void setName(String name){
-        this.name=name;
+
+    public void setElement_name(String element_name) {
+        this.element_name = element_name;
     }
 
     public String getDescription(){

@@ -37,17 +37,29 @@
                                 </h:commandLink>
                             </div>
                         </f:facet>
-                        <p:column headerText="Id" filterBy="#{novelty.id}" sortBy="#{novelty.id}">
+                        <p:column headerText="Id" filterBy="#{novelty.id}" style="text-align: center" sortBy="#{novelty.id}">
                             <h:outputText value="#{novelty.id}"/>
                         </p:column>
-                        <p:column headerText="Id Equipo" filterBy="#{novelty.equipment_id}" sortBy="#{novelty.equipment_id}">
-                            <h:outputText value="#{novelty.equipment_id}"/>
+                        <p:column headerText="Fecha" style="text-align: center" filterBy="#{noveltyBean.darFormatoFehca(novelty.date)}" sortBy="#{noveltyBean.darFormatoFehca(novelty.date)}">
+                            <h:outputText value="#{noveltyBean.darFormatoFehca(novelty.date)}"/>
                         </p:column>
-                        <p:column headerText="Id Elemento" filterBy="#{novelty.element_id}" sortBy="#{novelty.element_id}">
-                            <h:outputText value="#{novelty.element_id}"/>
+                        <p:column headerText="Usuario" style="text-align: center" filterBy="#{usuarioBean.consultarNombreUsuario(novelty.user_id)}" sortBy="#{usuarioBean.consultarNombreUsuario(novelty.user_id)}">
+                            <h:outputText value="#{usuarioBean.consultarNombreUsuario(novelty.user_id) }"/>
                         </p:column>
-                        <p:column headerText="Descripción" filterBy="#{novelty.description}" sortBy="#{novelty.description}">
+                        <p:column headerText="Tipo" style="text-align: center" filterBy="#{novelty.title}" sortBy="#{novelty.title}">
+                            <h:outputText value="#{novelty.title}"/>
+                        </p:column>
+                        <p:column headerText="Descripción" style="text-align: center" align="cen" filterBy="#{novelty.description}" sortBy="#{novelty.description}">
                             <h:outputText value="#{novelty.description}"/>
+                        </p:column>
+                        <p:column headerText="Laboratorio" style="text-align: center" filterBy="#{laboratoryBean.consultarNombreLaboratorio(novelty.laboratory_id)}" sortBy="#{laboratoryBean.consultarNombreLaboratorio(novelty.laboratory_id)}">
+                            <h:outputText value="#{laboratoryBean.consultarNombreLaboratorio(novelty.laboratory_id)}"/>
+                        </p:column>
+                        <p:column headerText="Equipo" style="text-align: center" filterBy="#{equipmentBean.consultarNombreEquipo(novelty.equipment_id)}" sortBy="#{equipmentBean.consultarNombreEquipo(novelty.equipment_id)}">
+                            <h:outputText value="#{equipmentBean.consultarNombreEquipo(novelty.equipment_id)}"/>
+                        </p:column>
+                        <p:column headerText="Elemento" style="text-align: center" filterBy="#{elementBean.consultarNombreElemento(novelty.element_id)}" sortBy="#{elementBean.consultarNombreElemento(novelty.element_id)}">
+                            <h:outputText value="#{elementBean.consultarNombreElemento(novelty.element_id)}"/>
                         </p:column>
                     </p:dataTable>
                 </h:form>

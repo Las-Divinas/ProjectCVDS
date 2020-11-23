@@ -2,9 +2,9 @@ package edu.eci.cvds.samples.entities;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.text.SimpleDateFormat;
 
-public class  Novelty implements Serializable
-{
+public class  Novelty implements Serializable {
     private static final long serialVersionUID = -3203284066887482905L;
     private String description;
     private Date date;
@@ -14,6 +14,7 @@ public class  Novelty implements Serializable
     private Integer element_id;
     private int id;
     private String title;
+
 
     public Novelty() {
     }

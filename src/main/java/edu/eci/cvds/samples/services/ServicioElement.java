@@ -5,12 +5,13 @@ import java.util.List;
 import edu.eci.cvds.samples.entities.Element;
 
 public interface ServicioElement {
-    public abstract void registrarElemento(Element e) throws Exception;
-    public abstract int consultarUltimoIdElement() throws ExceptionHistorialDeEquipos;
-    public abstract Element consultarElementoPorId(int id) throws ExceptionHistorialDeEquipos;
-    public abstract List<Element> consultarElementos() throws ExceptionHistorialDeEquipos;
-    public abstract void cambiarIdEquipoParaElemento(int idEquipment, int idElement) throws ExceptionHistorialDeEquipos;
-    public abstract void eliminarElementosPorId(int id) throws ExceptionHistorialDeEquipos;
-    public abstract void cambiarEstadoElementosId(int id,String estado) throws ExceptionHistorialDeEquipos;
-    public abstract Element seleccionarElementoPorIdEquipo(int idEquipment, String tipo) throws ExceptionHistorialDeEquipos;
+    void registrarElemento(Element e) throws Exception;
+    int consultarUltimoIdElement() throws ExceptionHistorialDeEquipos;
+    Element consultarElementoPorId(int id) throws ExceptionHistorialDeEquipos;
+    List<Element> consultarElementos() throws ExceptionHistorialDeEquipos;
+    void cambiarIdEquipoParaElemento(int idEquipment, int idElement) throws ExceptionHistorialDeEquipos;
+    void eliminarElementosPorId(int id) throws ExceptionHistorialDeEquipos;
+    void cambiarEstadoElementosId(int id,String estado) throws ExceptionHistorialDeEquipos;
+    Element seleccionarElementoPorIdEquipo(int idEquipment, String tipo) throws ExceptionHistorialDeEquipos;
+    String consultarNombreElemento(Integer elementoID) throws ExceptionHistorialDeEquipos;
 }

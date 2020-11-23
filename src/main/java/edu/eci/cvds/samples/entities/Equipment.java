@@ -8,7 +8,7 @@ public class  Equipment implements Serializable
 
     private static final long serialVersionUID = -1857291145846510680L;
     private int id;
-    private String name;
+    private String equipment_name;
     private String description ;
     private int laboratory_id;
     private List<Element> elementos;
@@ -19,31 +19,31 @@ public class  Equipment implements Serializable
     {
 
     }
-    
-    public Equipment(int id,String name, String description, int laboratory_id){
+
+    public Equipment(int id,String equipment_name, String description, int laboratory_id){
         this.id=id;
-        this.name=name;
+        this.equipment_name = equipment_name;
         this.description=description;
         this.laboratory_id=laboratory_id;
     }
 
-    public Equipment(String name, String description, int laboratory_id){
-        this.name=name;
+    public Equipment(String equipment_name, String description, int laboratory_id){
+        this.equipment_name = equipment_name;
         this.description=description;
         this.laboratory_id=laboratory_id;
     }
 
-    public Equipment(String name, String description, int laboratory_id, String estado){
-        this.name=name;
+    public Equipment(String equipment_name, String description, int laboratory_id, String estado){
+        this.equipment_name = equipment_name;
         this.description=description;
         this.laboratory_id=laboratory_id;
         this.estado = estado;
     }
-    
-    public Equipment(String description,String name,int laboratory_id,List<Element> elementos,List<Novelty> novedades)
+
+    public Equipment(String description,String equipment_name,int laboratory_id,List<Element> elementos,List<Novelty> novedades)
     {
         this.description = description;
-        this.name = name;
+        this.equipment_name = equipment_name;
         this.laboratory_id = laboratory_id;
         this.elementos = elementos;
         this.novedades = novedades ;
@@ -65,13 +65,13 @@ public class  Equipment implements Serializable
     {
         this.description = description;
     }
-    public String getName()
-    {
-        return this.name;
+
+    public String getEquipment_name() {
+        return equipment_name;
     }
-    public void setName(String name)
-    {
-        this.name = name;
+
+    public void setEquipment_name(String equipment_name) {
+        this.equipment_name = equipment_name;
     }
 
     public int getLaboratory_id()

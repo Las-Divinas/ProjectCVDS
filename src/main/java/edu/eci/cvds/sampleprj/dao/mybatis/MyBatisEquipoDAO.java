@@ -88,5 +88,18 @@ public class MyBatisEquipoDAO implements EquipoDAO {
         }
 
     }
+
+    @Override
+    public String consultarNombreEquipo(Integer equipmentID) throws PersistenceException {
+        try {
+            if(equipmentID!=null) {
+                return equipoMapper.consultarNombreEquipo(equipmentID);
+            }
+
+            return "N/A";
+        } catch (Exception e) {
+            throw new PersistenceException(e.toString());
+        }
+    }
     
 }

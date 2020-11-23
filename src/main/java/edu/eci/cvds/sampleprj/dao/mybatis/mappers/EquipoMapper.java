@@ -14,4 +14,5 @@ public interface EquipoMapper {
     public int consultarNumeroEquipos(@Param("laboratory_id")int laboratory_id);
     public void eliminarElementoPorId(@Param("id") int id);
     public void cambiarEstadoElementoId(@Param("id") int id,@Param("estado") String estado);
+    String consultarNombreEquipo(@Param("equipmentID") Integer equipmentID);
 }

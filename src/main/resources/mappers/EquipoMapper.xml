@@ -14,12 +14,12 @@
 
     <!-- Insert new equipment  -->
     <insert id="registrarEquipo" parameterType="map">
-        INSERT INTO equipment VALUES(DEFAULT,#{equipo.name}, #{equipo.description},#{equipo.laboratory_id}, #{equipo.estado});
+        INSERT INTO equipment VALUES(DEFAULT,#{equipo.equipment_name}, #{equipo.description},#{equipo.laboratory_id}, #{equipo.estado});
     </insert>
 
     <!-- Select the equipments -->
     <select parameterType="map" id="consultarEquipos" resultMap="EquipoResult">
-        SELECT e.id, e.name , e.description, e.laboratory_id, e.estado
+        SELECT e.id, e.equipment_name , e.description, e.laboratory_id, e.estado
         FROM equipment as e
         WHERE e.estado = 'ACTIVO';
     </select>
@@ -29,7 +29,7 @@
         SELECT id FROM equipment ORDER BY id DESC LIMIT 1; 
     </select>
     <select parameterType="map" id="consultarEquipoPorId" resultMap="EquipoResult">
-        SELECT e.id, e.name, e.description, e.laboratory_id
+        SELECT e.id, e.equipment_name, e.description, e.laboratory_id
         FROM equipment  as e
         WHERE e.id = #{id}
     </select>
@@ -50,4 +50,8 @@
         SET estado = #{estado}
         WHERE id = #{id};
     </update>
+    <select id="consultarNombreEquipo" resultType="String">
+        SELECT e.equipment_name FROM equipment e
+        WHERE e.id = #{equipmentID};
+    </select>
 </mapper>

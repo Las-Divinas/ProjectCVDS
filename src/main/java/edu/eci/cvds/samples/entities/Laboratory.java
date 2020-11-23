@@ -7,7 +7,7 @@ import java.util.List;
 public class  Laboratory implements Serializable {
     
     private static final long serialVersionUID = 2225826998261144603L;
-    private String name;
+    private String laboratory_name;
     private String description;
     private List<Equipment> equipos;
     private int id;
@@ -19,47 +19,47 @@ public class  Laboratory implements Serializable {
 
     }
 
-    public Laboratory(String name, String description, String estado, Date fecha_creacion, Date fecha_cierre) {
-        this.name = name;
+    //LaboratoryBean.registrarLaboratorio()
+    public Laboratory(String laboratory_name, String description, String estado, Date fecha_creacion, Date fecha_cierre) {
+        this.laboratory_name = laboratory_name;
         this.description = description;
         this.estado = estado;
         this.fecha_creacion = fecha_creacion;
         this.fecha_cierre = fecha_cierre;
     }
 
-    public Laboratory(int id, String name, String description) {
+    public Laboratory(int id, String laboratory_name, String description) {
         this.id=id;
-        this.name=name;
+        this.laboratory_name = laboratory_name;
         this.description=description;
     }
 
-    public Laboratory(int id, String name, String description, String estado, Date fecha_creacion, Date fecha_cierre) {
+    public Laboratory(int id, String laboratory_name, String description, String estado, Date fecha_creacion, Date fecha_cierre) {
         this.id=id;
-        this.name=name;
+        this.laboratory_name = laboratory_name;
         this.description=description;
         this.estado=estado;
         this.fecha_creacion=fecha_creacion;
         this.fecha_cierre=fecha_cierre;
     }
 
-    public Laboratory(String name, String description) {
-        this.name=name;
+    public Laboratory(String laboratory_name, String description) {
+        this.laboratory_name = laboratory_name;
         this.description=description;
     }
 
-    public Laboratory(String name, String description, List<Equipment> equipos) {
-        this.name = name;
+    public Laboratory(String laboratory_name, String description, List<Equipment> equipos) {
+        this.laboratory_name = laboratory_name;
         this.description = description;
         this.equipos = equipos;
     }
 
-    public String getName()
-    {
-        return name;
+    public String getLaboratory_name() {
+        return laboratory_name;
     }
-    public void setName(String name)
-    {
-        this.name = name;
+
+    public void setLaboratory_name(String laboratory_name) {
+        this.laboratory_name = laboratory_name;
     }
 
     public String getDescription()

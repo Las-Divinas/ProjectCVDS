@@ -1,6 +1,7 @@
 package edu.eci.cvds.view;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -17,11 +18,7 @@ import edu.eci.cvds.samples.entities.Element;
 import edu.eci.cvds.samples.entities.Equipment;
 import edu.eci.cvds.samples.entities.Novelty;
 import edu.eci.cvds.samples.entities.Usuario;
-import edu.eci.cvds.samples.services.ExceptionHistorialDeEquipos;
-import edu.eci.cvds.samples.services.ServicioElement;
-import edu.eci.cvds.samples.services.ServicioEquipment;
-import edu.eci.cvds.samples.services.ServicioNovelty;
-import edu.eci.cvds.samples.services.ServicioUsuario;
+import edu.eci.cvds.samples.services.*;
 
 @ManagedBean(name = "noveltyBean")
 @SessionScoped
@@ -41,12 +38,16 @@ public class NoveltyBean extends BasePageBean{
     @Inject
     private ServicioElement servicioElement;
 
+    @Inject
+    ServicioLaboratory servicioLaboratory;
+
     private int id;
     private String description;
     private String idUser;
     private int idEquipment;
     private String title;
     private int idElement;
+    private Integer laboratoryID;
     private String message;
     private List<Novelty> novedadBusquedaBasica;
     private List<Equipment> equipos;
@@ -69,10 +70,10 @@ public class NoveltyBean extends BasePageBean{
             elementos = servicioElement.consultarElementos();
             equipos = servicioEquipment.consultarEquipos();
             for(Element elemento: elementos){
-                nombresElementos.add(elemento.getName());
+                nombresElementos.add(elemento.getElement_name());
             }
             for(Equipment equipo: equipos){
-                nombresEquipos.add(equipo.getName());
+                nombresEquipos.add(equipo.getEquipment_name());
             }
         } catch (ExceptionHistorialDeEquipos e){
             e.printStackTrace();
@@ -99,7 +100,7 @@ public class NoveltyBean extends BasePageBean{
         Usuario usuario = servicioUsuario.consultarIdUsuarioPorCorreo(correoSession);
         idElement = getIdByNameElement(nombreElemento);
         Element elemento = servicioElement.consultarElementoPorId(idElement);
-        System.out.println(elemento.getName()+"-------------"+elemento.getId_equipment());
+        System.out.println(elemento.getElement_name()+"-------------"+elemento.getId_equipment());
         Novelty novelty = new Novelty(description,title, date, usuario.getDocumento(), elemento.getId_equipment(), idElement);
         message = "Se agrego la nueva novedad al elemento "+idElement+" del equipo "+elemento.getId_equipment();
         servicioNovelty.registrarNovedad(novelty);
@@ -120,7 +121,7 @@ public class NoveltyBean extends BasePageBean{
     public int getIdByNameEquipment(String name){
         int idEquipment = 0;
         for(Equipment equipo: equipos){
-            if(equipo.getName().equals(name)){
+            if(equipo.getEquipment_name().equals(name)){
                 idEquipment = equipo.getId();
             }
         }
@@ -130,11 +131,17 @@ public class NoveltyBean extends BasePageBean{
     public int getIdByNameElement(String name){
         int idElement = 0;
         for(Element elemento: elementos){
-            if(elemento.getName().equals(name)){
+            if(elemento.getElement_name().equals(name)){
                 idElement = elemento.getId();
             }
         }
         return idElement;
+    }
+
+    public String darFormatoFehca(Date date) {
+        SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
+
+        return format.format(date);
     }
     
     public List<String> getNombresEquipos(){

@@ -8,4 +8,5 @@ public interface LaboratoryDAO {
     public void registrarLaboratorio(Laboratory lab) throws PersistenceException;
     public int consultarUltimoId() throws PersistenceException;
     public List<Laboratory> consultarLaboratorios() throws PersistenceException;
+    String consultarNombreLaboratorio(Integer laboratorioID) throws PersistenceException;
 }

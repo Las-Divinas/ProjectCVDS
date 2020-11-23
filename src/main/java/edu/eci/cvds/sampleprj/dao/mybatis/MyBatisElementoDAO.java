@@ -87,4 +87,17 @@ public class MyBatisElementoDAO implements ElementoDAO {
             throw new PersistenceException(e.toString());
         }
     }
+
+    @Override
+    public String consultarNombreElemento(Integer elementoID) throws PersistenceException{
+        try {
+            if(elementoID!=null){
+                return elementoMapper.consultarNombreElemento(elementoID);
+            }
+
+            return "N/A";
+        } catch (Exception e) {
+            throw new PersistenceException("Error al consultar nombre de elemento");
+        }
+    }
 }

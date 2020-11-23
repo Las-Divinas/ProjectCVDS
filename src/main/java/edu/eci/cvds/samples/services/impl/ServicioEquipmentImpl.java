@@ -86,4 +86,13 @@ public class ServicioEquipmentImpl implements ServicioEquipment {
         }
 
     }
+
+    @Override
+    public String consultarNombreEquipo(Integer equipmentID) throws ExceptionHistorialDeEquipos {
+        try {
+            return equipoDAO.consultarNombreEquipo(equipmentID);
+        } catch (Exception e) {
+            throw new ExceptionHistorialDeEquipos(e.toString());
+        }
+    }
 }

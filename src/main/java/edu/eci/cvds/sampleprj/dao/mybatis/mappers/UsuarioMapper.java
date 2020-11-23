@@ -5,6 +5,7 @@ import org.apache.ibatis.annotations.Param;
 import edu.eci.cvds.samples.entities.Usuario;
 
 public interface UsuarioMapper {
-    public void registrarUsuario(@Param("usuario") Usuario usuario);
-    public Usuario consultarIdPorCorreo(@Param("correo") String correo);
+    void registrarUsuario(@Param("usuario") Usuario usuario);
+    Usuario consultarIdPorCorreo(@Param("correo") String correo);
+    String consultarNombreUsuario(@Param("userID") String userID);
 }

@@ -30,7 +30,7 @@ public class EquipmentBean extends BasePageBean{
     private ServicioLaboratory servicioLaboratory;
 
     private int id;
-    private String name;
+    private String equipment_name;
     private String description;
     private int laboratory_id;
     private String message = "Se creo el equipo con exito";
@@ -50,7 +50,7 @@ public class EquipmentBean extends BasePageBean{
             equiposBusquedaBasica = servicioEquipment.consultarEquipos();
             laboratorios = servicioLaboratory.consultarLaboratorios();
             for(int i=0; i<laboratorios.size(); i++){
-                nombresLaboratorios.add(laboratorios.get(i).getName());
+                nombresLaboratorios.add(laboratorios.get(i).getLaboratory_name());
             }
         } catch (ExceptionHistorialDeEquipos e){
             e.printStackTrace();
@@ -60,7 +60,7 @@ public class EquipmentBean extends BasePageBean{
     public void registrarEquipo() throws ExceptionHistorialDeEquipos, IOException{
         message = "Se creo el elemento con exito";
         laboratory_id = getIdByNameLaboratory(nombreLaboratorio);
-        Equipment equipo = new Equipment(name, description, laboratory_id,"ACTIVO");
+        Equipment equipo = new Equipment(equipment_name, description, laboratory_id,"ACTIVO");
         servicioEquipment.registrarEquipment(equipo);
         FacesContext facesContext = FacesContext.getCurrentInstance();
         facesContext.getExternalContext().redirect("../admin/selectElement.xhtml");
@@ -69,6 +69,10 @@ public class EquipmentBean extends BasePageBean{
     public List<Equipment> consultarEquipos() throws ExceptionHistorialDeEquipos{
         message = "Tuvimos un problema en agregar el equipo";
         return servicioEquipment.consultarEquipos();
+    }
+
+    public String consultarNombreEquipo(Integer equipmentID) throws ExceptionHistorialDeEquipos {
+        return servicioEquipment.consultarNombreEquipo(equipmentID);
     }
 
     public void eliminarEquipos() throws ExceptionHistorialDeEquipos{
@@ -84,7 +88,7 @@ public class EquipmentBean extends BasePageBean{
     public int getIdByNameLaboratory(String name){
         int laboratoryId = 0;
         for(Laboratory laboratory: laboratorios){
-            if(laboratory.getName().equals(name))
+            if(laboratory.getLaboratory_name().equals(name))
                 laboratoryId = laboratory.getId();
         }
         return laboratoryId;
@@ -130,14 +134,14 @@ public class EquipmentBean extends BasePageBean{
         this.id=id;
     }
 
-    public String getName(){
-        return name;
+    public String getEquipment_name() {
+        return equipment_name;
     }
 
-    public void setName(String name){
-        this.name=name;
+    public void setEquipment_name(String equipment_name) {
+        this.equipment_name = equipment_name;
     }
-    
+
     public String getDescription(){
         return description;
     }

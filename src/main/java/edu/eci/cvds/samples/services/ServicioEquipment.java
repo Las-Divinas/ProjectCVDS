@@ -13,4 +13,5 @@ public interface ServicioEquipment {
     public int consultarNumeroEquipos(int laboratory_id) throws ExceptionHistorialDeEquipos;
     public abstract void eliminarEquipoPorId(int id) throws ExceptionHistorialDeEquipos;
     public abstract void cambiarEstadoElementoId(int id,String estado) throws ExceptionHistorialDeEquipos;
+    String consultarNombreEquipo(Integer equipmentID) throws ExceptionHistorialDeEquipos;
 }

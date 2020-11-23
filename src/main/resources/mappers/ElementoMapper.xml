@@ -13,18 +13,18 @@
         <result property='estado' column='estado'/>
     </resultMap>
     <insert id="registrarElemento" parameterType="map">
-        INSERT INTO element VALUES(DEFAULT, #{elemento.id_equipment}, #{elemento.name}, #{elemento.type}, #{elemento.description}, #{elemento.estado});
+        INSERT INTO element VALUES(DEFAULT, #{elemento.id_equipment}, #{elemento.element_name}, #{elemento.type}, #{elemento.description}, #{elemento.estado});
     </insert>
     <select parameterType="map" id="consultarUltimoId" resultType="int">
         SELECT id FROM element ORDER BY id DESC LIMIT 1;
     </select>
     <select parameterType="map" id="consultarElementoPorId" resultMap="ElementoResult">
-        SELECT e.id, e.name, e.description, e.id_equipment, e.type, e.estado
+        SELECT e.id, e.element_name, e.description, e.id_equipment, e.type, e.estado
         FROM element as e
         WHERE e.id = #{id};
     </select>
     <select parameterType="map" id="consultarElementos" resultMap="ElementoResult">
-        SELECT e.id, e.name, e.description, e.id_equipment, e.type, e.estado
+        SELECT e.id, e.element_name, e.description, e.id_equipment, e.type, e.estado
         FROM element as e;
     </select>
     <update parameterType="map" id="cambiarIdEquipo">
@@ -41,8 +41,12 @@
         WHERE id = #{id};
     </update>
     <select id="seleccionarElementoPorIdEquipo" resultMap="ElementoResult">
-        SELECT e.id, e.name, e.description, e.id_equipment, e.type, e.estado
+        SELECT e.id, e.element_name, e.description, e.id_equipment, e.type, e.estado
         FROM element as e
         WHERE e.id_equipment = #{idEquipment} AND e.type = #{tipo};
+    </select>
+    <select id="consultarNombreElemento" resultType="String">
+        SELECT e.element_name FROM element e
+        WHERE e.id = #{elementoID};
     </select>
 </mapper>

@@ -7,7 +7,7 @@ public class  Element implements Serializable
 
     private static final long serialVersionUID = 3057312705708674257L;
     private int id;
-    private String name;
+    private String element_name;
     private String description;
     private String type;
     private Integer id_equipment;
@@ -16,44 +16,43 @@ public class  Element implements Serializable
     public Element() {
     }
 
-    public Element(String name, String description, String type, String estado) {
-        this.name = name;
+    public Element(String element_name, String description, String type, String estado) {
+        this.element_name = element_name;
         this.description = description;
         this.type = type;
         this.estado = estado;
     }
 
-    public Element(int id,String name,String description, String type, String estado)
+    public Element(int id,String element_name,String description, String type, String estado)
     {
         this.id=id;
-        this.name = name;
+        this.element_name = element_name;
         this.description = description;
         this.type = type;
         this.estado = estado;
     }
 
-    public Element(String name,String description,int id_equipment, String type)
+    public Element(String element_name,String description,int id_equipment, String type)
     {
-        this.name = name;
+        this.element_name = element_name;
         this.description = description;
         this.id_equipment = id_equipment;
         this.type = type;
     }
 
-    public Element(String name,String description,int id_equipment)
+    public Element(String element_name,String description,int id_equipment)
     {
-        this.name = name;
+        this.element_name = element_name;
         this.description = description;
         this.id_equipment = id_equipment;
     }
 
-    public String getName()
-    {
-        return this.name;
+    public String getElement_name() {
+        return element_name;
     }
-    public void setName(String name)
-    {
-        this.name = name;
+
+    public void setElement_name(String element_name) {
+        this.element_name = element_name;
     }
 
     public String getDescription()

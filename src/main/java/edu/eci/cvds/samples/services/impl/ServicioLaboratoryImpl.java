@@ -29,7 +29,7 @@ public class ServicioLaboratoryImpl implements ServicioLaboratory {
         try {
             return laboratoryDAO.consultarUltimoId();
         } catch (Exception e) {
-            throw new ExceptionHistorialDeEquipos("Error al consultar el ultimo Id de la tabla laboratorio");
+            throw new ExceptionHistorialDeEquipos(e.toString());
         }
     }
 
@@ -39,6 +39,15 @@ public class ServicioLaboratoryImpl implements ServicioLaboratory {
             return laboratoryDAO.consultarLaboratorios();
         } catch (Exception e) {
             throw new ExceptionHistorialDeEquipos("Error al consultar los laboratorios");
+        }
+    }
+
+    @Override
+    public String consultarNombreLaboratorio(Integer laboratorioID) throws ExceptionHistorialDeEquipos {
+        try {
+            return laboratoryDAO.consultarNombreLaboratorio(laboratorioID);
+        } catch (Exception e) {
+            throw new ExceptionHistorialDeEquipos(e.getMessage());
         }
     }
 }
