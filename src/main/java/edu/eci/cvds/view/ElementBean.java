@@ -116,8 +116,27 @@ public class ElementBean extends BasePageBean{
             Usuario usuario = servicioUsuario.consultarIdUsuarioPorCorreo(correoSession);
             servicioElement.cambiarIdEquipoParaElemento((Integer)null, elemento.getId());
             servicioElement.cambiarEstadoElementosId(elemento.getId(), "INACTIVO");
-            Novelty novelty = new Novelty("Elemento fue desasociado","desasociacion elemeto "+elemento.getId(), date, usuario.getDocumento(), (Integer)null, elemento.getId());
+            Novelty novelty = new Novelty("Elemento fue desasociado","Des habilitado"+elemento.getElement_name(), date, usuario.getDocumento(), (Integer)null, elemento.getId());
             servicioNovelty.registrarNovedad(novelty);
+        }
+    }
+
+    public void deleteElement() throws ExceptionHistorialDeEquipos{
+        int idElement = getIdByNameElement(nombreElemento);
+        Element element = servicioElement.consultarElementoPorId(idElement);
+        if(element.getId_equipment() == null){
+            servicioElement.cambiarEstadoElementosId(element.getId(), "INACTIVO");
+            Date date = new Date(System.currentTimeMillis());
+            FacesContext facesContext = FacesContext.getCurrentInstance();
+            HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
+            String correoSession = (String) session.getAttribute("correo");
+            Usuario usuario = servicioUsuario.consultarIdUsuarioPorCorreo(correoSession);
+            Novelty novelty = new Novelty("Dado de baja","Inactivo elemento "+element.getElement_name(), date, usuario.getDocumento(), (Integer)null, element.getId());
+            servicioNovelty.registrarNovedad(novelty);
+            message = "El elemento "+element.getElement_name()+" fue dado de baja.";
+        }
+        else{
+            message = "El elemento "+element.getElement_name()+" Esta asociado al equipo "+servicioEquipment.consultarEquipoPorId(element.getId_equipment()).getEquipment_name();
         }
     }
 
