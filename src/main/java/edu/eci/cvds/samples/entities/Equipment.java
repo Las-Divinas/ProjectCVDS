@@ -20,6 +20,12 @@ public class  Equipment implements Serializable
 
     }
 
+    public Equipment(String equipment_name, String description, String estado) {
+        this.equipment_name = equipment_name;
+        this.description = description;
+        this.estado = estado;
+    }
+
     public Equipment(int id,String equipment_name, String description, int laboratory_id){
         this.id=id;
         this.equipment_name = equipment_name;

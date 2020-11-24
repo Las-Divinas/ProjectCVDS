@@ -84,7 +84,7 @@ public class ElementBean extends BasePageBean{
     public void registrarElemento() throws ExceptionHistorialDeEquipos {
         try {
             //-----Registro de Elemento-----
-            Element element = new Element(element_name,description,type,"INACTIVO");
+            Element element = new Element(element_name,description,type,"ACTIVO");
             servicioElement.registrarElemento(element);
 
             //-----Registro de Novedad al crear nuevo Elemento-----

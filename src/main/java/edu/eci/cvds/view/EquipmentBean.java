@@ -7,14 +7,20 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpSession;
 
 import com.google.inject.Inject;
 
 import edu.eci.cvds.samples.entities.Equipment;
 import edu.eci.cvds.samples.entities.Laboratory;
+import edu.eci.cvds.samples.entities.Novelty;
+import edu.eci.cvds.samples.entities.Usuario;
 import edu.eci.cvds.samples.services.ExceptionHistorialDeEquipos;
 import edu.eci.cvds.samples.services.ServicioEquipment;
 import edu.eci.cvds.samples.services.ServicioLaboratory;
+import edu.eci.cvds.samples.services.ServicioUsuario;
+
+import java.util.Date;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -29,10 +35,13 @@ public class EquipmentBean extends BasePageBean{
     @Inject
     private ServicioLaboratory servicioLaboratory;
 
+    @Inject
+    private ServicioUsuario servicioUsuario;
+
     private int id;
     private String equipment_name;
     private String description;
-    private int laboratory_id;
+    private Integer laboratory_id;
     private String message = "Se creo el equipo con exito";
     private List<Equipment> equiposBusquedaBasica;
     private List<Equipment> equiposSeleccionados;
@@ -58,11 +67,22 @@ public class EquipmentBean extends BasePageBean{
     }
 
     public void registrarEquipo() throws ExceptionHistorialDeEquipos, IOException{
-        message = "Se creo el elemento con exito";
-        laboratory_id = getIdByNameLaboratory(nombreLaboratorio);
-        Equipment equipo = new Equipment(equipment_name, description, laboratory_id,"ACTIVO");
-        servicioEquipment.registrarEquipment(equipo);
+        //-----Registro de Equipo-----
+        Equipment equipment = new Equipment(equipment_name, description, "ACTIVO");
+        servicioEquipment.registrarEquipment(equipment);
+
+        //-----Registro de Novedad al crear nuevo Equipo----
+        Date date = new Date(System.currentTimeMillis());
+        //* Obtener Usuario que esta realizando actividad
         FacesContext facesContext = FacesContext.getCurrentInstance();
+        HttpSession httpSession = (HttpSession) facesContext.getExternalContext().getSession(true);
+        String sessionCorreo = (String) httpSession.getAttribute("correo");
+        Usuario usuario = servicioUsuario.consultarIdUsuarioPorCorreo(sessionCorreo);
+        //* Obtener ID del Elemento creado
+        Integer equipmentID = servicioEquipment.consultarUltimoIdEquipment();
+        //* Generar Novedad
+        Novelty novelty = new Novelty("El equipo "+equipment_name+" ha sido creado", "Equipo Creado", date, usuario.getDocumento(), equipmentID, "Equipment");
+        //* Redirigir para Seleccionar Elementos del Equipo
         facesContext.getExternalContext().redirect("../admin/selectElement.xhtml");
     }
 
@@ -126,11 +146,11 @@ public class EquipmentBean extends BasePageBean{
         this.message = message;
     }
 
-    public int getId(){
+    public Integer getId(){
         return id;
     }
 
-    public void setId(int id){
+    public void setId(Integer id){
         this.id=id;
     }
 
@@ -150,11 +170,11 @@ public class EquipmentBean extends BasePageBean{
         this.description=description;
     }
 
-    public int getLaboratory_id(){
+    public Integer getLaboratory_id(){
         return id;
     }
 
-    public void setLaboratory_id(int laboratory_id){
+    public void setLaboratory_id(Integer laboratory_id){
         this.laboratory_id=laboratory_id;
     }
 
