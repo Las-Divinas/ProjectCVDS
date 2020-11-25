@@ -61,24 +61,6 @@ public class NoveltyBean extends BasePageBean{
     @PostConstruct
     public void init(){
         super.init();
-        try{
-            novedadBusquedaBasica = new ArrayList<>();
-            equipos = new ArrayList<>();
-            elementos = new ArrayList<>();
-            nombresElementos = new ArrayList<>();
-            nombresEquipos = new ArrayList<>();
-            novedadBusquedaBasica = servicioNovelty.consultarNovedades();
-            elementos = servicioElement.consultarElementos();
-            equipos = servicioEquipment.consultarEquipos();
-            for(Element elemento: elementos){
-                nombresElementos.add(elemento.getElement_name());
-            }
-            for(Equipment equipo: equipos){
-                nombresEquipos.add(equipo.getEquipment_name());
-            }
-        } catch (ExceptionHistorialDeEquipos e){
-            e.printStackTrace();
-        }
     }
 
     public void registrarNovedad() throws ExceptionHistorialDeEquipos, IOException{
@@ -129,9 +111,11 @@ public class NoveltyBean extends BasePageBean{
         return idEquipment;
     }
 
-    public int getIdByNameElement(String name){
+    public int getIdByNameElement(String name) throws ExceptionHistorialDeEquipos{
         int idElement = 0;
-        for(Element elemento: elementos){
+        equipos = servicioEquipment.consultarEquipos();
+
+        for(Element elemento: elementos) {
             if(elemento.getElement_name().equals(name)){
                 idElement = elemento.getId();
             }
@@ -144,8 +128,15 @@ public class NoveltyBean extends BasePageBean{
 
         return format.format(date);
     }
-    
-    public List<String> getNombresEquipos(){
+
+    public List<String> getNombresEquipos() throws ExceptionHistorialDeEquipos {
+        nombresEquipos = new ArrayList<>();
+        equipos = servicioEquipment.consultarEquipos();
+
+        for(Equipment equipo: equipos) {
+            nombresEquipos.add(equipo.getEquipment_name());
+        }
+
         return nombresEquipos;
     }
 
@@ -153,7 +144,14 @@ public class NoveltyBean extends BasePageBean{
         this.nombresEquipos = nombresEquipos;
     }
 
-    public List<String> getNombresElementos(){
+    public List<String> getNombresElementos() throws ExceptionHistorialDeEquipos {
+        nombresElementos = new ArrayList<>();
+        elementos = servicioElement.consultarElementos();
+
+        for(Element elemento: elementos){
+            nombresElementos.add(elemento.getElement_name());
+        }
+
         return nombresElementos;
     }
 
@@ -233,7 +231,9 @@ public class NoveltyBean extends BasePageBean{
         this.message = message;
     }
 
-    public List<Novelty> getNovedadBusquedaBasica() {
+    public List<Novelty> getNovedadBusquedaBasica() throws ExceptionHistorialDeEquipos {
+        novedadBusquedaBasica = servicioNovelty.consultarNovedades();
+
         return novedadBusquedaBasica;
     }
 

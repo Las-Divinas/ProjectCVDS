@@ -36,6 +36,7 @@
                         <h:outputLabel for="Description" value="Description: " style="color: white;"/>
                         <p:inputText class="form-control" type="String" id="description" value="#{equipmentBean.description}" placeholder="Description"/>
                     </div>
+<<<<<<< HEAD
                     <div class="form-group">
                         <h:outputLabel for="Laboratory" value="Laboratory: " style="color: white;"/>
                         <p:selectOneMenu id="nombresLaboratorios" value="#{equipmentBean.nombreLaboratorio}" class="form-control"  required="true">
@@ -44,6 +45,12 @@
                         </p:selectOneMenu>
                     </div>
                     <p:commandButton value="Add" class="btn btn-primary" actionListener="#{equipmentBean.registrarEquipo}" action="#{equipmentBean.info}"/>
+=======
+                    <p:commandButton value="Add" class="btn btn-primary" actionListener="#{equipmentBean.registrarEquipo}" onclick="PF('dlg2').show();"/>
+                    <p:dialog header="Modal Dialog" widgetVar="dlg2" modal="true" height="100">
+                        <h:outputText value="#{equipmentBean.message}" />
+                    </p:dialog> 
+>>>>>>> c805b2919d16a0b53a7853000017ed501f715025
                 </h:form>
             </div>
         </div>

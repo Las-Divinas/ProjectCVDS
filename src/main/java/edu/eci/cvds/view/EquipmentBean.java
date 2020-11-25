@@ -21,6 +21,7 @@ import edu.eci.cvds.samples.services.ServicioLaboratory;
 import edu.eci.cvds.samples.services.ServicioNovelty;
 import edu.eci.cvds.samples.services.ServicioUsuario;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.ArrayList;
@@ -60,7 +61,6 @@ public class EquipmentBean extends BasePageBean{
             equiposBusquedaBasica = new ArrayList<>();
             laboratorios = new ArrayList<>();
             nombresLaboratorios = new ArrayList<>();
-            equiposBusquedaBasica = servicioEquipment.consultarEquipos();
             laboratorios = servicioLaboratory.consultarLaboratorios();
             for(int i=0; i<laboratorios.size(); i++){
                 nombresLaboratorios.add(laboratorios.get(i).getLaboratory_name());
@@ -71,6 +71,7 @@ public class EquipmentBean extends BasePageBean{
     }
 
     public void registrarEquipo() throws ExceptionHistorialDeEquipos, IOException{
+        message = "El equipo "+equipment_name+" ha sido creado con exito.";
         //-----Registro de Equipo-----
         int idLaboratorio = getIdByNameLaboratory(nombreLaboratorio);
         Equipment equipment = new Equipment(equipment_name, description, idLaboratorio, "ACTIVO");
@@ -87,6 +88,7 @@ public class EquipmentBean extends BasePageBean{
         Integer equipmentID = servicioEquipment.consultarUltimoIdEquipment();
         //* Generar Novedad
         Novelty novelty = new Novelty("El equipo "+equipment_name+" ha sido creado", "Equipo Creado", date, usuario.getDocumento(), equipmentID, "Equipment");
+        servicioNovelty.registrarNovedad(novelty);
         //* Redirigir para Seleccionar Elementos del Equipo
         servicioNovelty.registrarNovedad(novelty);
         message = "Equipo registrado correctamente";
@@ -119,6 +121,12 @@ public class EquipmentBean extends BasePageBean{
                 laboratoryId = laboratory.getId();
         }
         return laboratoryId;
+    }
+
+    public String darFormatoFecha(Date date) {
+        SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
+
+        return format.format(date);
     }
 
     public String getNombreLaboratorio(){
@@ -185,15 +193,19 @@ public class EquipmentBean extends BasePageBean{
         this.laboratory_id=laboratory_id;
     }
 
-    public List<Equipment> getEquiposBusquedaBasica(){
+    public List<Equipment> getEquiposBusquedaBasica() throws ExceptionHistorialDeEquipos {
+        equiposBusquedaBasica = servicioEquipment.consultarEquipos();
+
         return equiposBusquedaBasica;
     }
 
-    public void setEquiposBusquedaBasica(List<Equipment> equiposBusquedaBasica){
-        this.equiposBusquedaBasica=equiposBusquedaBasica;
+    public void setEquiposBusquedaBasica(List<Equipment> equiposBusquedaBasica) {
+        this.equiposBusquedaBasica = equiposBusquedaBasica;
     }
 
     public void info() {
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, message, "PrimeFaces Rocks."));
     }
+
+
 }

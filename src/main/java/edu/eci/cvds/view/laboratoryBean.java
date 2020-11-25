@@ -1,6 +1,7 @@
 package edu.eci.cvds.view;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -53,12 +54,8 @@ public class laboratoryBean extends BasePageBean{
     @PostConstruct
     public void init(){
         super.init();
-        try{
-            laboratoriosBusquedaBasica = new ArrayList<>();
-            laboratoriosBusquedaBasica = servicioLaboratory.consultarLaboratorios();
-        } catch (ExceptionHistorialDeEquipos e){
-            e.printStackTrace();
-        }
+
+        laboratoriosBusquedaBasica = new ArrayList<>();
     }
 
     public void registrarLaboratorio() throws ExceptionHistorialDeEquipos {
@@ -117,6 +114,16 @@ public class laboratoryBean extends BasePageBean{
         }
     }
 
+    public String darFormatoFecha(Date date) {
+        if(date!=null) {
+            SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
+
+            return format.format(date);
+        }
+
+        return "";
+    }
+
     public String getMessage(){
         return message;
     }
@@ -157,12 +164,10 @@ public class laboratoryBean extends BasePageBean{
         this.idEquipment = idEquipment;
     }
 
-    public List<Laboratory> getLaboratoriosBusquedaBasica(){
-        return laboratoriosBusquedaBasica;
-    }
+    public List<Laboratory> getLaboratoriosBusquedaBasica() throws ExceptionHistorialDeEquipos{
+        laboratoriosBusquedaBasica = servicioLaboratory.consultarLaboratorios();;
 
-    public void setLaboratoriosBusquedaBasica(List<Laboratory> laboratoriosBusquedaBasica){
-        this.laboratoriosBusquedaBasica=laboratoriosBusquedaBasica;
+        return laboratoriosBusquedaBasica;
     }
 
     public void info() {
@@ -176,6 +181,8 @@ public class laboratoryBean extends BasePageBean{
 
     public PieChartModel generarEstadistica() throws ExceptionHistorialDeEquipos {
         model = new PieChartModel();
+        laboratoriosBusquedaBasica = servicioLaboratory.consultarLaboratorios();;
+
         for (Laboratory laboratory : laboratoriosBusquedaBasica) {
             model.set(laboratory.getLaboratory_name(),servicioEquipment.consultarNumeroEquipos(laboratory.getId()));
         }

@@ -49,4 +49,9 @@
         SELECT e.element_name FROM element e
         WHERE e.id = #{elementoID};
     </select>
+    <select id="consultarElementoNoAsociado" resultMap="ElementoResult">
+        SELECT e.id, e.element_name, e.description, e.id_equipment, e.type, e.estado
+        FROM element as e
+        WHERE e.id_equipment IS NULL AND e.type = #{type} AND e.estado = 'ACTIVO';
+    </select>
 </mapper>

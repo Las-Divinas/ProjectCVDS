@@ -51,7 +51,7 @@ public class ServicioElementImpl implements ServicioElement {
     }
 
     @Override
-    public void cambiarIdEquipoParaElemento(int idEquipment, int idElement) throws ExceptionHistorialDeEquipos {
+    public void cambiarIdEquipoParaElemento(Integer idEquipment, Integer idElement) throws ExceptionHistorialDeEquipos {
         try {
             elementoDAO.cambiarIdEquipo(idEquipment, idElement);
         } catch (Exception e) {
@@ -93,6 +93,15 @@ public class ServicioElementImpl implements ServicioElement {
             return elementoDAO.consultarNombreElemento(elementoID);
         } catch (Exception e) {
             throw new ExceptionHistorialDeEquipos("Error al consultar nombre del elemento");
+        }
+    }
+
+    @Override
+    public List<Element> consultarElementoNoAsociado(String type) throws ExceptionHistorialDeEquipos {
+        try {
+            return elementoDAO.consultarElementoNoAsociado(type);
+        } catch (Exception e) {
+            throw new ExceptionHistorialDeEquipos("Error al consultar teclados no asociados");
         }
     }
 }
