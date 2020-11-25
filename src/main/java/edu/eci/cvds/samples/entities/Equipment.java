@@ -10,14 +10,12 @@ public class  Equipment implements Serializable
     private int id;
     private String equipment_name;
     private String description ;
-    private int laboratory_id;
+    private Integer laboratory_id;
     private List<Element> elementos;
     private List<Novelty> novedades;
     private String estado;
 
-    public Equipment()
-    {
-
+    public Equipment() {
     }
 
     public Equipment(String equipment_name, String description, String estado) {
@@ -67,6 +65,7 @@ public class  Equipment implements Serializable
     {
         return this.description;
     }
+
     public void setDescription(String description)
     {
         this.description = description;
@@ -80,11 +79,12 @@ public class  Equipment implements Serializable
         this.equipment_name = equipment_name;
     }
 
-    public int getLaboratory_id()
+    public Integer getLaboratory_id()
     {
         return this.laboratory_id;
     }
-    public void setLaboratory_id(int laboratory_id)
+
+    public void setLaboratory_id(Integer laboratory_id)
     {
         this.laboratory_id = laboratory_id;
     }
@@ -102,13 +102,16 @@ public class  Equipment implements Serializable
     {
         return this.novedades;
     }
+
     public void setNovedades(List<Novelty> novedades)
     {
         this.novedades = novedades;
     }
+
     public int getId(){
         return id;
     }
+
     public void setId(int id){
         this.id=id;
     }

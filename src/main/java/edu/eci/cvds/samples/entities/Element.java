@@ -59,6 +59,7 @@ public class  Element implements Serializable
     {
         return this.description;
     }
+
     public void setDescription(String description)
     {
         this.description = description;
@@ -68,13 +69,16 @@ public class  Element implements Serializable
     {
         return id_equipment;
     }
+
     public void setId_equipment(Integer id_equipment)
     {
         this.id_equipment = id_equipment;
     }
+
     public int getId(){
         return id;
     }
+
     public void setId(int id){
         this.id=id;
     }

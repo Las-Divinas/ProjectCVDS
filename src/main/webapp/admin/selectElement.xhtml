@@ -7,10 +7,10 @@
 <h:head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Add Element</title>
+    <title>Associate Element</title>
     <link rel="stylesheet" href="../style/bootstrap.min.css"/>
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous"/>
-    <link rel = "icon" href ="https://observatics.edu.co/wp-content/uploads/sites/20/2019/06/Logo-Escuela-ingenier%C3%ADa.png"/> 
+    <link href="https://fonts.googleapis.com/css2?family=Oswald;family=Staatliches;display=swap" rel="stylesheet"/>
+    <link rel="icon" href ="https://observatics.edu.co/wp-content/uploads/sites/20/2019/06/Logo-Escuela-ingenier%C3%ADa.png"/>
     <link rel="stylesheet" href="../style/style.css"/>
 </h:head>
 <h:body>
@@ -27,13 +27,31 @@
                 </div>
                 <h:form class="justify-content-center">
                     <div class="form-group">
-                        <h:outputLabel for="Element" value="Element: " style="color: white;"/>
-                        <p:selectOneMenu id="nombresElementos" value="#{elementBean.nombreElemento}" class="form-control"  required="true">
+                        <h:outputLabel for="Element" value="Teclado" style="color: aliceblue;"/>
+                        <p:selectOneMenu id="NombresTeclado" value="#{elementBean.nombreTeclado}" class="form-control">
                             <f:selectItem itemLabel="Select Element" noSelectionOption="true"/>
-                            <f:selectItems value="#{elementBean.nombresElementos}"/>
+                            <f:selectItems value="#{elementBean.nombreTecladoNoAsociado}"/>
+                        </p:selectOneMenu>
+                        <h:outputLabel for="Element" value="Mouse" style="color: aliceblue;"/>
+                        <p:selectOneMenu id="NombresMouse" value="#{elementBean.nombreMouse}" class="form-control">
+                            <f:selectItem itemLabel="Select Element" noSelectionOption="true"/>
+                            <f:selectItems value="#{elementBean.nombreMouseNoAsociado}"/>
+                        </p:selectOneMenu>
+                        <h:outputLabel for="Element" value="Pantalla" style="color: aliceblue;"/>
+                        <p:selectOneMenu id="NombresPantalla" value="#{elementBean.nombrePantalla}" class="form-control">
+                            <f:selectItem itemLabel="Select Element" noSelectionOption="true"/>
+                            <f:selectItems value="#{elementBean.nombrePantallaNoAsociado}"/>
+                        </p:selectOneMenu>
+                        <h:outputLabel for="Element" value="Torre" style="color: aliceblue;"/>
+                        <p:selectOneMenu id="NombresTorre" value="#{elementBean.nombreTorre}" class="form-control">
+                            <f:selectItem itemLabel="Select Element" noSelectionOption="true"/>
+                            <f:selectItems value="#{elementBean.nombreTorreNoAsociado}"/>
                         </p:selectOneMenu>
                     </div>
-                    <p:commandButton value="Add" class="btn btn-primary" actionListener="#{elementBean.changeEquipmentElement}"/>
+                    <p:commandButton value="Añadir Elementos a Equipo" class="btn btn-primary" actionListener="#{elementBean.asociarElementoEquipo}"/>
+                    <p:dialog header="Modal Dialog" widgetVar="dlg2" modal="true" height="100">
+                        <h:outputText value="#{elementBean.message}"/>
+                    </p:dialog>
                 </h:form>
             </div>
         </div>

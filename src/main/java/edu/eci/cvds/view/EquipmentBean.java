@@ -15,11 +15,9 @@ import edu.eci.cvds.samples.entities.Equipment;
 import edu.eci.cvds.samples.entities.Laboratory;
 import edu.eci.cvds.samples.entities.Novelty;
 import edu.eci.cvds.samples.entities.Usuario;
-import edu.eci.cvds.samples.services.ExceptionHistorialDeEquipos;
-import edu.eci.cvds.samples.services.ServicioEquipment;
-import edu.eci.cvds.samples.services.ServicioLaboratory;
-import edu.eci.cvds.samples.services.ServicioUsuario;
+import edu.eci.cvds.samples.services.*;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.ArrayList;
@@ -37,6 +35,9 @@ public class EquipmentBean extends BasePageBean{
 
     @Inject
     private ServicioUsuario servicioUsuario;
+
+    @Inject
+    private ServicioNovelty servicioNovelty;
 
     private int id;
     private String equipment_name;
@@ -56,7 +57,6 @@ public class EquipmentBean extends BasePageBean{
             equiposBusquedaBasica = new ArrayList<>();
             laboratorios = new ArrayList<>();
             nombresLaboratorios = new ArrayList<>();
-            equiposBusquedaBasica = servicioEquipment.consultarEquipos();
             laboratorios = servicioLaboratory.consultarLaboratorios();
             for(int i=0; i<laboratorios.size(); i++){
                 nombresLaboratorios.add(laboratorios.get(i).getLaboratory_name());
@@ -67,6 +67,7 @@ public class EquipmentBean extends BasePageBean{
     }
 
     public void registrarEquipo() throws ExceptionHistorialDeEquipos, IOException{
+        message = "El equipo "+equipment_name+" ha sido creado con exito.";
         //-----Registro de Equipo-----
         Equipment equipment = new Equipment(equipment_name, description, "ACTIVO");
         servicioEquipment.registrarEquipment(equipment);
@@ -82,6 +83,7 @@ public class EquipmentBean extends BasePageBean{
         Integer equipmentID = servicioEquipment.consultarUltimoIdEquipment();
         //* Generar Novedad
         Novelty novelty = new Novelty("El equipo "+equipment_name+" ha sido creado", "Equipo Creado", date, usuario.getDocumento(), equipmentID, "Equipment");
+        servicioNovelty.registrarNovedad(novelty);
         //* Redirigir para Seleccionar Elementos del Equipo
         facesContext.getExternalContext().redirect("../admin/selectElement.xhtml");
     }
@@ -112,6 +114,12 @@ public class EquipmentBean extends BasePageBean{
                 laboratoryId = laboratory.getId();
         }
         return laboratoryId;
+    }
+
+    public String darFormatoFecha(Date date) {
+        SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
+
+        return format.format(date);
     }
 
     public String getNombreLaboratorio(){
@@ -178,16 +186,20 @@ public class EquipmentBean extends BasePageBean{
         this.laboratory_id=laboratory_id;
     }
 
-    public List<Equipment> getEquiposBusquedaBasica(){
+    public List<Equipment> getEquiposBusquedaBasica() throws ExceptionHistorialDeEquipos {
+        equiposBusquedaBasica = servicioEquipment.consultarEquipos();
+
         return equiposBusquedaBasica;
     }
 
-    public void setEquiposBusquedaBasica(List<Equipment> equiposBusquedaBasica){
-        this.equiposBusquedaBasica=equiposBusquedaBasica;
+    public void setEquiposBusquedaBasica(List<Equipment> equiposBusquedaBasica) {
+        this.equiposBusquedaBasica = equiposBusquedaBasica;
     }
 
     public void dialogMessage() {
         FacesContext context = FacesContext.getCurrentInstance();
         context.addMessage(null, new FacesMessage("Exitoso", "Se añadio con exito el Equipo"));
     }
+
+
 }

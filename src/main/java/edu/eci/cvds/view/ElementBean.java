@@ -1,6 +1,7 @@
 package edu.eci.cvds.view;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,6 +11,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
+import javax.swing.plaf.synth.SynthTextAreaUI;
 
 import com.google.inject.Inject;
 
@@ -58,27 +60,50 @@ public class ElementBean extends BasePageBean{
     private List<Equipment> equipos;
     private List<String> nombresEquipos;
     private String nombreEquipo;
-
+    private String nombreTeclado, nombreMouse, nombrePantalla, nombreTorre;
 
     @PostConstruct
-    public void init(){
+    public void init() {
         super.init();
-        try{
-            elementosBusquedaBasica = new ArrayList<>(); 
-            equipos = new ArrayList<>();
-            nombresEquipos = new ArrayList<>();
-            nombresElementos = new ArrayList<>();
-            elementosBusquedaBasica = servicioElement.consultarElementos();
-            for(Element elemento: elementosBusquedaBasica){
-                nombresElementos.add(elemento.getElement_name());
-            }
-            equipos = servicioEquipment.consultarEquipos();
-            for(Equipment equipo: equipos){
-                nombresEquipos.add(equipo.getEquipment_name());
-            }
-        } catch (ExceptionHistorialDeEquipos e){
-            e.printStackTrace();
-        }
+    }
+
+    public void asociarElementoEquipo() throws ExceptionHistorialDeEquipos {
+        Novelty novedadTeclado, novedadMouse, novedadPantalla, novedadTorre;
+        Integer equipoID, tecladoID, mouseID, pantallaID, torreID;
+        String nombreEquipo;
+        Date date;
+
+        message = "Los elementos seleccionados fueron asociados con el equipo.";
+
+        equipoID = servicioEquipment.consultarUltimoIdEquipment();
+        nombreEquipo = servicioEquipment.consultarNombreEquipo(equipoID);
+
+        tecladoID = getIdByNameElement(nombreTeclado);
+        mouseID = getIdByNameElement(nombreMouse);
+        pantallaID = getIdByNameElement(nombrePantalla);
+        torreID = getIdByNameElement(nombreTorre);
+
+        servicioElement.cambiarIdEquipoParaElemento(equipoID, tecladoID);
+        servicioElement.cambiarIdEquipoParaElemento(equipoID, mouseID);
+        servicioElement.cambiarIdEquipoParaElemento(equipoID, pantallaID);
+        servicioElement.cambiarIdEquipoParaElemento(equipoID, torreID);
+
+        date = new Date(System.currentTimeMillis());
+
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+        HttpSession httpSession = (HttpSession) facesContext.getExternalContext().getSession(true);
+        String sessionCorreo = (String) httpSession.getAttribute("correo");
+        Usuario usuario = servicioUsuario.consultarIdUsuarioPorCorreo(sessionCorreo);
+
+        novedadTeclado = new Novelty("Teclado "+nombreTeclado+" asociado a equipo "+nombreEquipo, "Elemento Asociado a Equipo", date, usuario.getDocumento(), equipoID, tecladoID);
+        novedadMouse = new Novelty("Mouse "+nombreMouse+" asociado a equipo "+nombreEquipo, "Elemento Asociado a Equipo", date, usuario.getDocumento(), equipoID, mouseID);
+        novedadPantalla = new Novelty("Pantalla "+nombrePantalla+" asociado a equipo "+nombreEquipo, "Elemento Asociado a Equipo", date, usuario.getDocumento(), equipoID, pantallaID);
+        novedadTorre = new Novelty("Torre "+nombreTorre+" asociado a equipo "+nombreEquipo, "Elemento Asociado a Equipo", date, usuario.getDocumento(), equipoID, torreID);
+
+        servicioNovelty.registrarNovedad(novedadTeclado);
+        servicioNovelty.registrarNovedad(novedadMouse);
+        servicioNovelty.registrarNovedad(novedadPantalla);
+        servicioNovelty.registrarNovedad(novedadTorre);
     }
 
     public void registrarElemento() throws ExceptionHistorialDeEquipos {
@@ -141,7 +166,7 @@ public class ElementBean extends BasePageBean{
     }
 
     public void asociarElemento() throws ExceptionHistorialDeEquipos{
-        int idEquipment = getIdByNameEquipment(nombreEquipo);
+        Integer idEquipment = getIdByNameEquipment(nombreEquipo);
         id = getIdByNameElement(nombreElemento);
         System.out.println(id+"  Consultar el id del elemento++++++++++++++++++++++++++++++++++++++"+nombreElemento+"+++++"+nombreEquipo);
         try {
@@ -195,8 +220,9 @@ public class ElementBean extends BasePageBean{
         }
     }
 
-    public int getIdByNameEquipment(String nombre){
-        int idEquipment = 0;
+    public Integer getIdByNameEquipment(String nombre){
+        Integer idEquipment = null;
+
         for(Equipment equipo: equipos){
             if(equipo.getEquipment_name().equals(nombre)){
                 idEquipment = equipo.getId();
@@ -205,8 +231,11 @@ public class ElementBean extends BasePageBean{
         return idEquipment;
     }
 
-    public int getIdByNameElement(String nombre){
-        int idElement = 0;
+    public Integer getIdByNameElement(String nombre) throws ExceptionHistorialDeEquipos {
+        Integer idElement = null;
+
+        elementosBusquedaBasica = servicioElement.consultarElementos();
+
         for(Element elemento: elementosBusquedaBasica){
             System.out.println(elemento.getId()+"++++++++++"+elemento.getElement_name()+"++++++"+nombre);
             if(elemento.getElement_name().equals(nombre)){
@@ -222,19 +251,34 @@ public class ElementBean extends BasePageBean{
 
     public void eliminarElementos() throws ExceptionHistorialDeEquipos{
         message = "Entre a eliminar";
+
         for(int i=0; i < elementosSeleccionados.size(); i++){
             System.out.println("------------------------------Entre"+i+"---------------------------------------");
             int idElementos = elementosSeleccionados.get(i).getId();
             servicioElement.cambiarEstadoElementosId(idElementos,"NO_ACTIVO");
         }
+
         elementosBusquedaBasica = servicioElement.consultarElementos();
+    }
+
+    public String darFormatoFecha(Date date) {
+        SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
+
+        return format.format(date);
     }
 
     public String consultarNombreElemento(Integer elementoID) throws ExceptionHistorialDeEquipos {
         return servicioElement.consultarNombreElemento(elementoID);
     }
 
-    public List<String> getNombresElementos(){
+    public List<String> getNombresElementos() throws ExceptionHistorialDeEquipos {
+        nombresElementos = new ArrayList<>();
+        elementosBusquedaBasica = servicioElement.consultarElementos();
+
+        for (Element elemento : elementosBusquedaBasica) {
+            nombresElementos.add(elemento.getElement_name());
+        }
+
         return nombresElementos;
     }
 
@@ -250,7 +294,14 @@ public class ElementBean extends BasePageBean{
         this.nombreElemento = nombreElemento;
     }
 
-    public List<String> getNombresEquipos(){
+    public List<String> getNombresEquipos() throws ExceptionHistorialDeEquipos {
+        nombresEquipos = new ArrayList<>();
+        equipos = servicioEquipment.consultarEquipos();
+
+        for(Equipment e:equipos) {
+            nombresEquipos.add(e.getEquipment_name());
+        }
+
         return nombresEquipos;
     }
 
@@ -322,7 +373,9 @@ public class ElementBean extends BasePageBean{
         this.message = message;
     }
 
-    public List<Element> getElementosBusquedaBasica(){
+    public List<Element> getElementosBusquedaBasica() throws ExceptionHistorialDeEquipos {
+        elementosBusquedaBasica = servicioElement.consultarElementos();
+
         return elementosBusquedaBasica;
     }
 
@@ -337,5 +390,88 @@ public class ElementBean extends BasePageBean{
     public void setElementosSeleccionados(List<Element> elementosSeleccionados){
         this.elementosSeleccionados = elementosSeleccionados;
     }
-    
+
+    public List<String> getNombreTecladoNoAsociado() throws ExceptionHistorialDeEquipos{
+        List<Element> tecladoNoAsociado;
+        List<String> nombreTecladoNoAsociado = new ArrayList<>();
+
+        tecladoNoAsociado = servicioElement.consultarElementoNoAsociado("Teclado");
+
+        for(Element e:tecladoNoAsociado) {
+            nombreTecladoNoAsociado.add(e.getElement_name());
+        }
+
+        return nombreTecladoNoAsociado;
+    }
+
+    public List<String> getNombreMouseNoAsociado() throws ExceptionHistorialDeEquipos{
+        List<Element> mouseNoAsociado;
+        List<String> nombreMouseNoAsociado = new ArrayList<>();
+
+        mouseNoAsociado = servicioElement.consultarElementoNoAsociado("Mouse");
+
+        for(Element e:mouseNoAsociado) {
+            nombreMouseNoAsociado.add(e.getElement_name());
+        }
+
+        return nombreMouseNoAsociado;
+    }
+
+    public List<String> getNombrePantallaNoAsociado() throws ExceptionHistorialDeEquipos{
+        List<Element> pantallaNoAsociado;
+        List<String> nombrePantallaNoAsociado = new ArrayList<>();
+
+        pantallaNoAsociado = servicioElement.consultarElementoNoAsociado("Pantalla");
+
+        for(Element e:pantallaNoAsociado) {
+            nombrePantallaNoAsociado.add(e.getElement_name());
+        }
+
+        return nombrePantallaNoAsociado;
+    }
+
+    public List<String> getNombreTorreNoAsociado() throws ExceptionHistorialDeEquipos{
+        List<Element> torreNoAsociado;
+        List<String> nombreTorreNoAsociado = new ArrayList<>();
+
+        torreNoAsociado = servicioElement.consultarElementoNoAsociado("Torre");
+
+        for(Element e:torreNoAsociado) {
+            nombreTorreNoAsociado.add(e.getElement_name());
+        }
+
+        return nombreTorreNoAsociado;
+    }
+
+    public String getNombreTeclado() {
+        return nombreTeclado;
+    }
+
+    public void setNombreTeclado(String nombreTeclado) {
+        this.nombreTeclado = nombreTeclado;
+    }
+
+    public String getNombreMouse() {
+        return nombreMouse;
+    }
+
+    public void setNombreMouse(String nombreMouse) {
+        this.nombreMouse = nombreMouse;
+    }
+
+    public String getNombrePantalla() {
+        return nombrePantalla;
+    }
+
+    public void setNombrePantalla(String nombrePantalla) {
+        this.nombrePantalla = nombrePantalla;
+    }
+
+    public String getNombreTorre() {
+        return nombreTorre;
+    }
+
+    public void setNombreTorre(String nombreTorre) {
+        this.nombreTorre = nombreTorre;
+    }
 }

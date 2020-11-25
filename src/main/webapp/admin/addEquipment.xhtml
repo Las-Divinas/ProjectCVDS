@@ -33,13 +33,6 @@
                         <h:outputLabel for="Description" value="Description: " style="color: white;"/>
                         <p:inputText class="form-control" type="String" id="description" value="#{equipmentBean.description}" placeholder="Description"/>
                     </div>
-                    <div class="form-group">
-                        <h:outputLabel for="Laboratory" value="Laboratory: " style="color: white;"/>
-                        <p:selectOneMenu id="nombresLaboratorios" value="#{equipmentBean.nombreLaboratorio}" class="form-control"  required="true">
-                            <f:selectItem itemLabel="Select Laboratory" noSelectionOption="true"/>
-                            <f:selectItems value="#{equipmentBean.nombresLaboratorios}"/>
-                        </p:selectOneMenu>
-                    </div>
                     <p:commandButton value="Add" class="btn btn-primary" actionListener="#{equipmentBean.registrarEquipo}" onclick="PF('dlg2').show();"/>
                     <p:dialog header="Modal Dialog" widgetVar="dlg2" modal="true" height="100">
                         <h:outputText value="#{equipmentBean.message}" />

@@ -38,33 +38,27 @@
                                     </h:commandLink>
                                 </div>
                             </f:facet>
-                        <p:column headerText="Id" filterBy="#{laboratory.id}" sortBy="#{laboratory.id}">
+                        <p:column headerText="Id" style="text-align: center" filterBy="#{laboratory.id}" sortBy="#{laboratory.id}">
                             <h:outputText value="#{laboratory.id}"/>
                         </p:column>
-                        <p:column headerText="Nombre" filterBy="#{laboratory.laboratory_name}" sortBy="#{laboratory.laboratory_name}">
+                        <p:column headerText="Nombre" style="text-align: center" filterBy="#{laboratory.laboratory_name}" sortBy="#{laboratory.laboratory_name}">
                             <h:outputText value="#{laboratory.laboratory_name}"/>
                         </p:column>
-                        <p:column headerText="Descripción" filterBy="#{laboratory.description}" sortBy="#{laboratory.description}">
+                        <p:column headerText="Descripción" style="text-align: center" filterBy="#{laboratory.description}" sortBy="#{laboratory.description}">
                             <h:outputText value="#{laboratory.description}"/>
                         </p:column>
-                        <p:column headerText="Estado" filterBy="#{laboratory.estado}" sortBy="#{laboratory.estado}">
+                        <p:column headerText="Estado" style="text-align: center" filterBy="#{laboratory.estado}" sortBy="#{laboratory.estado}">
                             <h:outputText value="#{laboratory.estado}"/>
                         </p:column>
-                        <p:column headerText="Fecha Creacion" filterBy="#{laboratory.fecha_creacion}" sortBy="#{laboratory.fecha_creacion}">
-                            <h:outputText value="#{laboratory.fecha_creacion}"/>
+                        <p:column headerText="Fecha Creacion" style="text-align: center" filterBy="#{laboratoryBean.darFormatoFecha(laboratory.fecha_creacion)}" sortBy="#{laboratoryBean.darFormatoFecha(laboratory.fecha_creacion)}">
+                            <h:outputText value="#{laboratoryBean.darFormatoFecha(laboratory.fecha_creacion)}"/>
                         </p:column>
-                        <p:column headerText="Fecha Cierre" filterBy="#{laboratory.fecha_cierre}" sortBy="#{laboratory.fecha_cierre}">
-                            <h:outputText value="#{laboratory.fecha_cierre}"/>
+                        <p:column headerText="Fecha Cierre" style="text-align: center" filterBy="#{laboratoryBean.darFormatoFecha(laboratory.fecha_cierre)}" sortBy="#{laboratoryBean.darFormatoFecha(laboratory.fecha_cierre)}">
+                            <h:outputText value="#{laboratoryBean.darFormatoFecha(laboratory.fecha_cierre)}"/>
                         </p:column>
-                        <p:column headerText="Numero Equipos">
+                        <p:column headerText="Numero de Equipos" style="text-align: center">
                             <h:outputText value="#{laboratoryBean.countEquipment(laboratory.id)}"/>
                         </p:column>
-                        <!--<p:column class="text-center" headerText="Administrar" exportable="false">
-                            <p:commandButton class="btn btn-success btn-sm" value="Administrar"/>
-                        </p:column>
-                        <p:column class="text-center" headerText="Novedades" exportable="false">
-                            <p:commandButton class="btn btn-success btn-sm" value="Novedades"/>
-                        </p:column>-->
                     </p:dataTable>
                    <!--  <h1 style="color:antiquewhite">Estadisticas Elementos laboratorio</h1> -->
                     <br/>

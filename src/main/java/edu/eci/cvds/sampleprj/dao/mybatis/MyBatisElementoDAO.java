@@ -8,7 +8,6 @@ import edu.eci.cvds.sampleprj.dao.mybatis.mappers.ElementoMapper;
 import edu.eci.cvds.samples.entities.Element;
 
 public class MyBatisElementoDAO implements ElementoDAO {
-
     @Inject
     private ElementoMapper elementoMapper;
 
@@ -50,7 +49,7 @@ public class MyBatisElementoDAO implements ElementoDAO {
     }
 
     @Override
-    public void cambiarIdEquipo(int idEquipment, int idElement) throws PersistenceException {
+    public void cambiarIdEquipo(Integer idEquipment, Integer idElement) throws PersistenceException {
         try {
             elementoMapper.cambiarIdEquipo(idEquipment, idElement);
         } catch (Exception e) {
@@ -98,6 +97,15 @@ public class MyBatisElementoDAO implements ElementoDAO {
             return "N/A";
         } catch (Exception e) {
             throw new PersistenceException("Error al consultar nombre de elemento");
+        }
+    }
+
+    @Override
+    public List<Element> consultarElementoNoAsociado(String type) throws PersistenceException {
+        try {
+            return elementoMapper.consultarElementoNoAsociado(type);
+        } catch (Exception e) {
+            throw new PersistenceException("Error al consultar elementos nos asociados");
         }
     }
 }

@@ -9,9 +9,10 @@ public interface ElementoMapper {
     int consultarUltimoId();
     Element consultarElementoPorId(@Param("id") int id);
     List<Element> consultarElementos();
-    void cambiarIdEquipo(@Param("idEquipment") int idEquipment, @Param("idElement") int idElement);
+    void cambiarIdEquipo(@Param("idEquipment") Integer idEquipment, @Param("idElement") Integer idElement);
     void eliminarElementosPorId(@Param("id") int id);
     void cambiarEstadoElementosId(@Param("id") int id,@Param("estado") String estado);
     Element seleccionarElementoPorIdEquipo(@Param("idEquipment") int idEquipment, @Param("tipo") String tipo);
     String consultarNombreElemento(@Param("elementoID") Integer elementoID);
+    List<Element> consultarElementoNoAsociado(@Param("type") String type);
 }

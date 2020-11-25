@@ -40,19 +40,19 @@
                             </div>
                         </f:facet>
                         <p:column selectionMode="multiple" style="width:40px;text-align:center"/>
-                        <p:column headerText="Id" filterBy="#{equipment.id}" sortBy="#{equipment.id}">
+                        <p:column headerText="Id" style="text-align: center" filterBy="#{equipment.id}" sortBy="#{equipment.id}">
                             <h:outputText value="#{equipment.id}"/>
                         </p:column>
-                        <p:column headerText="Nombre" filterBy="#{equipment.equipment_name}" sortBy="#{equipment.equipment_name}">
+                        <p:column headerText="Laboratorio al que esta Asociado" style="text-align: center" filterBy="#{laboratoryBean.consultarNombreLaboratorio(equipment.laboratory_id)}" sortBy="#{laboratoryBean.consultarNombreLaboratorio(equipment.laboratory_id)}">
+                            <h:outputText value="#{laboratoryBean.consultarNombreLaboratorio(equipment.laboratory_id)}"/>
+                        </p:column>
+                        <p:column headerText="Nombre" style="text-align: center" filterBy="#{equipment.equipment_name}" sortBy="#{equipment.equipment_name}">
                             <h:outputText value="#{equipment.equipment_name}"/>
                         </p:column>
-                        <p:column headerText="Descripción" filterBy="#{equipment.description}" sortBy="#{equipment.description}">
+                        <p:column headerText="Descripción" style="text-align: center" filterBy="#{equipment.description}" sortBy="#{equipment.description}">
                             <h:outputText value="#{equipment.description}"/>
                         </p:column>
-                        <p:column headerText="Laboratorio" filterBy="#{equipment.laboratory_id}" sortBy="#{equipment.laboratory_id}">
-                            <h:outputText value="#{equipment.laboratory_id}"/>
-                        </p:column>
-                        <p:column headerText="Estado" filterBy="#{equipment.estado}" sortBy="#{equipment.estado}">
+                        <p:column headerText="Estado" style="text-align: center" filterBy="#{equipment.estado}" sortBy="#{equipment.estado}">
                             <h:outputText value="#{equipment.estado}"/>
                         </p:column>
                         <p:column class="text-center" headerText="Administrar" exportable="false">
