@@ -220,8 +220,10 @@ public class ElementBean extends BasePageBean{
         }
     }
 
-    public Integer getIdByNameEquipment(String nombre){
+    public Integer getIdByNameEquipment(String nombre) throws ExceptionHistorialDeEquipos {
         Integer idEquipment = null;
+
+        equipos = servicioEquipment.consultarEquipos();
 
         for(Equipment equipo: equipos){
             if(equipo.getEquipment_name().equals(nombre)){
