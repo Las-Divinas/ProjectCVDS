@@ -25,6 +25,9 @@
                 <h4 class="card-title mt-3 text-center">Create Account</h4>
                 <p class="text-center">Get started with your free account</p>
                 <h:form class="justify-content-center">
+                    <p:messages>
+                        <p:autoUpdate />
+                    </p:messages>
                     <div class="form-group input-group">
                         <div class="input-group-prepend">
                             <span class="input-group-text"> <i class="fa fa-user"></i> </span>
@@ -59,7 +62,7 @@
                          <p:password class="form-control" id="password" value="#{registerBean.contraseña}" placeholder="password"/>
                     </div>
                     <div class="form-group" role="group" aria-label="Basic example">
-                        <p:commandButton class="btn btn-primary btn-block" value="Register" actionListener="#{registerBean.registerNewUser}"/>
+                        <p:commandButton class="btn btn-primary btn-block" value="Register" actionListener="#{registerBean.registerNewUser}" action="#{registerBean.info}"/>
                     </div>
                 </h:form>
             </article>

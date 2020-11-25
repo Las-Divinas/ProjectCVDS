@@ -18,6 +18,7 @@ import edu.eci.cvds.samples.entities.Usuario;
 import edu.eci.cvds.samples.services.ExceptionHistorialDeEquipos;
 import edu.eci.cvds.samples.services.ServicioEquipment;
 import edu.eci.cvds.samples.services.ServicioLaboratory;
+import edu.eci.cvds.samples.services.ServicioNovelty;
 import edu.eci.cvds.samples.services.ServicioUsuario;
 
 import java.util.Date;
@@ -37,6 +38,9 @@ public class EquipmentBean extends BasePageBean{
 
     @Inject
     private ServicioUsuario servicioUsuario;
+
+    @Inject
+    private ServicioNovelty servicioNovelty;
 
     private int id;
     private String equipment_name;
@@ -68,7 +72,8 @@ public class EquipmentBean extends BasePageBean{
 
     public void registrarEquipo() throws ExceptionHistorialDeEquipos, IOException{
         //-----Registro de Equipo-----
-        Equipment equipment = new Equipment(equipment_name, description, "ACTIVO");
+        int idLaboratorio = getIdByNameLaboratory(nombreLaboratorio);
+        Equipment equipment = new Equipment(equipment_name, description, idLaboratorio, "ACTIVO");
         servicioEquipment.registrarEquipment(equipment);
 
         //-----Registro de Novedad al crear nuevo Equipo----
@@ -83,6 +88,8 @@ public class EquipmentBean extends BasePageBean{
         //* Generar Novedad
         Novelty novelty = new Novelty("El equipo "+equipment_name+" ha sido creado", "Equipo Creado", date, usuario.getDocumento(), equipmentID, "Equipment");
         //* Redirigir para Seleccionar Elementos del Equipo
+        servicioNovelty.registrarNovedad(novelty);
+        message = "Equipo registrado correctamente";
         facesContext.getExternalContext().redirect("../admin/selectElement.xhtml");
     }
 
@@ -186,8 +193,7 @@ public class EquipmentBean extends BasePageBean{
         this.equiposBusquedaBasica=equiposBusquedaBasica;
     }
 
-    public void dialogMessage() {
-        FacesContext context = FacesContext.getCurrentInstance();
-        context.addMessage(null, new FacesMessage("Exitoso", "Se añadio con exito el Equipo"));
+    public void info() {
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, message, "PrimeFaces Rocks."));
     }
 }

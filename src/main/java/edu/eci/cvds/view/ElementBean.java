@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
@@ -47,8 +48,8 @@ public class ElementBean extends BasePageBean{
     private String element_name;
     private String type;
     private String description;
-    private Integer idEquipment;
-    private String message = "Se creo el elemento con exito";
+    private Integer idEquipment;    
+    private String message;
     private String a[] = new String[] {"Torre","Pantalla","Mouse","Teclado"};
     private List<String> types = Arrays.asList(a);
     private List<Element> elementosBusquedaBasica;
@@ -100,7 +101,7 @@ public class ElementBean extends BasePageBean{
             Novelty novelty = new Novelty("El elemento "+element_name+" ha sido creado", "Elemento Creado", date, usuario.getDocumento(),elementoID,"Element");
             servicioNovelty.registrarNovedad(novelty);
             //* Mensaje POPUP
-            message = "Elemento de Tipo "+type+" Creado Correctamente";
+            this.message = "Elemento de Tipo "+type+" Creado Correctamente";
         } catch (Exception e) {
             throw new ExceptionHistorialDeEquipos("Error al registrar nuevo elemento");
         }
@@ -122,9 +123,11 @@ public class ElementBean extends BasePageBean{
     }
 
     public void deleteElement() throws ExceptionHistorialDeEquipos{
+        this.message = "PRUEBA";
         int idElement = getIdByNameElement(nombreElemento);
         Element element = servicioElement.consultarElementoPorId(idElement);
-        if(element.getId_equipment() == null){
+        if(element.getId_equipment() == null && !element.getEstado().equals("ACTIVO")){
+            message = "El elemento "+element.getElement_name()+" fue dado de baja.";
             servicioElement.cambiarEstadoElementosId(element.getId(), "INACTIVO");
             Date date = new Date(System.currentTimeMillis());
             FacesContext facesContext = FacesContext.getCurrentInstance();
@@ -133,7 +136,6 @@ public class ElementBean extends BasePageBean{
             Usuario usuario = servicioUsuario.consultarIdUsuarioPorCorreo(correoSession);
             Novelty novelty = new Novelty("Dado de baja","Inactivo elemento "+element.getElement_name(), date, usuario.getDocumento(), (Integer)null, element.getId());
             servicioNovelty.registrarNovedad(novelty);
-            message = "El elemento "+element.getElement_name()+" fue dado de baja.";
         }
         else{
             message = "El elemento "+element.getElement_name()+" Esta asociado al equipo "+servicioEquipment.consultarEquipoPorId(element.getId_equipment()).getEquipment_name();
@@ -157,7 +159,9 @@ public class ElementBean extends BasePageBean{
             Usuario usuario = servicioUsuario.consultarIdUsuarioPorCorreo(correoSession);
             Novelty novelty = new Novelty("Asociado "+element.getElement_name(),"Asociado", date, usuario.getDocumento(), idEquipment, element.getId());
             servicioNovelty.registrarNovedad(novelty);
+            this.message = "Se asocio correctamente el elemento";
         } catch (Exception e) {
+            message = "Error al asociar el elemento";
             throw new ExceptionHistorialDeEquipos(e.toString());
         }
     }
@@ -336,6 +340,10 @@ public class ElementBean extends BasePageBean{
 
     public void setElementosSeleccionados(List<Element> elementosSeleccionados){
         this.elementosSeleccionados = elementosSeleccionados;
+    }
+
+    public void info() {
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, message, "PrimeFaces Rocks."));
     }
     
 }

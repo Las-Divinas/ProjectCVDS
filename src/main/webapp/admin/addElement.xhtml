@@ -26,6 +26,9 @@
                     <h1 class="text align-self-center p-2">Añadir Elemento</h1>
                 </div>
                 <h:form class="justify-content-center">
+                    <p:messages>
+                        <p:autoUpdate />
+                    </p:messages>
                     <div class="form-group">
                         <h:outputLabel for="Name" value="Name: " style="color: white;"/>
                         <p:inputText class="form-control" type="String" id="name" value="#{elementBean.element_name}" placeholder="Name"/>
@@ -50,10 +53,7 @@
                         </p:selectOneMenu>
                     </div>
                     -->
-                    <p:commandButton value="Add" class="btn btn-primary" actionListener="#{elementBean.registrarElemento}" onclick="PF('dlg2').show();"/>
-                    <p:dialog header="Modal Dialog" widgetVar="dlg2" modal="true" height="100">
-                        <h:outputText value="#{elementBean.message}" />
-                    </p:dialog> 
+                    <p:commandButton value="Add" class="btn btn-primary" actionListener="#{elementBean.registrarElemento}" action="#{elementBean.info}"/>
                 </h:form>
             </div>
         </div>

@@ -21,6 +21,9 @@
                         <img src="../image/Laboratorio_Sistemas.jpg" class="mt-2 img-fluid" alt="Responsive image"/>
                         <div class="px-2">
                             <h:form class="justify-content-center">
+                                <p:messages>
+                                    <p:autoUpdate />
+                                </p:messages>
                                 <div class="form-group">
                                     <h:outputLabel for="Email" value="Email: "/>
                                     <p:inputText class="form-control" type="String" id="Email" value="#{loginBean.email}" placeholder="test@test.com"/>
@@ -30,7 +33,7 @@
                                     <p:password class="form-control" type="String" id="Password" value="#{loginBean.password}" placeholder="Password"/>
                                 </div>
                                 <div class="btn-group " role="group" aria-label="Basic example">
-                                    <p:commandButton class="btn btn-primary" value="Login" actionListener="#{loginBean.login}"/>
+                                    <p:commandButton class="btn btn-primary" value="Login" actionListener="#{loginBean.login}" action="#{loginBean.info}"/>
                                 </div>
                             </h:form>
                         </div>

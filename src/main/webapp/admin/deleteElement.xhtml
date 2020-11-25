@@ -27,6 +27,9 @@
                     <h1 class="text align-self-center p-2">Dar de baja Elemento</h1>
                 </div>
                 <h:form class="justify-content-center">
+                    <p:messages>
+                        <p:autoUpdate />
+                    </p:messages>
                     <div class="form-group">
                         <h:outputLabel for="Element" value="Element: " style="color: white;"/>
                         <p:selectOneMenu id="nombresElementos" value="#{elementBean.nombreElemento}" class="form-control"  required="true">
@@ -34,11 +37,11 @@
                             <f:selectItems value="#{elementBean.nombresElementos}"/>
                         </p:selectOneMenu>
                     </div>
-                    <p:commandButton value="Eliminar" class="btn btn-primary" actionListener="#{elementBean.deleteElement}">
+                    <p:commandButton value="Eliminar" class="btn btn-primary" actionListener="#{elementBean.deleteElement}" action="#{elementBean.info}">
                         <p:confirm header="Confirmation" message="Are you sure?" icon="pi pi-exclamation-triangle" />
                     </p:commandButton>
                     <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
-                        <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="pi pi-check" />
+                        <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="pi pi-check"/>
                         <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="pi pi-times" />
                     </p:confirmDialog> 
                 </h:form>

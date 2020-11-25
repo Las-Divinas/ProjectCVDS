@@ -19,7 +19,7 @@ public class MyBatisEquipoDAO implements EquipoDAO {
         try {
             equipoMapper.registrarEquipo(equipo);
         } catch (Exception e) {
-            throw new PersistenceException("Error al registrar el nuevo equipo");
+            throw new PersistenceException(e.toString());
         }
     }
 

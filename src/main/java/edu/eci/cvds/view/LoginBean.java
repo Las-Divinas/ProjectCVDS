@@ -2,6 +2,7 @@ package edu.eci.cvds.view;
 
 import java.io.IOException;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
@@ -41,6 +42,7 @@ public class LoginBean extends BasePageBean{
 
     public void redirectHomeUser() throws IOException{
         FacesContext facesContext = FacesContext.getCurrentInstance();
+        message = "Login correcto";
         if(logger.isAdmin()){
             System.out.println("Entre a admin");
             HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
@@ -111,5 +113,9 @@ public class LoginBean extends BasePageBean{
 
     public void setMessage(String message){
         this.message = message;
+    }
+
+    public void info() {
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, message, "PrimeFaces Rocks."));
     }
 }

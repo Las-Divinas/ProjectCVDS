@@ -28,6 +28,9 @@
                 <div class="row">
                     <div class="col-6">
                         <h:form class="justify-content-center">
+                            <p:messages>
+                                <p:autoUpdate />
+                            </p:messages>
                             <div class="form-group">
                                 <h:outputLabel for="Description" value="Description: " style="color: white;"/>
                                 <p:inputText class="form-control" type="String" id="DescriptionEquipment" value="#{noveltyBean.description}" placeholder="H3ll0 w0rld"/>
@@ -51,6 +54,9 @@
                     </div>
                     <div class="col-6">
                         <h:form class="justify-content">
+                            <p:messages>
+                                <p:autoUpdate />
+                            </p:messages>
                             <div class="form-group">
                                 <h:outputLabel for="Description" value="Description: " style="color: white;"/>
                                 <p:inputText class="form-control" type="String" id="DescriptionElement" value="#{noveltyBean.description}" placeholder="H3ll0 w0rld"/>

@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.*;
 
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 
@@ -27,6 +28,7 @@ public class RegisterBean extends BasePageBean {
     private String correo;
     private String nombre;
     private String contraseña;
+    private String message;
     private String rol;
     private String a[] = new String[] { "admin", "user" }; 
     private List<String> roles = Arrays.asList(a);
@@ -35,9 +37,11 @@ public class RegisterBean extends BasePageBean {
         try {
             servicioUsuario.registrarUsuario(new Usuario(documento, correo, nombre,new Sha512Hash(contraseña).toHex(),rol));
             FacesContext facesContext = FacesContext.getCurrentInstance();
+            message = "Login correcto";
             facesContext.getExternalContext().redirect("../Login.xhtml");
         } catch (ExceptionHistorialDeEquipos e) {
-            throw new ExceptionHistorialDeEquipos("Error al registrar el equipo");
+            message = "Error al registrar el usuario";
+            throw new ExceptionHistorialDeEquipos("Error al registrar el usuario");
         }
     }
 
@@ -45,6 +49,14 @@ public class RegisterBean extends BasePageBean {
         System.out.println("Redirect to login");
         FacesContext facesContext = FacesContext.getCurrentInstance();
         facesContext.getExternalContext().redirect("../Login.xhtml");
+    }
+
+    public String getMessage(){
+        return message;
+    }
+
+    public void setMessage(String message){
+        this.message = message;
     }
 
     public String getDocumento(){
@@ -93,5 +105,9 @@ public class RegisterBean extends BasePageBean {
 
     public void setRoles(List<String> roles){
         this.roles=roles;
+    }
+
+    public void info() {
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, message, "PrimeFaces Rocks."));
     }
 }

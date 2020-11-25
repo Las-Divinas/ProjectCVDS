@@ -19,7 +19,7 @@ public class ServicioEquipmentImpl implements ServicioEquipment {
         try {
             equipoDAO.registrarEquipo(e);
         } catch (PersistenceException ex) {
-            throw new ExceptionHistorialDeEquipos("Error al registrar el equipo");
+            throw new ExceptionHistorialDeEquipos(e.toString());
         }
     }
 
