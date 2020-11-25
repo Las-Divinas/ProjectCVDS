@@ -24,10 +24,10 @@
             <article class="card-body mx-auto"  style="max-width: 400px;">
                 <h4 class="card-title mt-3 text-center">Create Account</h4>
                 <p class="text-center">Get started with your free account</p>
+                <p:messages>
+                    <p:autoUpdate />
+                </p:messages>
                 <h:form class="justify-content-center">
-                    <p:messages>
-                        <p:autoUpdate />
-                    </p:messages>
                     <div class="form-group input-group">
                         <div class="input-group-prepend">
                             <span class="input-group-text"> <i class="fa fa-user"></i> </span>
@@ -50,7 +50,7 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text"> <i class="fa fa-user"></i> </span>
                         </div>
-                        <p:selectOneMenu id="roles" value="#{registerBean.rol}" class="custom-select"  required="true" >
+                        <p:selectOneMenu id="roles" value="#{registerBean.rol}" class="form-control" required="true" >
                             <f:selectItem itemLabel="Select Role" noSelectionOption="true" />
                             <f:selectItems value="#{registerBean.roles}" />
                         </p:selectOneMenu>

@@ -25,12 +25,12 @@
                 <div class="jumbotron text-center">
                     <h1 class="text align-self-center p-2">Añadir Novedad</h1>
                 </div>
+                <p:messages>
+                    <p:autoUpdate />
+                </p:messages>
                 <div class="row">
                     <div class="col-6">
                         <h:form class="justify-content-center">
-                            <p:messages>
-                                <p:autoUpdate />
-                            </p:messages>
                             <div class="form-group">
                                 <h:outputLabel for="Description" value="Description: " style="color: white;"/>
                                 <p:inputText class="form-control" type="String" id="DescriptionEquipment" value="#{noveltyBean.description}" placeholder="H3ll0 w0rld"/>
@@ -46,7 +46,7 @@
                                     <f:selectItems value="#{noveltyBean.nombresEquipos}"/>
                                 </p:selectOneMenu>
                             </div>
-                            <p:commandButton value="Add" class="btn btn-primary" actionListener="#{noveltyBean.registrarNovedad}"/>
+                            <p:commandButton value="Add" class="btn btn-primary" actionListener="#{noveltyBean.registrarNovedad}" action="#{noveltyBean.info}"/>
                             <p:dialog header="Modal Dialog" widgetVar="dlg2" modal="true" height="100">
                                 <h:outputText value="#{noveltyBean.message}" />
                             </p:dialog> 
@@ -54,9 +54,6 @@
                     </div>
                     <div class="col-6">
                         <h:form class="justify-content">
-                            <p:messages>
-                                <p:autoUpdate />
-                            </p:messages>
                             <div class="form-group">
                                 <h:outputLabel for="Description" value="Description: " style="color: white;"/>
                                 <p:inputText class="form-control" type="String" id="DescriptionElement" value="#{noveltyBean.description}" placeholder="H3ll0 w0rld"/>
@@ -72,7 +69,7 @@
                                     <f:selectItems value="#{noveltyBean.nombresElementos}"/>
                                 </p:selectOneMenu>
                             </div>
-                            <p:commandButton value="Add" class="btn btn-primary" actionListener="#{noveltyBean.registrarNovedadElemento}"/>
+                            <p:commandButton value="Add" class="btn btn-primary" actionListener="#{noveltyBean.registrarNovedadElemento}" action="#{noveltyBean.info}"/>
                         </h:form>
                     </div>
                 </div>

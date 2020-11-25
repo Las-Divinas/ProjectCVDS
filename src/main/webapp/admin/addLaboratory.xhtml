@@ -23,10 +23,10 @@
                 <div class="jumbotron text-center">
                     <h1 class="text align-self-center p-2">Añadir Laboratorio</h1>
                 </div>
-                <h:form class="justify-content-center">
-                    <p:messages>
+                <p:messages>
                         <p:autoUpdate />
                     </p:messages>
+                <h:form class="justify-content-center">
                     <div class="form-group">
                         <h:outputLabel for="name" value="Name: " style="color: white;"/>
                         <p:inputText class="form-control" type="String" id="name" value="#{laboratoryBean.laboratory_name}"/>

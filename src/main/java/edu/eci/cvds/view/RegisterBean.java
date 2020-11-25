@@ -36,9 +36,7 @@ public class RegisterBean extends BasePageBean {
     public void registerNewUser() throws ExceptionHistorialDeEquipos, IOException{
         try {
             servicioUsuario.registrarUsuario(new Usuario(documento, correo, nombre,new Sha512Hash(contraseña).toHex(),rol));
-            FacesContext facesContext = FacesContext.getCurrentInstance();
-            message = "Login correcto";
-            facesContext.getExternalContext().redirect("../Login.xhtml");
+            message = "Se ha registrado correctamente el usuario";
         } catch (ExceptionHistorialDeEquipos e) {
             message = "Error al registrar el usuario";
             throw new ExceptionHistorialDeEquipos("Error al registrar el usuario");

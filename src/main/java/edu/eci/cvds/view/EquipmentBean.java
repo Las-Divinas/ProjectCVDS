@@ -186,7 +186,7 @@ public class EquipmentBean extends BasePageBean{
     }
 
     public Integer getLaboratory_id(){
-        return id;
+        return laboratory_id;
     }
 
     public void setLaboratory_id(Integer laboratory_id){

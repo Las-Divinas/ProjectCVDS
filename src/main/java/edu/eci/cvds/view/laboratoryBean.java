@@ -59,24 +59,29 @@ public class laboratoryBean extends BasePageBean{
     }
 
     public void registrarLaboratorio() throws ExceptionHistorialDeEquipos {
-        //-----Registro de Laboratorio-----
-        Date date = new Date(System.currentTimeMillis());
-        Laboratory laboratory = new Laboratory(laboratory_name, description,"ACTIVO",date,null);
-        servicioLaboratory.registrarLaboratorio(laboratory);
+        try {
+            //-----Registro de Laboratorio-----
+            Date date = new Date(System.currentTimeMillis());
+            Laboratory laboratory = new Laboratory(laboratory_name, description,"ACTIVO",date,null);
+            servicioLaboratory.registrarLaboratorio(laboratory);
 
-        //-----Registro de Novedad al crear nuevo Laboratorio
-        //* Obtener Usuario que esta realizando actividad
-        FacesContext facesContext = FacesContext.getCurrentInstance();
-        HttpSession httpSession = (HttpSession) facesContext.getExternalContext().getSession(true);
-        String sessionCorreo = (String) httpSession.getAttribute("correo");
-        Usuario usuario = servicioUsuario.consultarIdUsuarioPorCorreo(sessionCorreo);
-        //* Obtener ID del Elemento creado
-        Integer laboratorioID = servicioLaboratory.consultarUltimoIdLaboratorio();
-        //* Generar Novedad
-        Novelty novelty = new Novelty("El laboratorio "+laboratory_name+" ha sido creado", "Laboratorio Creado", date, usuario.getDocumento(), laboratorioID, "Laboratory");
-        servicioNovelty.registrarNovedad(novelty);
-        //* Mensaje POPUP
-        message = "Laboratorio Creado Correctamente";
+            //-----Registro de Novedad al crear nuevo Laboratorio
+            //* Obtener Usuario que esta realizando actividad
+            FacesContext facesContext = FacesContext.getCurrentInstance();
+            HttpSession httpSession = (HttpSession) facesContext.getExternalContext().getSession(true);
+            String sessionCorreo = (String) httpSession.getAttribute("correo");
+            Usuario usuario = servicioUsuario.consultarIdUsuarioPorCorreo(sessionCorreo);
+            //* Obtener ID del Elemento creado
+            Integer laboratorioID = servicioLaboratory.consultarUltimoIdLaboratorio();
+            //* Generar Novedad
+            Novelty novelty = new Novelty("El laboratorio "+laboratory_name+" ha sido creado", "Laboratorio Creado", date, usuario.getDocumento(), laboratorioID, "Laboratory");
+            servicioNovelty.registrarNovedad(novelty);
+            //* Mensaje POPUP
+            message = "Laboratorio Creado Correctamente";
+        } catch (Exception e) {
+            message = "Error al crear el laboratorio";
+            throw new ExceptionHistorialDeEquipos("Error al registrar Laboratorio");
+        }
     }
 
 

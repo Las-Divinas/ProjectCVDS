@@ -23,20 +23,25 @@ public class LoginBean extends BasePageBean{
      */
     @Inject
     private Logger logger;
+    
     private String email;
     private String password;
     private Boolean remember;
     private String message;
 
     public void login() throws IOException, ExceptionHistorialDeEquipos{
-        System.out.println("Hola entre en el login");
         boolean isLogger = logger.isLogged();
-        if(!isLogger){
-            System.out.println("Hola entre 2");
-            logger.login(email, password, false);
-            redirectHomeUser();
-        } else{
-            existingSession();
+        try {
+            if(!isLogger){
+                message = "Login Correcto";
+                logger.login(email, password, false);
+                redirectHomeUser();
+            } else{
+                existingSession();
+            }
+        } catch (Exception e) {
+            message = "Credenciales incorrectas";
+            throw new ExceptionHistorialDeEquipos("Credenciales incorrectas");
         }
     }
 

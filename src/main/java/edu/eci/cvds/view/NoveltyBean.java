@@ -48,7 +48,6 @@ public class NoveltyBean extends BasePageBean{
     private int idEquipment;
     private String title;
     private int idElement;
-    private Integer laboratoryID;
     private String message;
     private List<Novelty> novedadBusquedaBasica;
     private List<Equipment> equipos;
@@ -70,8 +69,8 @@ public class NoveltyBean extends BasePageBean{
         String correoSession = (String) session.getAttribute("correo");
         Usuario usuario = servicioUsuario.consultarIdUsuarioPorCorreo(correoSession);
         idEquipment = getIdByNameEquipment(nombreEquipo);
-        Novelty novelty = new Novelty(id, description,title, date , usuario.getDocumento(), idEquipment, 0);
-        message = "Se agrego la nueva novedad al equipo "+idEquipment;
+        Novelty novelty = new Novelty(id, description,title, date , usuario.getDocumento(), idEquipment);
+        message = "Se agrego la nueva novedad al equipo "+nombreEquipo;
         servicioNovelty.registrarNovedad(novelty);
     }
 
@@ -85,7 +84,7 @@ public class NoveltyBean extends BasePageBean{
         Element elemento = servicioElement.consultarElementoPorId(idElement);
         System.out.println(elemento.getElement_name()+"-------------"+elemento.getId_equipment());
         Novelty novelty = new Novelty(description,title, date, usuario.getDocumento(), elemento.getId_equipment(), idElement);
-        message = "Se agrego la nueva novedad al elemento "+idElement+" del equipo "+elemento.getId_equipment();
+        message = "Se agrego la nueva novedad al elemento "+nombreElemento+" del equipo "+servicioEquipment.consultarEquipoPorId(elemento.getId_equipment()).getEquipment_name();
         servicioNovelty.registrarNovedad(novelty);
     }
 

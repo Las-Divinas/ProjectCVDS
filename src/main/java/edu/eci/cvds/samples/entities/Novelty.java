@@ -19,7 +19,7 @@ public class  Novelty implements Serializable {
     public Novelty() {
     }
 
-    public Novelty(int id,String description,String title, Date date,String user_id,int equipment_id) {
+    public Novelty(int id,String description,String title, Date date,String user_id,Integer equipment_id) {
         this.id=id;
         this.description = description;
         this.date = date;
