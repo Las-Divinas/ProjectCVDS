@@ -11,20 +11,14 @@ import javax.servlet.http.HttpSession;
 
 import com.google.inject.Inject;
 
-import edu.eci.cvds.samples.entities.Equipment;
-import edu.eci.cvds.samples.entities.Laboratory;
-import edu.eci.cvds.samples.entities.Novelty;
-import edu.eci.cvds.samples.entities.Usuario;
-import edu.eci.cvds.samples.services.ExceptionHistorialDeEquipos;
-import edu.eci.cvds.samples.services.ServicioEquipment;
-import edu.eci.cvds.samples.services.ServicioLaboratory;
-import edu.eci.cvds.samples.services.ServicioNovelty;
-import edu.eci.cvds.samples.services.ServicioUsuario;
+import edu.eci.cvds.samples.entities.*;
+import edu.eci.cvds.samples.services.*;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
 
 @ManagedBean(name = "equipmentBean")
 @SessionScoped
@@ -43,8 +37,12 @@ public class EquipmentBean extends BasePageBean{
     @Inject
     private ServicioNovelty servicioNovelty;
 
+    @Inject
+    private ServicioElement servicioElement;
+
     private int id;
     private String equipment_name;
+    private String nombreEquipo;
     private String description;
     private Integer laboratory_id;
     private String message = "Se creo el equipo con exito";
@@ -73,8 +71,7 @@ public class EquipmentBean extends BasePageBean{
     public void registrarEquipo() throws ExceptionHistorialDeEquipos, IOException{
         message = "El equipo "+equipment_name+" ha sido creado con exito.";
         //-----Registro de Equipo-----
-        int idLaboratorio = getIdByNameLaboratory(nombreLaboratorio);
-        Equipment equipment = new Equipment(equipment_name, description, idLaboratorio, "ACTIVO");
+        Equipment equipment = new Equipment(equipment_name, description, "ACTIVO");
         servicioEquipment.registrarEquipment(equipment);
 
         //-----Registro de Novedad al crear nuevo Equipo----
@@ -90,8 +87,6 @@ public class EquipmentBean extends BasePageBean{
         Novelty novelty = new Novelty("El equipo "+equipment_name+" ha sido creado", "Equipo Creado", date, usuario.getDocumento(), equipmentID, "Equipment");
         servicioNovelty.registrarNovedad(novelty);
         //* Redirigir para Seleccionar Elementos del Equipo
-        servicioNovelty.registrarNovedad(novelty);
-        message = "Equipo registrado correctamente";
         facesContext.getExternalContext().redirect("../admin/selectElement.xhtml");
     }
 
@@ -127,6 +122,26 @@ public class EquipmentBean extends BasePageBean{
         SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
 
         return format.format(date);
+    }
+
+    public void darDeBajaEquipo() throws ExceptionHistorialDeEquipos {
+        Integer equipoID;
+        List<Element> elementosAsociados;
+
+        message = "El equipo "+nombreEquipo+" fue dado de baja.";
+
+        equiposBusquedaBasica = servicioEquipment.consultarEquipos();
+
+        equipoID = getEquipoIDporNombre(nombreEquipo);
+
+        elementosAsociados = servicioElement.consultarElementosPorEquipo(equipoID);
+
+        for(Element e:elementosAsociados) {
+            servicioElement.cambiarIdEquipoParaElemento(null, e.getId());
+        }
+
+        servicioEquipment.cambiarLaboratorioEquipo(null, equipoID);
+        servicioEquipment.cambiarEstadoElementoId(equipoID, "INACTIVO");
     }
 
     public String getNombreLaboratorio(){
@@ -207,5 +222,28 @@ public class EquipmentBean extends BasePageBean{
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, message, "PrimeFaces Rocks."));
     }
 
+    public String getNombreEquipo() {
+        return nombreEquipo;
+    }
 
+    public void setNombreEquipo(String nombreEquipo) {
+        this.nombreEquipo = nombreEquipo;
+    }
+
+    public List<String> getNombresDeEquipos() throws ExceptionHistorialDeEquipos {
+        List<String> nombresDeEquipos;
+
+        nombresDeEquipos = new ArrayList<>();
+        equiposBusquedaBasica = servicioEquipment.consultarEquipos();
+
+        for(Equipment e:equiposBusquedaBasica) {
+            nombresDeEquipos.add(e.getEquipment_name());
+        }
+
+        return nombresDeEquipos;
+    }
+
+    public Integer getEquipoIDporNombre(String nombreEquipo) throws ExceptionHistorialDeEquipos {
+        return servicioEquipment.consultarEquipoIDporNombre(nombreEquipo);
+    }
 }

@@ -54,4 +54,8 @@
         SELECT e.equipment_name FROM equipment e
         WHERE e.id = #{equipmentID};
     </select>
+    <select id="consultarEquipoIDporNombre" resultType="Integer">
+        SELECT e.id FROM equipment e
+        WHERE e.equipment_name = #{nombreEquipo};
+    </select>
 </mapper>

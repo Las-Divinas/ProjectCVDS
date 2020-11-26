@@ -8,6 +8,8 @@ import edu.eci.cvds.sampleprj.dao.EquipoDAO;
 import edu.eci.cvds.sampleprj.dao.PersistenceException;
 import edu.eci.cvds.sampleprj.dao.mybatis.mappers.EquipoMapper;
 import edu.eci.cvds.samples.entities.Equipment;
+import edu.eci.cvds.samples.services.ExceptionHistorialDeEquipos;
+
 import java.util.List;
 
 public class MyBatisEquipoDAO implements EquipoDAO {
@@ -51,7 +53,7 @@ public class MyBatisEquipoDAO implements EquipoDAO {
     }
 
     @Override
-    public void cambiarLaboratorio(int idLaboratory, int idEquipment) throws PersistenceException {
+    public void cambiarLaboratorio(Integer idLaboratory, Integer idEquipment) throws PersistenceException {
         try {
             equipoMapper.cambiarLaboratorio(idLaboratory, idEquipment);
         } catch (Exception e) {
@@ -101,5 +103,13 @@ public class MyBatisEquipoDAO implements EquipoDAO {
             throw new PersistenceException(e.toString());
         }
     }
-    
+
+    @Override
+    public Integer consultarEquipoIDporNombre(String nombreEquipo) throws PersistenceException {
+        try {
+            return equipoMapper.consultarEquipoIDporNombre(nombreEquipo);
+        } catch (Exception e) {
+            throw new PersistenceException("Error al consultar ID del equipo.");
+        }
+    }
 }

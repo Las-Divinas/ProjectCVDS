@@ -51,7 +51,7 @@ public class ServicioEquipmentImpl implements ServicioEquipment {
     }
 
     @Override
-    public void cambiarLaboratorioEquipo(int idLaboratory, int idEquipment) throws ExceptionHistorialDeEquipos {
+    public void cambiarLaboratorioEquipo(Integer idLaboratory, Integer idEquipment) throws ExceptionHistorialDeEquipos {
         try {
             equipoDAO.cambiarLaboratorio(idLaboratory, idEquipment);
         } catch (Exception e) {
@@ -93,6 +93,14 @@ public class ServicioEquipmentImpl implements ServicioEquipment {
             return equipoDAO.consultarNombreEquipo(equipmentID);
         } catch (Exception e) {
             throw new ExceptionHistorialDeEquipos(e.toString());
+        }
+    }
+    @Override
+    public Integer consultarEquipoIDporNombre(String nombreEquipo) throws ExceptionHistorialDeEquipos {
+        try {
+            return equipoDAO.consultarEquipoIDporNombre(nombreEquipo);
+        } catch (Exception e) {
+            throw new ExceptionHistorialDeEquipos("Error al consultar ID del equipo");
         }
     }
 }

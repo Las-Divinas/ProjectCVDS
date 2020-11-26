@@ -2,6 +2,7 @@ package edu.eci.cvds.samples.services;
 
 import java.util.List;
 
+import edu.eci.cvds.sampleprj.dao.PersistenceException;
 import edu.eci.cvds.samples.entities.Element;
 
 public interface ServicioElement {
@@ -15,4 +16,5 @@ public interface ServicioElement {
     Element seleccionarElementoPorIdEquipo(int idEquipment, String tipo) throws ExceptionHistorialDeEquipos;
     String consultarNombreElemento(Integer elementoID) throws ExceptionHistorialDeEquipos;
     List<Element> consultarElementoNoAsociado(String type) throws ExceptionHistorialDeEquipos;
+    List<Element> consultarElementosPorEquipo(Integer equipoID) throws ExceptionHistorialDeEquipos;
 }

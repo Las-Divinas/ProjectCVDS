@@ -148,7 +148,7 @@ public class ElementBean extends BasePageBean{
 
     public void deleteElement() throws ExceptionHistorialDeEquipos{
         this.message = "PRUEBA";
-        int idElement = getIdByNameElement(nombreElemento);
+        Integer idElement = getIdByNameElement(nombreElemento);
         Element element = servicioElement.consultarElementoPorId(idElement);
         if(element.getId_equipment() == null && !element.getEstado().equals("ACTIVO")){
             message = "El elemento "+element.getElement_name()+" fue dado de baja.";

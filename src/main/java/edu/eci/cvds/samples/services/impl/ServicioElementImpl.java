@@ -5,6 +5,7 @@ import java.util.List;
 import com.google.inject.Inject;
 
 import edu.eci.cvds.sampleprj.dao.ElementoDAO;
+import edu.eci.cvds.sampleprj.dao.PersistenceException;
 import edu.eci.cvds.samples.entities.Element;
 import edu.eci.cvds.samples.services.ExceptionHistorialDeEquipos;
 import edu.eci.cvds.samples.services.ServicioElement;
@@ -102,6 +103,15 @@ public class ServicioElementImpl implements ServicioElement {
             return elementoDAO.consultarElementoNoAsociado(type);
         } catch (Exception e) {
             throw new ExceptionHistorialDeEquipos("Error al consultar teclados no asociados");
+        }
+    }
+
+    @Override
+    public List<Element> consultarElementosPorEquipo(Integer equipoID) throws ExceptionHistorialDeEquipos {
+        try {
+            return elementoDAO.consultarElementosPorEquipo(equipoID);
+        } catch (Exception e) {
+            throw new ExceptionHistorialDeEquipos("Error al consultar elementos asociados a equipo");
         }
     }
 }
