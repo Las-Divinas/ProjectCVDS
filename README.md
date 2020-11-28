@@ -1,4 +1,7 @@
 # ECI Historial de Equipos
+[![CircleCI](https://circleci.com/gh/Las-Divinas/ProjectCVDS.svg?style=svg)](https://github.com/Las-Divinas/ProjectCVDS) [![Codacy Badge](https://app.codacy.com/project/badge/Grade/c8d1257ced7646d39cc0ba4e6957f348)](https://www.codacy.com/gh/Las-Divinas/ProjectCVDS/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Las-Divinas/ProjectCVDS&amp;utm_campaign=Badge_Grade)
+
+[![Heroku](https://www.herokucdn.com/deploy/button.svg)](https://vast-garden-17209.herokuapp.com/)
 ## CVDS 2020-2
 ### Product Owner
 * Julian Mauricio Velasco Briceño
@@ -11,9 +14,7 @@
 
 ## Descripción del Producto
 
-## Arquitectura y Diseño Detallado
-
-[![App Launcher](https://www.herokucdn.com/deploy/button.svg)](https://vast-garden-17209.herokuapp.com/)
+## Arquitectura y Diseño Detallado 
 
 ## Descripción del Proceso
 
@@ -33,8 +34,6 @@
 ### SPRINT 1
 #### Burndown Chart
 ![sprint01-burndown chart](/imagenes_README/Sprint01.png)
-
-#### Descripción
 
 ### SPRINT 2
 #### Burndown Chart
