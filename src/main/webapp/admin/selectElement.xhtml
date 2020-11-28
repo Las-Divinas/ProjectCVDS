@@ -15,15 +15,13 @@
 </h:head>
 <h:body>
     <div class="container h-100">
-        <h:form>
-            <div class="float-sm-right">
-                <p:commandButton value="Atras" action="#{loginBean.redirectHomeUser}" class="btn btn-danger"/>
-            </div>
-        </h:form>
         <div class="d-flex justify-content-center align-items-center">
             <div class="d-flex flex-column">
-                <div class="jumbotron text-center">
-                    <h1 class="text align-self-center p-2">Añadir Elemento</h1>
+                <div class="p-0 btn-group justify-content-lg-center">
+                    <img src="../image/logo.jpg" height="200" width="200"/>
+                    <div class="btn-group jumbotron justify-content-center" style="background-color: #000000; color: #ffffff; font-family: Consolas;">
+                        <h1 class="text align-self-center p-2">Selección de Elemento para Equipo</h1>
+                    </div>
                 </div>
                 <h:form class="justify-content-center">
                     <div class="form-group">
@@ -48,7 +46,10 @@
                             <f:selectItems value="#{elementBean.nombreTorreNoAsociado}"/>
                         </p:selectOneMenu>
                     </div>
-                    <p:commandButton value="Añadir Elementos a Equipo" class="btn btn-primary" actionListener="#{elementBean.asociarElementoEquipo}" action="#{elementBean.info}"/>
+                    <div class="p-2 row justify-content-center h-100">
+                        <p:commandButton value="Añadir Elementos a Equipo" style="margin: 10px; font-family: Consolas;" class="btn btn-primary" actionListener="#{elementBean.asociarElementoEquipo}" action="#{elementBean.info}"/>
+                        <p:commandButton value="Atras" style="margin: 10px; font-family: Consolas;" action="#{loginBean.redirectHomeUser}" class="btn btn-danger"/>
+                    </div>
                 </h:form>
             </div>
         </div>

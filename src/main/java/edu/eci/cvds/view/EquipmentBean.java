@@ -96,7 +96,7 @@ public class EquipmentBean extends BasePageBean{
         for(int i=0; i < equiposSeleccionados.size(); i++){
             System.out.println("------------------------------Entre"+i+"---------------------------------------");
             int idElemento = equiposSeleccionados.get(i).getId();
-            servicioEquipment.cambiarEstadoElementoId(idElemento,"NO_ACTIVO");
+            servicioEquipment.cambiarEstadoElementoId(idElemento,"INACTIVO");
         }
         equiposBusquedaBasica = servicioEquipment.consultarEquipos();
     }

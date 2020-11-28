@@ -24,17 +24,21 @@
                     </div>
                 </div>
                 <div class="p-2 btn-group justify-content-center" role="group" aria-label="Basic example">
+                    <a class="btn btn-primary" href="../admin/Register.xhtml" style="font-family: Consolas;">Crear Nuevo Usuario</a>
+                </div>
+                <div class="p-2 btn-group justify-content-center" role="group" aria-label="Basic example">
                     <a class="btn btn-primary" href="../public/consultEquipment.xhtml" style="font-family: Consolas;">Consultar Equipos</a>
                     <a class="btn btn-primary" href="../public/consultElement.xhtml" style="font-family: Consolas;">Consultar Elementos</a>
                     <a class="btn btn-primary" href="../public/consultLaboratory.xhtml" style="font-family: Consolas;">Consultar Laboratorios</a>
                     <a class="btn btn-primary" href="../public/consultNovelty.xhtml" style="font-family: Consolas;">Consultar Novedades</a>
                 </div>
                 <div class="p-2 btn-group justify-content-center" role="group" aria-label="Basic example">
-                    <a class="btn btn-primary" href="../admin/addEquipment.xhtml" style="font-family: Consolas;">Añadir Equipo</a>
-                    <a class="btn btn-primary" href="../admin/addElement.xhtml" style="font-family: Consolas;">Añadir Elemento</a>
-                    <a class="btn btn-primary" href="../admin/addNovelty.xhtml" style="font-family: Consolas;">Añadir Novedad</a>
-                    <a class="btn btn-primary" href="../admin/addLaboratory.xhtml" style="font-family: Consolas;">Añadir Laboratorio</a>
-                    <a class="btn btn-primary" href="../admin/Register.xhtml" style="font-family: Consolas;">Registrar Nuevo Usuario</a>
+                    <a class="btn btn-primary" href="../admin/addEquipment.xhtml" style="font-family: Consolas;">Registrar Equipo</a>
+                    <a class="btn btn-primary" href="../admin/addElement.xhtml" style="font-family: Consolas;">Registrar Elemento</a>
+                    <a class="btn btn-primary" href="../admin/addNovelty.xhtml" style="font-family: Consolas;">Registrar Novedad</a>
+                    <a class="btn btn-primary" href="../admin/addLaboratory.xhtml" style="font-family: Consolas;">Registrar Laboratorio</a>
+                </div>
+                <div class="p-2 btn-group justify-content-center" role="group" aria-label="Basic example">
                     <a class="btn btn-primary" href="../admin/associateElement.xhtml" style="font-family: Consolas;">Asociar Elemento a Equipo</a>
                 </div>
                 <div class="p-2 btn-group justify-content-center" role="group" aria-label="Basic example">
@@ -43,7 +47,7 @@
                 </div>
                 <h:form>
                     <div class="p-2 row justify-content-center h-100" style="font-family: Consolas;">
-                        <p:commandButton value="Salir" action="#{loginBean.logout}" class="btn btn-danger"/>
+                        <p:commandButton value="Salir" style="margin: 10px; font-family: Consolas;" action="#{loginBean.logout}" class="btn btn-danger"/>
                     </div>
                 </h:form>
             </div>

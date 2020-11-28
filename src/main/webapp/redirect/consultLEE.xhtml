@@ -16,53 +16,58 @@
 <h:body style="font-family: 'Oswald', sans-serif; background-color:rgba(218, 218, 221, 0.932);">
     <div class="container h-100">
         <div class="d-flex justify-content-center align-items-center">
-            <h:form>
-                <div class="float-sm-right">
-                    <p:commandButton value="Atras" action="#{loginBean.redirectHomeUser}" class="btn btn-danger"/>
+            <div class="d-flex flex-column">
+                <div class="p-0 btn-group justify-content-lg-center">
+                    <img src="../image/logo.jpg" height="200" width="200"/>
+                    <div class="btn-group jumbotron justify-content-center" style="background-color: #000000; color: #ffffff; font-family: Consolas;">
+                        <h1 class="text align-self-center p-2">Novedades Registradas</h1>
+                    </div>
                 </div>
-                <div class="jumbotron text-center">
-                    <h1 class="text align-self-center p-2">Novedades</h1>
+                <h:form>
+                    <p:dataTable id="tbl" var="novelty" value="#{noveltyBean.novedadLEE}" rows="10"
+                                 paginator="true"
+                                 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {Exporters}"
+                                 currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records"
+                                 rowsPerPageTemplate="5,10,15"
+                                 styleClass="table-dark table-striped table-bordered justify-content-center">
+                        <f:facet name="{Exporters}">
+                            <div style="float:right;margin-right: 2%;">
+                                <h:commandLink>
+                                    <p:graphicImage url="../image/excel.png" width="22"/>
+                                    <p:dataExporter type="xls" target="tbl" fileName="novelty" encoding="UTF-8"/>
+                                </h:commandLink>
+                            </div>
+                        </f:facet>
+                        <p:column headerText="Id" filterBy="#{novelty.id}" style="text-align: center" sortBy="#{novelty.id}">
+                            <h:outputText value="#{novelty.id}"/>
+                        </p:column>
+                        <p:column headerText="Fecha" style="text-align: center" filterBy="#{noveltyBean.darFormatoFehca(novelty.date)}" sortBy="#{noveltyBean.darFormatoFehca(novelty.date)}">
+                            <h:outputText value="#{noveltyBean.darFormatoFehca(novelty.date)}"/>
+                        </p:column>
+                        <p:column headerText="Usuario" style="text-align: center" filterBy="#{usuarioBean.consultarNombreUsuario(novelty.user_id)}" sortBy="#{usuarioBean.consultarNombreUsuario(novelty.user_id)}">
+                            <h:outputText value="#{usuarioBean.consultarNombreUsuario(novelty.user_id) }"/>
+                        </p:column>
+                        <p:column headerText="Tipo" style="text-align: center" filterBy="#{novelty.title}" sortBy="#{novelty.title}">
+                            <h:outputText value="#{novelty.title}"/>
+                        </p:column>
+                        <p:column headerText="Descripción" style="text-align: center" align="cen" filterBy="#{novelty.description}" sortBy="#{novelty.description}">
+                            <h:outputText value="#{novelty.description}"/>
+                        </p:column>
+                        <p:column headerText="Laboratorio" style="text-align: center" filterBy="#{laboratoryBean.consultarNombreLaboratorio(novelty.laboratory_id)}" sortBy="#{laboratoryBean.consultarNombreLaboratorio(novelty.laboratory_id)}">
+                            <h:outputText value="#{laboratoryBean.consultarNombreLaboratorio(novelty.laboratory_id)}"/>
+                        </p:column>
+                        <p:column headerText="Equipo" style="text-align: center" filterBy="#{equipmentBean.consultarNombreEquipo(novelty.equipment_id)}" sortBy="#{equipmentBean.consultarNombreEquipo(novelty.equipment_id)}">
+                            <h:outputText value="#{equipmentBean.consultarNombreEquipo(novelty.equipment_id)}"/>
+                        </p:column>
+                        <p:column headerText="Elemento" style="text-align: center" filterBy="#{elementBean.consultarNombreElemento(novelty.element_id)}" sortBy="#{elementBean.consultarNombreElemento(novelty.element_id)}">
+                            <h:outputText value="#{elementBean.consultarNombreElemento(novelty.element_id)}"/>
+                        </p:column>
+                    </p:dataTable>
+                </h:form>
+                <div class="p-2 row justify-content-center h-100" style="font-family: Consolas;">
+                    <p:commandButton value="Atras" style="margin: 10px; font-family: Consolas;" action="#{loginBean.redirectHomeUser}" class="btn btn-danger"/>
                 </div>
-                <p:dataTable id="tbl" var="novelty" value="#{noveltyBean.novedadLEE}" rows="10"
-                             paginator="true"
-                             paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {Exporters}"
-                             currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records"
-                             rowsPerPageTemplate="5,10,15"
-                             styleClass="table-dark table-striped table-bordered justify-content-center">
-                    <f:facet name="{Exporters}">
-                        <div style="float:right;margin-right: 2%;">
-                            <h:commandLink>
-                                <p:graphicImage url="../image/excel.png" width="22"/>
-                                <p:dataExporter type="xls" target="tbl" fileName="novelty" encoding="UTF-8"/>
-                            </h:commandLink>
-                        </div>
-                    </f:facet>
-                    <p:column headerText="Id" filterBy="#{novelty.id}" style="text-align: center" sortBy="#{novelty.id}">
-                        <h:outputText value="#{novelty.id}"/>
-                    </p:column>
-                    <p:column headerText="Fecha" style="text-align: center" filterBy="#{noveltyBean.darFormatoFehca(novelty.date)}" sortBy="#{noveltyBean.darFormatoFehca(novelty.date)}">
-                        <h:outputText value="#{noveltyBean.darFormatoFehca(novelty.date)}"/>
-                    </p:column>
-                    <p:column headerText="Usuario" style="text-align: center" filterBy="#{usuarioBean.consultarNombreUsuario(novelty.user_id)}" sortBy="#{usuarioBean.consultarNombreUsuario(novelty.user_id)}">
-                        <h:outputText value="#{usuarioBean.consultarNombreUsuario(novelty.user_id) }"/>
-                    </p:column>
-                    <p:column headerText="Tipo" style="text-align: center" filterBy="#{novelty.title}" sortBy="#{novelty.title}">
-                        <h:outputText value="#{novelty.title}"/>
-                    </p:column>
-                    <p:column headerText="Descripción" style="text-align: center" align="cen" filterBy="#{novelty.description}" sortBy="#{novelty.description}">
-                        <h:outputText value="#{novelty.description}"/>
-                    </p:column>
-                    <p:column headerText="Laboratorio" style="text-align: center" filterBy="#{laboratoryBean.consultarNombreLaboratorio(novelty.laboratory_id)}" sortBy="#{laboratoryBean.consultarNombreLaboratorio(novelty.laboratory_id)}">
-                        <h:outputText value="#{laboratoryBean.consultarNombreLaboratorio(novelty.laboratory_id)}"/>
-                    </p:column>
-                    <p:column headerText="Equipo" style="text-align: center" filterBy="#{equipmentBean.consultarNombreEquipo(novelty.equipment_id)}" sortBy="#{equipmentBean.consultarNombreEquipo(novelty.equipment_id)}">
-                        <h:outputText value="#{equipmentBean.consultarNombreEquipo(novelty.equipment_id)}"/>
-                    </p:column>
-                    <p:column headerText="Elemento" style="text-align: center" filterBy="#{elementBean.consultarNombreElemento(novelty.element_id)}" sortBy="#{elementBean.consultarNombreElemento(novelty.element_id)}">
-                        <h:outputText value="#{elementBean.consultarNombreElemento(novelty.element_id)}"/>
-                    </p:column>
-                </p:dataTable>
-            </h:form>
+            </div>
         </div>
     </div>
 </h:body>

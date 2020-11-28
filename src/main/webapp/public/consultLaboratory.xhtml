@@ -17,13 +17,13 @@
     <div class="container h-100">
         <div class="d-flex justify-content-center align-items-center">
             <div class="d-flex flex-column">
+                <div class="p-0 btn-group justify-content-lg-center">
+                    <img src="../image/logo.jpg" height="200" width="200"/>
+                    <div class="btn-group jumbotron justify-content-center" style="background-color: #000000; color: #ffffff; font-family: Consolas;">
+                        <h1 class="text align-self-center p-2">Consulta de Laboratorios</h1>
+                    </div>
+                </div>
                 <h:form>
-                    <div class="float-sm-right">
-                        <p:commandButton value="Atras" action="#{loginBean.redirectHomeUser}" class="btn btn-danger"/>
-                    </div>
-                    <div class="jumbotron text-center">
-                        <h1 class="text align-self-center p-2">Laboratorios</h1>
-                    </div>
                     <p:dataTable id="tbl" var="laboratory" value="#{laboratoryBean.laboratoriosBusquedaBasica}" rows="10"
                             paginator="true"
                             paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {Exporters}"
@@ -68,7 +68,7 @@
                     </p:dataTable>
                    <!--  <h1 style="color:antiquewhite">Estadisticas Elementos laboratorio</h1> -->
                     <br/>
-                    <p:chart style="opacity: 0.8;-moz-opacity: 0.8;filter: alpha(opacity=10);-khtml-opacity: 0.8;width: 70%;margin-left: 15%;border-radius: 10px;background-color: mintcream;" type="pie" id="pie"
+                    <p:chart style="opacity: 1;-moz-opacity: 1;filter: alpha(opacity=10);-khtml-opacity: 1;width: 70%;margin-left: 15%;border-radius: 10px;background-color: mintcream; color: white;" type="pie" id="pie"
                             responsive="true"
                             model="#{laboratoryBean.generarEstadistica()}"
 
@@ -77,13 +77,16 @@
                     <br/>
                     <!-- <h1 style="color:antiquewhite">Estadisticas estado laboratorios</h1> -->
                     <br/>
-                    <p:chart style="opacity: 0.8;-moz-opacity: 0.8;filter: alpha(opacity=10);-khtml-opacity: 0.8;width: 70%;margin-left: 15%;border-radius: 10px;background-color: mintcream;" type="pie" id="pie2"
+                    <p:chart style="opacity: 1;-moz-opacity: 1;filter: alpha(opacity=10);-khtml-opacity: 1;width: 70%;margin-left: 15%;border-radius: 10px;background-color: mintcream; color: white;" type="pie" id="pie2"
                             responsive="true"
                             model="#{laboratoryBean.generarEstadisticaEstado()}"
 
                     />
 
                     <br/>
+                    <div class="p-2 row justify-content-center h-100" style="font-family: Consolas;">
+                        <p:commandButton value="Atras" style="margin: 10px; font-family: Consolas;" action="#{loginBean.redirectHomeUser}" class="btn btn-danger"/>
+                    </div>
                 </h:form>
             </div>
         </div>

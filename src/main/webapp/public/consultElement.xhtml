@@ -18,13 +18,13 @@
     <div class="container h-100">
         <div class="d-flex justify-content-center align-items-center">
             <div class="d-flex flex-column">
+                <div class="p-0 btn-group justify-content-lg-center">
+                    <img src="../image/logo.jpg" height="200" width="200"/>
+                    <div class="btn-group jumbotron justify-content-center" style="background-color: #000000; color: #ffffff; font-family: Consolas;">
+                        <h1 class="text align-self-center p-2">Consulta de Elementos</h1>
+                    </div>
+                </div>
                 <h:form>
-                    <div class="float-sm-right">
-                        <p:commandButton value="Atras" action="#{loginBean.redirectHomeUser}" class="btn btn-danger"/>
-                    </div>
-                    <div class="jumbotron text-center">
-                        <h1 class="text align-self-center p-2">Elementos</h1>
-                    </div>
                     <p:dataTable id="tbl" var="element" value="#{elementBean.elementosBusquedaBasica}" rows="10"
                             paginator="true"
                             paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {Exporters}"
@@ -60,8 +60,9 @@
                             <p:commandButton class="btn btn-success btn-sm" value="Novedades" actionListener="#{noveltyBean.consultarNovedadElementoID(element.id)}"/>
                         </p:column>
                     </p:dataTable>
-                    <div class="float-sm-lefth" style="margin: 20px;">
-                        <p:commandButton update="tbl" class="btn btn-primary" value="Eliminar" actionListener="#{elementBean.eliminarElementos}" onclick="PF('dlg2').show();"/>
+                    <div class="p-2 row justify-content-center h-100">
+                        <p:commandButton update="tbl" class="btn btn-primary" style="margin: 10px; font-family: Consolas;" value="Dar de Baja Elemento" actionListener="#{elementBean.eliminarElementos}" onclick="PF('dlg2').show();"/>
+                        <p:commandButton value="Atras" style="margin: 10px; font-family: Consolas;" action="#{loginBean.redirectHomeUser}" class="btn btn-danger"/>
                     </div>
                     <p:dialog header="Modal Dialog" widgetVar="dlg2" modal="true" height="100">
                         <h:outputText value="#{elementBean.message}" />

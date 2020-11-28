@@ -16,27 +16,30 @@
 </h:head>
 <h:body>
     <div class="container h-100">
-        <div class="float-sm-right">
-            <p:commandButton value="Atras" action="#{loginBean.comeBack}" class="btn btn-danger"/>
-        </div>
         <div class="d-flex justify-content-center align-items-center">
             <div class="d-flex flex-column">
-                <div class="jumbotron text-center">
-                    <h1 class="text align-self-center p-2">Añadir Equipo</h1>
+                <div class="p-0 btn-group justify-content-lg-center">
+                    <img src="../image/logo.jpg" height="200" width="200"/>
+                    <div class="btn-group jumbotron justify-content-center" style="background-color: #000000; color: #ffffff; font-family: Consolas;">
+                        <h1 class="text align-self-center p-2">Registrar Nuevo Equipo</h1>
+                    </div>
                 </div>
                 <h:form class="justify-content-center">
                     <p:messages>
                         <p:autoUpdate />
                     </p:messages>
-                    <div class="form-group">
-                        <h:outputLabel for="Name" value="Name: " style="color: white;"/>
+                    <div class="p-2 row justify-content-center h-100" style="font-family: Consolas;">
+                        <h:outputLabel for="Name" value="Name" style="color: white;"/>
                         <p:inputText class="form-control" type="String" id="name" value="#{equipmentBean.equipment_name}" placeholder="Name"/>
                     </div>
-                    <div class="form-group">
-                        <h:outputLabel for="Description" value="Description: " style="color: white;"/>
+                    <div class="p-2 row justify-content-center h-100" style="font-family: Consolas;">
+                        <h:outputLabel for="Description" value="Description" style="color: white;"/>
                         <p:inputText class="form-control" type="String" id="description" value="#{equipmentBean.description}" placeholder="Description"/>
                     </div>
-                    <p:commandButton value="Crear Equipo" class="btn btn-primary" actionListener="#{equipmentBean.registrarEquipo}" action="#{equipmentBean.info}"/>
+                    <div class="p-2 row justify-content-center h-100" style="font-family: Consolas;">
+                        <p:commandButton value="Crear Equipo" style="margin: 10px; font-family: Consolas;" class="btn btn-primary" actionListener="#{equipmentBean.registrarEquipo}" action="#{equipmentBean.info}"/>
+                        <p:commandButton value="Atras" style="margin: 10px; font-family: Consolas;" action="#{loginBean.redirectHomeUser}" class="btn btn-danger"/>
+                    </div>
                 </h:form>
             </div>
         </div>
