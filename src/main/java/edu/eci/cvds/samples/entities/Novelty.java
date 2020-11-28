@@ -2,7 +2,6 @@ package edu.eci.cvds.samples.entities;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.text.SimpleDateFormat;
 
 public class  Novelty implements Serializable {
     private static final long serialVersionUID = -3203284066887482905L;
@@ -52,14 +51,16 @@ public class  Novelty implements Serializable {
         this.date = date;
         this.user_id = user_id;
 
-        if(classEquipment=="Equipment") {
-            this.equipment_id = equipment_id;
-        }
-        else if(classEquipment=="Element") {
-            this.element_id = equipment_id;
-        }
-        else if(classEquipment=="Laboratory") {
-            this.laboratory_id = equipment_id;
+        switch (classEquipment) {
+            case "Equipment":
+                this.equipment_id = equipment_id;
+                break;
+            case "Element":
+                this.element_id = equipment_id;
+                break;
+            case "Laboratory":
+                this.laboratory_id = equipment_id;
+                break;
         }
     }
 

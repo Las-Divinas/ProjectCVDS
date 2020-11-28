@@ -5,7 +5,6 @@ import java.util.List;
 import com.google.inject.Inject;
 
 import edu.eci.cvds.sampleprj.dao.ElementoDAO;
-import edu.eci.cvds.sampleprj.dao.PersistenceException;
 import edu.eci.cvds.samples.entities.Element;
 import edu.eci.cvds.samples.services.ExceptionHistorialDeEquipos;
 import edu.eci.cvds.samples.services.ServicioElement;

@@ -55,10 +55,10 @@
                         <p:column headerText="Estado" style="text-align: center" filterBy="#{equipment.estado}" sortBy="#{equipment.estado}">
                             <h:outputText value="#{equipment.estado}"/>
                         </p:column>
-                        <p:column class="text-center" headerText="Administrar" exportable="false">
+                        <p:column class="text-center" headerText="Administrar" style="text-align: center" exportable="false">
                             <p:commandButton class="btn btn-success btn-sm" value="Administrar"/>
                         </p:column>
-                        <p:column class="text-center" headerText="Novedades" exportable="false">
+                        <p:column class="text-center" headerText="Novedades" style="text-align: center" exportable="false">
                             <p:commandButton class="btn btn-success btn-sm" value="Novedades" actionListener="#{noveltyBean.consultarNovedadEquipoID(equipment.id)}"/>
                         </p:column>
                     </p:dataTable>

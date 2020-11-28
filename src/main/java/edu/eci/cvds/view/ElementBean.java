@@ -1,7 +1,5 @@
 package edu.eci.cvds.view;
 
-import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.List;
@@ -51,7 +49,7 @@ public class ElementBean extends BasePageBean{
     private String description;
     private Integer idEquipment;    
     private String message;
-    private String a[] = new String[] {"Torre","Pantalla","Mouse","Teclado"};
+    private final String[] a = new String[] {"Torre","Pantalla","Mouse","Teclado"};
     private List<String> types = Arrays.asList(a);
     private List<Element> elementosBusquedaBasica;
     private List<Element> elementosSeleccionados;
@@ -139,9 +137,9 @@ public class ElementBean extends BasePageBean{
             HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
             String correoSession = (String) session.getAttribute("correo");
             Usuario usuario = servicioUsuario.consultarIdUsuarioPorCorreo(correoSession);
-            servicioElement.cambiarIdEquipoParaElemento((Integer)null, elemento.getId());
+            servicioElement.cambiarIdEquipoParaElemento(null, elemento.getId());
             servicioElement.cambiarEstadoElementosId(elemento.getId(), "INACTIVO");
-            Novelty novelty = new Novelty("Elemento fue desasociado","Des habilitado"+elemento.getElement_name(), date, usuario.getDocumento(), (Integer)null, elemento.getId());
+            Novelty novelty = new Novelty("El elemento "+elemento.getElement_name()+" fue dado de baja","Elemento Dado de Baja", date, usuario.getDocumento(), null, elemento.getId());
             servicioNovelty.registrarNovedad(novelty);
         }
     }
@@ -158,7 +156,7 @@ public class ElementBean extends BasePageBean{
             HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
             String correoSession = (String) session.getAttribute("correo");
             Usuario usuario = servicioUsuario.consultarIdUsuarioPorCorreo(correoSession);
-            Novelty novelty = new Novelty("Dado de baja","Inactivo elemento "+element.getElement_name(), date, usuario.getDocumento(), (Integer)null, element.getId());
+            Novelty novelty = new Novelty("Dado de baja","Inactivo elemento "+element.getElement_name(), date, usuario.getDocumento(), null, element.getId());
             servicioNovelty.registrarNovedad(novelty);
         }
         else{
@@ -190,8 +188,8 @@ public class ElementBean extends BasePageBean{
         }
     }
 
-    public void changeEquipmentElement() throws ExceptionHistorialDeEquipos, IOException{
-        int idEquipo = servicioEquipment.consultarUltimoIdEquipment();
+    public void changeEquipmentElement() throws ExceptionHistorialDeEquipos{
+        Integer idEquipo = servicioEquipment.consultarUltimoIdEquipment();
         System.out.println(idEquipo+" Id Equipo");
         id = getIdByNameElement(nombreElemento);
         Element elemento = servicioElement.consultarElementoPorId(id);
@@ -264,12 +262,6 @@ public class ElementBean extends BasePageBean{
         }
 
         elementosBusquedaBasica = servicioElement.consultarElementos();
-    }
-
-    public String darFormatoFecha(Date date) {
-        SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
-
-        return format.format(date);
     }
 
     public String consultarNombreElemento(Integer elementoID) throws ExceptionHistorialDeEquipos {

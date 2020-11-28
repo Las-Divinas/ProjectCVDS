@@ -59,6 +59,12 @@
                         <p:column headerText="Numero de Equipos" style="text-align: center">
                             <h:outputText value="#{laboratoryBean.countEquipment(laboratory.id)}"/>
                         </p:column>
+                        <p:column class="text-center" headerText="Administrar" style="text-align: center" exportable="false">
+                            <p:commandButton class="btn btn-success btn-sm" value="Administrar"/>
+                        </p:column>
+                        <p:column class="text-center" headerText="Novedades" style="text-align: center" exportable="false">
+                            <p:commandButton class="btn btn-success btn-sm" value="Novedades" actionListener="#{noveltyBean.consultarNovedadLaboratorioID(laboratory.id)}"/>
+                        </p:column>
                     </p:dataTable>
                    <!--  <h1 style="color:antiquewhite">Estadisticas Elementos laboratorio</h1> -->
                     <br/>

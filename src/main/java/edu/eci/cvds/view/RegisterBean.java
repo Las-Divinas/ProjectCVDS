@@ -1,7 +1,6 @@
 
 package edu.eci.cvds.view;
 
-import java.io.IOException;
 import java.util.*;
 
 import javax.enterprise.context.SessionScoped;
@@ -30,10 +29,10 @@ public class RegisterBean extends BasePageBean {
     private String contraseña;
     private String message;
     private String rol;
-    private String a[] = new String[] { "admin", "user" }; 
+    private final String[] a = new String[] { "admin", "user" };
     private List<String> roles = Arrays.asList(a);
 
-    public void registerNewUser() throws ExceptionHistorialDeEquipos, IOException{
+    public void registerNewUser() throws ExceptionHistorialDeEquipos {
         try {
             servicioUsuario.registrarUsuario(new Usuario(documento, correo, nombre,new Sha512Hash(contraseña).toHex(),rol));
             message = "Se ha registrado correctamente el usuario";
@@ -41,12 +40,6 @@ public class RegisterBean extends BasePageBean {
             message = "Error al registrar el usuario";
             throw new ExceptionHistorialDeEquipos("Error al registrar el usuario");
         }
-    }
-
-    public void redirectToLogin() throws IOException{
-        System.out.println("Redirect to login");
-        FacesContext facesContext = FacesContext.getCurrentInstance();
-        facesContext.getExternalContext().redirect("../Login.xhtml");
     }
 
     public String getMessage(){

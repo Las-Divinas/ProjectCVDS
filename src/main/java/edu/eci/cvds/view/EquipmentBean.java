@@ -14,11 +14,9 @@ import com.google.inject.Inject;
 import edu.eci.cvds.samples.entities.*;
 import edu.eci.cvds.samples.services.*;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.ArrayList;
-import java.util.concurrent.ExecutionException;
 
 @ManagedBean(name = "equipmentBean")
 @SessionScoped
@@ -49,19 +47,18 @@ public class EquipmentBean extends BasePageBean{
     private List<Equipment> equiposBusquedaBasica;
     private List<Equipment> equiposSeleccionados;
     private List<String> nombresLaboratorios;
-    private String nombreLaboratorio;
-    private List<Laboratory> laboratorios;
 
     @PostConstruct
     public void init(){
         super.init();
         try{
             equiposBusquedaBasica = new ArrayList<>();
-            laboratorios = new ArrayList<>();
+            List<Laboratory> laboratorios;
             nombresLaboratorios = new ArrayList<>();
             laboratorios = servicioLaboratory.consultarLaboratorios();
-            for(int i=0; i<laboratorios.size(); i++){
-                nombresLaboratorios.add(laboratorios.get(i).getLaboratory_name());
+
+            for(Laboratory l: laboratorios) {
+                nombresLaboratorios.add(l.getLaboratory_name());
             }
         } catch (ExceptionHistorialDeEquipos e){
             e.printStackTrace();
@@ -90,11 +87,6 @@ public class EquipmentBean extends BasePageBean{
         facesContext.getExternalContext().redirect("../admin/selectElement.xhtml");
     }
 
-    public List<Equipment> consultarEquipos() throws ExceptionHistorialDeEquipos{
-        message = "Tuvimos un problema en agregar el equipo";
-        return servicioEquipment.consultarEquipos();
-    }
-
     public String consultarNombreEquipo(Integer equipmentID) throws ExceptionHistorialDeEquipos {
         return servicioEquipment.consultarNombreEquipo(equipmentID);
     }
@@ -109,51 +101,36 @@ public class EquipmentBean extends BasePageBean{
         equiposBusquedaBasica = servicioEquipment.consultarEquipos();
     }
 
-    public int getIdByNameLaboratory(String name){
-        int laboratoryId = 0;
-        for(Laboratory laboratory: laboratorios){
-            if(laboratory.getLaboratory_name().equals(name))
-                laboratoryId = laboratory.getId();
-        }
-        return laboratoryId;
-    }
-
-    public String darFormatoFecha(Date date) {
-        SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
-
-        return format.format(date);
-    }
-
     public void darDeBajaEquipo() throws ExceptionHistorialDeEquipos {
+        Novelty novelty;
+        Date date;
         Integer equipoID;
         List<Element> elementosAsociados;
 
         message = "El equipo "+nombreEquipo+" fue dado de baja.";
-
         equiposBusquedaBasica = servicioEquipment.consultarEquipos();
 
+        date = new Date(System.currentTimeMillis());
         equipoID = getEquipoIDporNombre(nombreEquipo);
-
         elementosAsociados = servicioElement.consultarElementosPorEquipo(equipoID);
 
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+        HttpSession httpSession = (HttpSession) facesContext.getExternalContext().getSession(true);
+        String sessionCorreo = (String) httpSession.getAttribute("correo");
+        Usuario usuario = servicioUsuario.consultarIdUsuarioPorCorreo(sessionCorreo);
+
         for(Element e:elementosAsociados) {
+            novelty = new Novelty("El elemento "+e.getElement_name()+" fue desvinculado del equipo "+nombreEquipo, "Elemento Desvinculado", date, usuario.getDocumento(), e.getId(), "Element");
+
             servicioElement.cambiarIdEquipoParaElemento(null, e.getId());
+            servicioNovelty.registrarNovedad(novelty);
         }
 
+        novelty = new Novelty("El equipo "+nombreEquipo+" fue dado de baja", "Equipo Dado de Baja", date, usuario.getDocumento(), equipoID, "Equipment");
+
+        servicioNovelty.registrarNovedad(novelty);
         servicioEquipment.cambiarLaboratorioEquipo(null, equipoID);
         servicioEquipment.cambiarEstadoElementoId(equipoID, "INACTIVO");
-    }
-
-    public String getNombreLaboratorio(){
-        return nombreLaboratorio;
-    }
-
-    public void setNombreLaboratorio(String nombreLaboratorio){
-        this.nombreLaboratorio = nombreLaboratorio;
-    }
-
-    public List<String> getNombresLaboratorios(){
-        return nombresLaboratorios;
     }
 
     public void setNombresLaboratorios(List<String> nombresLaboratorios){

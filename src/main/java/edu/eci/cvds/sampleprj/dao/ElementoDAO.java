@@ -3,7 +3,6 @@ import java.util.List;
 
 
 import edu.eci.cvds.samples.entities.Element;
-import org.apache.ibatis.annotations.Param;
 
 public interface ElementoDAO {
     void registrarElemento(Element element) throws Exception;

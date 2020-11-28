@@ -2,8 +2,6 @@ package edu.eci.cvds.sampleprj.dao.mybatis;
 
 import com.google.inject.Inject;
 
-/* import com.google.inject.Inject; */
-
 import edu.eci.cvds.sampleprj.dao.NovedadDAO;
 import edu.eci.cvds.sampleprj.dao.PersistenceException;
 import edu.eci.cvds.sampleprj.dao.mybatis.mappers.NovedadMapper;
@@ -35,7 +33,7 @@ public class MyBatisNovedadDAO implements NovedadDAO {
     }
 
     @Override
-    public List<Novelty> consultarNovedadesPorIDEquipo(int equipoID) throws PersistenceException {
+    public List<Novelty> consultarNovedadesPorIDEquipo(Integer equipoID) throws PersistenceException {
         try{
             return novedadMapper.consultarNovedadesPorIDEquipo(equipoID);
         } catch (Exception e){
@@ -44,11 +42,20 @@ public class MyBatisNovedadDAO implements NovedadDAO {
     }
 
     @Override
-    public List<Novelty> consultarNovedadesPorIDElemento(int elementoID) throws PersistenceException {
+    public List<Novelty> consultarNovedadesPorIDElemento(Integer elementoID) throws PersistenceException {
         try{
             return novedadMapper.consultarNovedadesPorIDElemento(elementoID);
         } catch (Exception e){
             throw new PersistenceException(e.toString());
+        }
+    }
+
+    @Override
+    public List<Novelty> consultarNovedadesPorIDLaboratorio(Integer laboratorioID) throws PersistenceException {
+        try {
+            return novedadMapper.consultarNovedadesPorIDLaboratorio(laboratorioID);
+        } catch (Exception e) {
+            throw new PersistenceException("Error al consultar novedades del laboratorio");
         }
     }
 }

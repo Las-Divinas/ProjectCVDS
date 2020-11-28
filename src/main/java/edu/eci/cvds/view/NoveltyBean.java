@@ -39,17 +39,14 @@ public class NoveltyBean extends BasePageBean{
     @Inject
     private ServicioElement servicioElement;
 
-    @Inject
-    ServicioLaboratory servicioLaboratory;
-
     private int id;
     private String description;
-    private String idUser;
     private int idEquipment;
     private String title;
     private int idElement;
     private String message;
     private List<Novelty> novedadBusquedaBasica;
+    private List<Novelty> novedadLEE;
     private List<Equipment> equipos;
     private List<String> nombresEquipos;
     private String nombreEquipo;
@@ -62,7 +59,7 @@ public class NoveltyBean extends BasePageBean{
         super.init();
     }
 
-    public void registrarNovedad() throws ExceptionHistorialDeEquipos, IOException{
+    public void registrarNovedad() throws ExceptionHistorialDeEquipos {
         Date date = new Date(System.currentTimeMillis());
         FacesContext facesContext = FacesContext.getCurrentInstance();
         HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
@@ -88,16 +85,22 @@ public class NoveltyBean extends BasePageBean{
         servicioNovelty.registrarNovedad(novelty);
     }
 
-    public void consultarNovedadEquipoID(int equipoID) throws  ExceptionHistorialDeEquipos,IOException{
-        this.novedadBusquedaBasica = servicioNovelty.consultarNovedadesPorIDEquipo(equipoID);
+    public void consultarNovedadEquipoID(Integer equipoID) throws  ExceptionHistorialDeEquipos,IOException {
+        this.novedadLEE = servicioNovelty.consultarNovedadesPorIDEquipo(equipoID);
         FacesContext facesContext = FacesContext.getCurrentInstance();
-        facesContext.getExternalContext().redirect("../public/consultNovelty.xhtml");
+        facesContext.getExternalContext().redirect("../redirect/consultLEE.xhtml");
     }
 
-    public void consultarNovedadElementoID(int elementoID) throws ExceptionHistorialDeEquipos,IOException{
-        this.novedadBusquedaBasica = servicioNovelty.consultarNovedadesPorIDElemento(elementoID);
+    public void consultarNovedadElementoID(Integer elementoID) throws ExceptionHistorialDeEquipos,IOException {
+        this.novedadLEE = servicioNovelty.consultarNovedadesPorIDElemento(elementoID);
         FacesContext facesContext = FacesContext.getCurrentInstance();
-        facesContext.getExternalContext().redirect("../public/consultNovelty.xhtml");
+        facesContext.getExternalContext().redirect("../redirect/consultLEE.xhtml");
+    }
+
+    public void consultarNovedadLaboratorioID(Integer laboratorioID) throws ExceptionHistorialDeEquipos,IOException {
+        this.novedadLEE = servicioNovelty.consultarNovedadesPorIDLaboratorio(laboratorioID);
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+        facesContext.getExternalContext().redirect("../redirect/consultLEE.xhtml");
     }
 
     public int getIdByNameEquipment(String name){
@@ -206,14 +209,6 @@ public class NoveltyBean extends BasePageBean{
         this.description=description;
     }
 
-    public String getIdUser(){
-        return idUser;
-    }
-
-    public void setIdUser(String idUser){
-        this.idUser=idUser;
-    }
-
     public int getIdEquipment(){
         return idEquipment;
     }
@@ -241,5 +236,13 @@ public class NoveltyBean extends BasePageBean{
     }
     public void info() {
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, message, "PrimeFaces Rocks."));
+    }
+
+    public List<Novelty> getNovedadLEE() {
+        return novedadLEE;
+    }
+
+    public void setNovedadLEE(List<Novelty> novedadLEE) {
+        this.novedadLEE = novedadLEE;
     }
 }

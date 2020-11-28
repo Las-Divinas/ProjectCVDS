@@ -15,9 +15,6 @@ public class ServicioNoveltyImpl implements ServicioNovelty {
     @Inject
     private NovedadDAO novedadDAO;
 
-    @Inject
-    private ElementoDAO elementoDAO;
-
     @Override
     public void registrarNovedad(Novelty n) throws ExceptionHistorialDeEquipos {
         try {
@@ -37,7 +34,7 @@ public class ServicioNoveltyImpl implements ServicioNovelty {
     }
 
     @Override
-    public List<Novelty> consultarNovedadesPorIDEquipo(int equipoID) throws ExceptionHistorialDeEquipos {
+    public List<Novelty> consultarNovedadesPorIDEquipo(Integer equipoID) throws ExceptionHistorialDeEquipos {
         try{
             return novedadDAO.consultarNovedadesPorIDEquipo(equipoID);
         }catch (Exception e){
@@ -46,11 +43,20 @@ public class ServicioNoveltyImpl implements ServicioNovelty {
     }
 
     @Override
-    public List<Novelty> consultarNovedadesPorIDElemento(int elementoID) throws ExceptionHistorialDeEquipos {
+    public List<Novelty> consultarNovedadesPorIDElemento(Integer elementoID) throws ExceptionHistorialDeEquipos {
         try{
             return novedadDAO.consultarNovedadesPorIDElemento(elementoID);
         }catch (Exception e){
             throw new ExceptionHistorialDeEquipos(e.toString());
+        }
+    }
+
+    @Override
+    public List<Novelty> consultarNovedadesPorIDLaboratorio(Integer laboratorioID) throws ExceptionHistorialDeEquipos {
+        try{
+            return novedadDAO.consultarNovedadesPorIDLaboratorio(laboratorioID);
+        }catch (Exception e){
+            throw new ExceptionHistorialDeEquipos("Error al consultar novedad del laboratorio");
         }
     }
 }

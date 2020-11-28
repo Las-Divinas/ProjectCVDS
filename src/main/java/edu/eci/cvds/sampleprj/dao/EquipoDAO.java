@@ -1,7 +1,6 @@
 package edu.eci.cvds.sampleprj.dao;
 
 import edu.eci.cvds.samples.entities.Equipment;
-import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 

@@ -5,8 +5,9 @@ import edu.eci.cvds.samples.entities.Novelty;
 import java.util.List;
 
 public interface NovedadDAO {
-    public void registrarNovedad(Novelty novedad) throws PersistenceException;
-    public List<Novelty> consultarNovedades() throws PersistenceException;
-    public List<Novelty> consultarNovedadesPorIDEquipo(int equipoID) throws PersistenceException;
-    public List<Novelty> consultarNovedadesPorIDElemento(int elementoID) throws PersistenceException;
+    void registrarNovedad(Novelty novedad) throws PersistenceException;
+    List<Novelty> consultarNovedades() throws PersistenceException;
+    List<Novelty> consultarNovedadesPorIDEquipo(Integer equipoID) throws PersistenceException;
+    List<Novelty> consultarNovedadesPorIDElemento(Integer elementoID) throws PersistenceException;
+    List<Novelty> consultarNovedadesPorIDLaboratorio(Integer laboratorioID) throws PersistenceException;
 }

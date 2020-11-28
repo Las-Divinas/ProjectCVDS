@@ -19,11 +19,15 @@
         SELECT n.id, n.description, n.title, n.date, n.user_id, n.element_id, n.equipment_id, n.laboratory_id FROM novelty as n;
     </select>
     <select parameterType="map" id="consultarNovedadesPorIDEquipo" resultMap="NoveltyResult">
-        SELECT n.id, n.equipment_id, n.element_id, n.date, n.description FROM novelty as n
-        WHERE n.element_id = #{equipmentID};
+        SELECT n.id, n.description, n.title, n.date, n.user_id, n.element_id, n.equipment_id, n.laboratory_id FROM novelty as n
+        WHERE n.equipment_id = #{equipmentID};
     </select>
     <select parameterType="map" id="consultarNovedadesPorIDElemento" resultMap="NoveltyResult">
-        SELECT n.id, n.equipment_id, n.element_id, n.date, n.description FROM novelty as n
+        SELECT n.id, n.description, n.title, n.date, n.user_id, n.element_id, n.equipment_id, n.laboratory_id FROM novelty as n
         WHERE n.element_id = #{elementID};
+    </select>
+    <select parameterType="map" id="consultarNovedadesPorIDLaboratorio" resultMap="NoveltyResult">
+        SELECT n.id, n.description, n.title, n.date, n.user_id, n.element_id, n.equipment_id, n.laboratory_id FROM novelty as n
+        WHERE n.laboratory_id = #{laboratorioID};
     </select>
 </mapper>

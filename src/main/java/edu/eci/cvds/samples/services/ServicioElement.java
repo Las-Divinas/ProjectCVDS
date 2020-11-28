@@ -2,7 +2,6 @@ package edu.eci.cvds.samples.services;
 
 import java.util.List;
 
-import edu.eci.cvds.sampleprj.dao.PersistenceException;
 import edu.eci.cvds.samples.entities.Element;
 
 public interface ServicioElement {

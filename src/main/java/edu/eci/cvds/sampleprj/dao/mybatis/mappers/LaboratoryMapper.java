@@ -7,8 +7,8 @@ import org.apache.ibatis.annotations.Param;
 import edu.eci.cvds.samples.entities.Laboratory;
 
 public interface LaboratoryMapper {
-    public void registrarLaboratorio(@Param("laboratorio") Laboratory lab);
-    public int consultarUltimoId();
-    public List<Laboratory> consultarLaboratorios();
+    void registrarLaboratorio(@Param("laboratorio") Laboratory lab);
+    int consultarUltimoId();
+    List<Laboratory> consultarLaboratorios();
     String consultarNombreLaboratorio(@Param("laboratorioID") Integer laboratorioID);
 }

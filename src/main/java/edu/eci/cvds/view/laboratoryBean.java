@@ -1,6 +1,5 @@
 package edu.eci.cvds.view;
 
-import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -170,7 +169,7 @@ public class laboratoryBean extends BasePageBean{
     }
 
     public List<Laboratory> getLaboratoriosBusquedaBasica() throws ExceptionHistorialDeEquipos{
-        laboratoriosBusquedaBasica = servicioLaboratory.consultarLaboratorios();;
+        laboratoriosBusquedaBasica = servicioLaboratory.consultarLaboratorios();
 
         return laboratoriosBusquedaBasica;
     }
@@ -186,7 +185,7 @@ public class laboratoryBean extends BasePageBean{
 
     public PieChartModel generarEstadistica() throws ExceptionHistorialDeEquipos {
         model = new PieChartModel();
-        laboratoriosBusquedaBasica = servicioLaboratory.consultarLaboratorios();;
+        laboratoriosBusquedaBasica = servicioLaboratory.consultarLaboratorios();
 
         for (Laboratory laboratory : laboratoriosBusquedaBasica) {
             model.set(laboratory.getLaboratory_name(),servicioEquipment.consultarNumeroEquipos(laboratory.getId()));
@@ -206,6 +205,9 @@ public class laboratoryBean extends BasePageBean{
         model = new PieChartModel();
         int activo=0;
         int noActivo=0;
+
+        laboratoriosBusquedaBasica = servicioLaboratory.consultarLaboratorios();
+
         for (Laboratory laboratory : laboratoriosBusquedaBasica) {
            if(laboratory.getEstado().equals("ACTIVO"))
            {
