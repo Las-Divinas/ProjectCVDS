@@ -44,8 +44,8 @@
                         <p:column headerText="Id" style="text-align: center" filterBy="#{element.id}" sortBy="#{element.id}">
                             <h:outputText value="#{element.id}"/>
                         </p:column>
-                        <p:column headerText="Equipo al que esta Asociado" style="text-align: center" filterBy="#{elementBean.consultarNombreElemento(element.id_equipment)}" sortBy="#{elementBean.consultarNombreElemento(element.id_equipment)}">
-                            <h:outputText value="#{elementBean.consultarNombreElemento(element.id_equipment)}"/>
+                        <p:column headerText="Equipo al que esta Asociado" style="text-align: center" filterBy="#{equipmentBean.consultarNombreEquipo(element.id_equipment)}" sortBy="#{equipmentBean.consultarNombreEquipo(element.id_equipment)}">
+                            <h:outputText value="#{equipmentBean.consultarNombreEquipo(element.id_equipment)}"/>
                         </p:column>
                         <p:column headerText="Nombre" style="text-align: center" filterBy="#{element.element_name}" sortBy="#{element.element_name}">
                             <h:outputText value="#{element.element_name}"/>

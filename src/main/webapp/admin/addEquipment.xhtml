@@ -36,10 +36,7 @@
                         <h:outputLabel for="Description" value="Description: " style="color: white;"/>
                         <p:inputText class="form-control" type="String" id="description" value="#{equipmentBean.description}" placeholder="Description"/>
                     </div>
-                    <p:commandButton value="Add" class="btn btn-primary" actionListener="#{equipmentBean.registrarEquipo}" action="#{equipmentBean.info}"/>
-                    <p:dialog header="Modal Dialog" widgetVar="dlg2" modal="true" height="100">
-                        <h:outputText value="#{equipmentBean.message}" />
-                    </p:dialog>
+                    <p:commandButton value="Crear Equipo" class="btn btn-primary" actionListener="#{equipmentBean.registrarEquipo}" action="#{equipmentBean.info}"/>
                 </h:form>
             </div>
         </div>
