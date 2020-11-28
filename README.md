@@ -5,6 +5,7 @@
 ## CVDS 2020-2
 ### Product Owner
 * Julian Mauricio Velasco Briceño
+* Oscar David Ospina Rodriguez
 ### Scrum Master
 * Diego Alejandro Murcia Céspedes 
 ### Team
