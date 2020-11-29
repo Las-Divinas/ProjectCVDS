@@ -11,4 +11,5 @@ public interface LaboratoryMapper {
     int consultarUltimoId();
     List<Laboratory> consultarLaboratorios();
     String consultarNombreLaboratorio(@Param("laboratorioID") Integer laboratorioID);
+    Integer consultarIDLaboratorioPorNombre(@Param("nombreLaboratorio") String nombreLaboratorio);
 }

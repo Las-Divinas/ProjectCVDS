@@ -10,7 +10,7 @@ public class  Laboratory implements Serializable {
     private String laboratory_name;
     private String description;
     private List<Equipment> equipos;
-    private int id;
+    private Integer id;
     private String estado;
     private Date fecha_creacion;
     private Date fecha_cierre;
@@ -79,10 +79,10 @@ public class  Laboratory implements Serializable {
     {
         this.equipos = equipos;
     }
-    public int getId(){
+    public Integer getId(){
         return id;
     }
-    public void setId(int id){
+    public void setId(Integer id){
         this.id=id;
     }
     public String getEstado()

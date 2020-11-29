@@ -37,6 +37,10 @@
                             <f:selectItems value="#{equipmentBean.nombresDeEquipos}"/>
                         </p:selectOneMenu>
                     </div>
+                    <p:selectOneMenu id="opcion" value="#{equipmentBean.accionElementos}" class="form-control" required="true" >
+                        <f:selectItem itemLabel="Seleccione Accion para los Elementos" noSelectionOption="true" />
+                        <f:selectItems value="#{equipmentBean.bajaDesvincular}" />
+                    </p:selectOneMenu>
                     <p:commandButton value="Dar de Baja Equipo" class="btn btn-primary" actionListener="#{equipmentBean.darDeBajaEquipo}" action="#{equipmentBean.info}">
                         <p:confirm header="Confirmation" message="¿Esta seguro que quiere dar de baja el equipo seleccionado?" icon="pi pi-exclamation-triangle" />
                     </p:commandButton>

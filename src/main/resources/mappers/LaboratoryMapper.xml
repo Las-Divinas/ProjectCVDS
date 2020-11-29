@@ -27,4 +27,8 @@
         SELECT l.laboratory_name FROM laboratorio l
         WHERE l.id = #{laboratorioID};
     </select>
+    <select id="consultarIDLaboratorioPorNombre" resultType="Integer">
+        SELECT l.id FROM laboratorio l
+        WHERE l.laboratory_name = #{nombreLaboratorio};
+    </select>
 </mapper>

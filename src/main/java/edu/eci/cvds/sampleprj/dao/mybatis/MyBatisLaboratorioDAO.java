@@ -56,4 +56,13 @@ public class MyBatisLaboratorioDAO implements LaboratoryDAO {
             throw new PersistenceException(e.toString());
         }
     }
+
+    @Override
+    public Integer consultarIDLaboratorioPorNombre(String nombreLaboratorio) throws PersistenceException {
+        try {
+            return laboratorioMapper.consultarIDLaboratorioPorNombre(nombreLaboratorio);
+        } catch (Exception e) {
+            throw new PersistenceException("Error al consultar ID de "+nombreLaboratorio);
+        }
+    }
 }

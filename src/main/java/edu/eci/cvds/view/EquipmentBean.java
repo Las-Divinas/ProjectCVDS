@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 
 import com.google.inject.Inject;
 
+import com.sun.org.apache.xerces.internal.xs.StringList;
 import edu.eci.cvds.samples.entities.*;
 import edu.eci.cvds.samples.services.*;
 
@@ -47,25 +48,17 @@ public class EquipmentBean extends BasePageBean{
     private List<Equipment> equiposBusquedaBasica;
     private List<Equipment> equiposSeleccionados;
     private List<String> nombresLaboratorios;
+    private final String[] bajaDesvincular = new String[] {"Dar de Baja Elementos Vinculados", "Desvincular Elementos"};
+    private String accionElementos;
+    private String nombreLaboratorio;
 
     @PostConstruct
     public void init(){
         super.init();
-        try{
-            equiposBusquedaBasica = new ArrayList<>();
-            List<Laboratory> laboratorios;
-            nombresLaboratorios = new ArrayList<>();
-            laboratorios = servicioLaboratory.consultarLaboratorios();
-
-            for(Laboratory l: laboratorios) {
-                nombresLaboratorios.add(l.getLaboratory_name());
-            }
-        } catch (ExceptionHistorialDeEquipos e){
-            e.printStackTrace();
-        }
+        equiposBusquedaBasica = new ArrayList<>();
     }
 
-    public void registrarEquipo() throws ExceptionHistorialDeEquipos, IOException{
+    public void registrarEquipo() throws ExceptionHistorialDeEquipos, IOException {
         message = "El equipo "+equipment_name+" ha sido creado con exito.";
         //-----Registro de Equipo-----
         Equipment equipment = new Equipment(equipment_name, description, "ACTIVO");
@@ -119,11 +112,21 @@ public class EquipmentBean extends BasePageBean{
         String sessionCorreo = (String) httpSession.getAttribute("correo");
         Usuario usuario = servicioUsuario.consultarIdUsuarioPorCorreo(sessionCorreo);
 
-        for(Element e:elementosAsociados) {
-            novelty = new Novelty("El elemento "+e.getElement_name()+" fue desvinculado del equipo "+nombreEquipo, "Elemento Desvinculado", date, usuario.getDocumento(), e.getId(), "Element");
+        if(accionElementos.equals("Desvincular Elementos")) {
+            for(Element e:elementosAsociados) {
+                novelty = new Novelty("El elemento "+e.getElement_name()+" fue desvinculado del equipo "+nombreEquipo, "Elemento Desvinculado", date, usuario.getDocumento(), e.getId(), "Element");
 
-            servicioElement.cambiarIdEquipoParaElemento(null, e.getId());
-            servicioNovelty.registrarNovedad(novelty);
+                servicioElement.cambiarIdEquipoParaElemento(null, e.getId());
+                servicioNovelty.registrarNovedad(novelty);
+            }
+        } else {
+            for(Element e:elementosAsociados) {
+                novelty = new Novelty("El elemento "+e.getElement_name()+" fue dado de baja", "Elemento Dado de Baja", date, usuario.getDocumento(), e.getId(), "Element");
+
+                servicioElement.cambiarIdEquipoParaElemento(null, e.getId());
+                servicioElement.cambiarEstadoElementosId(e.getId(), "INACTIVO");
+                servicioNovelty.registrarNovedad(novelty);
+            }
         }
 
         novelty = new Novelty("El equipo "+nombreEquipo+" fue dado de baja", "Equipo Dado de Baja", date, usuario.getDocumento(), equipoID, "Equipment");
@@ -133,31 +136,84 @@ public class EquipmentBean extends BasePageBean{
         servicioEquipment.cambiarEstadoElementoId(equipoID, "INACTIVO");
     }
 
-    public void setNombresLaboratorios(List<String> nombresLaboratorios){
+    public void asociarEquipoLaboratorio() throws ExceptionHistorialDeEquipos{
+        Integer equipoID, laboratorioID, laboratorioIDViejo;
+        FacesContext facesContext;
+        Novelty novelty;
+        Date date;
+
+        equiposBusquedaBasica = servicioEquipment.consultarEquipos();
+
+        equipoID = getEquipoIDporNombre(nombreEquipo);
+        laboratorioID = servicioLaboratory.consultarIDLaboratorioPorNombre(nombreLaboratorio);
+        laboratorioIDViejo = null;
+
+        for(Equipment e:equiposBusquedaBasica) {
+            if(e.getId().equals(equipoID)) {
+                laboratorioIDViejo = e.getLaboratory_id();
+                break;
+            }
+        }
+
+        date = new Date(System.currentTimeMillis());
+        facesContext = FacesContext.getCurrentInstance();
+        HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
+        String correoSession = (String) session.getAttribute("correo");
+        Usuario usuario = servicioUsuario.consultarIdUsuarioPorCorreo(correoSession);
+
+        if(laboratorioIDViejo!=null) {
+            novelty = new Novelty("El equipo "+nombreEquipo+" fue desvinculado de "+servicioLaboratory.consultarNombreLaboratorio(laboratorioIDViejo), "Equipo Desvinculado de Laboratorio", date, usuario.getDocumento(), equipoID, "Equipment");
+            servicioEquipment.cambiarLaboratorioEquipo(null, equipoID);
+            servicioNovelty.registrarNovedad(novelty);
+
+            novelty = new Novelty("El equipo "+nombreEquipo+" fue vinculado a "+nombreLaboratorio, "Equipo Vinculado a Laboratorio", date, usuario.getDocumento(), equipoID, "Equipment");
+            servicioEquipment.cambiarLaboratorioEquipo(laboratorioID, equipoID);
+            servicioNovelty.registrarNovedad(novelty);
+        } else {
+            novelty = new Novelty("El equipo "+nombreEquipo+" fue vinculado a "+nombreLaboratorio, "Equipo Vinculado a Laboratorio", date, usuario.getDocumento(), equipoID, "Equipment");
+            servicioEquipment.cambiarLaboratorioEquipo(laboratorioID, equipoID);
+            servicioNovelty.registrarNovedad(novelty);
+        }
+    }
+
+    public List<String> getNombresLaboratorios() throws ExceptionHistorialDeEquipos {
+        List<Laboratory> laboratorios;
+
+        nombresLaboratorios = new ArrayList<>();
+        laboratorios = servicioLaboratory.consultarLaboratorios();
+
+        for(Laboratory l: laboratorios) {
+            nombresLaboratorios.add(l.getLaboratory_name());
+        }
+
+        return nombresLaboratorios;
+    }
+
+    public void setNombresLaboratorios(List<String> nombresLaboratorios) {
         this.nombresLaboratorios = nombresLaboratorios;
     }
 
-    public List<Equipment> getEquiposSeleccionados(){
+    public List<Equipment> getEquiposSeleccionados() {
         return equiposSeleccionados;
     }
 
-    public void setEquiposSeleccionados(List<Equipment> equiposSeleccionados){
+    public void setEquiposSeleccionados(List<Equipment> equiposSeleccionados) {
         this.equiposSeleccionados = equiposSeleccionados;
     }
 
-    public String getMessage(){
+    public String getMessage() {
         return message;
     }
 
-    public void setMessage(String message){
+    public void setMessage(String message) {
         this.message = message;
     }
 
-    public Integer getId(){
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Integer id){
+    public void setId(Integer id) {
         this.id=id;
     }
 
@@ -169,19 +225,19 @@ public class EquipmentBean extends BasePageBean{
         this.equipment_name = equipment_name;
     }
 
-    public String getDescription(){
+    public String getDescription() {
         return description;
     }
 
-    public void setDescription(String description){
+    public void setDescription(String description) {
         this.description=description;
     }
 
-    public Integer getLaboratory_id(){
+    public Integer getLaboratory_id() {
         return laboratory_id;
     }
 
-    public void setLaboratory_id(Integer laboratory_id){
+    public void setLaboratory_id(Integer laboratory_id) {
         this.laboratory_id=laboratory_id;
     }
 
@@ -222,5 +278,25 @@ public class EquipmentBean extends BasePageBean{
 
     public Integer getEquipoIDporNombre(String nombreEquipo) throws ExceptionHistorialDeEquipos {
         return servicioEquipment.consultarEquipoIDporNombre(nombreEquipo);
+    }
+
+    public String[] getBajaDesvincular() {
+        return bajaDesvincular;
+    }
+
+    public String getAccionElementos() {
+        return accionElementos;
+    }
+
+    public void setAccionElementos(String accionElementos) {
+        this.accionElementos = accionElementos;
+    }
+
+    public String getNombreLaboratorio() {
+        return nombreLaboratorio;
+    }
+
+    public void setNombreLaboratorio(String nombreLaboratorio) {
+        this.nombreLaboratorio = nombreLaboratorio;
     }
 }

@@ -50,4 +50,13 @@ public class ServicioLaboratoryImpl implements ServicioLaboratory {
             throw new ExceptionHistorialDeEquipos(e.getMessage());
         }
     }
+
+    @Override
+    public Integer consultarIDLaboratorioPorNombre(String nombreLaboratorio) throws ExceptionHistorialDeEquipos {
+        try {
+            return laboratoryDAO.consultarIDLaboratorioPorNombre(nombreLaboratorio);
+        } catch (Exception e) {
+            throw new ExceptionHistorialDeEquipos("Error al consultar ID de "+nombreLaboratorio);
+        }
+    }
 }

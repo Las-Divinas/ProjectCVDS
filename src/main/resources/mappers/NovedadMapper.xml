@@ -16,7 +16,8 @@
         INSERT INTO novelty VALUES(DEFAULT,#{novedad.description}, #{novedad.title}, #{novedad.date} , #{novedad.user_id} ,#{novedad.element_id},#{novedad.equipment_id}, #{novedad.laboratory_id});
     </insert>
     <select parameterType="map" id="consultarNovedades" resultMap="NoveltyResult">
-        SELECT n.id, n.description, n.title, n.date, n.user_id, n.element_id, n.equipment_id, n.laboratory_id FROM novelty as n;
+        SELECT n.id, n.description, n.title, n.date, n.user_id, n.element_id, n.equipment_id, n.laboratory_id FROM novelty n
+        ORDER BY n.id DESC;
     </select>
     <select parameterType="map" id="consultarNovedadesPorIDEquipo" resultMap="NoveltyResult">
         SELECT n.id, n.description, n.title, n.date, n.user_id, n.element_id, n.equipment_id, n.laboratory_id FROM novelty as n
