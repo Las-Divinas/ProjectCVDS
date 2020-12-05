@@ -143,7 +143,7 @@ public class ElementBean extends BasePageBean{
             Usuario usuario = servicioUsuario.consultarIdUsuarioPorCorreo(correoSession);
             servicioElement.cambiarIdEquipoParaElemento(null, elemento.getId());
             servicioElement.cambiarEstadoElementosId(elemento.getId(), "ACTIVO");
-            Novelty novelty = new Novelty("El elemento "+elemento.getElement_name()+" fue dado de baja","Elemento Dado de Baja", date, usuario.getDocumento(), null, elemento.getId());
+            Novelty novelty = new Novelty("El elemento "+elemento.getElement_name()+" fue desvinculado de un equipo","Elemento Desvinculado de Equipo", date, usuario.getDocumento(), null, elemento.getId());
             servicioNovelty.registrarNovedad(novelty);
         }
     }
