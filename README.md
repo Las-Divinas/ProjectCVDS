@@ -91,12 +91,6 @@ admeas podra controlar, por ejemplo, a que equipo asigna ciertos elementos o que
 tengan problemas o se encuentren dañados.\
 ![](/imagenes_README/asociar_darBaja.png)
 
-- Login
-- Consultas
-- Registros
-- Asociar y Dar de Baja
-- Excel
-
 ## Arquitectura y Diseño Detallado
 ### Modelo ER
 ![ER](/imagenes_README/DiagramaER.png)
