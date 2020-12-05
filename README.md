@@ -29,7 +29,10 @@ a la hora de administrar equipos pertenecientes a una organización, en este cas
 
 ## Arquitectura y Diseño Detallado
 ### Modelo ER
-![ER](/imagenes_README/DClases.JPG)
+![ER](/imagenes_README/DiagramaER.png)
+
+### Diagrama de Clases
+![DClases](/imagenes_README/DClases.JPG)
 
 ## Descripción del Proceso
 
