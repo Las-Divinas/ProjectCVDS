@@ -37,12 +37,12 @@
                     </div>
                     <div class="p-2 row justify-content-center h-100" style="font-family: Consolas;">
                         <p:commandButton value="Dar de Baja Elemento" style="margin: 10px; font-family: Consolas;" class="btn btn-primary" actionListener="#{elementBean.darDeBajaElemento}" action="#{elementBean.info}">
-                            <p:confirm header="Confirmation" message="Are you sure?" icon="pi pi-exclamation-triangle" />
+                            <p:confirm header="Confirmacion" message="¿Esta seguro que desea dar de baja el elemento seleccionado?" icon="pi pi-exclamation-triangle" />
                         </p:commandButton>
                         <p:commandButton value="Atras" style="margin: 10px; font-family: Consolas;" action="#{loginBean.redirectHomeUser}" class="btn btn-danger"/>
                     </div>
                     <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
-                        <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="pi pi-check"/>
+                        <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="pi pi-check"/>
                         <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="pi pi-times" />
                     </p:confirmDialog>
                 </h:form>
