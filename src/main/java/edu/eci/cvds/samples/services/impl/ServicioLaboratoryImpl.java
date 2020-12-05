@@ -1,5 +1,6 @@
 package edu.eci.cvds.samples.services.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import com.google.inject.Inject;
@@ -57,6 +58,42 @@ public class ServicioLaboratoryImpl implements ServicioLaboratory {
             return laboratoryDAO.consultarIDLaboratorioPorNombre(nombreLaboratorio);
         } catch (Exception e) {
             throw new ExceptionHistorialDeEquipos("Error al consultar ID de "+nombreLaboratorio);
+        }
+    }
+
+    @Override
+    public List<Laboratory> laboratorioActivo() throws ExceptionHistorialDeEquipos {
+        try {
+            return laboratoryDAO.laboratorioActivo();
+        } catch (Exception e) {
+            throw new ExceptionHistorialDeEquipos("Error al consultar laboratorios activos");
+        }
+    }
+
+    @Override
+    public void cambiarEstadoLaboratorio(String estadoLaboratorio, Integer laboratorioID) throws ExceptionHistorialDeEquipos {
+        try {
+            laboratoryDAO.cambiarEstadoLaboratorio(estadoLaboratorio, laboratorioID);
+        } catch (Exception e) {
+            throw new ExceptionHistorialDeEquipos("Error al cambiar estado de laboratorio");
+        }
+    }
+
+    @Override
+    public void cambiarFechaDeCierre(Date fechaCierre, Integer laboratorioID) throws ExceptionHistorialDeEquipos {
+        try {
+            laboratoryDAO.cambiarFechaDeCierre(fechaCierre, laboratorioID);
+        } catch (Exception e) {
+            throw new ExceptionHistorialDeEquipos("Error al cambiar fecha de cierre de laboratorio");
+        }
+    }
+
+    @Override
+    public List<Laboratory> consultarLaboratoriosActivos() throws ExceptionHistorialDeEquipos {
+        try {
+            return laboratoryDAO.consultarLaboratoriosActivos();
+        } catch (Exception e) {
+            throw new ExceptionHistorialDeEquipos("Error al consultar laboratorios activos");
         }
     }
 }

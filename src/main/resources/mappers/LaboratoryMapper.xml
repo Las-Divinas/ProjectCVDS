@@ -23,6 +23,10 @@
         SELECT e.id, e.laboratory_name , e.description,e.estado,e.fecha_creacion,e.fecha_cierre
         FROM laboratorio as e;
     </select>
+    <select parameterType="map" id="consultarLaboratoriosActivos" resultMap="LaboratoryResult">
+        SELECT e.id, e.laboratory_name , e.description,e.estado,e.fecha_creacion,e.fecha_cierre FROM laboratorio e
+        WHERE e.estado = 'ACTIVO';
+    </select>
     <select id="consultarNombreLaboratorio" resultType="String">
         SELECT l.laboratory_name FROM laboratorio l
         WHERE l.id = #{laboratorioID};
@@ -31,4 +35,18 @@
         SELECT l.id FROM laboratorio l
         WHERE l.laboratory_name = #{nombreLaboratorio};
     </select>
+    <select id="laboratorioActivo" parameterType="map" resultMap="LaboratoryResult">
+        SELECT e.id, e.laboratory_name , e.description,e.estado,e.fecha_creacion,e.fecha_cierre FROM laboratorio e
+        WHERE e.estado = 'ACTIVO';
+    </select>
+    <update parameterType="map" id="cambiarEstadoLaboratorio">
+        UPDATE laboratorio
+        SET estado = #{estadoLaboratorio}
+        WHERE id = #{laboratorioID}
+    </update>
+    <update parameterType="map" id="cambiarFechaDeCierre">
+        UPDATE laboratorio
+        SET fecha_cierre = #{fechaCierre}
+        WHERE id = #{laboratorioID}
+    </update>
 </mapper>

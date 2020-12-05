@@ -1,5 +1,6 @@
 package edu.eci.cvds.sampleprj.dao;
 
+import java.util.Date;
 import java.util.List;
 
 import edu.eci.cvds.samples.entities.Laboratory;
@@ -11,4 +12,8 @@ public interface LaboratoryDAO {
     List<Laboratory> consultarLaboratorios() throws PersistenceException;
     String consultarNombreLaboratorio(Integer laboratorioID) throws PersistenceException;
     Integer consultarIDLaboratorioPorNombre(String nombreLaboratorio) throws PersistenceException;
+    List<Laboratory> laboratorioActivo() throws PersistenceException;
+    void cambiarEstadoLaboratorio(String estadoLaboratorio, Integer laboratorioID) throws PersistenceException;
+    void cambiarFechaDeCierre(Date fechaCierre,Integer laboratorioID) throws PersistenceException;
+    List<Laboratory> consultarLaboratoriosActivos() throws PersistenceException;
 }
