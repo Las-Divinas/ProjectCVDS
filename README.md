@@ -1,7 +1,7 @@
 # ECI Historial de Equipos - Las Divinas
+[![Heroku](https://www.herokucdn.com/deploy/button.svg)](https://vast-garden-17209.herokuapp.com/)
 [![CircleCI](https://circleci.com/gh/Las-Divinas/ProjectCVDS.svg?style=svg)](https://github.com/Las-Divinas/ProjectCVDS) [![Codacy Badge](https://app.codacy.com/project/badge/Grade/c8d1257ced7646d39cc0ba4e6957f348)](https://www.codacy.com/gh/Las-Divinas/ProjectCVDS/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Las-Divinas/ProjectCVDS&amp;utm_campaign=Badge_Grade)
 
-[![Heroku](https://www.herokucdn.com/deploy/button.svg)](https://vast-garden-17209.herokuapp.com/)
 ## CVDS 2020-2
 ### Product Owner
 * Julian Mauricio Velasco Briceño
@@ -19,8 +19,78 @@ El producto busca facilitar el proceso y solucionar los inconvenientes que se pu
 a la hora de administrar equipos pertenecientes a una organización, en este caso la Escuela Colombiana de Ingeniería Julio Garavito.
 
 ### Manual de Usuario
+En esta aplicacion se podran encontrar diferentes opciones como consultar, realizar registro, y otras opciones de administracion.
+
+En primer lugar tendremos las consultar:\
+![cons](/imagenes_README/consultas.png)
+
+Al dar click en alguna de ellas se deplegaran todos los equipos, elementos o laboratorios con los que se cuentan, esto dependiendo
+de la consulta seleccionada. Una vez abierta se tendra algo del siguiente estilo:
+![consPage](/imagenes_README/consultasPage.png)
+
+En donde se podra ver toda la informacion detallada, pero ademas de esto se podra exportar dicha informacion a un
+documento en EXCEL dando un click en el icono que aparece en la parte superior derecha de las tablas. Ademas, para el caso
+de los equipos, laboratorios y elementos se tendra un boton con el nombre de novedades, que al dar click nos redireccionara a una
+nueva pagina donde podremos ver las novedades registradas del elemento en cuestion seleccionado.
+
+Por otro lado tendremos los registros:\
+![](/imagenes_README/registros.png)
+
+En cada uno de ellos se nos solicitara una informacion a completar para realizar el registro, y una vez realizado tendremos la opcion
+de hacer el registro o volver a la pagina de inicio.
+
+Luego tendremos las asociaciones:\
+![](/imagenes_README/asociar.png)
+
+Aqui, en el caso de Asociar un Elemento a un Equipo, tendremos dos desplegables donde tendremos que escoger un Equipo al cual queramos asociar un elemento, y el elemento en cuestion. Una
+vez hecho esto se procede a asociar el elemento y si tenia algun elemento asociado del mismo tipo, este que consideramos como el atiguo quedara libre para ser asociado a otro equipo o al mismo.
+
+Luego esta Asociar Equipo a Laboratorio en donde se sigue la misma logica que Asociar un Elemento a un Equipo. En este caso se mostraran
+todos los laboratorios activos y todos los elementos activos que pueden usarse para ser asignados.
+
+Tambien tenremos los Dar de Baja:\
+![](/imagenes_README/darBaja.png)
+
+Aqui podremos seleccionar un elemento o equipo para dar de baja. En el caso de los elementos, solo se permitiran y mostraran los
+elementos que no esten asociados a ningun equipo para que puedan ser dados de baja. Con los equipos es algo especial, ya que mostraremos
+todos los equipos activos que se pueden dar de baja, pero tambien le permitiremos al usuario tomar la decicion de dar de baja los elementos que el
+equipo tiene asociado o solo devincularlos y dejarlos libres para vincular. Al momento de un equipo ser dado de baja este, en caso tal de estar vinculado
+a un laboratorio, quedara totalmente desvinculado.
+
+Por ultimo tendremos la opcion de cerar un laboratorio:\
+![](/imagenes_README/cerrarLab.png)
+
+Aqui se le permitira seleccionar un laboratorio para cerrar de todos los que se encuentren activos. Al momento de cerrar dicho laboratorio, este
+desvinculara todos los equipos que tuviera y los dejara libres para ser vinculados a otros laboratorios. El laboratorio quedara como inactivo.
+
 
 ### Imágenes y Descripción de las Funcionalidades más Importantes
+#### Login Page
+Con esta funcionalidad en el proyecto nos aseguramos de tener un control de usuarios, dar permiso
+a quien puede entrar y no. Además de esto tener un control de que usuarios pueden realizar cambios 
+y quienes no ya que contamos con roles para esto.\
+![log](imagenes_README/loginPage.png)
+
+#### Consultas
+Otra de las funcionalidades importantes es que tanto usuarios como administradores podran consultar la informacion
+mas relevante sobre sus equipos, elementos y laboratorios que se tengan.\
+![cons](/imagenes_README/consultas.png)
+
+Ademas de poder consultar la informacion mas relevante tambien podran exportar en excel esta informacion que encuentren
+dando click al icono de EXCEL que aparece en cada una de las consultas.\
+![consPage](/imagenes_README/consultasPage.png)
+
+#### Registros
+La funcionalidad de registros permite que todas las personas con un rol de administrador ingresen
+nuevos equipos, laboratorios o elementos para que sean administrados con ayuda de la aplicacion.\
+![](/imagenes_README/registros.png)
+
+#### Asociar y Dar de Baja
+Prestamos la funcionalidad de que alguien con rol de administrador logre administrar todos los elementos que se posean, pero
+admeas podra controlar, por ejemplo, a que equipo asigna ciertos elementos o que elementos decide dar de baja ya sea porque
+tengan problemas o se encuentren dañados.\
+![](/imagenes_README/asociar_darBaja.png)
+
 - Login
 - Consultas
 - Registros

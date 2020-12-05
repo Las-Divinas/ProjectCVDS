@@ -142,7 +142,7 @@ public class ElementBean extends BasePageBean{
             String correoSession = (String) session.getAttribute("correo");
             Usuario usuario = servicioUsuario.consultarIdUsuarioPorCorreo(correoSession);
             servicioElement.cambiarIdEquipoParaElemento(null, elemento.getId());
-            servicioElement.cambiarEstadoElementosId(elemento.getId(), "INACTIVO");
+            servicioElement.cambiarEstadoElementosId(elemento.getId(), "ACTIVO");
             Novelty novelty = new Novelty("El elemento "+elemento.getElement_name()+" fue dado de baja","Elemento Dado de Baja", date, usuario.getDocumento(), null, elemento.getId());
             servicioNovelty.registrarNovedad(novelty);
         }
@@ -171,7 +171,7 @@ public class ElementBean extends BasePageBean{
     public void asociarElemento() throws ExceptionHistorialDeEquipos{
         Integer idEquipment = getIdByNameEquipment(nombreEquipo);
         id = getIdByNameElement(nombreElemento);
-        System.out.println(id+"  Consultar el id del elemento++++++++++++++++++++++++++++++++++++++"+nombreElemento+"+++++"+nombreEquipo);
+
         try {
             Element element = servicioElement.consultarElementoPorId(id);
             System.out.println(element.getEstado()+"++++"+element.getId());
