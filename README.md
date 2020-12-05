@@ -85,5 +85,9 @@ se nos dificulto la creación de los gráficos solicitados para los laboratorios
 ![sprint02-burndown chart](/imagenes_README/Sprint02.png)
 
 ### SPRINT 3
+Para este Sprint no se presentaron problemas. Las tareas pendientes para cerrar todo el
+proyecto y las correcciones fueron realizadas.
+
+#### Burndown Chart
 ![sprint03](/imagenes_README/backlogSprint03.png)\
 ![sprint03-burndown chart](/imagenes_README/Sprint03.png)
