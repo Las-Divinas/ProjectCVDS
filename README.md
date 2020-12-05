@@ -34,8 +34,18 @@ a la hora de administrar equipos pertenecientes a una organización, en este cas
 ### Diagrama de Clases
 ![DClases](/imagenes_README/DClases.JPG)
 
-## Descripción del Proceso
+### Stack de Tecnologías
+1. Java
+2. MyBatis
+3. PostgreSQL
+4. Prime Faces
+5. Bootstrap
+6. Maven
+7. Apache Tomcat
+8. HTML
+9. CSS
 
+## Descripción del Proceso
 ### Integrantes
 * Santiago Martinez Martinez
 * Nikolas Bernal Giraldo
@@ -43,22 +53,37 @@ a la hora de administrar equipos pertenecientes a una organización, en este cas
 * Diego Alejandro Murcia Céspedes
 
 ### Metodología
+Para este proyecto se uso la metodología Scrum en la cual se dividió en tres Sprints con una duración de
+15 días. En cada uno de ellos se asignaron tareas por integrante, y una vez completadas
+se debian subir a un repositorio de GitHub donde se encontraba el proyecto para realizar el despliegue automático
+de la aplicación con los cambios respectivos, y al final de cada entrega ser mostrados a los Product Owner para que
+realizaran la respectiva revision y corrección de la entrega. 
 
 ### Taiga 
 [Taiga Backlog](https://tree.taiga.io/project/soytiyi-historial-de-equipos-labinfo/backlog)
 
 ### Release-Burndown Chart
+![rbc](/imagenes_README/backlog.png)
 
 ### SPRINT 1
+Luego de este Sprint como equipo nos dimos cuenta de que era más eficiente asignar una
+tarea por cada integrante y no que entre varios integrantes hacer una o varias tareas. Aquí
+se tuvo un poco de dificultad con el desarrollo del Login ya que se estaba comenzando el proyecto
+desde cero y no se tenia entendimiento de muchas cosas.
+
 #### Burndown Chart
+![sprint01](/imagenes_README/backlogSprint01.png)\
 ![sprint01-burndown chart](/imagenes_README/Sprint01.png)
 
 ### SPRINT 2
+En este Sprint tuvimos problemas en cuanto a la visualización de las consultas que se
+pueden realizar en la aplicación ya que estas no se actualizaban cada vez que había cambios. Además
+se nos dificulto la creación de los gráficos solicitados para los laboratorios.
+
 #### Burndown Chart
+![sprint02](/imagenes_README/backlogSprint02.png)\
 ![sprint02-burndown chart](/imagenes_README/Sprint02.png)
 
 ### SPRINT 3
-
-
-
-
+![sprint03](/imagenes_README/backlogSprint03.png)\
+![sprint03-burndown chart](/imagenes_README/Sprint03.png)
