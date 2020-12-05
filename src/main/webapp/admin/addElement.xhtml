@@ -15,45 +15,37 @@
 </h:head>
 <h:body>
     <div class="container h-100">
-        <h:form>
-            <div class="float-sm-right">
-                <p:commandButton value="Atras" action="#{loginBean.redirectHomeUser}" class="btn btn-danger"/>
-            </div>
-        </h:form>
         <div class="d-flex justify-content-center align-items-center">
             <div class="d-flex flex-column">
-                <div class="jumbotron text-center">
-                    <h1 class="text align-self-center p-2">Añadir Elemento</h1>
+                <div class="p-0 btn-group justify-content-lg-center">
+                    <img src="../image/logo.jpg" height="200" width="200"/>
+                    <div class="btn-group jumbotron justify-content-center" style="background-color: #000000; color: #ffffff; font-family: Consolas;">
+                        <h1 class="text align-self-center p-2">Registrar Nuevo Elemento</h1>
+                    </div>
                 </div>
                 <h:form class="justify-content-center">
                     <p:messages>
                         <p:autoUpdate />
                     </p:messages>
                     <div class="form-group">
-                        <h:outputLabel for="Name" value="Name: " style="color: white;"/>
+                        <h:outputLabel for="Name" value="Nombre: " style="color: white;"/>
                         <p:inputText class="form-control" type="String" id="name" value="#{elementBean.element_name}" placeholder="Name"/>
                     </div>
                     <div class="form-group">
-                        <h:outputLabel for="Type" value="Type: " style="color: white;"/>
+                        <h:outputLabel for="Type" value="Tipo: " style="color: white;"/>
                         <p:selectOneMenu id="types" value="#{elementBean.type}" class="form-control"  required="true">
                             <f:selectItem itemLabel="Select Type" noSelectionOption="true"/>
                             <f:selectItems value="#{elementBean.types}"/>
                         </p:selectOneMenu>
                     </div>
                     <div class="form-group">
-                        <h:outputLabel for="Description" value="Description: " style="color: white;"/>
+                        <h:outputLabel for="Description" value="Descripcion: " style="color: white;"/>
                         <p:inputText class="form-control" type="String" id="description" value="#{elementBean.description}" placeholder="Description"/>
                     </div>
-                    <!--Asignar Elemento a Equipo
-                    <div class="form-group">
-                        <h:outputLabel for="Equipo" value="Equipo: " style="color: white;"/>
-                        <p:selectOneMenu id="nombresEquipos" value="#{elementBean.nombreEquipo}" class="form-control"  required="true">
-                            <f:selectItem itemLabel="Select Equipment" noSelectionOption="true"/>
-                            <f:selectItems value="#{elementBean.nombresEquipos}"/>
-                        </p:selectOneMenu>
+                    <div class="p-2 row justify-content-center h-100" style="font-family: Consolas;">
+                        <p:commandButton value="Registrar Elemento" style="margin: 10px; font-family: Consolas;" class="btn btn-primary" actionListener="#{elementBean.registrarElemento}" action="#{elementBean.info}"/>
+                        <p:commandButton value="Atras" style="margin: 10px; font-family: Consolas;" action="#{loginBean.redirectHomeUser}" class="btn btn-danger"/>
                     </div>
-                    -->
-                    <p:commandButton value="Add" class="btn btn-primary" actionListener="#{elementBean.registrarElemento}" action="#{elementBean.info}"/>
                 </h:form>
             </div>
         </div>

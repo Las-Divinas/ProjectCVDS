@@ -85,12 +85,35 @@ public class EquipmentBean extends BasePageBean{
     }
 
     public void eliminarEquipos() throws ExceptionHistorialDeEquipos{
-        message = "Entre a eliminar";
-        for(int i=0; i < equiposSeleccionados.size(); i++){
-            System.out.println("------------------------------Entre"+i+"---------------------------------------");
-            int idElemento = equiposSeleccionados.get(i).getId();
-            servicioEquipment.cambiarEstadoElementoId(idElemento,"INACTIVO");
+        Novelty novelty;
+
+        message = "Los Equipos seleccionados fueron dados de baja";
+
+        Date date = new Date(System.currentTimeMillis());
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+        HttpSession httpSession = (HttpSession) facesContext.getExternalContext().getSession(true);
+        String sessionCorreo = (String) httpSession.getAttribute("correo");
+        Usuario usuario = servicioUsuario.consultarIdUsuarioPorCorreo(sessionCorreo);
+
+        for(Equipment e:equiposSeleccionados) {
+            if(e.getLaboratory_id()==null) {
+                novelty = new Novelty("El Equipo "+e.getEquipment_name()+" fue dado de baja.", "Equipo Dado de Baja", date, usuario.getDocumento(), e.getId(), "Equipment");
+
+                servicioEquipment.cambiarEstadoElementoId(e.getId(), "INACTIVO");
+                servicioNovelty.registrarNovedad(novelty);
+            }
+            else {
+                novelty = new Novelty("El Equipo "+e.getEquipment_name()+" fue devinculado de "+servicioLaboratory.consultarNombreLaboratorio(e.getLaboratory_id()), "Equipo Desvinculado de Laboratorio", date, usuario.getDocumento(), e.getId(), "Equipment");
+                servicioNovelty.registrarNovedad(novelty);
+
+                novelty = new Novelty("El Equipo "+e.getEquipment_name()+" fue dado de baja.", "Equipo Dado de Baja", date, usuario.getDocumento(), e.getId(), "Equipment");
+                servicioNovelty.registrarNovedad(novelty);
+
+                servicioEquipment.cambiarLaboratorioEquipo(null, e.getId());
+                servicioEquipment.cambiarEstadoElementoId(e.getId(), "INACTIVO");
+            }
         }
+
         equiposBusquedaBasica = servicioEquipment.consultarEquipos();
     }
 
@@ -142,6 +165,7 @@ public class EquipmentBean extends BasePageBean{
         Novelty novelty;
         Date date;
 
+        message = "El equipo "+nombreEquipo+" fue asociado a "+nombreLaboratorio+" con exito.";
         equiposBusquedaBasica = servicioEquipment.consultarEquipos();
 
         equipoID = getEquipoIDporNombre(nombreEquipo);
@@ -191,6 +215,37 @@ public class EquipmentBean extends BasePageBean{
 
     public void setNombresLaboratorios(List<String> nombresLaboratorios) {
         this.nombresLaboratorios = nombresLaboratorios;
+    }
+
+    public List<String> getNombresLaboratoriosActivos() throws ExceptionHistorialDeEquipos {
+        List<Laboratory> laboratorios;
+
+        nombresLaboratorios = new ArrayList<>();
+        laboratorios = servicioLaboratory.consultarLaboratorios();
+
+        for(Laboratory l: laboratorios) {
+            if(l.getEstado().equals("ACTIVO")) {
+                nombresLaboratorios.add(l.getLaboratory_name());
+            }
+        }
+
+        return nombresLaboratorios;
+    }
+
+    public List<String> getNombresEquiposActivos() throws ExceptionHistorialDeEquipos {
+        List<Equipment> equipos;
+        List<String> nombresEquipos;
+
+        nombresEquipos = new ArrayList<>();
+        equipos = servicioEquipment.consultarEquipos();
+
+        for(Equipment e:equipos) {
+            if(e.getEstado().equals("ACTIVO")) {
+                nombresEquipos.add(e.getEquipment_name());
+            }
+        }
+
+        return nombresEquipos;
     }
 
     public List<Equipment> getEquiposSeleccionados() {

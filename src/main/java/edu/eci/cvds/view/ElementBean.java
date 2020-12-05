@@ -1,5 +1,6 @@
 package edu.eci.cvds.view;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +24,7 @@ import edu.eci.cvds.samples.services.ServicioElement;
 import edu.eci.cvds.samples.services.ServicioEquipment;
 import edu.eci.cvds.samples.services.ServicioNovelty;
 import edu.eci.cvds.samples.services.ServicioUsuario;
+
 import java.util.Date;
 
 @ManagedBean(name = "elementBean")
@@ -65,7 +67,7 @@ public class ElementBean extends BasePageBean{
         super.init();
     }
 
-    public void asociarElementoEquipo() throws ExceptionHistorialDeEquipos {
+    public void asociarElementoEquipo() throws ExceptionHistorialDeEquipos, IOException {
         Novelty novedadTeclado, novedadMouse, novedadPantalla, novedadTorre;
         Integer equipoID, tecladoID, mouseID, pantallaID, torreID;
         String nombreEquipo;
@@ -102,6 +104,8 @@ public class ElementBean extends BasePageBean{
         servicioNovelty.registrarNovedad(novedadMouse);
         servicioNovelty.registrarNovedad(novedadPantalla);
         servicioNovelty.registrarNovedad(novedadTorre);
+
+        facesContext.getExternalContext().redirect("../admin/admin.xhtml");
     }
 
     public void registrarElemento() throws ExceptionHistorialDeEquipos {
@@ -207,6 +211,25 @@ public class ElementBean extends BasePageBean{
         servicioNovelty.registrarNovedad(novelty);
     }
 
+    public void darDeBajaElemento() throws ExceptionHistorialDeEquipos {
+        Date date;
+        Integer elementoID;
+
+        date = new Date(System.currentTimeMillis());
+        elementoID = servicioElement.consultarElementoIDPorNombre(nombreElemento);
+        message = "El Elemento "+nombreElemento+" fue dado de baja con exito.";
+
+        servicioElement.cambiarEstadoElementosId(elementoID, "INACTIVO");
+
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+        HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
+        String correoSession = (String) session.getAttribute("correo");
+        Usuario usuario = servicioUsuario.consultarIdUsuarioPorCorreo(correoSession);
+
+        Novelty novelty = new Novelty("El Elemento "+nombreElemento+" fue dado de baja", "Elemento Dado de Baja", date, usuario.getDocumento(), elementoID, "Element");
+        servicioNovelty.registrarNovedad(novelty);
+    }
+
     private void messageManagerElementAssociete(Element elemento, Equipment equipo){
         if(elemento.getId_equipment() == null){
             message = "El equipo se asocio al equipo "+equipo.getEquipment_name();
@@ -253,12 +276,27 @@ public class ElementBean extends BasePageBean{
     }
 
     public void eliminarElementos() throws ExceptionHistorialDeEquipos{
-        message = "Entre a eliminar";
+        Novelty novelty;
 
-        for(int i=0; i < elementosSeleccionados.size(); i++){
-            System.out.println("------------------------------Entre"+i+"---------------------------------------");
-            int idElementos = elementosSeleccionados.get(i).getId();
-            servicioElement.cambiarEstadoElementosId(idElementos,"NO_ACTIVO");
+        message = "Los Elementos seleccionados fueron dados de baja";
+
+        Date date = new Date(System.currentTimeMillis());
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+        HttpSession httpSession = (HttpSession) facesContext.getExternalContext().getSession(true);
+        String sessionCorreo = (String) httpSession.getAttribute("correo");
+        Usuario usuario = servicioUsuario.consultarIdUsuarioPorCorreo(sessionCorreo);
+
+        for(Element e:elementosSeleccionados) {
+            if(e.getId_equipment()==null) {
+                novelty = new Novelty("El Elemento "+e.getElement_name()+" fue dado de baja.", "Elemento Dado de Baja", date, usuario.getDocumento(), e.getId(), "Element");
+
+                servicioElement.cambiarEstadoElementosId(e.getId(), "INACTIVO");;
+                servicioNovelty.registrarNovedad(novelty);
+            }
+            else {
+                novelty = new Novelty("El Elemento "+e.getElement_name()+" no se pudo dar de baja ya que esta asociado a un equipo.", "Error al dar de Baja Elemento", date, usuario.getDocumento(), e.getId(), "Element");
+                servicioNovelty.registrarNovedad(novelty);
+            }
         }
 
         elementosBusquedaBasica = servicioElement.consultarElementos();
@@ -474,5 +512,21 @@ public class ElementBean extends BasePageBean{
 
     public void setNombreTorre(String nombreTorre) {
         this.nombreTorre = nombreTorre;
+    }
+
+    public List<String> getNombresElementosNoAsociados() throws ExceptionHistorialDeEquipos {
+        List<Element> elementos;
+        List<String> nombresElementosNoA;
+
+        nombresElementosNoA = new ArrayList<>();
+        elementos = servicioElement.consultarElementos();
+
+        for(Element e:elementos) {
+            if(e.getId_equipment()==null && e.getEstado().equals("ACTIVO")) {
+                nombresElementosNoA.add(e.getElement_name());
+            }
+        }
+
+        return nombresElementosNoA;
     }
 }

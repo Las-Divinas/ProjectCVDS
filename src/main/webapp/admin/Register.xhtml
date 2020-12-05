@@ -14,16 +14,15 @@
     <link rel="stylesheet" href="../style/style.css"/>
 </h:head>
 <h:body>
-    <div class="container">
-        <h:form>
-            <div class="float-sm-right">
-                <p:commandButton value="Atras" action="#{loginBean.comeBack}" class="btn btn-danger"/>
-            </div>
-        </h:form>
-        <div class="card bg-light">
-            <article class="card-body mx-auto"  style="max-width: 400px;">
-                <h4 class="card-title mt-3 text-center">Create Account</h4>
-                <p class="text-center">Get started with your free account</p>
+    <div class="container h-100">
+        <div class="d-flex justify-content-center align-items-center">
+            <div class="d-flex flex-column">
+                <div class="p-0 btn-group justify-content-lg-center">
+                    <img src="../image/logo.jpg" height="200" width="200"/>
+                    <div class="btn-group jumbotron justify-content-center" style="background-color: #000000; color: #ffffff; font-family: Consolas;">
+                        <h1 class="text align-self-center p-2">Registrar Nuevo Usuario</h1>
+                    </div>
+                </div>
                 <p:messages>
                     <p:autoUpdate />
                 </p:messages>
@@ -31,26 +30,26 @@
                     <div class="form-group input-group">
                         <div class="input-group-prepend">
                             <span class="input-group-text"> <i class="fa fa-user"></i> </span>
-                         </div>
-                         <p:inputText class="form-control" id="name" value="#{registerBean.nombre}" placeholder="Sandra Torres"/>
+                        </div>
+                        <p:inputText class="form-control" id="name" value="#{registerBean.nombre}" placeholder="Sandra Torres"/>
                     </div>
                     <div class="form-group input-group">
                         <div class="input-group-prepend">
                             <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
-                         </div>
-                         <p:inputText class="form-control" id="email" value="#{registerBean.correo}" placeholder="sandra@torres.co"/>
+                        </div>
+                        <p:inputText class="form-control" id="email" value="#{registerBean.correo}" placeholder="sandra@torres.co"/>
                     </div>
                     <div class="form-group input-group">
                         <div class="input-group-prepend">
                             <span class="input-group-text"> <i class="fas fa-file"></i> </span>
-                         </div>
-                         <p:inputText class="form-control" id="document" value="#{registerBean.documento}" placeholder="Document"/>
+                        </div>
+                        <p:inputText class="form-control" id="document" value="#{registerBean.documento}" placeholder="Document"/>
                     </div>
                     <div class="form-group input-group">
                         <div class="input-group-prepend">
                             <span class="input-group-text"> <i class="fa fa-user"></i> </span>
                         </div>
-                        <p:selectOneMenu id="roles" value="#{registerBean.rol}" class="form-control" required="true" >
+                        <p:selectOneMenu id="roles" value="#{registerBean.rol}" class="form-control">
                             <f:selectItem itemLabel="Select Role" noSelectionOption="true" />
                             <f:selectItems value="#{registerBean.roles}" />
                         </p:selectOneMenu>
@@ -58,14 +57,15 @@
                     <div class="form-group input-group">
                         <div class="input-group-prepend">
                             <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
-                         </div>
-                         <p:password class="form-control" id="password" value="#{registerBean.contraseña}" placeholder="password"/>
+                        </div>
+                        <p:password class="form-control" id="password" value="#{registerBean.contraseña}" placeholder="password"/>
                     </div>
-                    <div class="form-group" role="group" aria-label="Basic example">
-                        <p:commandButton class="btn btn-primary btn-block" value="Register" actionListener="#{registerBean.registerNewUser}" action="#{registerBean.info}"/>
+                    <div class="p-2 row justify-content-center h-100" style="font-family: Consolas;">
+                        <p:commandButton class="btn btn-primary" style="margin: 10px; font-family: Consolas;" value="Registrar Usuario" actionListener="#{registerBean.registerNewUser}" action="#{registerBean.info}"/>
+                        <p:commandButton value="Atras" style="margin: 10px; font-family: Consolas;" action="#{loginBean.redirectHomeUser}" class="btn btn-danger"/>
                     </div>
                 </h:form>
-            </article>
+            </div>
         </div>
     </div>
 </h:body>

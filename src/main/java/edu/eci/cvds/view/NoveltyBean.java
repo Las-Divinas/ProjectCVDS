@@ -88,19 +88,19 @@ public class NoveltyBean extends BasePageBean{
     public void consultarNovedadEquipoID(Integer equipoID) throws  ExceptionHistorialDeEquipos,IOException {
         this.novedadLEE = servicioNovelty.consultarNovedadesPorIDEquipo(equipoID);
         FacesContext facesContext = FacesContext.getCurrentInstance();
-        facesContext.getExternalContext().redirect("../redirect/consultLEE.xhtml");
+        facesContext.getExternalContext().redirect("../public/consultLEE.xhtml");
     }
 
     public void consultarNovedadElementoID(Integer elementoID) throws ExceptionHistorialDeEquipos,IOException {
         this.novedadLEE = servicioNovelty.consultarNovedadesPorIDElemento(elementoID);
         FacesContext facesContext = FacesContext.getCurrentInstance();
-        facesContext.getExternalContext().redirect("../redirect/consultLEE.xhtml");
+        facesContext.getExternalContext().redirect("../public/consultLEE.xhtml");
     }
 
     public void consultarNovedadLaboratorioID(Integer laboratorioID) throws ExceptionHistorialDeEquipos,IOException {
         this.novedadLEE = servicioNovelty.consultarNovedadesPorIDLaboratorio(laboratorioID);
         FacesContext facesContext = FacesContext.getCurrentInstance();
-        facesContext.getExternalContext().redirect("../redirect/consultLEE.xhtml");
+        facesContext.getExternalContext().redirect("../public/consultLEE.xhtml");
     }
 
     public int getIdByNameEquipment(String name){

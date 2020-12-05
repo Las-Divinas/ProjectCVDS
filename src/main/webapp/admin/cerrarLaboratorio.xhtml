@@ -15,36 +15,37 @@
 </h:head>
 <h:body>
     <div class="container h-100">
-        <h:form>
-            <div class="float-sm-right">
-                <p:commandButton value="Atras" action="#{loginBean.redirectHomeUser}" class="btn btn-danger"/>
-            </div>
-        </h:form>
         <div class="d-flex justify-content-center align-items-center">
             <div class="d-flex flex-column">
-                <div class="jumbotron text-center">
-                    <h1 class="text align-self-center p-2">Asociar Elemento a un Equipo</h1>
-                    <p:messages>
-                        <p:autoUpdate />
-                    </p:messages>
-                    <h:form>
-                        <p:growl id="message" showDetail="true" />
-                        <div class="form-group">
-                            <h:outputLabel for="Laboratory" value="Laboratorio" style="color: aliceblue;"/>
-                            <p:selectOneMenu id="LaboratoryNames" value="#{laboratoryBean.laboratory_name}" class="form-control">
-                                <f:selectItem itemLabel="Seleccionar Laboratorio" noSelectionOption="true"/>
-                                <f:selectItems value="#{laboratoryBean.nombreLaboratoriosActivos}"/>
-                            </p:selectOneMenu>
-                        </div>
-                        <p:commandButton value="Cerrar Laboratorio" class="btn btn-primary" actionListener="#{laboratoryBean.cerrarLaboratorio}" action="#{laboratoryBean.info}">
+                <div class="p-0 btn-group justify-content-lg-center">
+                    <img src="../image/logo.jpg" height="200" width="200"/>
+                    <div class="btn-group jumbotron justify-content-center" style="background-color: #000000; color: #ffffff; font-family: Consolas;">
+                        <h1 class="text align-self-center p-2">Cerrar Laboratorio</h1>
+                    </div>
+                </div>
+                <p:messages>
+                    <p:autoUpdate />
+                </p:messages>
+                <h:form>
+                    <p:growl id="message" showDetail="true" />
+                    <div class="form-group">
+                        <h:outputLabel for="Laboratory" value="Laboratorio" style="color: aliceblue;"/>
+                        <p:selectOneMenu id="LaboratoryNames" value="#{laboratoryBean.laboratory_name}" class="form-control">
+                            <f:selectItem itemLabel="Seleccionar Laboratorio" noSelectionOption="true"/>
+                            <f:selectItems value="#{laboratoryBean.nombreLaboratoriosActivos}"/>
+                        </p:selectOneMenu>
+                    </div>
+                    <div class="p-2 row justify-content-center h-100" style="font-family: Consolas;">
+                        <p:commandButton value="Cerrar Laboratorio" style="margin: 10px; font-family: Consolas;" class="btn btn-primary" actionListener="#{laboratoryBean.cerrarLaboratorio}" action="#{laboratoryBean.info}">
                             <p:confirm header="Confirmación" message="¿Esta seguro de que desea cerrar este laboratorio?" icon="pi pi-exclamation-triangle"/>
                         </p:commandButton>
-                        <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
-                            <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="pi pi-check"/>
-                            <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="pi pi-times" />
-                        </p:confirmDialog>
+                        <p:commandButton value="Atras" style="margin: 10px; font-family: Consolas;" action="#{loginBean.redirectHomeUser}" class="btn btn-danger"/>
+                    </div>
+                    <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                        <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="pi pi-check"/>
+                        <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="pi pi-times" />
+                    </p:confirmDialog>
                     </h:form>
-                </div>
             </div>
         </div>
     </div>

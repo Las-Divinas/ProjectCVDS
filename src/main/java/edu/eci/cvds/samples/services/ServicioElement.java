@@ -16,4 +16,5 @@ public interface ServicioElement {
     String consultarNombreElemento(Integer elementoID) throws ExceptionHistorialDeEquipos;
     List<Element> consultarElementoNoAsociado(String type) throws ExceptionHistorialDeEquipos;
     List<Element> consultarElementosPorEquipo(Integer equipoID) throws ExceptionHistorialDeEquipos;
+    Integer consultarElementoIDPorNombre(String nombreElemento) throws ExceptionHistorialDeEquipos;
 }

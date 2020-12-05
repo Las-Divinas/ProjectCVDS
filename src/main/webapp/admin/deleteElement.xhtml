@@ -15,35 +15,36 @@
 </h:head>
 <h:body>
     <div class="container">
-        <h:form>
-            <div class="float-sm-right">
-                <p:commandButton value="Atras" action="#{loginBean.redirectHomeUser}" class="btn btn-danger"/>
-            </div>
-        </h:form>
         <p:growl id="message" showDetail="true" />
         <div class="d-flex justify-content-center align-items-center">
             <div class="d-flex flex-column">
-                <div class="jumbotron text-center">
-                    <h1 class="text align-self-center p-2">Dar de baja Elemento</h1>
+                <div class="p-0 btn-group justify-content-lg-center">
+                    <img src="../image/logo.jpg" height="200" width="200"/>
+                    <div class="btn-group jumbotron justify-content-center" style="background-color: #000000; color: #ffffff; font-family: Consolas;">
+                        <h1 class="text align-self-center p-2">Dar de Baja Elemento</h1>
+                    </div>
                 </div>
                 <h:form class="justify-content-center">
                     <p:messages>
                         <p:autoUpdate />
                     </p:messages>
                     <div class="form-group">
-                        <h:outputLabel for="Element" value="Element: " style="color: white;"/>
-                        <p:selectOneMenu id="nombresElementos" value="#{elementBean.nombreElemento}" class="form-control"  required="true">
-                            <f:selectItem itemLabel="Select Element" noSelectionOption="true"/>
-                            <f:selectItems value="#{elementBean.nombresElementos}"/>
+                        <h:outputLabel for="Element" value="Elemento: " style="color: white;"/>
+                        <p:selectOneMenu id="nombresElementos" value="#{elementBean.nombreElemento}" class="form-control">
+                            <f:selectItem itemLabel="Seleccionar Elemento" noSelectionOption="true"/>
+                            <f:selectItems value="#{elementBean.nombresElementosNoAsociados}"/>
                         </p:selectOneMenu>
                     </div>
-                    <p:commandButton value="Eliminar" class="btn btn-primary" actionListener="#{elementBean.deleteElement}" action="#{elementBean.info}">
-                        <p:confirm header="Confirmation" message="Are you sure?" icon="pi pi-exclamation-triangle" />
-                    </p:commandButton>
+                    <div class="p-2 row justify-content-center h-100" style="font-family: Consolas;">
+                        <p:commandButton value="Dar de Baja Elemento" style="margin: 10px; font-family: Consolas;" class="btn btn-primary" actionListener="#{elementBean.darDeBajaElemento}" action="#{elementBean.info}">
+                            <p:confirm header="Confirmation" message="Are you sure?" icon="pi pi-exclamation-triangle" />
+                        </p:commandButton>
+                        <p:commandButton value="Atras" style="margin: 10px; font-family: Consolas;" action="#{loginBean.redirectHomeUser}" class="btn btn-danger"/>
+                    </div>
                     <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
                         <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="pi pi-check"/>
                         <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="pi pi-times" />
-                    </p:confirmDialog> 
+                    </p:confirmDialog>
                 </h:form>
             </div>
         </div>

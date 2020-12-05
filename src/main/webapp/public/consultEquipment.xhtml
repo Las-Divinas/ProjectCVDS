@@ -55,19 +55,16 @@
                         <p:column headerText="Estado" style="text-align: center" filterBy="#{equipment.estado}" sortBy="#{equipment.estado}">
                             <h:outputText value="#{equipment.estado}"/>
                         </p:column>
-                        <p:column class="text-center" headerText="Administrar" style="text-align: center" exportable="false">
-                            <p:commandButton class="btn btn-success btn-sm" value="Administrar"/>
-                        </p:column>
                         <p:column class="text-center" headerText="Novedades" style="text-align: center" exportable="false">
                             <p:commandButton class="btn btn-success btn-sm" value="Novedades" actionListener="#{noveltyBean.consultarNovedadEquipoID(equipment.id)}"/>
                         </p:column>
                     </p:dataTable>
-                    <div class="p-2 row justify-content-center h-100" style="font-family: Consolas;">
+                    <div class="p-2 row justify-content-center h-100">
                         <p:commandButton update="tbl" class="btn btn-primary" style="margin: 10px" value="Dar de Baja Equipo" actionListener="#{equipmentBean.eliminarEquipos}" onclick="PF('dlg2').show();"/>
                         <p:commandButton value="Atras" style="margin: 10px" action="#{loginBean.redirectHomeUser}" class="btn btn-danger"/>
                     </div>
                     <p:dialog header="Modal Dialog" widgetVar="dlg2" modal="true" height="100">
-                        <h:outputText value="#{elementBean.message}" />
+                        <h:outputText value="#{equipmentBean.message}" />
                     </p:dialog> 
                 </h:form>
             </div>

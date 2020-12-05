@@ -117,4 +117,13 @@ public class MyBatisElementoDAO implements ElementoDAO {
             throw new PersistenceException("Error al consultar elementos de un equipo");
         }
     }
+
+    @Override
+    public Integer consultarElementoIDPorNombre(String nombreElemento) throws PersistenceException {
+        try {
+            return elementoMapper.consultarElementoIDPorNombre(nombreElemento);
+        } catch (Exception e) {
+            throw new PersistenceException("Error al consultar ID elemento");
+        }
+    }
 }

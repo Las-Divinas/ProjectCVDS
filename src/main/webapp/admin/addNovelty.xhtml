@@ -15,15 +15,13 @@
 </h:head>
 <h:body>
     <div class="container h-100">
-        <h:form>
-            <div class="float-sm-right">
-                <p:commandButton value="Atras" action="#{loginBean.comeBack}" class="btn btn-danger"/>
-            </div>
-        </h:form>
         <div class="d-flex justify-content-center align-items-center">
             <div class="d-flex flex-column">
-                <div class="jumbotron text-center">
-                    <h1 class="text align-self-center p-2">Añadir Novedad</h1>
+                <div class="p-0 btn-group justify-content-lg-center">
+                    <img src="../image/logo.jpg" height="200" width="200"/>
+                    <div class="btn-group jumbotron justify-content-center" style="background-color: #000000; color: #ffffff; font-family: Consolas;">
+                        <h1 class="text align-self-center p-2">Registrar Nueva Novedad</h1>
+                    </div>
                 </div>
                 <p:messages>
                     <p:autoUpdate />
@@ -32,21 +30,23 @@
                     <div class="col-6">
                         <h:form class="justify-content-center">
                             <div class="form-group">
-                                <h:outputLabel for="Description" value="Description: " style="color: white;"/>
-                                <p:inputText class="form-control" type="String" id="DescriptionEquipment" value="#{noveltyBean.description}" placeholder="H3ll0 w0rld"/>
+                                <h:outputLabel for="Title" value="Titulo: " style="color: white;"/>
+                                <p:inputText class="form-control" type="String" id="TItleEquipment" value="#{noveltyBean.title}" placeholder="Titulo"/>
                             </div>
                             <div class="form-group">
-                                <h:outputLabel for="Title" value="Title: " style="color: white;"/>
-                                <p:inputText class="form-control" type="String" id="TItleEquipment" value="#{noveltyBean.title}" placeholder="Title"/>
+                                <h:outputLabel for="Description" value="Descripción: " style="color: white;"/>
+                                <p:inputText class="form-control" type="String" id="DescriptionEquipment" value="#{noveltyBean.description}" placeholder="Descripcion"/>
                             </div>
                             <div class="form-group">
-                                <h:outputLabel for="Equipment" value="Equipment Id: " style="color: white;"/>
+                                <h:outputLabel for="Equipment" value="Equipo: " style="color: white;"/>
                                 <p:selectOneMenu id="nombresEquipos" value="#{noveltyBean.nombreEquipo}" class="form-control"  required="true">
-                                    <f:selectItem itemLabel="Select Equipment" noSelectionOption="true"/>
+                                    <f:selectItem itemLabel="Seleccionar Equipo" noSelectionOption="true"/>
                                     <f:selectItems value="#{noveltyBean.nombresEquipos}"/>
                                 </p:selectOneMenu>
                             </div>
-                            <p:commandButton value="Add" class="btn btn-primary" actionListener="#{noveltyBean.registrarNovedad}" action="#{noveltyBean.info}"/>
+                            <div class="p-2 row justify-content-center h-100" style="font-family: Consolas;">
+                                <p:commandButton value="Registrar Novedad Equipo" style="margin: 10px; font-family: Consolas;" class="btn btn-primary" actionListener="#{noveltyBean.registrarNovedad}" action="#{noveltyBean.info}"/>
+                            </div>
                             <p:dialog header="Modal Dialog" widgetVar="dlg2" modal="true" height="100">
                                 <h:outputText value="#{noveltyBean.message}" />
                             </p:dialog> 
@@ -55,24 +55,31 @@
                     <div class="col-6">
                         <h:form class="justify-content">
                             <div class="form-group">
-                                <h:outputLabel for="Description" value="Description: " style="color: white;"/>
-                                <p:inputText class="form-control" type="String" id="DescriptionElement" value="#{noveltyBean.description}" placeholder="H3ll0 w0rld"/>
+                                <h:outputLabel for="Title" value="Titulo: " style="color: white;"/>
+                                <p:inputText class="form-control" type="String" id="TItleElement" value="#{noveltyBean.title}" placeholder="Titulo"/>
                             </div>
                             <div class="form-group">
-                                <h:outputLabel for="Title" value="Title: " style="color: white;"/>
-                                <p:inputText class="form-control" type="String" id="TItleElement" value="#{noveltyBean.title}" placeholder="Title"/>
+                                <h:outputLabel for="Description" value="Descripcion: " style="color: white;"/>
+                                <p:inputText class="form-control" type="String" id="DescriptionElement" value="#{noveltyBean.description}" placeholder="Descripcion"/>
                             </div>
                             <div class="form-group">
-                                <h:outputLabel for="Element" value="Element Id: " style="color: white;"/>
+                                <h:outputLabel for="Element" value="Elemento: " style="color: white;"/>
                                 <p:selectOneMenu id="nombresElementos" value="#{noveltyBean.nombreElemento}" class="form-control"  required="true">
-                                    <f:selectItem itemLabel="Select Element" noSelectionOption="true"/>
+                                    <f:selectItem itemLabel="Seleccionar Elemento" noSelectionOption="true"/>
                                     <f:selectItems value="#{noveltyBean.nombresElementos}"/>
                                 </p:selectOneMenu>
                             </div>
-                            <p:commandButton value="Add" class="btn btn-primary" actionListener="#{noveltyBean.registrarNovedadElemento}" action="#{noveltyBean.info}"/>
+                            <div class="p-2 row justify-content-center h-100" style="font-family: Consolas;">
+                                <p:commandButton value="Registrar Novedad Elemento" style="margin: 10px; font-family: Consolas;" class="btn btn-primary" actionListener="#{noveltyBean.registrarNovedadElemento}" action="#{noveltyBean.info}"/>
+                            </div>
                         </h:form>
                     </div>
                 </div>
+                <h:form>
+                    <div class="p-2 row justify-content-center h-100" style="font-family: Consolas;">
+                        <p:commandButton value="Atras" style="margin: 10px; font-family: Consolas;" action="#{loginBean.redirectHomeUser}" class="btn btn-danger"/>
+                    </div>
+                </h:form>
             </div>
         </div>
     </div>

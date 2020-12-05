@@ -16,4 +16,5 @@ public interface ElementoMapper {
     String consultarNombreElemento(@Param("elementoID") Integer elementoID);
     List<Element> consultarElementoNoAsociado(@Param("type") String type);
     List<Element> consultarElementosPorEquipo(@Param("equipoID") Integer equipoID);
+    Integer consultarElementoIDPorNombre(@Param("nombreElemento") String nombreElemento);
 }

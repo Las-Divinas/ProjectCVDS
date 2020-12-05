@@ -80,7 +80,6 @@ public class laboratoryBean extends BasePageBean {
         }
     }
 
-
     public int countEquipment(int idLaboratory) throws ExceptionHistorialDeEquipos {
         return servicioEquipment.consultarNumeroEquipos(idLaboratory);
     }
@@ -127,6 +126,7 @@ public class laboratoryBean extends BasePageBean {
 
     public void cerrarLaboratorio() throws ExceptionHistorialDeEquipos {
         Date date;
+        Novelty novelty;
         Integer laboratorioID;
         List<Equipment> equiposActivos;
 
@@ -136,18 +136,27 @@ public class laboratoryBean extends BasePageBean {
         laboratorioID = servicioLaboratory.consultarIDLaboratorioPorNombre(laboratory_name);
         equiposActivos = servicioEquipment.consultarEquipos();
 
-        System.out.println(laboratorioID);
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+        HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
+        String correoSession = (String) session.getAttribute("correo");
+        Usuario usuario = servicioUsuario.consultarIdUsuarioPorCorreo(correoSession);
 
         for (Equipment e : equiposActivos) {
-            System.out.println(e.getLaboratory_id());
             if (laboratorioID.equals(e.getLaboratory_id())) {
+                novelty = new Novelty("El equipo "+e.getEquipment_name()+" fue desvinculado de "+laboratory_name, "Equipo Desvinculado de Laboratorio", date, usuario.getDocumento(), e.getId(), "Equipment");
+
                 servicioEquipment.cambiarLaboratorioEquipo(null, e.getId());
+                servicioNovelty.registrarNovedad(novelty);
+
                 break;
             }
         }
 
+        novelty = new Novelty("El "+laboratory_name+" fue cerrado", "Laboratorio Cerrado", date, usuario.getDocumento(), laboratorioID, "Laboratory");
+
         servicioLaboratory.cambiarFechaDeCierre(date, laboratorioID);
         servicioLaboratory.cambiarEstadoLaboratorio("INACTIVO", laboratorioID);
+        servicioNovelty.registrarNovedad(novelty);
     }
 
     public String getMessage() {

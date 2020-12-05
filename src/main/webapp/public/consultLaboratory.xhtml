@@ -59,16 +59,13 @@
                         <p:column headerText="Numero de Equipos" style="text-align: center">
                             <h:outputText value="#{laboratoryBean.countEquipment(laboratory.id)}"/>
                         </p:column>
-                        <p:column class="text-center" headerText="Administrar" style="text-align: center" exportable="false">
-                            <p:commandButton class="btn btn-success btn-sm" value="Administrar"/>
-                        </p:column>
                         <p:column class="text-center" headerText="Novedades" style="text-align: center" exportable="false">
                             <p:commandButton class="btn btn-success btn-sm" value="Novedades" actionListener="#{noveltyBean.consultarNovedadLaboratorioID(laboratory.id)}"/>
                         </p:column>
                     </p:dataTable>
                    <!--  <h1 style="color:antiquewhite">Estadisticas Elementos laboratorio</h1> -->
                     <br/>
-                    <p:chart style="opacity: 1;-moz-opacity: 1;filter: alpha(opacity=10);-khtml-opacity: 1;width: 70%;margin-left: 15%;border-radius: 10px;background-color: mintcream; color: white;" type="pie" id="pie"
+                    <p:chart style="opacity: 1;-moz-opacity: 1;filter: alpha(opacity=10);-khtml-opacity: 1;width: 70%;margin-left: 15%;border-radius: 10px;background-color: white; color: black;" type="pie" id="pie"
                             responsive="true"
                             model="#{laboratoryBean.generarEstadistica()}"
 
@@ -77,7 +74,7 @@
                     <br/>
                     <!-- <h1 style="color:antiquewhite">Estadisticas estado laboratorios</h1> -->
                     <br/>
-                    <p:chart style="opacity: 1;-moz-opacity: 1;filter: alpha(opacity=10);-khtml-opacity: 1;width: 70%;margin-left: 15%;border-radius: 10px;background-color: mintcream; color: white;" type="pie" id="pie2"
+                    <p:chart style="opacity: 1;-moz-opacity: 1;filter: alpha(opacity=10);-khtml-opacity: 1;width: 70%;margin-left: 15%;border-radius: 10px;background-color: white; color: black;" type="pie" id="pie2"
                             responsive="true"
                             model="#{laboratoryBean.generarEstadisticaEstado()}"
 

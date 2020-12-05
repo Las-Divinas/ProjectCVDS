@@ -113,4 +113,13 @@ public class ServicioElementImpl implements ServicioElement {
             throw new ExceptionHistorialDeEquipos("Error al consultar elementos asociados a equipo");
         }
     }
+
+    @Override
+    public Integer consultarElementoIDPorNombre(String nombreElemento) throws ExceptionHistorialDeEquipos {
+        try {
+            return elementoDAO.consultarElementoIDPorNombre(nombreElemento);
+        } catch (Exception e) {
+            throw new ExceptionHistorialDeEquipos("Error al consultar elementos asociados a equipo");
+        }
+    }
 }

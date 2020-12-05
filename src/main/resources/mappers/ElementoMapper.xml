@@ -58,4 +58,8 @@
         SELECT e.id, e.element_name, e.description, e.id_equipment, e.type, e.estado FROM element e
         WHERE e.id_equipment = #{equipoID};
     </select>
+    <select id="consultarElementoIDPorNombre" resultType="Integer">
+        SELECT e.id FROM element e
+        WHERE e.element_name = #{nombreElemento};
+    </select>
 </mapper>

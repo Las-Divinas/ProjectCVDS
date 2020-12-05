@@ -3,6 +3,7 @@ import java.util.List;
 
 
 import edu.eci.cvds.samples.entities.Element;
+import org.apache.ibatis.annotations.Param;
 
 public interface ElementoDAO {
     void registrarElemento(Element element) throws Exception;
@@ -16,4 +17,5 @@ public interface ElementoDAO {
     String consultarNombreElemento(Integer elementoID) throws PersistenceException;
     List<Element> consultarElementoNoAsociado(String type) throws PersistenceException;
     List<Element> consultarElementosPorEquipo(Integer equipoID) throws PersistenceException;
+    Integer consultarElementoIDPorNombre(String nombreElemento) throws PersistenceException;
 }

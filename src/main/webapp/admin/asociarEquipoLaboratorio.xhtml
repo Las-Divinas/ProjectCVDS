@@ -15,41 +15,43 @@
 </h:head>
 <h:body>
     <div class="container h-100">
-        <h:form>
-            <div class="float-sm-right">
-                <p:commandButton value="Atras" action="#{loginBean.redirectHomeUser}" class="btn btn-danger"/>
-            </div>
-        </h:form>
         <div class="d-flex justify-content-center align-items-center">
             <div class="d-flex flex-column">
-                <div class="jumbotron text-center">
-                    <h1 class="text align-self-center p-2">Asociar Elemento a un Equipo</h1>
-                    <p:messages>
-                        <p:autoUpdate />
-                    </p:messages>
-                    <h:form>
-                        <p:growl id="message" showDetail="true" />
-                        <div class="form-group">
-                            <h:outputLabel for="Laboratory" value="Laboratorio" style="color: aliceblue;"/>
-                            <p:selectOneMenu id="EquipmentNames" value="#{equipmentBean.nombreLaboratorio}" class="form-control">
-                                <f:selectItem itemLabel="Select Equipment" noSelectionOption="true"/>
-                                <f:selectItems value="#{equipmentBean.nombresLaboratorios}"/>
-                            </p:selectOneMenu>
-                            <h:outputLabel for="Equipment" value="Equipo" style="color: aliceblue;"/>
-                            <p:selectOneMenu id="ELementNames" value="#{equipmentBean.nombreEquipo}" class="form-control">
-                                <f:selectItem itemLabel="Select Element" noSelectionOption="true"/>
-                                <f:selectItems value="#{elementBean.nombresEquipos}"/>
-                            </p:selectOneMenu>
-                        </div>
-                        <p:commandButton value="Asociar" class="btn btn-primary" actionListener="#{equipmentBean.asociarEquipoLaboratorio}" action="#{equipmentBean.info}">
+                <div class="p-0 btn-group justify-content-lg-center">
+                    <img src="../image/logo.jpg" height="200" width="200"/>
+                    <div class="btn-group jumbotron justify-content-center" style="background-color: #000000; color: #ffffff; font-family: Consolas;">
+                        <h1 class="text align-self-center p-2">Asociar Equipo a Laboratorio</h1>
+                    </div>
+                </div>
+                <p:messages>
+                    <p:autoUpdate />
+                </p:messages>
+                <h:form>
+                    <p:growl id="message" showDetail="true" />
+                    <div class="form-group">
+                        <h:outputLabel for="Laboratory" value="Laboratorio" style="color: aliceblue;"/>
+                        <p:selectOneMenu id="EquipmentNames" value="#{equipmentBean.nombreLaboratorio}" class="form-control">
+                            <f:selectItem itemLabel="Seleccionar Laboratorio" noSelectionOption="true"/>
+                            <f:selectItems value="#{equipmentBean.nombresLaboratoriosActivos}"/>
+                        </p:selectOneMenu>
+                        <p></p>
+                        <h:outputLabel for="Equipment" value="Equipo" style="color: aliceblue;"/>
+                        <p:selectOneMenu id="ELementNames" value="#{equipmentBean.nombreEquipo}" class="form-control">
+                            <f:selectItem itemLabel="Seleccionar Equipo" noSelectionOption="true"/>
+                            <f:selectItems value="#{equipmentBean.nombresEquiposActivos}"/>
+                        </p:selectOneMenu>
+                    </div>
+                    <div class="p-2 row justify-content-center h-100" style="font-family: Consolas;">
+                        <p:commandButton value="Asociar" style="margin: 10px; font-family: Consolas;" class="btn btn-primary" actionListener="#{equipmentBean.asociarEquipoLaboratorio}" action="#{equipmentBean.info}">
                             <p:confirm header="Confirmación" message="¿Esta seguro que desea vincular el equipo seleccionado al laboratorio seleccionado?" icon="pi pi-exclamation-triangle" />
                         </p:commandButton>
-                        <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
-                            <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="pi pi-check"/>
-                            <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="pi pi-times" />
-                        </p:confirmDialog>
-                    </h:form>
-                </div>
+                        <p:commandButton value="Atras" style="margin: 10px; font-family: Consolas;" action="#{loginBean.redirectHomeUser}" class="btn btn-danger"/>
+                    </div>
+                    <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                        <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="pi pi-check"/>
+                        <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="pi pi-times" />
+                    </p:confirmDialog>
+                </h:form>
             </div>
         </div>
     </div>
